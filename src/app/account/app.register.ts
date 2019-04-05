@@ -42,11 +42,7 @@ export class RegisterComponent implements OnInit {
 		this.translate.get(this.close).subscribe((res: string) => this.close = res);
 		this.sessionService.register(this.user)
 			.subscribe(result => {
-				if (result.login === 'ok') {
-					this.sessionService.grantCredentials(result);
-				} else {
-					this.snackBar.open(result.error, this.close);
-				}
+				this.sessionService.grantCredentials(this.user.username, result);
 			},
 			onerror => this.snackBar.open(onerror._body, this.close));
 	}

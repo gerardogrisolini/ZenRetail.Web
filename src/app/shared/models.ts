@@ -2,7 +2,7 @@
 
 export class Login {
   constructor(
-    public email: string,
+    public username: string,
     public password: string) { }
 }
 
@@ -449,10 +449,8 @@ export class PdfDocument {
 // Interfaces
 
 export interface Token {
-    error: string;
-    login: string;
-    token: string;
-    role: string;
+  basic: string;
+  bearer: string;
 }
 
 export interface ProductCategory {

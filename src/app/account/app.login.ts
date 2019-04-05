@@ -39,12 +39,8 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.sessionService.login(this.user)
 			.subscribe(result => {
-				if (result.login === 'ok') {
-					this.sessionService.grantCredentials(result);
-					this.loadBasket();
-				} else {
-					this.snackBar.open(result.error, this.close);
-				}
+				this.sessionService.grantCredentials(this.user.username, result);
+				this.loadBasket();
 			}, onerror => this.snackBar.open(JSON.stringify(onerror), this.close))
 	}
 

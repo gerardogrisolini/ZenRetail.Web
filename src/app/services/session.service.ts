@@ -7,6 +7,8 @@ import { Login, Token } from '../shared/models';
 @Injectable()
 export class SessionService {
 
+    username: string;
+
     constructor(
         private router: Router,
         private http: HttpClient) {
@@ -26,12 +28,13 @@ export class SessionService {
         return this.http.post<Token>('/api/register', account);
     }
 
-    grantCredentials(data: any) {
-        window.parent.postMessage('token:' + data.token, '*');
-
-        localStorage.setItem('uniqueID', data.uniqueID);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.role);
+    grantCredentials(username: string, data: Token) {
+        window.parent.postMessage('token:' + data.bearer, '*');
+        this.username = username;
+        localStorage.setItem('username', username);
+        // localStorage.setItem('uniqueID', data.uniqueID);
+        localStorage.setItem('token', data.bearer);
+        localStorage.setItem('role', "Registry");
 
         const origin = localStorage.getItem('origin');
         this.router.navigate([origin ? origin : 'basket']);
