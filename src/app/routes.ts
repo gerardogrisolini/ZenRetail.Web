@@ -21,6 +21,7 @@ export const APP_ROUTES: Routes = [
     {path: 'account', component: AccountComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
+    {path: 'products/brand/:name', component: ProductsComponent},
     {path: 'products/:name', component: ProductsComponent},
     {path: 'product/:name', component: ProductComponent},
     {path: 'basket', component: BasketComponent},

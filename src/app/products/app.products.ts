@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT, Title, Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
@@ -31,6 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private productService: ProductService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.translate.get(this.close).subscribe((res: string) => this.close = res);
@@ -52,7 +53,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
       const name = params['name'];
-      this.loadProducts(name);
+      if (this.router.url.indexOf('brand') < 0) {
+        this.loadProductsByCategory(name);
+      } else {
+        this.loadProductsByBrand(name);
+      }
     });
   }
 
@@ -68,14 +73,26 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
   }
 
-  loadProducts(categoryName: string) {
-    // AppComponent.setPage(categoryName);
+  loadProductsByCategory(categoryName: string) {
+    AppComponent.setPage(categoryName);
     this.filtering = false;
     this.productService.getByCategoryName(categoryName)
         .subscribe(result => {
           this.filtered = result;
           this.products = result;
-          const name = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category.categoryName
+          const name = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category.categoryName;
+          AppComponent.setPage(name);
+        }, onerror => this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, this.close));
+  }
+
+  loadProductsByBrand(brandName: string) {
+    AppComponent.setPage(brandName);
+    this.filtering = false;
+    this.productService.getByBrandName(brandName)
+        .subscribe(result => {
+          this.filtered = result;
+          this.products = result;
+          const name = this.products[0].brand.brandName;
           AppComponent.setPage(name);
         }, onerror => this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, this.close));
   }
