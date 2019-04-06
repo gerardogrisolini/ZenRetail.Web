@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from './services/basket.service';
 import { ProductService } from './services/product.service';
 import { Setting } from 'app/shared/models';
 import { Helpers } from 'app/shared/helpers';
+import { MyTranslatePipe } from './pipes/mytranslate.pipe';
 
 @Component({
   moduleId: module.id,
@@ -90,10 +90,12 @@ export class AppComponent implements OnInit {
   }
 
   loadCategories() {
-    this.navItems.push({ name: 'Home', route: '/home' });
     this.productService.getCategories()
       .subscribe(result => {
-        result.forEach(p => this.navItems.push({ name: p.categoryName, route: '/products/' + p.seo.permalink }));
+        result.forEach(p => {
+          let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
+          this.navItems.push({ name: name, image: '/media/' + p.media.name, route: '/products/' + p.seo.permalink })
+        });
       });
   }
 

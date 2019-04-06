@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Product } from 'app/shared/models';
 
 @Component({

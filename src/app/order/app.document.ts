@@ -8,7 +8,6 @@ import { RegistryService } from 'app/services/registry.service';
 import { DocumentService } from 'app/services/document.service';
 import { Movement, MovementArticle, PdfDocument } from './../shared/models';
 import { AppComponent } from 'app/app.component';
-import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-document',

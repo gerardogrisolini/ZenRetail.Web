@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProductService } from './../services/product.service';
 import { Product } from './../shared/models';
 import { AppComponent } from 'app/app.component';
+import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 
 @Component({
   moduleId: module.id,
@@ -80,7 +81,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           this.filtered = result;
           this.products = result;
-          const name = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category.categoryName;
+          const translations = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category.translations;
+          let name = new MyTranslatePipe().transform(translations, categoryName);
           AppComponent.setPage(name);
         }, onerror => this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, this.close));
   }
@@ -92,7 +94,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           this.filtered = result;
           this.products = result;
-          const name = this.products[0].brand.brandName;
+          let name = new MyTranslatePipe().transform(this.products[0].brand.translations, brandName);
           AppComponent.setPage(name);
         }, onerror => this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, this.close));
   }

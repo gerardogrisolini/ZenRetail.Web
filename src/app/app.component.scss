@@ -1,6 +1,5 @@
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-
   // Helps fonts on OSX looks more consistent with other systems
   // Isn't currently in button styles due to performance concerns
   * {
@@ -8,7 +7,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-
   .mat-sidenav {
     border-top: thin ridge #ececec;
     border-left: thin ridge #ececec;
@@ -16,11 +14,10 @@ body {
     max-width: 300px;
     padding: 1vw;
     z-index: 102;
-    
+   
     img {
-      margin-left: 10px;
-      margin-top: 10px;
-      height: 75px;
+      margin: 10px;
+      height: 100px;
     }
     .mat-button {
       width: 100%;
@@ -28,8 +25,20 @@ body {
       bottom: 0;
       margin: 24px 0;
     }
+    .mat-nav-list {
+      img {
+        height: 40px;
+      }
+    }
     .mat-list-item {
       border-bottom: thin dotted silver;
+      border-radius: 20px;
+    }
+    .mat-list-item:hover {
+      background-color: lightyellow;
+    }
+    .active-link {
+      background-color: whitesmoke;
     }
   }
 

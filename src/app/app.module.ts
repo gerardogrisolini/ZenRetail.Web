@@ -3,12 +3,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpRequest, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from 'app/material.module';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
+import { SwiperModule } from 'angular2-useful-swiper';
 
 import { ALL_ROUTES } from 'app/routes';
 
@@ -26,11 +27,9 @@ import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { ArticleInfoPipe } from 'app/pipes/articleinfo.pipe';
 import { ArticlePicker } from 'app/shared/article.picker';
 import { ConfirmDialog } from 'app/shared/confirm.dialog';
-import { ImageSlider, SafeHtmlPipe } from 'app/shared/image.slider';
 
 import { AppComponent } from 'app/app.component';
 import { HomeComponent } from 'app/home/home.component';
-import { CarouselComponent } from 'app/home/carousel.component';
 import { AccountComponent } from 'app/account/app.account';
 import { LoginComponent } from 'app/account/app.login';
 import { RegisterComponent } from 'app/account/app.register';
@@ -53,13 +52,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParseUrlPipe,
     MyTranslatePipe,
     ArticleInfoPipe,
-    SafeHtmlPipe,
     ArticlePicker,
     ConfirmDialog,
-    ImageSlider,
     AppComponent,
     HomeComponent,
-    CarouselComponent,
     AccountComponent,
     LoginComponent,
     RegisterComponent,
@@ -78,6 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaterialModule,
     LayoutModule,
     HttpClientModule,
+    SwiperModule,
     RouterModule.forRoot(ALL_ROUTES),
     TranslateModule.forRoot({
       loader: {
@@ -102,10 +99,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialog,
     CurrencyFormatPipe,
     ParseUrlPipe,
-    SafeHtmlPipe,
     MyTranslatePipe,
-    ArticleInfoPipe,
-    ImageSlider
+    ArticleInfoPipe
   ],
   entryComponents: [
     ConfirmDialog

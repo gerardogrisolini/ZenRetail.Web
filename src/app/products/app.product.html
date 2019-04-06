@@ -1,6 +1,5 @@
 <div *ngIf="product">
-  <article-picker [product]="product" (onPicked)="pickerClick($event)"></article-picker>
-  <mat-expansion-panel *ngIf="!isIframe">
+  <mat-expansion-panel *ngIf="!isIframe" [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-description>{{ 'Information' | translate }}</mat-panel-description>
       <mat-panel-title><b>SKU: {{product.productCode}}</b></mat-panel-title>
@@ -23,8 +22,21 @@
         <ng-template #price_content>
           <p><span mat-line>{{ 'Price' | translate }}<br/><b>{{product.price.selling | currencyFormat}}</b></span></p>
         </ng-template>
-        <image-slider [slides]="images"></image-slider>
+        <!-- <image-slider [slides]="images"></image-slider> -->
+        <swiper [config]="config">
+          <div class="swiper-wrapper">
+            <div *ngFor="let img of this.product.medias" class="swiper-slide">
+              <img src="{{ [img] | parseUrl }}" />
+            </div>
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
       </mat-card-content>
     </mat-card>
   </mat-expansion-panel>
+  <article-picker [product]="product" (onPicked)="pickerClick($event)"></article-picker>
 </div>

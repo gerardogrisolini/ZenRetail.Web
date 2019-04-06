@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material';
@@ -7,7 +7,6 @@ import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
 	moduleId: module.id,
@@ -18,8 +17,7 @@ import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 export class ProductComponent implements OnInit, OnDestroy {
 	private sub: any;
 	product: Product;
-	images: Array<any>;
-
+	
 	constructor(
 		private titleService: Title,
 		private metaService: Meta,
@@ -31,10 +29,20 @@ export class ProductComponent implements OnInit, OnDestroy {
 		private activatedRoute: ActivatedRoute
 	) {	}
 
+	config: SwiperOptions = {
+		autoplay: 3000, // Autoplay option having value in milliseconds
+		initialSlide: 1, // Slide Index Starting from 0
+		slidesPerView: 1, // Slides Visible in Single View Default is 1
+		pagination: '.swiper-pagination', // Pagination Class defined
+		paginationClickable: true, // Making pagination dots clicable
+		nextButton: '.swiper-button-next', // Class for next button
+		prevButton: '.swiper-button-prev', // Class for prev button
+		spaceBetween: 0 // Space between each Item
+	};
+	  
 	get isIframe(): boolean { return AppComponent.inIframe(); }
 
 	ngOnInit() {
-		this.images = [];
 		if (localStorage.getItem('barcode')) {
 			this.pickerClick(null);
 		}
@@ -74,10 +82,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 							this.metaService.addTag({ name: 'description', content: translate.value }, false);
 						}
 					}
-
-					this.product.medias.forEach(m => {
-						this.images.push({ 'sType': 'img', 'imgSrc': new ParseUrlPipe().transform([m]) });
-					});
 				} else {
 					const height = (result.attributes.length * 100) + 160;
 					window.parent.postMessage('iframe:' + height, '*');
