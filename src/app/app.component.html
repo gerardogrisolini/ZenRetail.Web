@@ -14,6 +14,13 @@
         (click)="start.close()"
         tabindex="-1"
         routerLinkActive="active-link"
+        [routerLink]="['/info']">
+        <span><mat-icon>info</mat-icon></span>&nbsp;&nbsp;{{ 'Information' | translate}}
+      </a>
+      <a mat-list-item
+        (click)="start.close()"
+        tabindex="-1"
+        routerLinkActive="active-link"
         [routerLink]="['/basket']">
         <span><mat-icon>shopping_cart</mat-icon></span>&nbsp;&nbsp;{{ 'Basket' | translate }}
       </a>
@@ -29,7 +36,7 @@
         tabindex="-1"
         routerLinkActive="active-link"
         [routerLink]="['/account']">
-        <span><mat-icon>account_box</mat-icon></span>&nbsp;&nbsp;{{ 'Account' | translate }}
+        <span><mat-icon>account_circle</mat-icon></span>&nbsp;&nbsp;{{ 'Account' | translate }}
       </a>
       <h3 style="margin-left: 15px">{{ 'Categories' | translate }}</h3>
       <a *ngFor="let navItem of navItems"

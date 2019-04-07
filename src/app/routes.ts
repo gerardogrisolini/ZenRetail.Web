@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { ProductsComponent } from 'app/products/app.products';
-import { ProductComponent } from 'app/products/app.product';
+import { ProductsComponent } from 'app/product/app.products';
+import { ProductComponent } from 'app/product/app.product';
 import { AppComponent } from 'app/app.component';
 import { HomeComponent } from 'app/home/home.component';
+import { InfoComponent } from 'app/home/info.component';
 import { LoginComponent } from 'app/account/app.login';
 import { RegisterComponent } from 'app/account/app.register';
 import { AccountComponent } from 'app/account/app.account';
@@ -16,6 +17,7 @@ export const APP_ROUTES: Routes = [
   {path: '', component: AppComponent, children: [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
+    {path: 'info', component: InfoComponent},
     {path: 'account', component: AccountComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},

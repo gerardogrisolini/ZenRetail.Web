@@ -5,7 +5,7 @@
 </mat-form-field>
 <h3>Filter by category</h3>
 <mat-nav-list>
-    <a *ngFor="let category of data" href="#" mat-list-item (click)="openLink(category.categoryId)">
+    <a *ngFor="let category of data" mat-list-item (click)="openLink(category.categoryId)">
         <p mat-line class="category-list">
         <img src="{{ [category.media] | parseUrl }}" alt='category'/>
         <span>{{ category.translations | mytranslate : category.categoryName }}</span>

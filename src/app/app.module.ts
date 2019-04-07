@@ -10,6 +10,7 @@ import { MaterialModule } from 'app/material.module';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SwiperModule } from 'angular2-useful-swiper';
+import { AgmCoreModule } from '@agm/core';
 
 import { ALL_ROUTES } from 'app/routes';
 
@@ -30,16 +31,17 @@ import { ConfirmDialog } from 'app/shared/confirm.dialog';
 
 import { AppComponent } from 'app/app.component';
 import { HomeComponent } from 'app/home/home.component';
+import { InfoComponent } from 'app/home/info.component';
 import { AccountComponent } from 'app/account/app.account';
 import { LoginComponent } from 'app/account/app.login';
 import { RegisterComponent } from 'app/account/app.register';
-import { ProductsComponent } from 'app/products/app.products';
-import { ProductComponent } from 'app/products/app.product';
+import { ProductsComponent } from 'app/product/app.products';
+import { ProductComponent } from 'app/product/app.product';
 import { BasketComponent } from 'app/basket/app.basket';
 import { CheckoutComponent } from 'app/basket/app.checkout';
 import { OrdersComponent } from 'app/order/app.orders';
 import { DocumentComponent } from 'app/order/app.document';
-import { BottomSheetComponent } from 'app/products/app.bottomsheet';
+import { BottomSheetComponent } from 'app/product/app.bottomsheet';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialog,
     AppComponent,
     HomeComponent,
+    InfoComponent,
     AccountComponent,
     LoginComponent,
     RegisterComponent,
@@ -77,6 +80,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
     HttpClientModule,
     SwiperModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB3lyD6l1LxMEX0wNVhj6tmD_sDDRTjtA8'
+    }),
     RouterModule.forRoot(ALL_ROUTES),
     TranslateModule.forRoot({
       loader: {

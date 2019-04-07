@@ -1,0 +1,37 @@
+<div *ngIf="data">
+<mat-card>
+    <mat-card-title>
+        <img src="/media/logo.png" height="100" style="position: absolute; top: 0; right: 0;"/>
+        {{ data.companyName }}
+        <br/>
+        <br/>
+    </mat-card-title>
+    <mat-card-content [innerHTML]="data.companyDescription | mytranslate">
+    </mat-card-content>
+</mat-card>
+<br/>
+<mat-card>
+    <mat-card-title>{{ 'Contacts' | translate }}</mat-card-title>
+    <mat-card-content>
+        <p><strong [translate]="'Phone'"></strong>&nbsp;&nbsp;{{ data.companyPhone }}</p>
+        <strong [translate]="'Email'"></strong>
+        <ul>
+            <li><a href="mailto:{{ data.companyEmailInfo }}">{{ data.companyEmailInfo }} ({{ 'Information' | translate}})</a></li>
+            <li><a href="mailto:{{ data.companyEmailSales }}">{{ data.companyEmailSales }} ({{ 'Sales' | translate}})</a></li>
+            <li><a href="mailto:{{ data.companyEmailSupport }}">{{ data.companyEmailSupport }} ({{ 'Support' | translate}})</a></li>
+        </ul>
+    </mat-card-content>
+</mat-card>
+<br/>
+<mat-card>
+    <mat-card-title>{{ 'Address' | translate }}</mat-card-title>
+    <mat-card-content>
+        {{ data.companyAddress }}
+        {{ data.companyCity }}
+        {{ data.companyZip }}
+        {{ data.companyProvince }}
+        {{ data.companyCountry }}
+    </mat-card-content>
+</mat-card>
+<agm-map [zoom]="10" [latitude]="lat" [longitude]="lng"></agm-map>
+</div>

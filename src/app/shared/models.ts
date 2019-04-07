@@ -9,8 +9,10 @@ export class Login {
 export class Setting {
   public companyId: number;
   public companyName: string;
-  public companyDesc: string;
-  public companyEmail: string;
+  public companyDescription: Translation[];
+  public companyEmailInfo: string;
+  public companyEmailSales: string;
+  public companyEmailSupport: string;
   public companyPhone: string;
   public companyAddress: string;
   public companyCity: string;
@@ -32,8 +34,10 @@ export class Setting {
   constructor() {
     this.companyId = 0;
     this.companyName = '';
-    this.companyDesc = '';
-    this.companyEmail = '';
+    this.companyDescription = [];
+    this.companyEmailInfo = '';
+    this.companyEmailSales = '';
+    this.companyEmailSupport = '';
     this.companyPhone = '';
     this.companyAddress = '';
     this.companyCity = '';
