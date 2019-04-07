@@ -73,8 +73,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let categories = input.reduce(function(a, b) {
       return a.concat(b);
     }, []);
-    this.bottomSheet.open(BottomSheetComponent, {
+    const bottomSheetRef = this.bottomSheet.open(BottomSheetComponent, {
       data: categories,
+    });
+    bottomSheetRef.afterDismissed().subscribe(() => {
+      console.log('Bottom sheet has been dismissed: ' + bottomSheetRef.instance.filter);
     });
   }
 

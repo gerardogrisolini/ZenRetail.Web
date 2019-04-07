@@ -13,7 +13,8 @@ export class BottomSheetComponent {
         private bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>
     ) {}
 
-    openLink(event: MouseEvent): void {
+    openLink(categoryId: Number): void {
+        console.log(categoryId);
         this.bottomSheetRef.dismiss();
         event.preventDefault();
     }
