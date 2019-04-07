@@ -7,6 +7,7 @@ import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
+import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 
 @Component({
 	moduleId: module.id,
@@ -56,37 +57,28 @@ export class ProductComponent implements OnInit, OnDestroy {
 		// Clean sub to avoid memory leak
 		this.sub.unsubscribe();
   }
+  
+  addMetaData(product: Product) {
+    let title = new MyTranslatePipe().transform(product.translations, product.productName);
+    this.titleService.setTitle(title);
+    let description = new MyTranslatePipe().transform(product.seo.description, product.productName);
+    //this.metaService.removeTag('name="description"');
+    this.metaService.addTag({ name: 'description', content: description }, false);
+	AppComponent.setPage(product.productName, !this.isIframe, !this.isIframe);
+}
 
   loadProduct(name: string) {
 		this.productService.getByProductName(name)
 			.subscribe(result => {
 				this.product = result;
-				AppComponent.setPage(result.productName, !this.isIframe, !this.isIframe);
 				if (!this.isIframe) {
-					/// SEO
-					const country = navigator.language.substring(0, 2).toUpperCase();
-					// Changing title
-					let title = result.productName;
-					if (result.seo.title.length > 0) {
-						const translate = result.seo.title.find(p => p.country === country);
-						if (translate) {
-							title = translate.value;
-						}
-					}
-					this.titleService.setTitle(title);
-					// Changing meta with name="description"
-					if (result.seo.description.length > 0) {
-						const translate = result.seo.description.find(p => p.country === country);
-						if (translate) {
-							this.metaService.removeTag('name="description"');
-							this.metaService.addTag({ name: 'description', content: translate.value }, false);
-						}
-					}
+					this.addMetaData(result);
 				} else {
 					const height = (result.attributes.length * 100) + 160;
 					window.parent.postMessage('iframe:' + height, '*');
 				}
-		}, onerror => {
+			}, 
+			onerror => {
 				this.translate.get('Close').subscribe((res: string) =>
 					this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, res)
 				);

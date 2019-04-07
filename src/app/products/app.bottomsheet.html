@@ -1,0 +1,10 @@
+<mat-form-field style="width: 96%; padding: 0 2%;">
+    <input matInput mode="search" (ngModelChange)="onFilterChange($event)" [(ngModel)]="filter" placeholder="{{ 'Search' | translate }}">
+    <mat-icon matSuffix (click)="openLink($event)">search</mat-icon>
+</mat-form-field>
+<mat-nav-list>
+    <a *ngFor="let category of data" href="#" mat-list-item (click)="openLink($event)">
+        <span mat-line>{{ category.translations | mytranslate : category.categoryName }}</span>
+        <span mat-line>{{ [category.media] | parseUrl }}</span>
+    </a>
+</mat-nav-list>

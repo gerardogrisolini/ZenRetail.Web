@@ -32,7 +32,7 @@ body {
     }
     .mat-list-item {
       border-bottom: thin dotted silver;
-      border-radius: 20px;
+      border-radius: 10px;
     }
     .mat-list-item:hover {
       background-color: lightyellow;
@@ -82,7 +82,9 @@ body {
     height: 65px;
     z-index: 101;
     background-color: white;
-    
+    border-bottom: thin dotted silver;
+    border-radius: 10px;
+  
     .mat-icon {
       cursor: pointer;
     }

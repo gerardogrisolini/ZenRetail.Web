@@ -1,10 +1,4 @@
 <div class="app-grid-list">
-
-  <mat-form-field *ngIf="filtering" style="width: 96%; padding: 0 2%;">
-    <input matInput mode="search" (ngModelChange)="onFilterChange($event)" [(ngModel)]="filter" placeholder="{{ 'Search' | translate }}">
-    <mat-icon matSuffix (click)="toggleSearch()">search</mat-icon>
-  </mat-form-field>
-
   <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
     <mat-grid-tile *ngFor="let product of filtered" style="cursor: pointer">
       <img routerLink="/product/{{product.seo.permalink}}" [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
@@ -24,4 +18,8 @@
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
+
+  <span class="done">
+      <a mat-fab (click)="openBottomSheet()"><mat-icon>filter_list</mat-icon></a>
+  </span>
 </div>

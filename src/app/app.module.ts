@@ -39,6 +39,7 @@ import { BasketComponent } from 'app/basket/app.basket';
 import { CheckoutComponent } from 'app/basket/app.checkout';
 import { OrdersComponent } from 'app/order/app.orders';
 import { DocumentComponent } from 'app/order/app.document';
+import { BottomSheetComponent } from 'app/products/app.bottomsheet';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -64,7 +65,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BasketComponent,
     CheckoutComponent,
     OrdersComponent,
-    DocumentComponent
+    DocumentComponent,
+    BottomSheetComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +105,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ArticleInfoPipe
   ],
   entryComponents: [
-    ConfirmDialog
+    ConfirmDialog,
+    BottomSheetComponent
   ],
   bootstrap: [AppComponent]
 })
