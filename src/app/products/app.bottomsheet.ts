@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { Category } from 'app/shared/models';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app.bottomsheet',
@@ -8,23 +9,19 @@ import { Category } from 'app/shared/models';
 })
 export class BottomSheetComponent {
     filter: string;
+    categoryId: number;
+
     constructor(
         @Inject(MAT_BOTTOM_SHEET_DATA) public data: Category[],
         private bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>
-    ) {}
-
-    openLink(categoryId: Number): void {
-        console.log(categoryId);
-        this.bottomSheetRef.dismiss();
-        event.preventDefault();
+    ) {
+        this.filter = '';
+        this.categoryId = 0;
     }
 
-    onFilterChange(filter: string) {
-        // if (filter === '') {
-        //   this.filtered = [];
-        //   this.filtered = this.products;
-        //   return;
-        // }
-        // this.filtered = this.products.filter(p => p.productName.indexOf(filter) >= 0);
+    openLink(categoryId: number): void {
+        this.categoryId = categoryId;
+        this.bottomSheetRef.dismiss();
+        event.preventDefault();
     }
 }

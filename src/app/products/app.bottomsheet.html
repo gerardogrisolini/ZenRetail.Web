@@ -1,11 +1,15 @@
-<h2>Filter</h2>
+<h3>Filter by name or description</h3>
 <mat-form-field style="width: 96%; padding: 0 2%;">
-    <input matInput mode="search" (ngModelChange)="onFilterChange($event)" [(ngModel)]="filter" placeholder="{{ 'Search' | translate }}">
+    <input matInput mode="search" [(ngModel)]="filter" placeholder="{{ 'Search' | translate }}">
     <mat-icon matSuffix (click)="openLink(0)">search</mat-icon>
 </mat-form-field>
+<h3>Filter by category</h3>
 <mat-nav-list>
     <a *ngFor="let category of data" href="#" mat-list-item (click)="openLink(category.categoryId)">
-        <span mat-line>{{ category.translations | mytranslate : category.categoryName }}</span>
-        <span mat-line>{{ [category.media] | parseUrl }}</span>
+        <p mat-line class="category-list">
+        <img src="{{ [category.media] | parseUrl }}" alt='category'/>
+        <span>{{ category.translations | mytranslate : category.categoryName }}</span>
+        </p>
     </a>
 </mat-nav-list>
+<p>&nbsp;</p>

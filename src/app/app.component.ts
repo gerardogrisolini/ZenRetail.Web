@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
       .subscribe(result => {
         result.forEach(p => {
           let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
-          this.navItems.push({ name: name, image: '/media/' + p.media.name, route: '/products/' + p.seo.permalink })
+          this.navItems.push({ name: name, image: '/thumb/' + p.media.name, route: '/products/' + p.seo.permalink })
         });
       });
   }

@@ -77,7 +77,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       data: categories,
     });
     bottomSheetRef.afterDismissed().subscribe(() => {
-      console.log('Bottom sheet has been dismissed: ' + bottomSheetRef.instance.filter);
+      this.onFilterChange(bottomSheetRef.instance.filter);
+      this.onCategoryChange(bottomSheetRef.instance.categoryId);
     });
   }
 
@@ -118,6 +119,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }, onerror => this.snackBar.open(onerror._body, this.close));
   }
 
+  onCategoryChange(categoryId: number) {
+    if (categoryId === 0) {
+      this.filtered = [];
+      this.filtered = this.products;
+      return;
+    }
+    this.filtered = this.products.filter(p => p.categories.filter(f => f.category.categoryId == categoryId).length > 0);
+  }
+  
   onFilterChange(filter: string) {
     if (filter === '') {
       this.filtered = [];
