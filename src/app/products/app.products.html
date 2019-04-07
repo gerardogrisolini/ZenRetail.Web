@@ -1,5 +1,5 @@
-<div class="app-grid-list">
-  <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
+<div style="padding: 10px 15px;">
+  <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
     <mat-grid-tile *ngFor="let product of filtered" style="cursor: pointer">
       <img routerLink="/product/{{product.seo.permalink}}" [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
       <mat-grid-tile-footer>
