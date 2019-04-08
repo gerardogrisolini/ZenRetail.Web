@@ -4,14 +4,11 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "ng": "ng",
-    "update": "npm rebuild node-sass",
-    "start": "ng serve --aot",
-    "build": "ng build --aot --prod --deploy-url / --base-href '/'",
-    "deploy": "rm -f ../ZenRetail/webroot/*.*; rm -rf ../ZenRetail/webroot/assets; mv ./dist/* ../ZenRetail/webroot/; rm -rf ./dist;",
+    "start": "build:ssr && serve:ssr",
+    "start:dev": "ng serve --aot",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "serve:ssr": "node dist/server",
-    "build:client-and-server-bundles": "ng build --prod && ng run zenretail-web:server",
+    "build:client-and-server-bundles": "ng build --aot --prod && ng run zenretail-web:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
