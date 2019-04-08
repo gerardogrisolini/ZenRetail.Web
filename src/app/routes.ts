@@ -15,19 +15,18 @@ import { DocumentComponent } from 'app/order/app.document';
 
 export const APP_ROUTES: Routes = [
   {path: '', component: AppComponent, children: [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', component: HomeComponent},
+    {path: '', component: HomeComponent},
     {path: 'info', component: InfoComponent},
     {path: 'account', component: AccountComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'products/brand/:name', component: ProductsComponent},
-    {path: 'products/:name', component: ProductsComponent},
+    {path: 'brand/:name', component: ProductsComponent},
+    {path: 'category/:name', component: ProductsComponent},
     {path: 'product/:name', component: ProductComponent},
     {path: 'basket', component: BasketComponent},
     {path: 'checkout', component: CheckoutComponent},
     {path: 'orders', component: OrdersComponent},
-    {path: 'document/:id', component: DocumentComponent}
+    {path: 'doc/:id', component: DocumentComponent}
   ]}
 ];
 

@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 		public snackBar: MatSnackBar,
 		private sessionService: SessionService,
 		private fb: FormBuilder) {
-		AppComponent.setPage('Registration');
+		AppComponent.current.setPage('Registration');
 		this.translate.get(this.close).subscribe((res: string) => this.close = res);
         window.parent.postMessage('iframe:400', '*');
 	}

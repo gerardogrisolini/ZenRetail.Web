@@ -33,7 +33,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
                 private sessionService: SessionService,
                 private documentService: DocumentService,
                 private registryService: RegistryService) {
-            AppComponent.setPage('Document', true);
+            AppComponent.current.setPage('Document', 'Report', 'Report', true);
         }
 
     ngOnInit() {

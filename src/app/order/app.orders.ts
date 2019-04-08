@@ -24,7 +24,7 @@ export class OrdersComponent implements OnInit {
 		private translate: TranslateService,
 		private sessionService: SessionService,
 		private registryService: RegistryService) {
-		AppComponent.setPage('Orders');
+		AppComponent.current.setPage('Orders');
 	}
 
 	ngOnInit() {

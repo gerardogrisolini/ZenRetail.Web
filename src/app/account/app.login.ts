@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 		private basketService: BasketService,
 		private fb: FormBuilder
 	) {
-		AppComponent.setPage('Authentication');
+		AppComponent.current.setPage('Authentication');
 		this.translate.get(this.close).subscribe((res: string) => this.close = res);
 		window.parent.postMessage('iframe:300', '*');
 	}

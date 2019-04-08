@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private productService: ProductService) {
         this.onResizeChanged(window);
-		AppComponent.setPage('Home');
+		AppComponent.current.setPage('Homepage', 'Homepage', 'Homepage');
     }
 
     @HostListener('window:resize', ['$event'])

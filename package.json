@@ -1,18 +1,18 @@
 {
-  "name": "webretail-web",
+  "name": "zenretail-web",
   "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "update": "npm rebuild node-sass",
-    "start": "ng serve --aot --base-href '/web/' --proxy-config proxy.config.json",
-    "build": "ng build --aot --prod --deploy-url /web/ --base-href '/web/'",
-    "deploy": "rm -rf ../ZenRetail/webroot/web/*; mv ./dist/* ../ZenRetail/webroot/web/; rm -rf ./dist;"
+    "start": "ng serve --aot --base-href '/' --proxy-config proxy.config.json",
+    "build": "ng build --aot --prod --deploy-url / --base-href '/'",
+    "deploy": "rm -f ../ZenRetail/webroot/*.*; rm -rf ../ZenRetail/webroot/assets; mv ./dist/* ../ZenRetail/webroot/; rm -rf ./dist;"
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.5",
+    "@agm/core": "*",
     "@angular/animations": "*",
     "@angular/cdk": "*",
     "@angular/common": "*",
@@ -26,10 +26,10 @@
     "@angular/router": "*",
     "@ngx-translate/core": "*",
     "@ngx-translate/http-loader": "*",
-    "angular2-useful-swiper": "^5.0.1",
+    "angular2-useful-swiper": "*",
     "core-js": "*",
     "rxjs-compat": "*",
-    "swiper": "^4.5.0",
+    "swiper": "*",
     "ts-helpers": "*",
     "zone.js": "*"
   },

@@ -31,7 +31,7 @@ export class CheckoutComponent implements OnInit {
 		private dialogsService: DialogService,
 		private sessionService: SessionService,
 		private basketService: BasketService) {
-		AppComponent.setPage('Checkout', true);
+		AppComponent.current.setPage('Checkout', 'Checkout', 'Checkout page', true);
 	}
 
 	ngOnInit() {
@@ -78,7 +78,7 @@ export class CheckoutComponent implements OnInit {
 
 	paymentClick(event) {
 		if (this.isValidAccount && this.paymentMethod === 'PayPal') {
-			this.showPayPal(AppComponent.setting, this.amount + this.shippingCost);
+			this.showPayPal(AppComponent.current.setting, this.amount + this.shippingCost);
 		}
 	}
 

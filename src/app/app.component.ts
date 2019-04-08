@@ -6,6 +6,7 @@ import { ProductService } from './services/product.service';
 import { Setting } from 'app/shared/models';
 import { Helpers } from 'app/shared/helpers';
 import { MyTranslatePipe } from './pipes/mytranslate.pipe';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   moduleId: module.id,
@@ -16,36 +17,25 @@ import { MyTranslatePipe } from './pipes/mytranslate.pipe';
   preserveWhitespaces: false,
 })
 export class AppComponent implements OnInit {
-  public static setting: Setting;
-  private static translate: TranslateService;
-  private static title = '';
-  private static backButton = false;
-  private static menuActive = true;
+  setting: Setting;
+  title = '';
+  backButton = false;
+  menuActive = true;
   isIframe = false;
   navItems = [];
 
-  static setPage(title: string, backButton = false, menuActive = true) {
-		this.translate.get(title).subscribe((res: string) => AppComponent.title = res);
-    AppComponent.backButton = backButton;
-    AppComponent.menuActive = menuActive;
-  }
-
-  static inIframe() {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
-    }
-  }
+  public static current: AppComponent;
 
   constructor(
+    private titleService: Title,
+    private metaService: Meta,
     private translate: TranslateService,
     private location: Location,
     private basketService: BasketService,
     private productService: ProductService,
     private _element: ElementRef
   ) {
-    AppComponent.translate = this.translate;
+    AppComponent.current = this;
 
     const country = navigator.language.substring(0, 2).toLowerCase();
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -54,22 +44,43 @@ export class AppComponent implements OnInit {
     this.translate.use(country);
   }
 
-  get title(): string {
-    return AppComponent.title;
+  setPage(name: string, title: string = '', description: string = '', backButton = false, menuActive = true) {
+    this.titleService.setTitle(title !== '' ? title : name);
+    if (description !== '') {
+      this.metaService.addTag({ name: 'description', content: description }, false);
+    } else {
+      this.metaService.removeTag('description');
+    }
+    this.translate.get(name).subscribe((res: string) => this.title = res);
+    this.backButton = backButton;
+    this.menuActive = menuActive;
   }
 
-  get backButton(): boolean {
-    return AppComponent.backButton;
+  inIframe() {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
   }
 
-  get menuActive(): boolean {
-    return AppComponent.menuActive;
-  }
+
+  // get title(): string {
+  //   return AppComponent.title;
+  // }
+
+  // get backButton(): boolean {
+  //   return AppComponent.backButton;
+  // }
+
+  // get menuActive(): boolean {
+  //   return AppComponent.menuActive;
+  // }
 
   get itemsCount(): number { return this.basketService.count; }
 
   ngOnInit() {
-    this.isIframe = AppComponent.inIframe();
+    this.isIframe = this.inIframe();
     this.loadSetting();
     if (!this.isIframe) {
       this.loadBasket();
@@ -78,12 +89,12 @@ export class AppComponent implements OnInit {
   }
 
   loadSetting() {
-    if (AppComponent.setting != null) {
+    if (this.setting != null) {
       return;
     }
 		this.basketService.getSetting()
         .subscribe(result => {
-          AppComponent.setting = result;
+          this.setting = result;
           Helpers.currency = result.companyCurrency;
           Helpers.utc = result.companyUtc;
         });
@@ -94,7 +105,7 @@ export class AppComponent implements OnInit {
       .subscribe(result => {
         result.forEach(p => {
           let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
-          this.navItems.push({ name: name, image: '/thumb/' + p.media.name, route: '/products/' + p.seo.permalink })
+          this.navItems.push({ name: name, image: '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
         });
       });
   }

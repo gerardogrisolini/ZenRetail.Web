@@ -33,7 +33,7 @@ export class AccountComponent implements OnInit {
         if (!this.sessionService.checkCredentials()) { return; }
 
         if (!this.isCheckout) {
-            AppComponent.setPage('Account');
+            AppComponent.current.setPage('Account');
             window.parent.postMessage('iframe:1000', '*');
         }
 

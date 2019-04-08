@@ -10,6 +10,7 @@ export class Setting {
   public companyId: number;
   public companyName: string;
   public companyDescription: Translation[];
+  public companySeo: Seo;
   public companyEmailInfo: string;
   public companyEmailSales: string;
   public companyEmailSupport: string;
@@ -35,6 +36,7 @@ export class Setting {
     this.companyId = 0;
     this.companyName = '';
     this.companyDescription = [];
+    this.companySeo = new Seo();
     this.companyEmailInfo = '';
     this.companyEmailSales = '';
     this.companyEmailSupport = '';

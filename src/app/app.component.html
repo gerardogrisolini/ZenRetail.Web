@@ -7,7 +7,7 @@
         (click)="start.close()"
         tabindex="-1"
         routerLinkActive="active-link"
-        [routerLink]="['/home']">
+        [routerLink]="['/']">
         <span><mat-icon>home</mat-icon></span>&nbsp;&nbsp;{{ 'Home' | translate}}
       </a>
       <a mat-list-item
@@ -67,6 +67,9 @@
         <div *ngIf="!isIframe">
           <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
             <mat-icon>fullscreen</mat-icon>
+          </button>
+          <button mat-icon-button routerLink="/" title="Homepage">
+            <mat-icon>home</mat-icon>
           </button>
           <button mat-icon-button routerLink="/basket" title="Shopping Basket">
             <mat-icon>shopping_cart</mat-icon>

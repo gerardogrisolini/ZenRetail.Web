@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCUMENT, Title, Meta } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
 import { ProductService } from './../services/product.service';
@@ -27,8 +27,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(DOCUMENT) private document: any,
-    private titleService: Title,
-    private metaService: Meta,
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private productService: ProductService,
@@ -83,23 +81,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addMetaByCategory(category: Category) {
-    let title = new MyTranslatePipe().transform(category.translations, category.categoryName);
-    this.titleService.setTitle(title);
-    let description = new MyTranslatePipe().transform(category.seo.description, category.categoryName);
-    this.metaService.addTag({ name: 'description', content: description }, false);
-    AppComponent.setPage(title);
+    let name = new MyTranslatePipe().transform(category.translations, category.categoryName);
+    let title = new MyTranslatePipe().transform(category.seo.title, name);
+    let description = new MyTranslatePipe().transform(category.seo.description, name);
+    AppComponent.current.setPage(name, title, description);
   }
 
   addMetaByBrand(brand: Brand) {
-    let title = new MyTranslatePipe().transform(brand.translations, brand.brandName);
-    this.titleService.setTitle(title);
-    let description = new MyTranslatePipe().transform(brand.seo.description, brand.brandName);
-    this.metaService.addTag({ name: 'description', content: description }, false);
-    AppComponent.setPage(title);
+    let name = new MyTranslatePipe().transform(brand.translations, brand.brandName);
+    let title = new MyTranslatePipe().transform(brand.seo.title, name);
+    let description = new MyTranslatePipe().transform(brand.seo.description, name);
+    AppComponent.current.setPage(name, title, description);
   }
   
   loadProductsByCategory(categoryName: string) {
-    AppComponent.setPage(categoryName);
     this.productService.getByCategoryName(categoryName)
         .subscribe(result => {
           this.filtered = result;
@@ -110,12 +105,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   loadProductsByBrand(brandName: string) {
-    AppComponent.setPage(brandName);
     this.productService.getByBrandName(brandName)
         .subscribe(result => {
           this.filtered = result;
           this.products = result;
-          this.addMetaByBrand(this.products[0].brand);
+          let brand = this.products[0].brand;
+          this.addMetaByBrand(brand);
         }, onerror => this.snackBar.open(onerror._body, this.close));
   }
 

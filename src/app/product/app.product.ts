@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductService } from 'app/services/product.service';
@@ -20,8 +19,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 	product: Product;
 	
 	constructor(
-		private titleService: Title,
-		private metaService: Meta,
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private translate: TranslateService,
@@ -41,7 +38,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 		spaceBetween: 0 // Space between each Item
 	};
 	  
-	get isIframe(): boolean { return AppComponent.inIframe(); }
+	get isIframe(): boolean { return AppComponent.current.inIframe(); }
 
 	ngOnInit() {
 		if (localStorage.getItem('barcode')) {
@@ -59,12 +56,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   
   addMetaData(product: Product) {
-    let title = new MyTranslatePipe().transform(product.translations, product.productName);
-    this.titleService.setTitle(title);
-    let description = new MyTranslatePipe().transform(product.seo.description, product.productName);
+    let name = new MyTranslatePipe().transform(product.translations, product.productName);
+    let title = new MyTranslatePipe().transform(product.seo.title, name);
+    let description = new MyTranslatePipe().transform(product.seo.description, name);
     //this.metaService.removeTag('name="description"');
-    this.metaService.addTag({ name: 'description', content: description }, false);
-	AppComponent.setPage(product.productName, !this.isIframe, !this.isIframe);
+    AppComponent.current.setPage(name, title, description, !this.isIframe, !this.isIframe);
 }
 
   loadProduct(name: string) {
@@ -83,7 +79,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 					this.snackBar.open(onerror.status === 401 ? '401 - Unauthorized' : onerror._body, res)
 				);
 			});
-  }
+  	}
 
 	pickerClick(event: Article) {
 		const model = new Basket();

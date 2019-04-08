@@ -50,7 +50,7 @@
     <h2 style="text-align: center" [translate]="'Brands'"></h2>
     <div *ngIf="brands">    
         <div class="brand" *ngFor="let b of brands">
-            <img routerLink="/products/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl">
+            <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl">
             <br/><span>{{b.brandName}}</span>
         </div>
     </div>

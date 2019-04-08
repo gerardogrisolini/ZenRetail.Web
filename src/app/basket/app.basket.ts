@@ -6,7 +6,6 @@ import { SessionService } from 'app/services/session.service';
 import { BasketService } from 'app/services/basket.service';
 import { Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { Observable } from 'rxjs/Rx';
 
 @Component({
 	selector: 'app-basket',
@@ -23,10 +22,10 @@ export class BasketComponent implements OnInit {
 		private dialogsService: DialogService,
 		private sessionService: SessionService,
 		private basketService: BasketService) {
-		AppComponent.setPage('Basket');
+			AppComponent.current.setPage('Basket');
 	}
 
-	get isIframe(): boolean { return AppComponent.inIframe(); }
+	get isIframe(): boolean { return AppComponent.current.inIframe(); }
 
 	ngOnInit() {
 		if (!this.sessionService.checkCredentials()) { return; }
