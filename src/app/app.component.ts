@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from './services/basket.service';
@@ -18,11 +18,11 @@ import { Title, Meta } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   setting: Setting;
-  title = '';
-  backButton = false;
-  menuActive = true;
   isIframe = false;
   navItems = [];
+  private static title = '';
+  private static backButton = false;
+  private static menuActive = true;
 
   public static current: AppComponent;
 
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     private _element: ElementRef
   ) {
     AppComponent.current = this;
-
+    this.isIframe = this.isFrame();
     const country = navigator.language.substring(0, 2).toLowerCase();
     // this language will be used as a fallback when a translation isn't found in the current language
     // this.translate.setDefaultLang('en');
@@ -45,18 +45,19 @@ export class AppComponent implements OnInit {
   }
 
   setPage(name: string, title: string = '', description: string = '', backButton = false, menuActive = true) {
+    //AppComponent.title = name;
+    AppComponent.backButton = backButton;
+    AppComponent.menuActive = menuActive;
     this.titleService.setTitle(title !== '' ? title : name);
     if (description !== '') {
       this.metaService.addTag({ name: 'description', content: description }, false);
     } else {
       this.metaService.removeTag('description');
     }
-    this.translate.get(name).subscribe((res: string) => this.title = res);
-    this.backButton = backButton;
-    this.menuActive = menuActive;
+    this.translate.get(name).subscribe((res: string) => AppComponent.title = res);
   }
 
-  inIframe() {
+  isFrame(): boolean {
     try {
         return window.self !== window.top;
     } catch (e) {
@@ -65,22 +66,21 @@ export class AppComponent implements OnInit {
   }
 
 
-  // get title(): string {
-  //   return AppComponent.title;
-  // }
+  get title(): string {
+    return AppComponent.title;
+  }
 
-  // get backButton(): boolean {
-  //   return AppComponent.backButton;
-  // }
+  get backButton(): boolean {
+    return AppComponent.backButton;
+  }
 
-  // get menuActive(): boolean {
-  //   return AppComponent.menuActive;
-  // }
+  get menuActive(): boolean {
+    return AppComponent.menuActive;
+  }
 
   get itemsCount(): number { return this.basketService.count; }
 
   ngOnInit() {
-    this.isIframe = this.inIframe();
     this.loadSetting();
     if (!this.isIframe) {
       this.loadBasket();

@@ -28,6 +28,7 @@
     "@ngx-translate/http-loader": "*",
     "angular2-useful-swiper": "*",
     "core-js": "*",
+    "file-saver": "^2.0.1",
     "rxjs-compat": "*",
     "swiper": "*",
     "ts-helpers": "*",

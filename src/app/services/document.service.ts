@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, ResponseContentType } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import { PdfDocument } from '../shared/models';
-import { Helpers } from 'app/shared/helpers';
-import { environment } from 'environments/environment';
 
 @Injectable()
 export class DocumentService {
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     getHtml(model: PdfDocument): string {
@@ -159,14 +156,13 @@ export class DocumentService {
 
     htmlToPdf(model: PdfDocument): Observable<Blob> {
         model.content = this.getHtml(model);
-        return this.http.post('/api/pdf', model,
-          { headers: Helpers.getHeaders(), responseType: ResponseContentType.Blob })
-            .map(result => <Blob>result.blob());
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json');
+        return this.http.post('/api/pdf', model, {headers: headers, responseType: 'blob'});
     }
 
     sendMail(model: PdfDocument): Observable<PdfDocument> {
         model.content = this.getHtml(model);
-        return this.http.post('/api/pdf/email', model, { headers: Helpers.getHeaders() })
-            .map(result => <PdfDocument>result.json());
+        return this.http.post<PdfDocument>('/api/pdf/email', model);
     }
 }

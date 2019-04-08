@@ -1,5 +1,3 @@
-import { Headers } from '@angular/http';
-
 export class Helpers {
 
     static currency = 'EUR';
@@ -18,13 +16,5 @@ export class Helpers {
             }
         }
         return out;
-    }
-
-    static getHeaders(): Headers {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
-        headers.append('Content-Type', 'application/json');
-        // headers.append('Access-Control-Allow-Origin', '*');
-        return headers;
     }
 }

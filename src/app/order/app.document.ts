@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
@@ -8,6 +7,7 @@ import { RegistryService } from 'app/services/registry.service';
 import { DocumentService } from 'app/services/document.service';
 import { Movement, MovementArticle, PdfDocument } from './../shared/models';
 import { AppComponent } from 'app/app.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
     selector: 'app-document',
@@ -26,19 +26,19 @@ export class DocumentComponent implements OnInit, OnDestroy {
     groups: any[];
     isBusy: Boolean;
 
-    constructor(@Inject(DOCUMENT) private document: any,
-                private location: Location,
+    constructor(private location: Location,
                 public snackBar: MatSnackBar,
                 private activatedRoute: ActivatedRoute,
                 private sessionService: SessionService,
                 private documentService: DocumentService,
                 private registryService: RegistryService) {
-            AppComponent.current.setPage('Document', 'Report', 'Report', true);
-        }
+        let inIframe = AppComponent.current.isIframe;
+        AppComponent.current.setPage('Document', 'Report', 'Report', !inIframe, !inIframe);
+    }
 
     ngOnInit() {
-        this.sessionService.checkCredentials();
-
+		if (!this.sessionService.checkCredentials()) { return; }
+ 
         // Subscribe to route params
         this.sub = this.activatedRoute.params.subscribe(params => {
             this.movementId = Number(params['id']);
@@ -83,7 +83,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
 
     get header(): string {
         // return environment.apiUrl + '/Media/header.png';
-        return '/Media/header.png';
+        return '/media/header.png';
     }
 
     ngOnDestroy() {
@@ -107,8 +107,9 @@ export class DocumentComponent implements OnInit, OnDestroy {
             .subscribe(
                 data => {
                     const blob = new Blob([data], {type: 'application/pdf'});
-                    const url = window.URL.createObjectURL(blob);
-                    window.location.href = url;
+                    FileSaver.saveAs(blob, model.subject);
+                    // const url = window.URL.createObjectURL(blob);
+                    // window.location.href = url;
                 },
                 err => {
                     const reader = new FileReader();

@@ -14,8 +14,7 @@ import { AppComponent } from 'app/app.component';
 })
 
 export class BasketComponent implements OnInit {
-	private sub: any;
-
+	
 	constructor(
 		public snackBar: MatSnackBar,
 		private translate: TranslateService,
@@ -25,7 +24,7 @@ export class BasketComponent implements OnInit {
 			AppComponent.current.setPage('Basket');
 	}
 
-	get isIframe(): boolean { return AppComponent.current.inIframe(); }
+	get isIframe(): boolean { return AppComponent.current.isIframe; }
 
 	ngOnInit() {
 		if (!this.sessionService.checkCredentials()) { return; }
@@ -38,7 +37,7 @@ export class BasketComponent implements OnInit {
 					window.parent.postMessage('iframe:' + height, '*');
 				});
 		}
-	  }
+	}
 
 	get basket(): Basket[] { return this.basketService.basket; }
 	get count(): number {
@@ -63,7 +62,7 @@ export class BasketComponent implements OnInit {
 	}
 
 	deleteClick(items: MatSelectionList) {
-        this.translate.get('Confirm delete')
+		this.translate.get('Confirm delete')
 		.subscribe((title: string) => {
 			this.translate.get('Are you sure you want to delete selected items?')
 				.subscribe((message: string) => {

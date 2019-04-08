@@ -38,7 +38,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 		spaceBetween: 0 // Space between each Item
 	};
 	  
-	get isIframe(): boolean { return AppComponent.current.inIframe(); }
+	get isIframe(): boolean { return AppComponent.current.isIframe; }
 
 	ngOnInit() {
 		if (localStorage.getItem('barcode')) {

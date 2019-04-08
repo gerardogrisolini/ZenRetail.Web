@@ -1,5 +1,5 @@
 <mat-sidenav-container class="app-root" fullscreen>
-  
+
   <mat-sidenav mode="over" #start>
     <img src="/media/logo.png"/>
     <mat-nav-list>
@@ -59,7 +59,7 @@
       <button *ngIf="backButton" mat-icon-button (click)="backClick()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <button *ngIf="menuActive&&!backButton" mat-icon-button (click)="start.open()">
+      <button *ngIf="!backButton" mat-icon-button (click)="start.open()">
         <mat-icon>menu</mat-icon>
       </button>
       <div class="app-toolbar">

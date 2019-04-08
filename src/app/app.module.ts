@@ -80,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
     HttpClientModule,
     SwiperModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB3lyD6l1LxMEX0wNVhj6tmD_sDDRTjtA8'
     }),
