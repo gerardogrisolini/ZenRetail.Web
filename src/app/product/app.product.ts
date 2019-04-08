@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 	product: Product;
 	
 	constructor(
+		@Inject(PLATFORM_ID) private platformId: Object,
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private translate: TranslateService,
@@ -55,9 +56,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   
   addMetaData(product: Product) {
-    let name = new MyTranslatePipe().transform(product.translations, product.productName);
-    let title = new MyTranslatePipe().transform(product.seo.title, name);
-    let description = new MyTranslatePipe().transform(product.seo.description, name);
+		let pipe = new MyTranslatePipe(this.platformId);
+    let name = pipe.transform(product.translations, product.productName);
+    let title = pipe.transform(product.seo.title, name);
+    let description = pipe.transform(product.seo.description, name);
     //this.metaService.removeTag('name="description"');
     AppComponent.current.setPage(name, title, description, !this.isIframe, !this.isIframe);
 }

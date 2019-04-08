@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Product, Brand } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-    	selector: 'app-home',
+    selector: 'app-home',
     templateUrl: 'home.component.html'
 })
 export class HomeComponent implements OnInit {
@@ -15,8 +16,13 @@ export class HomeComponent implements OnInit {
     news: Product[];
     brands: Brand[];
 
-    constructor(private productService: ProductService) {
-        this.onResizeChanged(window);
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: Object,
+        private productService: ProductService
+    ) {
+        if (isPlatformBrowser(this.platformId)) {
+            this.onResizeChanged(window);
+        }
         AppComponent.current.setPage('Homepage', 'Homepage', 'Homepage');
     }
 

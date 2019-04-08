@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
 import { PLATFORM_ID } from '@angular/core';
- import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Location } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private titleService: Title,
     private metaService: Meta,
-    private translate: TranslateService,
+    public translate: TranslateService,
     private location: Location,
     private basketService: BasketService,
     private productService: ProductService,
@@ -42,12 +42,10 @@ export class AppComponent implements OnInit {
     this.isIframe = this.isFrame();
 
     if (isPlatformBrowser(this.platformId)) {
-      // Client only code.
       const country = navigator.language.substring(0, 2).toLowerCase();
       this.translate.use(country);
     }
     if (isPlatformServer(this.platformId)) {
-      // Server only code.
       this.translate.setDefaultLang('en');
     }
   }
@@ -66,10 +64,15 @@ export class AppComponent implements OnInit {
   }
 
   isFrame(): boolean {
-    try {
+    if (isPlatformServer(this.platformId)) {
+      return false;
+    }
+    if (isPlatformBrowser(this.platformId)) {
+      try {
         return window.self !== window.top;
-    } catch (e) {
+      } catch (e) {
         return true;
+      }
     }
   }
 
@@ -106,7 +109,7 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem(key);
     } else {
-      return '';
+      return null;
     }
   }
 
@@ -132,7 +135,7 @@ export class AppComponent implements OnInit {
     this.productService.getCategories()
       .subscribe(result => {
         result.forEach(p => {
-          let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
+          let name = new MyTranslatePipe(this.platformId).transform(p.translations, p.categoryName);
           this.navItems.push({ name: name, image: environment.host + '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
         });
       });

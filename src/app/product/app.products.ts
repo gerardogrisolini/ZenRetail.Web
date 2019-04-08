@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCUMENT } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
 import { ProductService } from 'app/services/product.service';
@@ -25,7 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 	close = 'Close';
 
   constructor(
-    @Inject(DOCUMENT) private document: any,
+    @Inject(PLATFORM_ID) private platformId: Object,
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private productService: ProductService,
@@ -80,16 +79,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addMetaByCategory(category: Category) {
-    let name = new MyTranslatePipe().transform(category.translations, category.categoryName);
-    let title = new MyTranslatePipe().transform(category.seo.title, name);
-    let description = new MyTranslatePipe().transform(category.seo.description, name);
+    let pipe = new MyTranslatePipe(this.platformId);
+    let name = pipe.transform(category.translations, category.categoryName);
+    let title = pipe.transform(category.seo.title, name);
+    let description = pipe.transform(category.seo.description, name);
     AppComponent.current.setPage(name, title, description);
   }
 
   addMetaByBrand(brand: Brand) {
-    let name = new MyTranslatePipe().transform(brand.translations, brand.brandName);
-    let title = new MyTranslatePipe().transform(brand.seo.title, name);
-    let description = new MyTranslatePipe().transform(brand.seo.description, name);
+    let pipe = new MyTranslatePipe(this.platformId);
+    let name = pipe.transform(brand.translations, brand.brandName);
+    let title = pipe.transform(brand.seo.title, name);
+    let description = pipe.transform(brand.seo.description, name);
     AppComponent.current.setPage(name, title, description);
   }
   
