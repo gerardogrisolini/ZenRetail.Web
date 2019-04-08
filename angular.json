@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "webretail-web": {
+    "zenretail-web": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -11,10 +11,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.json",
+            "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
@@ -52,38 +52,46 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "webretail-web:build"
+            "browserTarget": "zenretail-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "webretail-web:build:production"
+              "browserTarget": "zenretail-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "webretail-web:build"
+            "browserTarget": "zenretail-web:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.json"
+              "src/tsconfig.app.json"
             ],
             "exclude": []
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
           }
         }
       }
     },
-    "webretail-web-e2e": {
+    "zenretail-web-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application"
     }
   },
-  "defaultProject": "webretail-web",
+  "defaultProject": "zenretail-web",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

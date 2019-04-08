@@ -4,8 +4,9 @@ import { Category } from 'app/shared/models';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app.bottomsheet',
-  templateUrl: './app.bottomsheet.html',
+    moduleId: 'bottomsheet',
+    selector: 'app.bottomsheet',
+    templateUrl: './app.bottomsheet.html',
 })
 export class BottomSheetComponent {
     filter: string;

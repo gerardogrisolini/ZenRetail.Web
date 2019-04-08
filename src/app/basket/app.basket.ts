@@ -8,7 +8,7 @@ import { Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 
 @Component({
-	selector: 'app-basket',
+		selector: 'app-basket',
 	templateUrl: 'app.basket.html',
 	styleUrls: ['app.basket.scss']
 })
@@ -57,7 +57,7 @@ export class BasketComponent implements OnInit {
 			.subscribe(result => {
 				const index = this.basket.indexOf(item);
 				this.basketService.basket[index] = item;
-				window.parent.postMessage('token:' + localStorage.getItem('token'), '*');
+				window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
 			});
 	}
 
@@ -76,7 +76,7 @@ export class BasketComponent implements OnInit {
 									.subscribe(result => {
 										const index = this.basket.indexOf(item.value);
 										this.basket.splice(index, 1);
-										window.parent.postMessage('token:' + localStorage.getItem('token'), '*');
+										window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
 									});
 								});
 							}

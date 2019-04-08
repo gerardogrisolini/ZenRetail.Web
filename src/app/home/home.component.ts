@@ -4,7 +4,7 @@ import { Product, Brand } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
 
 @Component({
-    selector: 'app-home',
+    	selector: 'app-home',
     templateUrl: 'home.component.html'
 })
 export class HomeComponent implements OnInit {

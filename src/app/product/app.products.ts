@@ -4,14 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
-import { ProductService } from './../services/product.service';
-import { Product, Category, Brand } from './../shared/models';
+import { ProductService } from 'app/services/product.service';
+import { Product, Category, Brand } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { BottomSheetComponent } from './app.bottomsheet';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-products',
   templateUrl: './app.products.html',
   styleUrls: ['./app.products.scss']

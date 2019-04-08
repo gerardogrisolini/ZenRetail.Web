@@ -8,7 +8,7 @@ import { AppComponent } from 'app/app.component';
 import { PasswordValidation } from 'app/shared/password.validation';
 
 @Component({
-	selector: 'app-register',
+		selector: 'app-register',
 	templateUrl: 'app.register.html'
 })
 

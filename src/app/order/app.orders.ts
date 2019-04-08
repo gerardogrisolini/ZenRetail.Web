@@ -9,7 +9,7 @@ import { AppComponent } from 'app/app.component';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
-	selector: 'app-orders',
+		selector: 'app-orders',
 	templateUrl: 'app.orders.html',
 	styleUrls: ['app.orders.scss']
 })

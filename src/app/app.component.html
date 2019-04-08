@@ -1,7 +1,7 @@
 <mat-sidenav-container class="app-root" fullscreen>
 
   <mat-sidenav mode="over" #start>
-    <img src="/media/logo.png"/>
+    <img src="{{ '/media/logo.png' | imageUrl }}"/>
     <mat-nav-list>
       <a mat-list-item
         (click)="start.close()"

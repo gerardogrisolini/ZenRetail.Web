@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material';
 import { SessionService } from 'app/services/session.service';
 import { RegistryService } from 'app/services/registry.service';
 import { DocumentService } from 'app/services/document.service';
-import { Movement, MovementArticle, PdfDocument } from './../shared/models';
+import { Movement, MovementArticle, PdfDocument } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import * as FileSaver from 'file-saver';
 
 @Component({
-    selector: 'app-document',
+      selector: 'app-document',
     templateUrl: 'app.document.html',
 	styleUrls: ['app.document.scss']
 })

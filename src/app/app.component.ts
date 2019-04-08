@@ -1,15 +1,17 @@
-import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Location } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { BasketService } from './services/basket.service';
-import { ProductService } from './services/product.service';
+import { BasketService } from 'app/services/basket.service';
+import { ProductService } from 'app/services/product.service';
 import { Setting } from 'app/shared/models';
 import { Helpers } from 'app/shared/helpers';
-import { MyTranslatePipe } from './pipes/mytranslate.pipe';
-import { Title, Meta } from '@angular/platform-browser';
+import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
+import { environment } from 'environments/environment';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit {
   public static current: AppComponent;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private titleService: Title,
     private metaService: Meta,
     private translate: TranslateService,
@@ -37,11 +40,16 @@ export class AppComponent implements OnInit {
   ) {
     AppComponent.current = this;
     this.isIframe = this.isFrame();
-    const country = navigator.language.substring(0, 2).toLowerCase();
-    // this language will be used as a fallback when a translation isn't found in the current language
-    // this.translate.setDefaultLang('en');
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    this.translate.use(country);
+
+    if (isPlatformBrowser(this.platformId)) {
+      // Client only code.
+      const country = navigator.language.substring(0, 2).toLowerCase();
+      this.translate.use(country);
+    }
+    if (isPlatformServer(this.platformId)) {
+      // Server only code.
+      this.translate.setDefaultLang('en');
+    }
   }
 
   setPage(name: string, title: string = '', description: string = '', backButton = false, menuActive = true) {
@@ -88,6 +96,26 @@ export class AppComponent implements OnInit {
     }
   }
 
+  setItem(key: string, value: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(key, value);
+    }
+  }
+
+  getItem(key: string) : string {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(key);
+    } else {
+      return '';
+    }
+  }
+
+  removeItem(key: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(key);
+    }
+  }
+  
   loadSetting() {
     if (this.setting != null) {
       return;
@@ -105,13 +133,13 @@ export class AppComponent implements OnInit {
       .subscribe(result => {
         result.forEach(p => {
           let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
-          this.navItems.push({ name: name, image: '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
+          this.navItems.push({ name: name, image: environment.host + '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
         });
       });
   }
 
 	loadBasket() {
-    const uniqueID = localStorage.getItem('uniqueID');
+    const uniqueID = AppComponent.current.getItem('uniqueID');
     if (uniqueID == null) {
       return;
     }

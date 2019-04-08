@@ -2,7 +2,7 @@ import { MatDialogRef } from '@angular/material';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'confirm-dialog',
+      selector: 'confirm-dialog',
     template: `
 <p><b>{{ title }}</b></p>
 <p>{{ message }}</p>

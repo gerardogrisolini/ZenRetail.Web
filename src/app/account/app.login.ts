@@ -8,7 +8,7 @@ import { AppComponent } from 'app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-	selector: 'app-login',
+		selector: 'app-login',
 	templateUrl: 'app.login.html'
 })
 

@@ -9,8 +9,7 @@ import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 
 @Component({
-	moduleId: module.id,
-	selector: 'app-product',
+		selector: 'app-product',
 	templateUrl: 'app.product.html',
 	styleUrls: ['app.product.scss']
 })
@@ -41,7 +40,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 	get isIframe(): boolean { return AppComponent.current.isIframe; }
 
 	ngOnInit() {
-		if (localStorage.getItem('barcode')) {
+		if (AppComponent.current.getItem('barcode')) {
 			this.pickerClick(null);
 		}
 		this.sub = this.activatedRoute.params.subscribe(params => {
@@ -85,14 +84,14 @@ export class ProductComponent implements OnInit, OnDestroy {
 		const model = new Basket();
 		if (event !== null) {
 			model.basketBarcode = event.barcodes.find(p => p.tags.length === 0).barcode;
-			localStorage.setItem('barcode', model.basketBarcode);
+			AppComponent.current.setItem('barcode', model.basketBarcode);
 		} else {
-			model.basketBarcode = localStorage.getItem('barcode');
+			model.basketBarcode = AppComponent.current.getItem('barcode');
 		}
 		this.basketService
 			.create(model)
 			.subscribe(result => {
-				localStorage.removeItem('barcode');
+				AppComponent.current.removeItem('barcode');
 				this.translate.get('added to basket!')
 					.subscribe((message: string) => {
 						this.translate.get('Show Basket')
@@ -118,7 +117,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 					this.basketService.basket.push(result);
 					}
 				} else {
-					window.parent.postMessage('token:' + localStorage.getItem('token'), '*');
+					window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
 				}
 			},
 			onerror => {
@@ -129,7 +128,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 								this.snackBar.open(onerror.status === 401 ? message : onerror._body, login)
 									.onAction()
 									.subscribe(() => {
-										localStorage.setItem('origin', this.router.url);
+										AppComponent.current.setItem('origin', this.router.url);
 										this.router.navigate(['login']);
 									});
 							});

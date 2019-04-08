@@ -4,13 +4,13 @@ import { Setting } from 'app/shared/models';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 
 @Component({
-    selector: 'app-info',
-    styles: [`
-      agm-map {
-        height: 300px;
-      }
-    `],
-    templateUrl: 'info.component.html'
+  	selector: 'app-info',
+  styles: [`
+    agm-map {
+      height: 300px;
+    }
+  `],
+  templateUrl: 'info.component.html'
 })
 export class InfoComponent implements OnInit {
     lat: number = 51.678418;

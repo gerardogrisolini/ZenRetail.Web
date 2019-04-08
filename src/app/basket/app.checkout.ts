@@ -12,7 +12,7 @@ import { AccountComponent } from 'app/account/app.account';
 declare let paypal: any;
 
 @Component({
-	selector: 'app-checkout',
+		selector: 'app-checkout',
 	templateUrl: 'app.checkout.html',
 	styleUrls: ['app.checkout.scss']
 })

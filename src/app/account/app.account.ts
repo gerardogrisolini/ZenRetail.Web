@@ -10,7 +10,7 @@ import { PasswordValidation } from 'app/shared/password.validation';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-account',
+    	selector: 'app-account',
     templateUrl: 'app.account.html'
 })
 
@@ -54,7 +54,7 @@ export class AccountComponent implements OnInit {
             validator: PasswordValidation.MatchPassword
         });
 
-        const cutomerId = Number(localStorage.getItem('uniqueID'));
+        const cutomerId = Number(AppComponent.current.getItem('uniqueID'));
         this.registryService
             .getById(cutomerId)
             .subscribe(result => {

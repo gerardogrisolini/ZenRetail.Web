@@ -6,9 +6,13 @@
   "scripts": {
     "ng": "ng",
     "update": "npm rebuild node-sass",
-    "start": "ng serve --aot --base-href '/' --proxy-config proxy.config.json",
+    "start": "ng serve --aot",
     "build": "ng build --aot --prod --deploy-url / --base-href '/'",
-    "deploy": "rm -f ../ZenRetail/webroot/*.*; rm -rf ../ZenRetail/webroot/assets; mv ./dist/* ../ZenRetail/webroot/; rm -rf ./dist;"
+    "deploy": "rm -f ../ZenRetail/webroot/*.*; rm -rf ../ZenRetail/webroot/assets; mv ./dist/* ../ZenRetail/webroot/; rm -rf ./dist;",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "serve:ssr": "node dist/server",
+    "build:client-and-server-bundles": "ng build --prod && ng run zenretail-web:server",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
   "dependencies": {
@@ -23,25 +27,30 @@
     "@angular/material": "*",
     "@angular/platform-browser": "*",
     "@angular/platform-browser-dynamic": "*",
+    "@angular/platform-server": "*",
     "@angular/router": "*",
+    "@nguniversal/express-engine": "*",
+    "@nguniversal/module-map-ngfactory-loader": "*",
     "@ngx-translate/core": "*",
     "@ngx-translate/http-loader": "*",
     "angular2-useful-swiper": "*",
     "core-js": "*",
-    "file-saver": "^2.0.1",
+    "file-saver": "*",
     "rxjs-compat": "*",
     "swiper": "*",
     "ts-helpers": "*",
+    "ts-loader": "*",
     "zone.js": "*"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "*",
     "@angular/cli": "*",
     "@angular/compiler-cli": "*",
     "@types/node": "*",
     "codelyzer": "*",
     "ts-node": "*",
     "tslint": "*",
-    "typescript": "3.2.4",
-    "@angular-devkit/build-angular": "*"
+    "typescript": "*",
+    "webpack-cli": "*"
   }
 }

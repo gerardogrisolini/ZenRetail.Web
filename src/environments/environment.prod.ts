@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  // apiUrl: 'https://www.webretail.cloud',
+  host: 'http://localhost:8080',
   env: 'prod'
 };

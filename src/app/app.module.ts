@@ -22,8 +22,9 @@ import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { DocumentService } from 'app/services/document.service';
 
-import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
-import { ParseUrlPipe } from './pipes/parseurl.pipe';
+import { CurrencyFormatPipe } from 'app/pipes/currency-format.pipe';
+import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
+import { ImageUrlPipe } from 'app/pipes/imageurl.pipe';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { ArticleInfoPipe } from 'app/pipes/articleinfo.pipe';
 import { ArticlePicker } from 'app/shared/article.picker';
@@ -53,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     CurrencyFormatPipe,
     ParseUrlPipe,
+    ImageUrlPipe,
     MyTranslatePipe,
     ArticleInfoPipe,
     ArticlePicker,
@@ -72,7 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BottomSheetComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'zenretail-web' }),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -107,6 +109,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ArticlePicker,
     ConfirmDialog,
     CurrencyFormatPipe,
+    ImageUrlPipe,
     ParseUrlPipe,
     MyTranslatePipe,
     ArticleInfoPipe

@@ -2,7 +2,8 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import { Login, Token } from '../shared/models';
+import { Login, Token } from 'app/shared/models';
+import { AppComponent } from 'app/app.component';
 
 @Injectable()
 export class SessionService {
@@ -19,7 +20,7 @@ export class SessionService {
     }
 
     logout() {
-        const body = { token: localStorage.getItem('token') };
+        const body = { token: AppComponent.current.getItem('token') };
         this.http.post<any>('/api/logout', body).subscribe(result => result);
         this.removeCredentials();
     }
@@ -31,28 +32,28 @@ export class SessionService {
     grantCredentials(username: string, data: Token) {
         window.parent.postMessage('token:' + data.bearer, '*');
         this.username = username;
-        localStorage.setItem('username', username);
-        // localStorage.setItem('uniqueID', data.uniqueID);
-        localStorage.setItem('token', data.bearer);
-        localStorage.setItem('role', "Registry");
+        AppComponent.current.setItem('username', username);
+        // AppComponent.current.setItem('uniqueID', data.uniqueID);
+        AppComponent.current.setItem('token', data.bearer);
+        AppComponent.current.setItem('role', "Registry");
 
-        const origin = localStorage.getItem('origin');
+        const origin = AppComponent.current.getItem('origin');
         this.router.navigate([origin ? origin : 'basket']);
-        localStorage.removeItem('origin');
+        AppComponent.current.removeItem('origin');
     }
 
     removeCredentials() {
         window.parent.postMessage('token:', '*');
 
-        localStorage.removeItem('origin');
-        localStorage.removeItem('uniqueID');
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        AppComponent.current.removeItem('origin');
+        AppComponent.current.removeItem('uniqueID');
+        AppComponent.current.removeItem('token');
+        AppComponent.current.removeItem('role');
         this.router.navigate(['login']);
     }
 
     get isAuthenticated(): boolean {
-        return localStorage.getItem('token') != null && localStorage.getItem('role') === 'Registry';
+        return AppComponent.current.getItem('token') != null && AppComponent.current.getItem('role') === 'Registry';
     }
 
     checkCredentials(): boolean {

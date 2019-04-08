@@ -3,10 +3,9 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Product } from 'app/shared/models';
 
 @Component({
-    moduleId: module.id,
-    selector: 'article-picker',
-    templateUrl: 'article.picker.html',
-    encapsulation: ViewEncapsulation.None
+  selector: 'article-picker',
+  templateUrl: 'article.picker.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class ArticlePicker implements OnInit {
 
