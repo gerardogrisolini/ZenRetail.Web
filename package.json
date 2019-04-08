@@ -4,8 +4,9 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "build:ssr && serve:ssr",
-    "start:dev": "ng serve --aot",
+    "ng": "ng",
+    "start:dev": "ng serve",
+    "start": "npm run build:ssr && npm run serve:ssr",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "serve:ssr": "node dist/server",
     "build:client-and-server-bundles": "ng build --aot --prod && ng run zenretail-web:server",
@@ -33,21 +34,21 @@
     "angular2-useful-swiper": "*",
     "core-js": "*",
     "file-saver": "*",
-    "rxjs-compat": "*",
+    "rxjs-compat": "6.3.3",
     "swiper": "*",
     "ts-helpers": "*",
     "ts-loader": "*",
     "zone.js": "*"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "*",
+    "@angular-devkit/build-angular": "^0.13.8",
     "@angular/cli": "*",
     "@angular/compiler-cli": "*",
     "@types/node": "*",
     "codelyzer": "*",
     "ts-node": "*",
     "tslint": "*",
-    "typescript": "*",
+    "typescript": "3.2.4",
     "webpack-cli": "*"
   }
 }
