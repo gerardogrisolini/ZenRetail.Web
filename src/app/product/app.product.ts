@@ -8,6 +8,7 @@ import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { isPlatformBrowser } from '@angular/common';
+import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
 	selector: 'app-product',
@@ -60,9 +61,9 @@ export class ProductComponent implements OnInit, OnDestroy {
 		let pipe = new MyTranslatePipe(this.platformId);
     let name = pipe.transform(product.translations, product.productName);
     let title = pipe.transform(product.seo.title, name);
-    let description = pipe.transform(product.seo.description, name);
-    //this.metaService.removeTag('name="description"');
-    AppComponent.current.setPage(name, title, description, !this.isIframe, !this.isIframe);
+		let description = pipe.transform(product.seo.description, name);
+		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
+    AppComponent.current.setPage(name, title, description, image, !this.isIframe, !this.isIframe);
 }
 
   loadProduct(name: string) {

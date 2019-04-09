@@ -10,6 +10,7 @@ import { Setting } from 'app/shared/models';
 import { Helpers } from 'app/shared/helpers';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { environment } from 'environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router,
     private titleService: Title,
     private metaService: Meta,
     public translate: TranslateService,
@@ -50,17 +52,37 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setPage(name: string, title: string = '', description: string = '', backButton = false, menuActive = true) {
-    //AppComponent.title = name;
+  setPage(
+    name: string, 
+    title: string = null, 
+    description: string = null, 
+    image: string = null,
+    backButton: boolean = false, 
+    menuActive: boolean = true
+  ) {
+    if (title !== null) {
+      this.titleService.setTitle(title);
+      this.metaService.removeTag("property='description'");
+      this.metaService.removeTag("property='og:title'");
+      this.metaService.removeTag("property='og:description'"); 
+      this.metaService.removeTag("property='og:type'");
+      this.metaService.removeTag("property='og:url'");
+      this.metaService.removeTag("property='og:image'");
+      let url = environment.host + this.router.url;
+      this.metaService.addTag({ name: 'og:title', content: title }, false);
+      this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
+      this.metaService.addTag({ name: 'og:url', content: url }, false);
+      if (description !== null) {
+        this.metaService.addTag({ name: 'description', content: description }, false);
+        this.metaService.addTag({ name: 'og:description', content: description }, false);
+      }
+      if (image !== null) {
+        this.metaService.addTag({ name: 'og:image', image }, false);
+      }
+    }
     AppComponent.backButton = backButton;
     AppComponent.menuActive = menuActive;
-    this.titleService.setTitle(title !== '' ? title : name);
-    if (description !== '') {
-      this.metaService.addTag({ name: 'description', content: description }, false);
-    } else {
-      this.metaService.removeTag('description');
-    }
-    this.translate.get(name).subscribe((res: string) => AppComponent.title = res);
+    this.translate.get(name).subscribe((res: string) => AppComponent.title = res, () => AppComponent.title = name);
   }
 
   isFrame(): boolean {

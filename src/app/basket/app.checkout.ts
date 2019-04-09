@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
 		private dialogsService: DialogService,
 		private sessionService: SessionService,
 		private basketService: BasketService) {
-		AppComponent.current.setPage('Checkout', 'Checkout', 'Checkout page', true);
+		AppComponent.current.setPage('Checkout', null, null, null, true);
 	}
 
 	ngOnInit() {

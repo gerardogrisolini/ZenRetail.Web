@@ -17,4 +17,8 @@ export class Helpers {
         }
         return out;
     }
+
+    static delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }

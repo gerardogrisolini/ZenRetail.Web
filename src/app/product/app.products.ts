@@ -8,6 +8,7 @@ import { Product, Category, Brand } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { BottomSheetComponent } from './app.bottomsheet';
+import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
   selector: 'app-products',
@@ -83,7 +84,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let name = pipe.transform(category.translations, category.categoryName);
     let title = pipe.transform(category.seo.title, name);
     let description = pipe.transform(category.seo.description, name);
-    AppComponent.current.setPage(name, title, description);
+    let image = new ParseUrlPipe().transform([category.media], 'thumb')
+    AppComponent.current.setPage(name, title, description, image);
   }
 
   addMetaByBrand(brand: Brand) {
@@ -91,7 +93,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let name = pipe.transform(brand.translations, brand.brandName);
     let title = pipe.transform(brand.seo.title, name);
     let description = pipe.transform(brand.seo.description, name);
-    AppComponent.current.setPage(name, title, description);
+    let image = new ParseUrlPipe().transform([brand.media], 'thumb')
+    AppComponent.current.setPage(name, title, description, image);
   }
   
   loadProductsByCategory(categoryName: string) {

@@ -1,8 +1,10 @@
 import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from 'app/app.component';
-import { Product, Brand } from 'app/shared/models';
+import { Product, Brand, Setting } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
 import { isPlatformBrowser } from '@angular/common';
+import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
+import { Helpers } from 'app/shared/helpers';
 
 @Component({
     selector: 'app-home',
@@ -23,15 +25,28 @@ export class HomeComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
-        AppComponent.current.setPage('Homepage', 'Homepage', 'Homepage');
     }
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
       this.onResizeChanged(event.target);
     }
+    
+    get data(): Setting { return AppComponent.current.setting; }
+
+    async onInit() {
+        while (this.data == null) {
+          await Helpers.delay(10);
+        }
+        let pipe = new MyTranslatePipe(this.platformId);
+        let name = 'Homepage';
+        let title = pipe.transform(this.data.companyHomeSeo.title, name);
+        let description = pipe.transform(this.data.companyHomeSeo.description, name);
+        AppComponent.current.setPage(name, title, description, '/media/logo.png');
+    }
 
     ngOnInit() {
+        this.onInit();
         this.productService
             .getFeatured()
             .subscribe(result => {

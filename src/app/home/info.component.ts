@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Setting } from 'app/shared/models';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
+import { Helpers } from 'app/shared/helpers';
 
 @Component({
   	selector: 'app-info',
@@ -22,14 +23,12 @@ export class InfoComponent implements OnInit {
   
     async ngOnInit() {
       while (this.data == null) {
-        await this.delay(10);
+        await Helpers.delay(10);
       }
-      let title = new MyTranslatePipe(this.platformId).transform(this.data.companySeo.title);
-      let description = new MyTranslatePipe(this.platformId).transform(this.data.companySeo.description);
-      AppComponent.current.setPage('Information', title, description);
-    }
-
-    private delay(ms: number) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      let name = 'Information';
+      let pipe = new MyTranslatePipe(this.platformId);
+      let title = pipe.transform(this.data.companyInfoSeo.title, name);
+      let description = pipe.transform(this.data.companyInfoSeo.description, name);
+      AppComponent.current.setPage(name, title, description, '/media/logo.png');
     }
   }

@@ -33,7 +33,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
                 private documentService: DocumentService,
                 private registryService: RegistryService) {
         let inIframe = AppComponent.current.isIframe;
-        AppComponent.current.setPage('Document', 'Report', 'Report', !inIframe, !inIframe);
+        AppComponent.current.setPage('Document', null, null, null, !inIframe, !inIframe);
     }
 
     ngOnInit() {
