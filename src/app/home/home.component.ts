@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
           await Helpers.delay(10);
         }
         let pipe = new MyTranslatePipe(this.platformId);
-        let name = 'Homepage';
+        let name = this.data.companyName;
         let title = pipe.transform(this.data.companyHomeSeo.title, name);
         let description = pipe.transform(this.data.companyHomeSeo.description, name);
-        AppComponent.current.setPage(name, title, description, environment.host + '/media/logo.png');
+        AppComponent.current.setPage(name, title, description, environment.hostApi + '/media/logo.png');
     }
 
     ngOnInit() {

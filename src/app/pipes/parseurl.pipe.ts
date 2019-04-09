@@ -7,9 +7,9 @@ import { Media } from 'app/shared/models';
 })
 export class ParseUrlPipe implements PipeTransform {
   transform(value: Media[], args0?: string): string {
-    let path = environment.host + '/media/';
+    let path = environment.hostApi + '/media/';
     if (args0 !== null && args0 === 'thumb') {
-      path = environment.host + '/thumb/';
+      path = environment.hostApi + '/thumb/';
     }
     return value.length > 0 ? path + value[0].name : '';
   }

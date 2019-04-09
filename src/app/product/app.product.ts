@@ -59,11 +59,12 @@ export class ProductComponent implements OnInit, OnDestroy {
   
   addMetaData(product: Product) {
 		let pipe = new MyTranslatePipe(this.platformId);
+    let brand = pipe.transform(product.brand.translations, product.brand.brandName);
     let name = pipe.transform(product.translations, product.productName);
-    let title = pipe.transform(product.seo.title, name);
+    let title = pipe.transform(product.seo.title, product.productName) + ' - ' + brand;
 		let description = pipe.transform(product.seo.description, name);
 		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
-    AppComponent.current.setPage(name, title, description, image, !this.isIframe, !this.isIframe);
+    AppComponent.current.setPage(product.productName, title, description, image, !this.isIframe, !this.isIframe);
 }
 
   loadProduct(name: string) {

@@ -6,6 +6,6 @@ import { environment } from 'environments/environment';
 })
 export class ImageUrlPipe implements PipeTransform {
   transform(value: string, args0?: string): string {
-    return environment.host + value;
+    return environment.hostApi + value;
   }
 }

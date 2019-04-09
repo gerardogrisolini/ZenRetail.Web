@@ -8,8 +8,7 @@ import { environment } from 'environments/environment';
 export class UrlInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.indexOf('i18n') < 0) {
-      req = req.clone({ url: environment.host + req.url });
-      // console.log(req.url);
+      req = req.clone({ url: environment.hostApi + req.url });
       req = req.clone({ headers: req.headers.set('Authorization', `Bearer ${AppComponent.current.getItem('token')}`) });
     }
     // req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });

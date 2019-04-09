@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  host: 'http://localhost:8080',
+  hostApi: 'http://zennio:8888',
+  hostWeb: 'http://zennio',
   env: 'prod'
 };

@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.metaService.removeTag("name='og:url'");
     this.metaService.removeTag("name='og:image'");
     if (title !== null) {
-      let url = environment.host + this.router.url;
+      let url = environment.hostWeb + this.router.url;
       this.metaService.addTag({ name: 'og:title', content: title }, false);
       this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
       this.metaService.addTag({ name: 'og:url', content: url }, false);
@@ -158,7 +158,7 @@ export class AppComponent implements OnInit {
       .subscribe(result => {
         result.forEach(p => {
           let name = new MyTranslatePipe(this.platformId).transform(p.translations, p.categoryName);
-          this.navItems.push({ name: name, image: environment.host + '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
+          this.navItems.push({ name: name, image: environment.hostApi + '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
         });
       });
   }

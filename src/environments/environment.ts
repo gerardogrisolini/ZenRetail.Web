@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:8080',
+  hostApi: 'http://localhost:8888',
+  hostWeb: 'http://localhost',
   env: 'dev'
 };
