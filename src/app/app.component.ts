@@ -60,14 +60,14 @@ export class AppComponent implements OnInit {
     backButton: boolean = false, 
     menuActive: boolean = true
   ) {
+    this.titleService.setTitle(title !== null ? title : name);
+    this.metaService.removeTag("property='description'");
+    this.metaService.removeTag("property='og:title'");
+    this.metaService.removeTag("property='og:description'"); 
+    this.metaService.removeTag("property='og:type'");
+    this.metaService.removeTag("property='og:url'");
+    this.metaService.removeTag("property='og:image'");
     if (title !== null) {
-      this.titleService.setTitle(title);
-      this.metaService.removeTag("property='description'");
-      this.metaService.removeTag("property='og:title'");
-      this.metaService.removeTag("property='og:description'"); 
-      this.metaService.removeTag("property='og:type'");
-      this.metaService.removeTag("property='og:url'");
-      this.metaService.removeTag("property='og:image'");
       let url = environment.host + this.router.url;
       this.metaService.addTag({ name: 'og:title', content: title }, false);
       this.metaService.addTag({ name: 'og:type', content: 'website' }, false);

@@ -9,6 +9,7 @@ import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { BottomSheetComponent } from './app.bottomsheet';
 import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -34,7 +35,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet
   ) {
     this.translate.get(this.close).subscribe((res: string) => this.close = res);
-    this.onResizeChanged(window);
+    if (isPlatformBrowser(this.platformId)) {
+      this.onResizeChanged(window);
+    }
   }
 
   @HostListener('window:resize', ['$event'])
