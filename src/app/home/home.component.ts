@@ -5,6 +5,7 @@ import { ProductService } from 'app/services/product.service';
 import { isPlatformBrowser } from '@angular/common';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { Helpers } from 'app/shared/helpers';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-home',
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
         let name = 'Homepage';
         let title = pipe.transform(this.data.companyHomeSeo.title, name);
         let description = pipe.transform(this.data.companyHomeSeo.description, name);
-        AppComponent.current.setPage(name, title, description, '/media/logo.png');
+        AppComponent.current.setPage(name, title, description, environment.host + '/media/logo.png');
     }
 
     ngOnInit() {
