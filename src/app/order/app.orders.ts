@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,9 +7,10 @@ import { RegistryService } from 'app/services/registry.service';
 import { Movement } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { Observable } from 'rxjs/Rx';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-		selector: 'app-orders',
+	selector: 'app-orders',
 	templateUrl: 'app.orders.html',
 	styleUrls: ['app.orders.scss']
 })
@@ -20,6 +21,7 @@ export class OrdersComponent implements OnInit {
 	displayedColumns = ['number', 'date', 'amount', 'payment', 'status', 'doc'];
 
 	constructor(
+		@Inject(PLATFORM_ID) private platformId: Object,
 		public snackBar: MatSnackBar,
 		private translate: TranslateService,
 		private sessionService: SessionService,
@@ -38,7 +40,9 @@ export class OrdersComponent implements OnInit {
 			.subscribe(result => {
 				this.dataSource = new OrderDataSource(result);
 				const height = (result.length * 50) + 255;
-				window.parent.postMessage('iframe:' + height, '*');
+				if (isPlatformBrowser(this.platformId)) {
+					window.parent.postMessage('iframe:' + height, '*');
+				}
 			},
 			onerror => {
 				this.translate.get('Close').subscribe((close: string) =>

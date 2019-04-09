@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { SessionService } from 'app/services/session.service';
@@ -6,9 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Login } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { PasswordValidation } from 'app/shared/password.validation';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-		selector: 'app-register',
+	selector: 'app-register',
 	templateUrl: 'app.register.html'
 })
 
@@ -19,13 +20,16 @@ export class RegisterComponent implements OnInit {
 	close = 'Close';
 
 	constructor(
+		@Inject(PLATFORM_ID) private platformId: Object,
 		private translate: TranslateService,
 		public snackBar: MatSnackBar,
 		private sessionService: SessionService,
 		private fb: FormBuilder) {
 		AppComponent.current.setPage('Registration');
 		this.translate.get(this.close).subscribe((res: string) => this.close = res);
-        window.parent.postMessage('iframe:400', '*');
+		if (isPlatformBrowser(this.platformId)) {
+			window.parent.postMessage('iframe:400', '*');
+		}
 	}
 
 	ngOnInit() {

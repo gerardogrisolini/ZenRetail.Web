@@ -7,9 +7,10 @@ import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-		selector: 'app-product',
+	selector: 'app-product',
 	templateUrl: 'app.product.html',
 	styleUrls: ['app.product.scss']
 })
@@ -70,7 +71,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				this.product = result;
 				if (!this.isIframe) {
 					this.addMetaData(result);
-				} else {
+				} else if (isPlatformBrowser(this.platformId)) {
 					const height = (result.attributes.length * 100) + 160;
 					window.parent.postMessage('iframe:' + height, '*');
 				}
@@ -103,7 +104,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 								})
 								.onAction()
 								.subscribe(() => {
-									if (this.isIframe) {
+									if (isPlatformBrowser(this.platformId) && this.isIframe) {
 											window.parent.postMessage('basket', '*');
 									} else {
 										this.router.navigate(['basket']);
@@ -118,7 +119,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				} else {
 					this.basketService.basket.push(result);
 					}
-				} else {
+				} else if (isPlatformBrowser(this.platformId)) {
 					window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
 				}
 			},

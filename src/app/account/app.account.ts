@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
+﻿import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { DialogService } from 'app/services/dialog.service';
@@ -8,6 +8,7 @@ import { Registry } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { PasswordValidation } from 'app/shared/password.validation';
 import { TranslateService } from '@ngx-translate/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     	selector: 'app-account',
@@ -20,12 +21,14 @@ export class AccountComponent implements OnInit {
     dataform: FormGroup;
 	close = 'Close';
 
-    constructor(public snackBar: MatSnackBar,
-                private translate: TranslateService,
-                private dialogsService: DialogService,
-                private sessionService: SessionService,
-                private registryService: RegistryService,
-                private fb: FormBuilder) {
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: Object,
+        public snackBar: MatSnackBar,
+        private translate: TranslateService,
+        private dialogsService: DialogService,
+        private sessionService: SessionService,
+        private registryService: RegistryService,
+        private fb: FormBuilder) {
         this.translate.get(this.close).subscribe((res: string) => this.close = res);
     }
 
@@ -34,7 +37,9 @@ export class AccountComponent implements OnInit {
 
         if (!this.isCheckout) {
             AppComponent.current.setPage('Account');
-            window.parent.postMessage('iframe:1000', '*');
+            if (isPlatformBrowser(this.platformId)) {
+                window.parent.postMessage('iframe:1000', '*');
+            }
         }
 
         this.dataform = this.fb.group({

@@ -1,9 +1,10 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { Login, Token } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
 export class SessionService {
@@ -11,6 +12,7 @@ export class SessionService {
     username: string;
 
     constructor(
+        @Inject(PLATFORM_ID) private platformId: Object,
         private router: Router,
         private http: HttpClient) {
     }
@@ -30,7 +32,9 @@ export class SessionService {
     }
 
     grantCredentials(username: string, data: Token) {
-        window.parent.postMessage('token:' + data.bearer, '*');
+        if (isPlatformBrowser(this.platformId)) {
+            window.parent.postMessage('token:' + data.bearer, '*');
+        }
         this.username = username;
         AppComponent.current.setItem('username', username);
         // AppComponent.current.setItem('uniqueID', data.uniqueID);
@@ -43,8 +47,9 @@ export class SessionService {
     }
 
     removeCredentials() {
-        window.parent.postMessage('token:', '*');
-
+        if (isPlatformBrowser(this.platformId)) {
+            window.parent.postMessage('token:', '*');
+        }
         AppComponent.current.removeItem('origin');
         AppComponent.current.removeItem('uniqueID');
         AppComponent.current.removeItem('token');

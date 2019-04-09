@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { MatSnackBar, MatSelectionList } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'app/services/dialog.service';
@@ -6,6 +6,7 @@ import { SessionService } from 'app/services/session.service';
 import { BasketService } from 'app/services/basket.service';
 import { Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
 		selector: 'app-basket',
@@ -16,6 +17,7 @@ import { AppComponent } from 'app/app.component';
 export class BasketComponent implements OnInit {
 	
 	constructor(
+		@Inject(PLATFORM_ID) private platformId: Object,
 		public snackBar: MatSnackBar,
 		private translate: TranslateService,
 		private dialogsService: DialogService,
@@ -34,7 +36,9 @@ export class BasketComponent implements OnInit {
 				.subscribe(result => {
 					this.basketService.basket = result;
 					const height = (result.length * 160) + 255;
-					window.parent.postMessage('iframe:' + height, '*');
+					if (isPlatformBrowser(this.platformId)) { 
+						window.parent.postMessage('iframe:' + height, '*'); 
+					}
 				});
 		}
 	}
@@ -57,7 +61,9 @@ export class BasketComponent implements OnInit {
 			.subscribe(result => {
 				const index = this.basket.indexOf(item);
 				this.basketService.basket[index] = item;
-				window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
+				if (isPlatformBrowser(this.platformId)) {
+					window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
+				}
 			});
 	}
 
@@ -76,7 +82,9 @@ export class BasketComponent implements OnInit {
 									.subscribe(result => {
 										const index = this.basket.indexOf(item.value);
 										this.basket.splice(index, 1);
-										window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
+										if (isPlatformBrowser(this.platformId)) {
+											window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
+										}
 									});
 								});
 							}
