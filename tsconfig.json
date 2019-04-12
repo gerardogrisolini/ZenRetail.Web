@@ -6,7 +6,7 @@
       "core-js/es6/*": ["../node_modules/core-js/es/*"]
     },
     "baseUrl": "src",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./app/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

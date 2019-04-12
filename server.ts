@@ -14,10 +14,10 @@ enableProdMode();
 const app = express();
 
 const PORT = process.env.PORT || 80;
-const DIST_FOLDER = join(process.cwd(), 'dist');
+const DIST_FOLDER = join(process.cwd(), 'app');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./app/server/main');
 
 // Express Engine
 import { ngExpressEngine } from '@nguniversal/express-engine';
@@ -49,5 +49,5 @@ app.get('*', (req, res) => {
 
 // Start up the Node server
 app.listen(PORT, () => {
-  console.log(`Node server listening on http://localhost:${PORT}`);
+  console.log(`Node server listening on http://0.0.0.0:${PORT}`);
 });
