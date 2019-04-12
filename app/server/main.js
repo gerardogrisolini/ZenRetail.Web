@@ -7486,7 +7486,7 @@ exports.PasswordValidation = PasswordValidation;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
     production: false,
-    hostApi: 'http://40.113.66.167',
+    hostApi: 'zenretail-api.northeurope.cloudapp.azure.com',
     hostWeb: 'http://zenretail.westeurope.cloudapp.azure.com',
     env: 'dev'
 };
