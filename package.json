@@ -6,9 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start:dev": "ng serve",
-    "start": "npm run build:ssr && npm run serve:ssr",
+    "start": "node app/server.js",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
-    "serve:ssr": "node app/server.js",
     "build:client-and-server-bundles": "ng build --aot --prod && ng run zenretail-web:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
