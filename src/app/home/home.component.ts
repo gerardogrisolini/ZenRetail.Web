@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/c
 import { AppComponent } from 'app/app.component';
 import { Product, Brand, Setting } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { Helpers } from 'app/shared/helpers';
 import { environment } from 'environments/environment';
@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
     ) {
         if (isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
+        }
+        if (isPlatformServer(this.platformId)) {
+            this.resize(1200);
         }
     }
 
@@ -67,6 +70,10 @@ export class HomeComponent implements OnInit {
 
     onResizeChanged(event: any) {
         const w = event.innerWidth;
+        this.resize(w);
+    }
+
+    private resize(w: any) {
         this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
         this.fitListWidth = (w - this.fixedCols - 1) + 'px';
         this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';

@@ -9,7 +9,7 @@ import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { BottomSheetComponent } from './app.bottomsheet';
 import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -38,6 +38,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.onResizeChanged(window);
     }
+    if (isPlatformServer(this.platformId)) {
+      this.resize(1200);
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -63,9 +66,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onResizeChanged(event: any) {
     const w = event.innerWidth;
-    this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
-    this.fitListWidth = (w - this.fixedCols - 1) + 'px';
-    this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
+    this.resize(w);
+  }
+
+  private resize(w: any) {
+      this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
+      this.fitListWidth = (w - this.fixedCols - 1) + 'px';
+      this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
   }
 
   openBottomSheet(): void {

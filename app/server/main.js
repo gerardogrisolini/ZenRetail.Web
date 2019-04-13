@@ -5205,6 +5205,9 @@ var HomeComponent = /** @class */ (function () {
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
+        if (common_1.isPlatformServer(this.platformId)) {
+            this.resize(1200);
+        }
     }
     HomeComponent.prototype.onResize = function (event) {
         this.onResizeChanged(event.target);
@@ -5257,6 +5260,9 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.onResizeChanged = function (event) {
         var w = event.innerWidth;
+        this.resize(w);
+    };
+    HomeComponent.prototype.resize = function (w) {
         this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
         this.fitListWidth = (w - this.fixedCols - 1) + 'px';
         this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
@@ -6447,6 +6453,9 @@ var ProductsComponent = /** @class */ (function () {
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
+        if (common_1.isPlatformServer(this.platformId)) {
+            this.resize(1200);
+        }
     }
     ProductsComponent.prototype.onResize = function (event) {
         this.onResizeChanged(event.target);
@@ -6469,6 +6478,9 @@ var ProductsComponent = /** @class */ (function () {
     };
     ProductsComponent.prototype.onResizeChanged = function (event) {
         var w = event.innerWidth;
+        this.resize(w);
+    };
+    ProductsComponent.prototype.resize = function (w) {
         this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
         this.fitListWidth = (w - this.fixedCols - 1) + 'px';
         this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
