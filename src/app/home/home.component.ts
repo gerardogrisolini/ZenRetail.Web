@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
         this.resize(w);
     }
 
-    private resize(w: any) {
+    private resize(w: number) {
         this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
         this.fitListWidth = (w - this.fixedCols - 1) + 'px';
         this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';

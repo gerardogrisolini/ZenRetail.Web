@@ -6210,6 +6210,12 @@ var ProductComponent = /** @class */ (function () {
             prevButton: '.swiper-button-prev',
             spaceBetween: 0 // Space between each Item
         };
+        if (common_1.isPlatformBrowser(this.platformId)) {
+            this.resize(window.innerWidth);
+        }
+        if (common_1.isPlatformServer(this.platformId)) {
+            this.resize(1200);
+        }
     }
     Object.defineProperty(ProductComponent.prototype, "isIframe", {
         get: function () { return app_component_1.AppComponent.current.isIframe; },
@@ -6234,6 +6240,9 @@ var ProductComponent = /** @class */ (function () {
     ProductComponent.prototype.ngOnDestroy = function () {
         // Clean sub to avoid memory leak
         this.sub.unsubscribe();
+    };
+    ProductComponent.prototype.resize = function (w) {
+        this.config.slidesPerView = w < 1000 ? 1 : w < 2000 ? 2 : 3;
     };
     ProductComponent.prototype.addMetaData = function (product) {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);

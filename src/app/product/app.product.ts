@@ -27,8 +27,15 @@ export class ProductComponent implements OnInit, OnDestroy {
 		private productService: ProductService,
 		private basketService: BasketService,
 		private activatedRoute: ActivatedRoute
-	) {	}
-
+	) {	
+		if (isPlatformBrowser(this.platformId)) {
+      this.resize(window.innerWidth);
+    }
+    if (isPlatformServer(this.platformId)) {
+      this.resize(1200);
+    }
+	}
+	
 	config: SwiperOptions = {
 		autoplay: 3000, // Autoplay option having value in milliseconds
 		initialSlide: 1, // Slide Index Starting from 0
@@ -57,7 +64,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 		// Clean sub to avoid memory leak
 		this.sub.unsubscribe();
   }
-  
+	
+	private resize(w: number) {
+		this.config.slidesPerView = w < 1000 ? 1 : w < 2000 ? 2 : 3;
+	}
+
   addMetaData(product: Product) {
 		let pipe = new MyTranslatePipe(this.platformId);
     let brand = pipe.transform(product.brand.translations, product.brand.brandName);
