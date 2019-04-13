@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  hostApi: 'zenretail-api.westeurope.cloudapp.azure.com',
-  hostWeb: 'zenretail.westeurope.cloudapp.azure.com',
+  hostApi: 'http://zenretail-api.westeurope.cloudapp.azure.com',
+  hostWeb: 'http://zenretail.westeurope.cloudapp.azure.com',
   env: 'dev'
 };
