@@ -24,7 +24,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   fitListHeight: string;
   fitListWidth: string;
 	title: string;
-	description: string;
+  description: string;
+  image: string;
 	close = 'Close';
 
   constructor(
@@ -96,8 +97,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let name = pipe.transform(category.translations, category.categoryName);
     this.title = pipe.transform(category.seo.title, name);
     this.description = pipe.transform(category.seo.description, name);
-    let image = new ParseUrlPipe().transform([category.media], 'thumb')
-    AppComponent.current.setPage(name, this.title, this.description, image);
+    this.image = new ParseUrlPipe().transform([category.media], 'thumb')
+    AppComponent.current.setPage('Category', this.title, this.description, this.image);
   }
 
   addMetaByBrand(brand: Brand) {
@@ -105,8 +106,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let name = pipe.transform(brand.translations, brand.brandName);
     this.title = pipe.transform(brand.seo.title, name);
     this.description = pipe.transform(brand.seo.description, name);
-    let image = new ParseUrlPipe().transform([brand.media], 'thumb')
-    AppComponent.current.setPage(name, this.title, this.description, image);
+    this.image = new ParseUrlPipe().transform([brand.media], 'thumb')
+    AppComponent.current.setPage('Brand', this.title, this.description, this.image);
   }
   
   loadProductsByCategory(categoryName: string) {

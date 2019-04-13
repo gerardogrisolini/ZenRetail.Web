@@ -1,13 +1,13 @@
 <div *ngIf="product">
   <mat-expansion-panel *ngIf="!isIframe" [expanded]="true">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header style="background-color: whitesmoke">
       <mat-panel-description>{{ 'Information' | translate }}</mat-panel-description>
       <mat-panel-title><b>SKU: {{product.productCode}}</b></mat-panel-title>
     </mat-expansion-panel-header>
     <div class="detail-content">
       <h1>{{product.productName}}</h1>
       <h2>{{product.translations | mytranslate : product.productName}}</h2>
-      <br/><hr>
+      <hr>
       <p><span mat-line>{{ 'Brand' | translate }}<br/><b>{{product.brand.brandName}}</b></span></p>
       <p><span mat-line>{{ 'Categories' | translate }}<br/>
         <li *ngFor="let c of product.categories"><b>{{c.category.translations | mytranslate : c.category.categoryName}}</b></li>
@@ -23,17 +23,19 @@
       <ng-template #price_content>
         <p><span mat-line style="font-size: large">{{ 'Price' | translate }}<br/><b>{{product.price.selling | currencyFormat}}</b></span></p>
       </ng-template>
+      <hr>
+      <br/>
       <div *ngIf="isServer;then server else browser"></div>
       <ng-template #server>
         <div *ngFor="let img of this.product.medias">
-          <img src="{{ [img] | parseUrl:thumb }}" alt="{{product.productName}} image" />
+          <img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" />
         </div>
       </ng-template>
       <ng-template #browser>
         <swiper [config]="config">
           <div class="swiper-wrapper">
             <div *ngFor="let img of this.product.medias" class="swiper-slide">
-              <img src="{{ [img] | parseUrl }}" alt="{{product.productName}} image" />
+              <a href="{{ [img] | parseUrl }}" target="_blank"><img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" /></a>
             </div>
           </div>
         </swiper>

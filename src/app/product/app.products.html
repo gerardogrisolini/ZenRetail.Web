@@ -1,6 +1,9 @@
-<h1 style="padding: 20px">{{description}}</h1>
+<img src="{{ image }}" alt="logo" height="100" style="position: absolute; top: 80px; right: 20px;"/>
+<div style="padding: 20px;">
+  <h1>{{title}}</h1>
+  <h2>{{description}}</h2>
+</div>
 <hr>
-<br/>
 <div style="padding: 10px 15px;">
   <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
     <mat-grid-tile *ngFor="let product of filtered" style="cursor: pointer">

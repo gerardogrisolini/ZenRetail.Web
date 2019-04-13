@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     fixedCols: number;
     fitListHeight: string;
     fitListWidth: string;
+    name: string;
     description: string;
     featured: Product[];
     news: Product[];
@@ -38,15 +39,16 @@ export class HomeComponent implements OnInit {
     }
     
     get data(): Setting { return AppComponent.current.setting; }
+    get categories(): any[] { return AppComponent.current.navItems; }
 
     async onInit() {
         while (this.data == null) {
           await Helpers.delay(10);
         }
         let pipe = new MyTranslatePipe(this.platformId);
-        let name = this.data.companyName;
-        let title = pipe.transform(this.data.companyHomeSeo.title, name);
-        this.description = pipe.transform(this.data.companyHomeSeo.description, name);
+        this.name = this.data.companyName;
+        let title = pipe.transform(this.data.companyHomeSeo.title, this.name);
+        this.description = pipe.transform(this.data.companyHomeSeo.description, this.name);
         AppComponent.current.setPage('Homepage', title, this.description, environment.hostApi + '/media/logo.png');
     }
 

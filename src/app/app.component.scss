@@ -39,7 +39,6 @@ body {
 
   .paragraph {
     background-color: whitesmoke;
-    border: thin dotted silver;
     border-radius: 10px;
     text-align: center;
     color: #666;
@@ -155,17 +154,22 @@ body {
     color: silver;
     padding-bottom: 125px;
   }
-  
-  .brand { 
+
+  .horizontal-list {
+    height: 100px;
+    width: auto;
+  }
+
+  .horizontal-list-item { 
     color: #444;
     cursor: pointer;
-    float: left;
     padding: 10px;
     text-align: center;
-  
+    float: left;
     img {
       height: 60px;      
     }
+    
   }
 
   .badge {

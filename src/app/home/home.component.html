@@ -1,11 +1,12 @@
 <mat-card id="home">
     <mat-card-title>
-        <h1>{{description}}</h1>
-        <br/>
+        <h1>{{name}}</h1>
+        <h2>{{description}}</h2>
+        <br/><hr><br/>
     </mat-card-title>
     <mat-card-content>
-        <h3 class="paragraph" [translate]="'Featured'"></h3>
 
+        <h3 class="paragraph" [translate]="'Featured'"></h3>
         <div *ngIf="featured" class="app-grid-list">    
         <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
         <mat-grid-tile *ngFor="let product of featured" style="cursor: pointer">
@@ -52,12 +53,20 @@
     </div>
 
     <h3 class="paragraph" [translate]="'Brands'"></h3>
-    <div *ngIf="brands">    
-        <div class="brand" *ngFor="let b of brands">
-            <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl" alt="{{b.brandName}}">
+    <div *ngIf="brands" class="horizontal-list">    
+        <div class="horizontal-list-item" *ngFor="let b of brands">
+            <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl" alt="{{b.brandName}}" />
             <br/><span><b>{{b.brandName}}</b></span>
         </div>
     </div>
 
-    </mat-card-content>
+    <h3 class="paragraph" [translate]="'Categories'"></h3>
+    <div *ngIf="categories" class="horizontal-list">
+        <div class="horizontal-list-item" *ngFor="let c of categories">
+            <img routerLink="{{c.route}}" src="{{c.image}}" alt="{{c.name}}" />
+            <br/><span><b>{{c.name}}</b></span>
+        </div>
+    </div>
+
+</mat-card-content>
 </mat-card>

@@ -37,10 +37,12 @@ export class ProductComponent implements OnInit, OnDestroy {
 	}
 	
 	config: SwiperOptions = {
-		autoHeight: true,
-		autoplay: 3000, // Autoplay option having value in milliseconds
-		slidesPerView: 1, // Slides Visible in Single View Default is 1
-		pagination: '.swiper-pagination', // Pagination Class defined
+		//autoHeight: true,
+		//autoplay: 3000, // Autoplay option having value in milliseconds
+		effect: 'coverflow',
+		grabCursor: true,
+		centeredSlides: true,
+		slidesPerView: 2, // Slides Visible in Single View Default is 1
 		spaceBetween: 30 // Space between each Item
 	};
 	  
@@ -63,7 +65,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 	
 	private resize(w: number) {
-		this.config.slidesPerView = w < 1000 ? 1 : w < 2000 ? 2 : 3;
+		//this.config.slidesPerView = w < 600 ? 1 : w < 1200 ? 2 : 3;
 	}
 
   addMetaData(product: Product) {
