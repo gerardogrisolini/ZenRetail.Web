@@ -52,14 +52,18 @@ body {
       }
     }
     .mat-list-item {
+      outline: none;
+      color: #444;
+      background-color: transparent !important;
       border-bottom: thin dotted silver;
       border-radius: 10px;
     }
     .mat-list-item:hover {
-      background-color: lightyellow;
+      background-color: lightyellow !important;
     }
     .active-link {
-      background-color: whitesmoke;
+      font-weight: bold;
+      background-color: whitesmoke !important;
     }
   }
   .category-list {

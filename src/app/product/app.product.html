@@ -23,19 +23,28 @@
       <ng-template #price_content>
         <p><span mat-line style="font-size: large">{{ 'Price' | translate }}<br/><b>{{product.price.selling | currencyFormat}}</b></span></p>
       </ng-template>
-      <swiper [config]="config">
-        <div class="swiper-wrapper">
-          <div *ngFor="let img of this.product.medias"  class="swiper-slide">
-            <img src="{{ [img] | parseUrl }}" />
-          </div>
+      <div *ngIf="isServer;then server else browser"></div>
+      <ng-template #server>
+        <div *ngFor="let img of this.product.medias">
+          <img src="{{ [img] | parseUrl:thumb }}" alt="{{product.productName}} image" />
         </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-      </swiper>
+      </ng-template>
+      <ng-template #browser>
+        <swiper [config]="config">
+          <div class="swiper-wrapper">
+            <div *ngFor="let img of this.product.medias" class="swiper-slide">
+              <img src="{{ [img] | parseUrl }}" alt="{{product.productName}} image" />
+            </div>
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+      </ng-template>
     </div>
   </mat-expansion-panel>
+  <br/>
   <article-picker [product]="product" (onPicked)="pickerClick($event)"></article-picker>
 </div>

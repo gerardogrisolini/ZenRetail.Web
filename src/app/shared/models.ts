@@ -245,6 +245,7 @@ export class AttributeValue {
     public attributeValueId: number,
     public attributeValueCode: string,
     public attributeValueName: string,
+    public media: Media,
     public translations: Translation[]
   ) { }
 }

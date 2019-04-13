@@ -15,7 +15,8 @@ import { DocumentComponent } from 'app/order/app.document';
 
 export const APP_ROUTES: Routes = [
   {path: '', component: AppComponent, children: [
-    {path: '', component: HomeComponent},
+    {path: '', redirectTo: 'home', pathMatch: 'full' },
+    {path: 'home', component: HomeComponent},
     {path: 'info', component: InfoComponent},
     {path: 'account', component: AccountComponent},
     {path: 'login', component: LoginComponent},

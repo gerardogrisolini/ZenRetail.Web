@@ -7,7 +7,7 @@ import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
@@ -41,6 +41,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 	};
 	  
 	get isIframe(): boolean { return AppComponent.current.isIframe; }
+	get isServer(): boolean { return isPlatformServer(this.platformId) }
 
 	ngOnInit() {
 		if (AppComponent.current.getItem('barcode')) {
