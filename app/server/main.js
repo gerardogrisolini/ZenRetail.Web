@@ -4279,18 +4279,16 @@ var AppComponent = /** @class */ (function () {
                         this.metaService.removeTag("name='og:type'");
                         this.metaService.removeTag("name='og:url'");
                         this.metaService.removeTag("name='og:image'");
-                        if (title !== null) {
-                            url = environment_1.environment.hostWeb + this.router.url;
-                            this.metaService.addTag({ name: 'og:title', content: title }, false);
-                            this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
-                            this.metaService.addTag({ name: 'og:url', content: url }, false);
-                            if (description !== null) {
-                                this.metaService.addTag({ name: 'description', content: description }, false);
-                                this.metaService.addTag({ name: 'og:description', content: description }, false);
-                            }
-                            if (image !== null) {
-                                this.metaService.addTag({ name: 'og:image', image: image }, false);
-                            }
+                        url = environment_1.environment.hostWeb + this.router.url;
+                        this.metaService.addTag({ name: 'og:title', content: title }, false);
+                        this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
+                        this.metaService.addTag({ name: 'og:url', content: url }, false);
+                        if (description !== null) {
+                            this.metaService.addTag({ name: 'description', content: description }, false);
+                            this.metaService.addTag({ name: 'og:description', content: description }, false);
+                        }
+                        if (image !== null) {
+                            this.metaService.addTag({ name: 'og:image', image: image }, false);
                         }
                         AppComponent.title = name;
                         AppComponent.backButton = backButton;

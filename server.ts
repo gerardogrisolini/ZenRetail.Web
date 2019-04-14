@@ -4,16 +4,25 @@ import 'reflect-metadata';
 
 import { enableProdMode } from '@angular/core';
 
+import * as compression from 'compression';
 import * as express from 'express';
+import * as fs from 'fs';
 import { join } from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
 // Express server
-const app = express();
+const certificate = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/fullchain.pem');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/privkey.pem');
+const credentials = {key: privateKey, cert: certificate};
+const app = express.createServer(credentials);
+//const app = express();
 
-const PORT = process.env.PORT || 80;
+// compress all responses
+app.use(compression())
+
+const PORT = process.env.PORT || 443;
 const DIST_FOLDER = join(process.cwd(), 'app');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
@@ -49,5 +58,5 @@ app.get('*', (req, res) => {
 
 // Start up the Node server
 app.listen(PORT, () => {
-  console.log(`Node server listening on http://0.0.0.0:${PORT}`);
+  console.log(`Node server listening on port ${PORT}`);
 });
