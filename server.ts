@@ -16,20 +16,18 @@ enableProdMode();
 const PORT = process.env.PORT || 443;
 const DIST_FOLDER = join(process.cwd(), 'app');
 
-// Express server
-const app = express();
-// compress all responses
-app.use(compression())
-
 const certificate = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/fullchain.pem');
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/privkey.pem');
 const credentials = { key: privateKey, cert: certificate, requestCert: false, rejectUnauthorized: false };
-https.createServer(credentials, app).listen(PORT);
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./app/server/main');
 
 // Express Engine
+const app = express();
+// compress all responses
+app.use(compression())
+
 import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
@@ -58,6 +56,7 @@ app.get('*', (req, res) => {
 });
 
 // Start up the Node server
-app.listen(PORT, () => {
+const server = https.createServer(credentials, app);
+server.listen(PORT, () => {
   console.log(`Node server listening on port ${PORT}`);
 });
