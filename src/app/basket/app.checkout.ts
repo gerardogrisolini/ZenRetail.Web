@@ -9,6 +9,7 @@ import { AppComponent } from 'app/app.component';
 import { Observable } from 'rxjs/Rx';
 import { AccountComponent } from 'app/account/app.account';
 import { isPlatformBrowser } from '@angular/common';
+import { Helpers } from 'app/shared/helpers';
 
 declare let paypal: any;
 
@@ -82,7 +83,7 @@ export class CheckoutComponent implements OnInit {
 
 	paymentClick(event) {
 		if (this.isValidAccount && this.paymentMethod === 'PayPal') {
-			this.showPayPal(AppComponent.current.setting, this.amount + this.shippingCost);
+			this.showPayPal(Helpers.setting, this.amount + this.shippingCost);
 		}
 	}
 

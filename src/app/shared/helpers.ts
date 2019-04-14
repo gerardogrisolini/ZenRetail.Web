@@ -1,7 +1,10 @@
+import { Setting } from "./models";
+
 export class Helpers {
 
     static currency = 'EUR';
     static utc = 'UTC';
+    static setting: Setting = null;
 
     static distinct(a: any[]): any[] {
         const seen: any = {};

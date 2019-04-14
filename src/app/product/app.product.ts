@@ -75,7 +75,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     let title = pipe.transform(product.seo.title, product.productName) + ' - ' + brand;
 		let description = pipe.transform(product.seo.description, name);
 		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
-    AppComponent.current.setPage(product.productName, title, description, image, !this.isIframe, !this.isIframe);
+    AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);
 }
 
   loadProduct(name: string) {

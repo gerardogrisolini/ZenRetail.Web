@@ -1,15 +1,21 @@
-.flex75 {
-    flex: 0 0 75px;
+.mobile-label {
+    display: none;
 }
-.flex100Right {
-    flex: 0 0 100px;
-    text-align: right;
-}
-.flex100Center {
-    flex: 0 0 100px;
-    text-align: center;
-}
-.fix100Center {
-    max-width: 100px;
-    text-align: center;
+
+@media(max-width: 600px) {
+    .mat-header-row {
+        display: none;
+    }
+      
+    .mobile-label {
+        width: 150px;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .mat-row { 
+        flex-direction: column;
+        align-items: start;
+        padding: 8px 24px;
+    }
 }

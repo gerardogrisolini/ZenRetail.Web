@@ -20,7 +20,6 @@ import { Router } from '@angular/router';
   preserveWhitespaces: false,
 })
 export class AppComponent implements OnInit {
-  setting: Setting;
   isIframe = false;
   navItems = [];
   private static title = '';
@@ -41,6 +40,7 @@ export class AppComponent implements OnInit {
     private _element: ElementRef
   ) {
     AppComponent.current = this;
+    //this.loadSetting();
     this.isIframe = this.isFrame();
 
     if (isPlatformBrowser(this.platformId)) {
@@ -52,7 +52,14 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setPage(
+  ngOnInit() {
+    if (!this.isIframe) {
+      this.loadBasket();
+      this.loadCategories();
+    }
+  }
+
+  async setPage(
     name: string, 
     title: string = null, 
     description: string = null, 
@@ -60,7 +67,9 @@ export class AppComponent implements OnInit {
     backButton: boolean = false, 
     menuActive: boolean = true
   ) {
-    this.titleService.setTitle(title !== null ? title : name);
+    name = await this.translate.get(name).toPromise();
+    title = (title !== null ? title + ' - ' + name : name);
+    this.titleService.setTitle(title);
     this.metaService.removeTag("name='description'");
     this.metaService.removeTag("name='og:title'");
     this.metaService.removeTag("name='og:description'"); 
@@ -80,9 +89,9 @@ export class AppComponent implements OnInit {
         this.metaService.addTag({ name: 'og:image', image }, false);
       }
     }
+    AppComponent.title = name;
     AppComponent.backButton = backButton;
     AppComponent.menuActive = menuActive;
-    this.translate.get(name).subscribe((res: string) => AppComponent.title = res, () => AppComponent.title = name);
   }
 
   isFrame(): boolean {
@@ -98,7 +107,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-
   get title(): string {
     return AppComponent.title;
   }
@@ -112,14 +120,6 @@ export class AppComponent implements OnInit {
   }
 
   get itemsCount(): number { return this.basketService.count; }
-
-  ngOnInit() {
-    this.loadSetting();
-    if (!this.isIframe) {
-      this.loadBasket();
-      this.loadCategories();
-    }
-  }
 
   setItem(key: string, value: string) {
     if (isPlatformBrowser(this.platformId)) {
@@ -140,18 +140,17 @@ export class AppComponent implements OnInit {
       localStorage.removeItem(key);
     }
   }
-  
-  loadSetting() {
-    if (this.setting != null) {
-      return;
-    }
-		this.basketService.getSetting()
-        .subscribe(result => {
-          this.setting = result;
-          Helpers.currency = result.companyCurrency;
-          Helpers.utc = result.companyUtc;
-        });
-  }
+  count: number = 1;
+
+  // async loadSetting() {
+  //   this.count = this.count + 1;
+  //   console.log(this.count);
+  //   if (AppComponent.setting !== null) { return; }
+  //   AppComponent.setting = await this.basketService.getSetting().toPromise();
+  //   console.log(AppComponent.setting);
+  //   Helpers.currency = AppComponent.setting.companyCurrency;
+  //   Helpers.utc = AppComponent.setting.companyUtc;
+  // }
 
   loadCategories() {
     this.productService.getCategories()
@@ -164,7 +163,7 @@ export class AppComponent implements OnInit {
   }
 
 	loadBasket() {
-    const uniqueID = AppComponent.current.getItem('uniqueID');
+    const uniqueID = this.getItem('uniqueID');
     if (uniqueID == null) {
       return;
     }

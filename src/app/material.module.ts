@@ -17,6 +17,7 @@ import {
   MatSelectModule,
   MatStepperModule,
   MatTableModule,
+  MatSortModule,
   MatBottomSheetModule
 } from '@angular/material';
 
@@ -38,6 +39,7 @@ import {
     MatSelectModule,
     MatStepperModule,
     MatTableModule,
+    MatSortModule,
     MatBottomSheetModule
   ],
   exports: [
@@ -57,6 +59,7 @@ import {
     MatSelectModule,
     MatStepperModule,
     MatTableModule,
+    MatSortModule,
     MatBottomSheetModule
   ]
 })

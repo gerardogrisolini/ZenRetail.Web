@@ -1,12 +1,10 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { MatSnackBar, MatTableDataSource, MatSort } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from 'app/services/session.service';
 import { RegistryService } from 'app/services/registry.service';
 import { Movement } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { Observable } from 'rxjs/Rx';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -17,8 +15,9 @@ import { isPlatformBrowser } from '@angular/common';
 
 export class OrdersComponent implements OnInit {
 
-	dataSource: OrderDataSource;
-	displayedColumns = ['number', 'date', 'amount', 'payment', 'status', 'doc'];
+	@ViewChild(MatSort) sort: MatSort;
+	dataSource: MatTableDataSource<Movement>;
+	displayedColumns = ['movementNumber', 'movementDate', 'movementAmount', 'movementPayment', 'movementStatus', 'doc'];
 
 	constructor(
 		@Inject(PLATFORM_ID) private platformId: Object,
@@ -34,11 +33,12 @@ export class OrdersComponent implements OnInit {
 
 		this.loadOrders();
 	}
-
+	
 	loadOrders() {
 		this.registryService.getOrders()
 			.subscribe(result => {
-				this.dataSource = new OrderDataSource(result);
+				this.dataSource = new MatTableDataSource(result);
+				this.dataSource.sort = this.sort;
 				const height = (result.length * 50) + 255;
 				if (isPlatformBrowser(this.platformId)) {
 					window.parent.postMessage('iframe:' + height, '*');
@@ -50,20 +50,4 @@ export class OrdersComponent implements OnInit {
 				);
 			});
 	}
-}
-
-export class OrderDataSource extends DataSource<any> {
-
-	orders: Movement[] = [];
-
-	constructor(orders: Movement[]) {
-		super();
-		this.orders = orders;
-	};
-
-	connect(): Observable<Movement[]> {
-	  return Observable.of(this.orders);
-	}
-
-	disconnect() {}
 }

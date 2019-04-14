@@ -34,9 +34,9 @@ export class BasketService {
         return this.http.delete<any>('/api/ecommerce/basket/' + id);
     }
 
-    getSetting(): Observable<Setting> {
-        return this.http.get<Setting>('/api/ecommerce/setting');
-    }
+    // getSetting(): Observable<Setting> {
+    //     return this.http.get<Setting>('/api/ecommerce/setting');
+    // }
 
     getPayments(): Observable<Item[]> {
         return this.http.get<Item[]>('/api/ecommerce/payment');

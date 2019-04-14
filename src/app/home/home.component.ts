@@ -4,8 +4,8 @@ import { Product, Brand, Setting } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { Helpers } from 'app/shared/helpers';
 import { environment } from 'environments/environment';
+import { Helpers } from 'app/shared/helpers';
 
 @Component({
     selector: 'app-home',
@@ -38,18 +38,15 @@ export class HomeComponent implements OnInit {
       this.onResizeChanged(event.target);
     }
     
-    get data(): Setting { return AppComponent.current.setting; }
+    get data(): Setting { return Helpers.setting }
     get categories(): any[] { return AppComponent.current.navItems; }
 
-    async onInit() {
-        while (this.data == null) {
-          await Helpers.delay(10);
-        }
-        let pipe = new MyTranslatePipe(this.platformId);
+    onInit() {
         this.name = this.data.companyName;
+        let pipe = new MyTranslatePipe(this.platformId);
         let title = pipe.transform(this.data.companyHomeSeo.title, this.name);
         this.description = pipe.transform(this.data.companyHomeSeo.description, this.name);
-        AppComponent.current.setPage('Homepage', title, this.description, environment.hostApi + '/media/logo.png');
+        AppComponent.current.setPage('Home', title, this.description, environment.hostApi + '/media/logo.png');
     }
 
     ngOnInit() {

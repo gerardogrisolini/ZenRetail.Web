@@ -18,13 +18,10 @@ export class InfoComponent implements OnInit {
     lng: number = 7.809007;
   
     constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
-  
-    get data(): Setting { return AppComponent.current.setting; }
-  
-    async ngOnInit() {
-      while (this.data == null) {
-        await Helpers.delay(10);
-      }
+
+    get data(): Setting { return Helpers.setting }
+
+    ngOnInit() {
       let name = 'Information';
       let pipe = new MyTranslatePipe(this.platformId);
       let title = pipe.transform(this.data.companyInfoSeo.title, name);

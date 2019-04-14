@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,11 +43,16 @@ import { CheckoutComponent } from 'app/basket/app.checkout';
 import { OrdersComponent } from 'app/order/app.orders';
 import { DocumentComponent } from 'app/order/app.document';
 import { BottomSheetComponent } from 'app/product/app.bottomsheet';
+import { AppLoadService } from './services/appload.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http);
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function getSettings(appLoadService: AppLoadService) {
+  return () => appLoadService.getSettings();
 }
 
 @NgModule({
@@ -96,14 +101,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true },
+    AppLoadService,
     DialogService,
     SessionService,
     RegistryService,
     ProductService,
     BasketService,
-    DocumentService
+    DocumentService,
+    { provide: APP_INITIALIZER,  useFactory: getSettings, deps: [AppLoadService], multi: true },
+    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
+    { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true }
   ],
   exports: [
     ArticlePicker,
