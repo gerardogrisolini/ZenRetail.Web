@@ -7,7 +7,7 @@
 <mat-nav-list>
     <a *ngFor="let category of data" mat-list-item (click)="openLink(category.categoryId)">
         <p mat-line class="category-list">
-        <img src="{{ [category.media] | parseUrl }}" alt="{{b.categoryName}}"/>
+        <img src="{{ [category.media] | parseUrl:thumb }}" alt="{{category.categoryName}}"/>
         <span>{{ category.translations | mytranslate : category.categoryName }}</span>
         </p>
     </a>
