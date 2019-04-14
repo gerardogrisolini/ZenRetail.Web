@@ -6,24 +6,25 @@ import { enableProdMode } from '@angular/core';
 
 import * as compression from 'compression';
 import * as express from 'express';
+import * as https from 'https';
 import * as fs from 'fs';
 import { join } from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
-// Express server
-const certificate = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/fullchain.pem');
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/privkey.pem');
-const credentials = {key: privateKey, cert: certificate};
-const app = express.createServer(credentials);
-//const app = express();
+const PORT = process.env.PORT || 443;
+const DIST_FOLDER = join(process.cwd(), 'app');
 
+// Express server
+const app = express();
 // compress all responses
 app.use(compression())
 
-const PORT = process.env.PORT || 443;
-const DIST_FOLDER = join(process.cwd(), 'app');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/fullchain.pem');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/zenretail.westeurope.cloudapp.azure.com/privkey.pem');
+const credentials = { key: privateKey, cert: certificate, requestCert: false, rejectUnauthorized: false };
+https.createServer(credentials, app).listen(PORT);
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./app/server/main');
