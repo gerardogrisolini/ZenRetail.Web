@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     menuActive: boolean = true
   ) {
     name = await this.translate.get(name).toPromise();
-    title = (title !== null ? title + ' - ' + name : name);
+    title = (title !== null ? title : name);
     this.titleService.setTitle(title);
     this.metaService.removeTag("name='description'");
     this.metaService.removeTag("name='og:title'");

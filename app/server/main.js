@@ -2502,7 +2502,7 @@ var AppComponent = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.translate.get(name).toPromise()];
                     case 1:
                         name = _a.sent();
-                        title = (title !== null ? title + ' - ' + name : name);
+                        title = (title !== null ? title : name);
                         this.titleService.setTitle(title);
                         this.metaService.removeTag("name='description'");
                         this.metaService.removeTag("name='og:title'");
