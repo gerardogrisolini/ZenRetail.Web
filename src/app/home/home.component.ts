@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
     fixedCols: number;
     fitListHeight: string;
     fitListWidth: string;
-    name: string;
-    description: string;
     featured: Product[];
     news: Product[];
     brands: Brand[];
@@ -42,14 +40,13 @@ export class HomeComponent implements OnInit {
     get categories(): any[] { return AppComponent.current.navItems; }
 
     onInit() {
-        this.name = this.data.companyName;
         let pipe = new MyTranslatePipe(this.platformId);
-        let title = pipe.transform(this.data.companyHomeSeo.title, this.name);
-        this.description = pipe.transform(this.data.companyHomeSeo.description, this.name);
+        let title = pipe.transform(this.data.companyHomeSeo.title, this.data.companyName);
+        let desc = pipe.transform(this.data.companyHomeSeo.description, title);
         AppComponent.current.setPage(
             'Home', 
             title, 
-            this.description, 
+            desc, 
             environment.hostApi + '/media/logo.png'
         );
     }

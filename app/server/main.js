@@ -86,1775 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@agm/core/directives/map.js":
-/*!**************************************************!*\
-  !*** ./node_modules/@agm/core/directives/map.js ***!
-  \**************************************************/
-/*! exports provided: AgmMap */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AgmMap", function() { return AgmMap; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-/* harmony import */ var _services_managers_circle_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/managers/circle-manager */ "./node_modules/@agm/core/services/managers/circle-manager.js");
-/* harmony import */ var _services_managers_rectangle_manager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/managers/rectangle-manager */ "./node_modules/@agm/core/services/managers/rectangle-manager.js");
-/* harmony import */ var _services_managers_info_window_manager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/managers/info-window-manager */ "./node_modules/@agm/core/services/managers/info-window-manager.js");
-/* harmony import */ var _services_managers_marker_manager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/managers/marker-manager */ "./node_modules/@agm/core/services/managers/marker-manager.js");
-/* harmony import */ var _services_managers_polygon_manager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/managers/polygon-manager */ "./node_modules/@agm/core/services/managers/polygon-manager.js");
-/* harmony import */ var _services_managers_polyline_manager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/managers/polyline-manager */ "./node_modules/@agm/core/services/managers/polyline-manager.js");
-/* harmony import */ var _services_managers_kml_layer_manager__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../services/managers/kml-layer-manager */ "./node_modules/@agm/core/services/managers/kml-layer-manager.js");
-/* harmony import */ var _services_managers_data_layer_manager__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../services/managers/data-layer-manager */ "./node_modules/@agm/core/services/managers/data-layer-manager.js");
-/* harmony import */ var _services_fit_bounds__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/fit-bounds */ "./node_modules/@agm/core/services/fit-bounds.js");
-
-
-
-
-
-
-
-
-
-
-
-/**
- * AgmMap renders a Google Map.
- * **Important note**: To be able see a map in the browser, you have to define a height for the
- * element `agm-map`.
- *
- * ### Example
- * ```typescript
- * import { Component } from '@angular/core';
- *
- * @Component({
- *  selector: 'my-map-cmp',
- *  styles: [`
- *    agm-map {
- *      height: 300px;
- *    }
- * `],
- *  template: `
- *    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
- *    </agm-map>
- *  `
- * })
- * ```
- */
-var AgmMap = /** @class */ (function () {
-    function AgmMap(_elem, _mapsWrapper, _fitBoundsService) {
-        this._elem = _elem;
-        this._mapsWrapper = _mapsWrapper;
-        this._fitBoundsService = _fitBoundsService;
-        /**
-           * The longitude that defines the center of the map.
-           */
-        this.longitude = 0;
-        /**
-           * The latitude that defines the center of the map.
-           */
-        this.latitude = 0;
-        /**
-           * The zoom level of the map. The default zoom level is 8.
-           */
-        this.zoom = 8;
-        /**
-           * Enables/disables if map is draggable.
-           */
-        // tslint:disable-next-line:no-input-rename
-        this.draggable = true;
-        /**
-           * Enables/disables zoom and center on double click. Enabled by default.
-           */
-        this.disableDoubleClickZoom = false;
-        /**
-           * Enables/disables all default UI of the Google map. Please note: When the map is created, this
-           * value cannot get updated.
-           */
-        this.disableDefaultUI = false;
-        /**
-           * If false, disables scrollwheel zooming on the map. The scrollwheel is enabled by default.
-           */
-        this.scrollwheel = true;
-        /**
-           * If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are
-           * enabled by default.
-           */
-        this.keyboardShortcuts = true;
-        /**
-           * The enabled/disabled state of the Zoom control.
-           */
-        this.zoomControl = true;
-        /**
-           * Styles to apply to each of the default map types. Note that for Satellite/Hybrid and Terrain
-           * modes, these styles will only apply to labels and geometry.
-           */
-        this.styles = [];
-        /**
-           * When true and the latitude and/or longitude values changes, the Google Maps panTo method is
-           * used to
-           * center the map. See: https://developers.google.com/maps/documentation/javascript/reference#Map
-           */
-        this.usePanning = false;
-        /**
-           * The initial enabled/disabled state of the Street View Pegman control.
-           * This control is part of the default UI, and should be set to false when displaying a map type
-           * on which the Street View road overlay should not appear (e.g. a non-Earth map type).
-           */
-        this.streetViewControl = true;
-        /**
-           * Sets the viewport to contain the given bounds.
-           * If this option to `true`, the bounds get automatically computed from all elements that use the {@link AgmFitBounds} directive.
-           */
-        this.fitBounds = false;
-        /**
-           * The initial enabled/disabled state of the Scale control. This is disabled by default.
-           */
-        this.scaleControl = false;
-        /**
-           * The initial enabled/disabled state of the Map type control.
-           */
-        this.mapTypeControl = false;
-        /**
-           * The initial enabled/disabled state of the Pan control.
-           */
-        this.panControl = false;
-        /**
-           * The initial enabled/disabled state of the Rotate control.
-           */
-        this.rotateControl = false;
-        /**
-           * The initial enabled/disabled state of the Fullscreen control.
-           */
-        this.fullscreenControl = false;
-        /**
-           * The map mapTypeId. Defaults to 'roadmap'.
-           */
-        this.mapTypeId = 'roadmap';
-        /**
-           * When false, map icons are not clickable. A map icon represents a point of interest,
-           * also known as a POI. By default map icons are clickable.
-           */
-        this.clickableIcons = true;
-        /**
-           * This setting controls how gestures on the map are handled.
-           * Allowed values:
-           * - 'cooperative' (Two-finger touch gestures pan and zoom the map. One-finger touch gestures are not handled by the map.)
-           * - 'greedy'      (All touch gestures pan or zoom the map.)
-           * - 'none'        (The map cannot be panned or zoomed by user gestures.)
-           * - 'auto'        [default] (Gesture handling is either cooperative or greedy, depending on whether the page is scrollable or not.
-           */
-        this.gestureHandling = 'auto';
-        this._observableSubscriptions = [];
-        /**
-           * This event emitter gets emitted when the user clicks on the map (but not when they click on a
-           * marker or infoWindow).
-           */
-        this.mapClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event emitter gets emitted when the user right-clicks on the map (but not when they click
-           * on a marker or infoWindow).
-           */
-        this.mapRightClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event emitter gets emitted when the user double-clicks on the map (but not when they click
-           * on a marker or infoWindow).
-           */
-        this.mapDblClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event emitter is fired when the map center changes.
-           */
-        this.centerChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event is fired when the viewport bounds have changed.
-           */
-        this.boundsChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event is fired when the mapTypeId property changes.
-           */
-        this.mapTypeIdChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event is fired when the map becomes idle after panning or zooming.
-           */
-        this.idle = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event is fired when the zoom level has changed.
-           */
-        this.zoomChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        /**
-           * This event is fired when the google map is fully initialized.
-           * You get the google.maps.Map instance as a result of this EventEmitter.
-           */
-        this.mapReady = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-    }
-    /** @internal */
-    /** @internal */
-    AgmMap.prototype.ngOnInit = /** @internal */
-    function () {
-        // todo: this should be solved with a new component and a viewChild decorator
-        var container = this._elem.nativeElement.querySelector('.agm-map-container-inner');
-        this._initMapInstance(container);
-    };
-    AgmMap.prototype._initMapInstance = function (el) {
-        var _this = this;
-        this._mapsWrapper.createMap(el, {
-            center: { lat: this.latitude || 0, lng: this.longitude || 0 },
-            zoom: this.zoom,
-            minZoom: this.minZoom,
-            maxZoom: this.maxZoom,
-            disableDefaultUI: this.disableDefaultUI,
-            disableDoubleClickZoom: this.disableDoubleClickZoom,
-            scrollwheel: this.scrollwheel,
-            backgroundColor: this.backgroundColor,
-            draggable: this.draggable,
-            draggableCursor: this.draggableCursor,
-            draggingCursor: this.draggingCursor,
-            keyboardShortcuts: this.keyboardShortcuts,
-            styles: this.styles,
-            zoomControl: this.zoomControl,
-            zoomControlOptions: this.zoomControlOptions,
-            streetViewControl: this.streetViewControl,
-            streetViewControlOptions: this.streetViewControlOptions,
-            scaleControl: this.scaleControl,
-            scaleControlOptions: this.scaleControlOptions,
-            mapTypeControl: this.mapTypeControl,
-            mapTypeControlOptions: this.mapTypeControlOptions,
-            panControl: this.panControl,
-            panControlOptions: this.panControlOptions,
-            rotateControl: this.rotateControl,
-            rotateControlOptions: this.rotateControlOptions,
-            fullscreenControl: this.fullscreenControl,
-            fullscreenControlOptions: this.fullscreenControlOptions,
-            mapTypeId: this.mapTypeId,
-            clickableIcons: this.clickableIcons,
-            gestureHandling: this.gestureHandling
-        })
-            .then(function () { return _this._mapsWrapper.getNativeMap(); })
-            .then(function (map) { return _this.mapReady.emit(map); });
-        // register event listeners
-        this._handleMapCenterChange();
-        this._handleMapZoomChange();
-        this._handleMapMouseEvents();
-        this._handleBoundsChange();
-        this._handleMapTypeIdChange();
-        this._handleIdleEvent();
-    };
-    /** @internal */
-    /** @internal */
-    AgmMap.prototype.ngOnDestroy = /** @internal */
-    function () {
-        // unsubscribe all registered observable subscriptions
-        this._observableSubscriptions.forEach(function (s) { return s.unsubscribe(); });
-        // remove all listeners from the map instance
-        this._mapsWrapper.clearInstanceListeners();
-        if (this._fitBoundsSubscription) {
-            this._fitBoundsSubscription.unsubscribe();
-        }
-    };
-    /* @internal */
-    /* @internal */
-    AgmMap.prototype.ngOnChanges = /* @internal */
-    function (changes) {
-        this._updateMapOptionsChanges(changes);
-        this._updatePosition(changes);
-    };
-    AgmMap.prototype._updateMapOptionsChanges = function (changes) {
-        var options = {};
-        var optionKeys = Object.keys(changes).filter(function (k) { return AgmMap._mapOptionsAttributes.indexOf(k) !== -1; });
-        optionKeys.forEach(function (k) { options[k] = changes[k].currentValue; });
-        this._mapsWrapper.setMapOptions(options);
-    };
-    /**
-     * Triggers a resize event on the google map instance.
-     * When recenter is true, the of the google map gets called with the current lat/lng values or fitBounds value to recenter the map.
-     * Returns a promise that gets resolved after the event was triggered.
-     */
-    /**
-       * Triggers a resize event on the google map instance.
-       * When recenter is true, the of the google map gets called with the current lat/lng values or fitBounds value to recenter the map.
-       * Returns a promise that gets resolved after the event was triggered.
-       */
-    AgmMap.prototype.triggerResize = /**
-       * Triggers a resize event on the google map instance.
-       * When recenter is true, the of the google map gets called with the current lat/lng values or fitBounds value to recenter the map.
-       * Returns a promise that gets resolved after the event was triggered.
-       */
-    function (recenter) {
-        var _this = this;
-        if (recenter === void 0) { recenter = true; }
-        // Note: When we would trigger the resize event and show the map in the same turn (which is a
-        // common case for triggering a resize event), then the resize event would not
-        // work (to show the map), so we trigger the event in a timeout.
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                return _this._mapsWrapper.triggerMapEvent('resize').then(function () {
-                    if (recenter) {
-                        _this.fitBounds != null ? _this._fitBounds() : _this._setCenter();
-                    }
-                    resolve();
-                });
-            });
-        });
-    };
-    AgmMap.prototype._updatePosition = function (changes) {
-        if (changes['latitude'] == null && changes['longitude'] == null &&
-            !changes['fitBounds']) {
-            // no position update needed
-            return;
-        }
-        // we prefer fitBounds in changes
-        if ('fitBounds' in changes) {
-            this._fitBounds();
-            return;
-        }
-        if (typeof this.latitude !== 'number' || typeof this.longitude !== 'number') {
-            return;
-        }
-        this._setCenter();
-    };
-    AgmMap.prototype._setCenter = function () {
-        var newCenter = {
-            lat: this.latitude,
-            lng: this.longitude,
-        };
-        if (this.usePanning) {
-            this._mapsWrapper.panTo(newCenter);
-        }
-        else {
-            this._mapsWrapper.setCenter(newCenter);
-        }
-    };
-    AgmMap.prototype._fitBounds = function () {
-        switch (this.fitBounds) {
-            case true:
-                this._subscribeToFitBoundsUpdates();
-                break;
-            case false:
-                if (this._fitBoundsSubscription) {
-                    this._fitBoundsSubscription.unsubscribe();
-                }
-                break;
-            default:
-                this._updateBounds(this.fitBounds);
-        }
-    };
-    AgmMap.prototype._subscribeToFitBoundsUpdates = function () {
-        var _this = this;
-        this._fitBoundsSubscription = this._fitBoundsService.getBounds$().subscribe(function (b) { return _this._updateBounds(b); });
-    };
-    AgmMap.prototype._updateBounds = function (bounds) {
-        if (this._isLatLngBoundsLiteral(bounds) && google && google.maps) {
-            var newBounds = google.maps.LatLngBounds();
-            newBounds.union(bounds);
-            bounds = newBounds;
-        }
-        if (this.usePanning) {
-            this._mapsWrapper.panToBounds(bounds);
-            return;
-        }
-        this._mapsWrapper.fitBounds(bounds);
-    };
-    AgmMap.prototype._isLatLngBoundsLiteral = function (bounds) {
-        return bounds != null && bounds.extend === undefined;
-    };
-    AgmMap.prototype._handleMapCenterChange = function () {
-        var _this = this;
-        var s = this._mapsWrapper.subscribeToMapEvent('center_changed').subscribe(function () {
-            _this._mapsWrapper.getCenter().then(function (center) {
-                _this.latitude = center.lat();
-                _this.longitude = center.lng();
-                _this.centerChange.emit({ lat: _this.latitude, lng: _this.longitude });
-            });
-        });
-        this._observableSubscriptions.push(s);
-    };
-    AgmMap.prototype._handleBoundsChange = function () {
-        var _this = this;
-        var s = this._mapsWrapper.subscribeToMapEvent('bounds_changed').subscribe(function () {
-            _this._mapsWrapper.getBounds().then(function (bounds) { _this.boundsChange.emit(bounds); });
-        });
-        this._observableSubscriptions.push(s);
-    };
-    AgmMap.prototype._handleMapTypeIdChange = function () {
-        var _this = this;
-        var s = this._mapsWrapper.subscribeToMapEvent('maptypeid_changed').subscribe(function () {
-            _this._mapsWrapper.getMapTypeId().then(function (mapTypeId) { _this.mapTypeIdChange.emit(mapTypeId); });
-        });
-        this._observableSubscriptions.push(s);
-    };
-    AgmMap.prototype._handleMapZoomChange = function () {
-        var _this = this;
-        var s = this._mapsWrapper.subscribeToMapEvent('zoom_changed').subscribe(function () {
-            _this._mapsWrapper.getZoom().then(function (z) {
-                _this.zoom = z;
-                _this.zoomChange.emit(z);
-            });
-        });
-        this._observableSubscriptions.push(s);
-    };
-    AgmMap.prototype._handleIdleEvent = function () {
-        var _this = this;
-        var s = this._mapsWrapper.subscribeToMapEvent('idle').subscribe(function () { _this.idle.emit(void 0); });
-        this._observableSubscriptions.push(s);
-    };
-    AgmMap.prototype._handleMapMouseEvents = function () {
-        var _this = this;
-        var events = [
-            { name: 'click', emitter: this.mapClick },
-            { name: 'rightclick', emitter: this.mapRightClick },
-            { name: 'dblclick', emitter: this.mapDblClick },
-        ];
-        events.forEach(function (e) {
-            var s = _this._mapsWrapper.subscribeToMapEvent(e.name).subscribe(function (event) {
-                var value = { coords: { lat: event.latLng.lat(), lng: event.latLng.lng() } };
-                e.emitter.emit(value);
-            });
-            _this._observableSubscriptions.push(s);
-        });
-    };
-    /**
-       * Map option attributes that can change over time
-       */
-    AgmMap._mapOptionsAttributes = [
-        'disableDoubleClickZoom', 'scrollwheel', 'draggable', 'draggableCursor', 'draggingCursor',
-        'keyboardShortcuts', 'zoomControl', 'zoomControlOptions', 'styles', 'streetViewControl',
-        'streetViewControlOptions', 'zoom', 'mapTypeControl', 'mapTypeControlOptions', 'minZoom',
-        'maxZoom', 'panControl', 'panControlOptions', 'rotateControl', 'rotateControlOptions',
-        'fullscreenControl', 'fullscreenControlOptions', 'scaleControl', 'scaleControlOptions',
-        'mapTypeId', 'clickableIcons', 'gestureHandling'
-    ];
-    AgmMap.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
-                    selector: 'agm-map',
-                    providers: [
-                        _services_google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_1__["GoogleMapsAPIWrapper"], _services_managers_marker_manager__WEBPACK_IMPORTED_MODULE_5__["MarkerManager"], _services_managers_info_window_manager__WEBPACK_IMPORTED_MODULE_4__["InfoWindowManager"], _services_managers_circle_manager__WEBPACK_IMPORTED_MODULE_2__["CircleManager"], _services_managers_rectangle_manager__WEBPACK_IMPORTED_MODULE_3__["RectangleManager"],
-                        _services_managers_polyline_manager__WEBPACK_IMPORTED_MODULE_7__["PolylineManager"], _services_managers_polygon_manager__WEBPACK_IMPORTED_MODULE_6__["PolygonManager"], _services_managers_kml_layer_manager__WEBPACK_IMPORTED_MODULE_8__["KmlLayerManager"], _services_managers_data_layer_manager__WEBPACK_IMPORTED_MODULE_9__["DataLayerManager"], _services_managers_data_layer_manager__WEBPACK_IMPORTED_MODULE_9__["DataLayerManager"],
-                        _services_fit_bounds__WEBPACK_IMPORTED_MODULE_10__["FitBoundsService"]
-                    ],
-                    host: {
-                        // todo: deprecated - we will remove it with the next version
-                        '[class.sebm-google-map-container]': 'true'
-                    },
-                    styles: ["\n    .agm-map-container-inner {\n      width: inherit;\n      height: inherit;\n    }\n    .agm-map-content {\n      display:none;\n    }\n  "],
-                    template: "\n    <div class='agm-map-container-inner sebm-google-map-container-inner'></div>\n    <div class='agm-map-content'>\n      <ng-content></ng-content>\n    </div>\n  "
-                },] },
-    ];
-    /** @nocollapse */
-    AgmMap.ctorParameters = function () { return [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"], },
-        { type: _services_google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_1__["GoogleMapsAPIWrapper"], },
-        { type: _services_fit_bounds__WEBPACK_IMPORTED_MODULE_10__["FitBoundsService"], },
-    ]; };
-    AgmMap.propDecorators = {
-        "longitude": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "latitude": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "zoom": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "minZoom": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "maxZoom": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "draggable": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"], args: ['mapDraggable',] },],
-        "disableDoubleClickZoom": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "disableDefaultUI": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "scrollwheel": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "backgroundColor": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "draggableCursor": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "draggingCursor": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "keyboardShortcuts": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "zoomControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "zoomControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "styles": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "usePanning": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "streetViewControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "streetViewControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "fitBounds": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "scaleControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "scaleControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "mapTypeControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "mapTypeControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "panControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "panControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "rotateControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "rotateControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "fullscreenControl": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "fullscreenControlOptions": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "mapTypeId": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "clickableIcons": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "gestureHandling": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
-        "mapClick": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "mapRightClick": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "mapDblClick": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "centerChange": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "boundsChange": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "mapTypeIdChange": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "idle": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "zoomChange": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-        "mapReady": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
-    };
-    return AgmMap;
-}());
-
-//# sourceMappingURL=map.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/directives/map.ngfactory.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@agm/core/directives/map.ngfactory.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * @fileoverview This file was generated by the Angular template compiler. Do not edit.
- *
- * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
- * tslint:disable
- */ 
-Object.defineProperty(exports, "__esModule", { value: true });
-var i0 = __webpack_require__(/*! @angular/core */ "@angular/core");
-var i1 = __webpack_require__(/*! ../services/managers/marker-manager */ "./node_modules/@agm/core/services/managers/marker-manager.js");
-var i2 = __webpack_require__(/*! ../services/google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-var i3 = __webpack_require__(/*! ../services/managers/info-window-manager */ "./node_modules/@agm/core/services/managers/info-window-manager.js");
-var i4 = __webpack_require__(/*! ../services/managers/circle-manager */ "./node_modules/@agm/core/services/managers/circle-manager.js");
-var i5 = __webpack_require__(/*! ../services/managers/rectangle-manager */ "./node_modules/@agm/core/services/managers/rectangle-manager.js");
-var i6 = __webpack_require__(/*! ../services/managers/polyline-manager */ "./node_modules/@agm/core/services/managers/polyline-manager.js");
-var i7 = __webpack_require__(/*! ../services/managers/polygon-manager */ "./node_modules/@agm/core/services/managers/polygon-manager.js");
-var i8 = __webpack_require__(/*! ../services/managers/kml-layer-manager */ "./node_modules/@agm/core/services/managers/kml-layer-manager.js");
-var i9 = __webpack_require__(/*! ../services/managers/data-layer-manager */ "./node_modules/@agm/core/services/managers/data-layer-manager.js");
-var i10 = __webpack_require__(/*! ../services/maps-api-loader/maps-api-loader */ "./node_modules/@agm/core/services/maps-api-loader/maps-api-loader.js");
-var i11 = __webpack_require__(/*! ../services/fit-bounds */ "./node_modules/@agm/core/services/fit-bounds.js");
-var i12 = __webpack_require__(/*! ./map */ "./node_modules/@agm/core/directives/map.js");
-var styles_AgmMap = [".agm-map-container-inner[_ngcontent-%COMP%] {\n      width: inherit;\n      height: inherit;\n    }\n    .agm-map-content[_ngcontent-%COMP%] {\n      display:none;\n    }"];
-var RenderType_AgmMap = i0.ɵcrt({ encapsulation: 0, styles: styles_AgmMap, data: {} });
-exports.RenderType_AgmMap = RenderType_AgmMap;
-function View_AgmMap_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 0, "div", [["class", "agm-map-container-inner sebm-google-map-container-inner"]], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "div", [["class", "agm-map-content"]], null, null, null, null, null)), i0.ɵncd(null, 0)], null, null); }
-exports.View_AgmMap_0 = View_AgmMap_0;
-function View_AgmMap_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 11, "agm-map", [], [[2, "sebm-google-map-container", null]], null, null, View_AgmMap_0, RenderType_AgmMap)), i0.ɵprd(4608, null, i1.MarkerManager, i1.MarkerManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i3.InfoWindowManager, i3.InfoWindowManager, [i2.GoogleMapsAPIWrapper, i0.NgZone, i1.MarkerManager]), i0.ɵprd(4608, null, i4.CircleManager, i4.CircleManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i5.RectangleManager, i5.RectangleManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i6.PolylineManager, i6.PolylineManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i7.PolygonManager, i7.PolygonManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i8.KmlLayerManager, i8.KmlLayerManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i9.DataLayerManager, i9.DataLayerManager, [i2.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(512, null, i2.GoogleMapsAPIWrapper, i2.GoogleMapsAPIWrapper, [i10.MapsAPILoader, i0.NgZone]), i0.ɵprd(512, null, i11.FitBoundsService, i11.FitBoundsService, [i10.MapsAPILoader]), i0.ɵdid(11, 770048, null, 0, i12.AgmMap, [i0.ElementRef, i2.GoogleMapsAPIWrapper, i11.FitBoundsService], null, null)], function (_ck, _v) { _ck(_v, 11, 0); }, function (_ck, _v) { var currVal_0 = true; _ck(_v, 0, 0, currVal_0); }); }
-exports.View_AgmMap_Host_0 = View_AgmMap_Host_0;
-var AgmMapNgFactory = i0.ɵccf("agm-map", i12.AgmMap, View_AgmMap_Host_0, { longitude: "longitude", latitude: "latitude", zoom: "zoom", minZoom: "minZoom", maxZoom: "maxZoom", draggable: "mapDraggable", disableDoubleClickZoom: "disableDoubleClickZoom", disableDefaultUI: "disableDefaultUI", scrollwheel: "scrollwheel", backgroundColor: "backgroundColor", draggableCursor: "draggableCursor", draggingCursor: "draggingCursor", keyboardShortcuts: "keyboardShortcuts", zoomControl: "zoomControl", zoomControlOptions: "zoomControlOptions", styles: "styles", usePanning: "usePanning", streetViewControl: "streetViewControl", streetViewControlOptions: "streetViewControlOptions", fitBounds: "fitBounds", scaleControl: "scaleControl", scaleControlOptions: "scaleControlOptions", mapTypeControl: "mapTypeControl", mapTypeControlOptions: "mapTypeControlOptions", panControl: "panControl", panControlOptions: "panControlOptions", rotateControl: "rotateControl", rotateControlOptions: "rotateControlOptions", fullscreenControl: "fullscreenControl", fullscreenControlOptions: "fullscreenControlOptions", mapTypeId: "mapTypeId", clickableIcons: "clickableIcons", gestureHandling: "gestureHandling" }, { mapClick: "mapClick", mapRightClick: "mapRightClick", mapDblClick: "mapDblClick", centerChange: "centerChange", boundsChange: "boundsChange", mapTypeIdChange: "mapTypeIdChange", idle: "idle", zoomChange: "zoomChange", mapReady: "mapReady" }, ["*"]);
-exports.AgmMapNgFactory = AgmMapNgFactory;
-
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/fit-bounds.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@agm/core/services/fit-bounds.js ***!
-  \*******************************************************/
-/*! exports provided: FitBoundsAccessor, FitBoundsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FitBoundsAccessor", function() { return FitBoundsAccessor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FitBoundsService", function() { return FitBoundsService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "rxjs/operators");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _maps_api_loader_maps_api_loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./maps-api-loader/maps-api-loader */ "./node_modules/@agm/core/services/maps-api-loader/maps-api-loader.js");
-
-
-
-
-/**
- * Class to implement when you what to be able to make it work with the auto fit bounds feature
- * of AGM.
- */
-var /**
- * Class to implement when you what to be able to make it work with the auto fit bounds feature
- * of AGM.
- */
-FitBoundsAccessor = /** @class */ (function () {
-    function FitBoundsAccessor() {
-    }
-    return FitBoundsAccessor;
-}());
-/**
- * Class to implement when you what to be able to make it work with the auto fit bounds feature
- * of AGM.
- */
-
-/**
- * The FitBoundsService is responsible for computing the bounds of the a single map.
- */
-var FitBoundsService = /** @class */ (function () {
-    function FitBoundsService(loader) {
-        var _this = this;
-        this._boundsChangeSampleTime$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](200);
-        this._includeInBounds$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](new Map());
-        this.bounds$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(loader.load()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["flatMap"])(function () { return _this._includeInBounds$; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["sample"])(this._boundsChangeSampleTime$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (time) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["timer"])(0, time); }))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (includeInBounds) { return _this._generateBounds(includeInBounds); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["shareReplay"])(1));
-    }
-    FitBoundsService.prototype._generateBounds = function (includeInBounds) {
-        var bounds = new google.maps.LatLngBounds();
-        includeInBounds.forEach(function (b) { return bounds.extend(b); });
-        return bounds;
-    };
-    FitBoundsService.prototype.addToBounds = function (latLng) {
-        var id = this._createIdentifier(latLng);
-        if (this._includeInBounds$.value.has(id)) {
-            return;
-        }
-        var map = this._includeInBounds$.value;
-        map.set(id, latLng);
-        this._includeInBounds$.next(map);
-    };
-    FitBoundsService.prototype.removeFromBounds = function (latLng) {
-        var map = this._includeInBounds$.value;
-        map.delete(this._createIdentifier(latLng));
-        this._includeInBounds$.next(map);
-    };
-    FitBoundsService.prototype.changeFitBoundsChangeSampleTime = function (timeMs) {
-        this._boundsChangeSampleTime$.next(timeMs);
-    };
-    FitBoundsService.prototype.getBounds$ = function () {
-        return this.bounds$;
-    };
-    FitBoundsService.prototype._createIdentifier = function (latLng) {
-        return latLng.lat + "+" + latLng.lng;
-    };
-    FitBoundsService.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    FitBoundsService.ctorParameters = function () { return [
-        { type: _maps_api_loader_maps_api_loader__WEBPACK_IMPORTED_MODULE_3__["MapsAPILoader"], },
-    ]; };
-    return FitBoundsService;
-}());
-
-//# sourceMappingURL=fit-bounds.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/google-maps-api-wrapper.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/google-maps-api-wrapper.js ***!
-  \********************************************************************/
-/*! exports provided: GoogleMapsAPIWrapper */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleMapsAPIWrapper", function() { return GoogleMapsAPIWrapper; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _maps_api_loader_maps_api_loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./maps-api-loader/maps-api-loader */ "./node_modules/@agm/core/services/maps-api-loader/maps-api-loader.js");
-
-
-
-/**
- * Wrapper class that handles the communication with the Google Maps Javascript
- * API v3
- */
-var GoogleMapsAPIWrapper = /** @class */ (function () {
-    function GoogleMapsAPIWrapper(_loader, _zone) {
-        var _this = this;
-        this._loader = _loader;
-        this._zone = _zone;
-        this._map =
-            new Promise(function (resolve) { _this._mapResolver = resolve; });
-    }
-    GoogleMapsAPIWrapper.prototype.createMap = function (el, mapOptions) {
-        var _this = this;
-        return this._zone.runOutsideAngular(function () {
-            return _this._loader.load().then(function () {
-                var map = new google.maps.Map(el, mapOptions);
-                _this._mapResolver(map);
-                return;
-            });
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.setMapOptions = function (options) {
-        this._map.then(function (m) { m.setOptions(options); });
-    };
-    /**
-     * Creates a google map marker with the map context
-     */
-    /**
-       * Creates a google map marker with the map context
-       */
-    GoogleMapsAPIWrapper.prototype.createMarker = /**
-       * Creates a google map marker with the map context
-       */
-    function (options, addToMap) {
-        if (options === void 0) { options = {}; }
-        if (addToMap === void 0) { addToMap = true; }
-        return this._map.then(function (map) {
-            if (addToMap) {
-                options.map = map;
-            }
-            return new google.maps.Marker(options);
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.createInfoWindow = function (options) {
-        return this._map.then(function () { return new google.maps.InfoWindow(options); });
-    };
-    /**
-     * Creates a google.map.Circle for the current map.
-     */
-    /**
-       * Creates a google.map.Circle for the current map.
-       */
-    GoogleMapsAPIWrapper.prototype.createCircle = /**
-       * Creates a google.map.Circle for the current map.
-       */
-    function (options) {
-        return this._map.then(function (map) {
-            options.map = map;
-            return new google.maps.Circle(options);
-        });
-    };
-    /**
-     * Creates a google.map.Rectangle for the current map.
-     */
-    /**
-       * Creates a google.map.Rectangle for the current map.
-       */
-    GoogleMapsAPIWrapper.prototype.createRectangle = /**
-       * Creates a google.map.Rectangle for the current map.
-       */
-    function (options) {
-        return this._map.then(function (map) {
-            options.map = map;
-            return new google.maps.Rectangle(options);
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.createPolyline = function (options) {
-        return this.getNativeMap().then(function (map) {
-            var line = new google.maps.Polyline(options);
-            line.setMap(map);
-            return line;
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.createPolygon = function (options) {
-        return this.getNativeMap().then(function (map) {
-            var polygon = new google.maps.Polygon(options);
-            polygon.setMap(map);
-            return polygon;
-        });
-    };
-    /**
-     * Creates a new google.map.Data layer for the current map
-     */
-    /**
-       * Creates a new google.map.Data layer for the current map
-       */
-    GoogleMapsAPIWrapper.prototype.createDataLayer = /**
-       * Creates a new google.map.Data layer for the current map
-       */
-    function (options) {
-        return this._map.then(function (m) {
-            var data = new google.maps.Data(options);
-            data.setMap(m);
-            return data;
-        });
-    };
-    /**
-     * Determines if given coordinates are insite a Polygon path.
-     */
-    /**
-       * Determines if given coordinates are insite a Polygon path.
-       */
-    GoogleMapsAPIWrapper.prototype.containsLocation = /**
-       * Determines if given coordinates are insite a Polygon path.
-       */
-    function (latLng, polygon) {
-        return google.maps.geometry.poly.containsLocation(latLng, polygon);
-    };
-    GoogleMapsAPIWrapper.prototype.subscribeToMapEvent = function (eventName) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._map.then(function (m) {
-                m.addListener(eventName, function (arg) { _this._zone.run(function () { return observer.next(arg); }); });
-            });
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.clearInstanceListeners = function () {
-        this._map.then(function (map) {
-            google.maps.event.clearInstanceListeners(map);
-        });
-    };
-    GoogleMapsAPIWrapper.prototype.setCenter = function (latLng) {
-        return this._map.then(function (map) { return map.setCenter(latLng); });
-    };
-    GoogleMapsAPIWrapper.prototype.getZoom = function () { return this._map.then(function (map) { return map.getZoom(); }); };
-    GoogleMapsAPIWrapper.prototype.getBounds = function () {
-        return this._map.then(function (map) { return map.getBounds(); });
-    };
-    GoogleMapsAPIWrapper.prototype.getMapTypeId = function () {
-        return this._map.then(function (map) { return map.getMapTypeId(); });
-    };
-    GoogleMapsAPIWrapper.prototype.setZoom = function (zoom) {
-        return this._map.then(function (map) { return map.setZoom(zoom); });
-    };
-    GoogleMapsAPIWrapper.prototype.getCenter = function () {
-        return this._map.then(function (map) { return map.getCenter(); });
-    };
-    GoogleMapsAPIWrapper.prototype.panTo = function (latLng) {
-        return this._map.then(function (map) { return map.panTo(latLng); });
-    };
-    GoogleMapsAPIWrapper.prototype.panBy = function (x, y) {
-        return this._map.then(function (map) { return map.panBy(x, y); });
-    };
-    GoogleMapsAPIWrapper.prototype.fitBounds = function (latLng) {
-        return this._map.then(function (map) { return map.fitBounds(latLng); });
-    };
-    GoogleMapsAPIWrapper.prototype.panToBounds = function (latLng) {
-        return this._map.then(function (map) { return map.panToBounds(latLng); });
-    };
-    /**
-     * Returns the native Google Maps Map instance. Be careful when using this instance directly.
-     */
-    /**
-       * Returns the native Google Maps Map instance. Be careful when using this instance directly.
-       */
-    GoogleMapsAPIWrapper.prototype.getNativeMap = /**
-       * Returns the native Google Maps Map instance. Be careful when using this instance directly.
-       */
-    function () { return this._map; };
-    /**
-     * Triggers the given event name on the map instance.
-     */
-    /**
-       * Triggers the given event name on the map instance.
-       */
-    GoogleMapsAPIWrapper.prototype.triggerMapEvent = /**
-       * Triggers the given event name on the map instance.
-       */
-    function (eventName) {
-        return this._map.then(function (m) { return google.maps.event.trigger(m, eventName); });
-    };
-    GoogleMapsAPIWrapper.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    GoogleMapsAPIWrapper.ctorParameters = function () { return [
-        { type: _maps_api_loader_maps_api_loader__WEBPACK_IMPORTED_MODULE_2__["MapsAPILoader"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return GoogleMapsAPIWrapper;
-}());
-
-//# sourceMappingURL=google-maps-api-wrapper.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/circle-manager.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/circle-manager.js ***!
-  \********************************************************************/
-/*! exports provided: CircleManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CircleManager", function() { return CircleManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-var CircleManager = /** @class */ (function () {
-    function CircleManager(_apiWrapper, _zone) {
-        this._apiWrapper = _apiWrapper;
-        this._zone = _zone;
-        this._circles = new Map();
-    }
-    CircleManager.prototype.addCircle = function (circle) {
-        this._circles.set(circle, this._apiWrapper.createCircle({
-            center: { lat: circle.latitude, lng: circle.longitude },
-            clickable: circle.clickable,
-            draggable: circle.draggable,
-            editable: circle.editable,
-            fillColor: circle.fillColor,
-            fillOpacity: circle.fillOpacity,
-            radius: circle.radius,
-            strokeColor: circle.strokeColor,
-            strokeOpacity: circle.strokeOpacity,
-            strokePosition: circle.strokePosition,
-            strokeWeight: circle.strokeWeight,
-            visible: circle.visible,
-            zIndex: circle.zIndex
-        }));
-    };
-    /**
-     * Removes the given circle from the map.
-     */
-    /**
-       * Removes the given circle from the map.
-       */
-    CircleManager.prototype.removeCircle = /**
-       * Removes the given circle from the map.
-       */
-    function (circle) {
-        var _this = this;
-        return this._circles.get(circle).then(function (c) {
-            c.setMap(null);
-            _this._circles.delete(circle);
-        });
-    };
-    CircleManager.prototype.setOptions = function (circle, options) {
-        return this._circles.get(circle).then(function (c) { return c.setOptions(options); });
-    };
-    CircleManager.prototype.getBounds = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.getBounds(); });
-    };
-    CircleManager.prototype.getCenter = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.getCenter(); });
-    };
-    CircleManager.prototype.getRadius = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.getRadius(); });
-    };
-    CircleManager.prototype.setCenter = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.setCenter({ lat: circle.latitude, lng: circle.longitude }); });
-    };
-    CircleManager.prototype.setEditable = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.setEditable(circle.editable); });
-    };
-    CircleManager.prototype.setDraggable = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.setDraggable(circle.draggable); });
-    };
-    CircleManager.prototype.setVisible = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.setVisible(circle.visible); });
-    };
-    CircleManager.prototype.setRadius = function (circle) {
-        return this._circles.get(circle).then(function (c) { return c.setRadius(circle.radius); });
-    };
-    CircleManager.prototype.createEventObservable = function (eventName, circle) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            var listener = null;
-            _this._circles.get(circle).then(function (c) {
-                listener = c.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-            return function () {
-                if (listener !== null) {
-                    listener.remove();
-                }
-            };
-        });
-    };
-    CircleManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    CircleManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return CircleManager;
-}());
-
-//# sourceMappingURL=circle-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/data-layer-manager.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/data-layer-manager.js ***!
-  \************************************************************************/
-/*! exports provided: DataLayerManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataLayerManager", function() { return DataLayerManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-/**
- * Manages all Data Layers for a Google Map instance.
- */
-var DataLayerManager = /** @class */ (function () {
-    function DataLayerManager(_wrapper, _zone) {
-        this._wrapper = _wrapper;
-        this._zone = _zone;
-        this._layers = new Map();
-    }
-    /**
-     * Adds a new Data Layer to the map.
-     */
-    /**
-       * Adds a new Data Layer to the map.
-       */
-    DataLayerManager.prototype.addDataLayer = /**
-       * Adds a new Data Layer to the map.
-       */
-    function (layer) {
-        var _this = this;
-        var newLayer = this._wrapper.createDataLayer({
-            style: layer.style
-        })
-            .then(function (d) {
-            if (layer.geoJson) {
-                _this.getDataFeatures(d, layer.geoJson).then(function (features) { return d.features = features; });
-            }
-            return d;
-        });
-        this._layers.set(layer, newLayer);
-    };
-    DataLayerManager.prototype.deleteDataLayer = function (layer) {
-        var _this = this;
-        this._layers.get(layer).then(function (l) {
-            l.setMap(null);
-            _this._layers.delete(layer);
-        });
-    };
-    DataLayerManager.prototype.updateGeoJson = function (layer, geoJson) {
-        var _this = this;
-        this._layers.get(layer).then(function (l) {
-            l.forEach(function (feature) {
-                l.remove(feature);
-                var index = l.features.indexOf(feature, 0);
-                if (index > -1) {
-                    l.features.splice(index, 1);
-                }
-            });
-            _this.getDataFeatures(l, geoJson).then(function (features) { return l.features = features; });
-        });
-    };
-    DataLayerManager.prototype.setDataOptions = function (layer, options) {
-        this._layers.get(layer).then(function (l) {
-            l.setControlPosition(options.controlPosition);
-            l.setControls(options.controls);
-            l.setDrawingMode(options.drawingMode);
-            l.setStyle(options.style);
-        });
-    };
-    /**
-     * Creates a Google Maps event listener for the given DataLayer as an Observable
-     */
-    /**
-       * Creates a Google Maps event listener for the given DataLayer as an Observable
-       */
-    DataLayerManager.prototype.createEventObservable = /**
-       * Creates a Google Maps event listener for the given DataLayer as an Observable
-       */
-    function (eventName, layer) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._layers.get(layer).then(function (d) {
-                d.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    /**
-     * Extract features from a geoJson using google.maps Data Class
-     * @param d : google.maps.Data class instance
-     * @param geoJson : url or geojson object
-     */
-    /**
-       * Extract features from a geoJson using google.maps Data Class
-       * @param d : google.maps.Data class instance
-       * @param geoJson : url or geojson object
-       */
-    DataLayerManager.prototype.getDataFeatures = /**
-       * Extract features from a geoJson using google.maps Data Class
-       * @param d : google.maps.Data class instance
-       * @param geoJson : url or geojson object
-       */
-    function (d, geoJson) {
-        return new Promise(function (resolve, reject) {
-            if (typeof geoJson === 'object') {
-                try {
-                    var features = d.addGeoJson(geoJson);
-                    resolve(features);
-                }
-                catch (e) {
-                    reject(e);
-                }
-            }
-            else if (typeof geoJson === 'string') {
-                d.loadGeoJson(geoJson, null, resolve);
-            }
-            else {
-                reject("Impossible to extract features from geoJson: wrong argument type");
-            }
-        });
-    };
-    DataLayerManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    DataLayerManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return DataLayerManager;
-}());
-
-//# sourceMappingURL=data-layer-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/info-window-manager.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/info-window-manager.js ***!
-  \*************************************************************************/
-/*! exports provided: InfoWindowManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfoWindowManager", function() { return InfoWindowManager; });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-/* harmony import */ var _marker_manager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./marker-manager */ "./node_modules/@agm/core/services/managers/marker-manager.js");
-
-
-
-
-var InfoWindowManager = /** @class */ (function () {
-    function InfoWindowManager(_mapsWrapper, _zone, _markerManager) {
-        this._mapsWrapper = _mapsWrapper;
-        this._zone = _zone;
-        this._markerManager = _markerManager;
-        this._infoWindows = new Map();
-    }
-    InfoWindowManager.prototype.deleteInfoWindow = function (infoWindow) {
-        var _this = this;
-        var iWindow = this._infoWindows.get(infoWindow);
-        if (iWindow == null) {
-            // info window already deleted
-            return Promise.resolve();
-        }
-        return iWindow.then(function (i) {
-            return _this._zone.run(function () {
-                i.close();
-                _this._infoWindows.delete(infoWindow);
-            });
-        });
-    };
-    InfoWindowManager.prototype.setPosition = function (infoWindow) {
-        return this._infoWindows.get(infoWindow).then(function (i) {
-            return i.setPosition({
-                lat: infoWindow.latitude,
-                lng: infoWindow.longitude
-            });
-        });
-    };
-    InfoWindowManager.prototype.setZIndex = function (infoWindow) {
-        return this._infoWindows.get(infoWindow)
-            .then(function (i) { return i.setZIndex(infoWindow.zIndex); });
-    };
-    InfoWindowManager.prototype.open = function (infoWindow) {
-        var _this = this;
-        return this._infoWindows.get(infoWindow).then(function (w) {
-            if (infoWindow.hostMarker != null) {
-                return _this._markerManager.getNativeMarker(infoWindow.hostMarker).then(function (marker) {
-                    return _this._mapsWrapper.getNativeMap().then(function (map) { return w.open(map, marker); });
-                });
-            }
-            return _this._mapsWrapper.getNativeMap().then(function (map) { return w.open(map); });
-        });
-    };
-    InfoWindowManager.prototype.close = function (infoWindow) {
-        return this._infoWindows.get(infoWindow).then(function (w) { return w.close(); });
-    };
-    InfoWindowManager.prototype.setOptions = function (infoWindow, options) {
-        return this._infoWindows.get(infoWindow).then(function (i) { return i.setOptions(options); });
-    };
-    InfoWindowManager.prototype.addInfoWindow = function (infoWindow) {
-        var options = {
-            content: infoWindow.content,
-            maxWidth: infoWindow.maxWidth,
-            zIndex: infoWindow.zIndex,
-            disableAutoPan: infoWindow.disableAutoPan
-        };
-        if (typeof infoWindow.latitude === 'number' && typeof infoWindow.longitude === 'number') {
-            options.position = { lat: infoWindow.latitude, lng: infoWindow.longitude };
-        }
-        var infoWindowPromise = this._mapsWrapper.createInfoWindow(options);
-        this._infoWindows.set(infoWindow, infoWindowPromise);
-    };
-    /**
-     * Creates a Google Maps event listener for the given InfoWindow as an Observable
-     */
-    /**
-        * Creates a Google Maps event listener for the given InfoWindow as an Observable
-        */
-    InfoWindowManager.prototype.createEventObservable = /**
-        * Creates a Google Maps event listener for the given InfoWindow as an Observable
-        */
-    function (eventName, infoWindow) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"](function (observer) {
-            _this._infoWindows.get(infoWindow).then(function (i) {
-                i.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    InfoWindowManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"] },
-    ];
-    /** @nocollapse */
-    InfoWindowManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"], },
-        { type: _marker_manager__WEBPACK_IMPORTED_MODULE_3__["MarkerManager"], },
-    ]; };
-    return InfoWindowManager;
-}());
-
-//# sourceMappingURL=info-window-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/kml-layer-manager.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/kml-layer-manager.js ***!
-  \***********************************************************************/
-/*! exports provided: KmlLayerManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KmlLayerManager", function() { return KmlLayerManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-/**
- * Manages all KML Layers for a Google Map instance.
- */
-var KmlLayerManager = /** @class */ (function () {
-    function KmlLayerManager(_wrapper, _zone) {
-        this._wrapper = _wrapper;
-        this._zone = _zone;
-        this._layers = new Map();
-    }
-    /**
-     * Adds a new KML Layer to the map.
-     */
-    /**
-       * Adds a new KML Layer to the map.
-       */
-    KmlLayerManager.prototype.addKmlLayer = /**
-       * Adds a new KML Layer to the map.
-       */
-    function (layer) {
-        var newLayer = this._wrapper.getNativeMap().then(function (m) {
-            return new google.maps.KmlLayer({
-                clickable: layer.clickable,
-                map: m,
-                preserveViewport: layer.preserveViewport,
-                screenOverlays: layer.screenOverlays,
-                suppressInfoWindows: layer.suppressInfoWindows,
-                url: layer.url,
-                zIndex: layer.zIndex
-            });
-        });
-        this._layers.set(layer, newLayer);
-    };
-    KmlLayerManager.prototype.setOptions = function (layer, options) {
-        this._layers.get(layer).then(function (l) { return l.setOptions(options); });
-    };
-    KmlLayerManager.prototype.deleteKmlLayer = function (layer) {
-        var _this = this;
-        this._layers.get(layer).then(function (l) {
-            l.setMap(null);
-            _this._layers.delete(layer);
-        });
-    };
-    /**
-     * Creates a Google Maps event listener for the given KmlLayer as an Observable
-     */
-    /**
-       * Creates a Google Maps event listener for the given KmlLayer as an Observable
-       */
-    KmlLayerManager.prototype.createEventObservable = /**
-       * Creates a Google Maps event listener for the given KmlLayer as an Observable
-       */
-    function (eventName, layer) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._layers.get(layer).then(function (m) {
-                m.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    KmlLayerManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    KmlLayerManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return KmlLayerManager;
-}());
-
-//# sourceMappingURL=kml-layer-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/marker-manager.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/marker-manager.js ***!
-  \********************************************************************/
-/*! exports provided: MarkerManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarkerManager", function() { return MarkerManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-var MarkerManager = /** @class */ (function () {
-    function MarkerManager(_mapsWrapper, _zone) {
-        this._mapsWrapper = _mapsWrapper;
-        this._zone = _zone;
-        this._markers = new Map();
-    }
-    MarkerManager.prototype.deleteMarker = function (marker) {
-        var _this = this;
-        var m = this._markers.get(marker);
-        if (m == null) {
-            // marker already deleted
-            return Promise.resolve();
-        }
-        return m.then(function (m) {
-            return _this._zone.run(function () {
-                m.setMap(null);
-                _this._markers.delete(marker);
-            });
-        });
-    };
-    MarkerManager.prototype.updateMarkerPosition = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setPosition({ lat: marker.latitude, lng: marker.longitude }); });
-    };
-    MarkerManager.prototype.updateTitle = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setTitle(marker.title); });
-    };
-    MarkerManager.prototype.updateLabel = function (marker) {
-        return this._markers.get(marker).then(function (m) { m.setLabel(marker.label); });
-    };
-    MarkerManager.prototype.updateDraggable = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setDraggable(marker.draggable); });
-    };
-    MarkerManager.prototype.updateIcon = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setIcon(marker.iconUrl); });
-    };
-    MarkerManager.prototype.updateOpacity = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setOpacity(marker.opacity); });
-    };
-    MarkerManager.prototype.updateVisible = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setVisible(marker.visible); });
-    };
-    MarkerManager.prototype.updateZIndex = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setZIndex(marker.zIndex); });
-    };
-    MarkerManager.prototype.updateClickable = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setClickable(marker.clickable); });
-    };
-    MarkerManager.prototype.updateAnimation = function (marker) {
-        return this._markers.get(marker).then(function (m) {
-            if (typeof marker.animation === 'string') {
-                m.setAnimation(google.maps.Animation[marker.animation]);
-            }
-            else {
-                m.setAnimation(marker.animation);
-            }
-        });
-    };
-    MarkerManager.prototype.addMarker = function (marker) {
-        var markerPromise = this._mapsWrapper.createMarker({
-            position: { lat: marker.latitude, lng: marker.longitude },
-            label: marker.label,
-            draggable: marker.draggable,
-            icon: marker.iconUrl,
-            opacity: marker.opacity,
-            visible: marker.visible,
-            zIndex: marker.zIndex,
-            title: marker.title,
-            clickable: marker.clickable,
-            animation: (typeof marker.animation === 'string') ? google.maps.Animation[marker.animation] : marker.animation
-        });
-        this._markers.set(marker, markerPromise);
-    };
-    MarkerManager.prototype.getNativeMarker = function (marker) {
-        return this._markers.get(marker);
-    };
-    MarkerManager.prototype.createEventObservable = function (eventName, marker) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._markers.get(marker).then(function (m) {
-                m.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    MarkerManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    MarkerManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return MarkerManager;
-}());
-
-//# sourceMappingURL=marker-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/polygon-manager.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/polygon-manager.js ***!
-  \*********************************************************************/
-/*! exports provided: PolygonManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolygonManager", function() { return PolygonManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-var PolygonManager = /** @class */ (function () {
-    function PolygonManager(_mapsWrapper, _zone) {
-        this._mapsWrapper = _mapsWrapper;
-        this._zone = _zone;
-        this._polygons = new Map();
-    }
-    PolygonManager.prototype.addPolygon = function (path) {
-        var polygonPromise = this._mapsWrapper.createPolygon({
-            clickable: path.clickable,
-            draggable: path.draggable,
-            editable: path.editable,
-            fillColor: path.fillColor,
-            fillOpacity: path.fillOpacity,
-            geodesic: path.geodesic,
-            paths: path.paths,
-            strokeColor: path.strokeColor,
-            strokeOpacity: path.strokeOpacity,
-            strokeWeight: path.strokeWeight,
-            visible: path.visible,
-            zIndex: path.zIndex,
-        });
-        this._polygons.set(path, polygonPromise);
-    };
-    PolygonManager.prototype.updatePolygon = function (polygon) {
-        var _this = this;
-        var m = this._polygons.get(polygon);
-        if (m == null) {
-            return Promise.resolve();
-        }
-        return m.then(function (l) { return _this._zone.run(function () { l.setPaths(polygon.paths); }); });
-    };
-    PolygonManager.prototype.setPolygonOptions = function (path, options) {
-        return this._polygons.get(path).then(function (l) { l.setOptions(options); });
-    };
-    PolygonManager.prototype.deletePolygon = function (paths) {
-        var _this = this;
-        var m = this._polygons.get(paths);
-        if (m == null) {
-            return Promise.resolve();
-        }
-        return m.then(function (l) {
-            return _this._zone.run(function () {
-                l.setMap(null);
-                _this._polygons.delete(paths);
-            });
-        });
-    };
-    PolygonManager.prototype.createEventObservable = function (eventName, path) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._polygons.get(path).then(function (l) {
-                l.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    PolygonManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    PolygonManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return PolygonManager;
-}());
-
-//# sourceMappingURL=polygon-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/polyline-manager.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/polyline-manager.js ***!
-  \**********************************************************************/
-/*! exports provided: PolylineManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolylineManager", function() { return PolylineManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-var PolylineManager = /** @class */ (function () {
-    function PolylineManager(_mapsWrapper, _zone) {
-        this._mapsWrapper = _mapsWrapper;
-        this._zone = _zone;
-        this._polylines = new Map();
-    }
-    PolylineManager._convertPoints = function (line) {
-        var path = line._getPoints().map(function (point) {
-            return { lat: point.latitude, lng: point.longitude };
-        });
-        return path;
-    };
-    PolylineManager.prototype.addPolyline = function (line) {
-        var path = PolylineManager._convertPoints(line);
-        var polylinePromise = this._mapsWrapper.createPolyline({
-            clickable: line.clickable,
-            draggable: line.draggable,
-            editable: line.editable,
-            geodesic: line.geodesic,
-            strokeColor: line.strokeColor,
-            strokeOpacity: line.strokeOpacity,
-            strokeWeight: line.strokeWeight,
-            visible: line.visible,
-            zIndex: line.zIndex,
-            path: path
-        });
-        this._polylines.set(line, polylinePromise);
-    };
-    PolylineManager.prototype.updatePolylinePoints = function (line) {
-        var _this = this;
-        var path = PolylineManager._convertPoints(line);
-        var m = this._polylines.get(line);
-        if (m == null) {
-            return Promise.resolve();
-        }
-        return m.then(function (l) { return _this._zone.run(function () { l.setPath(path); }); });
-    };
-    PolylineManager.prototype.setPolylineOptions = function (line, options) {
-        return this._polylines.get(line).then(function (l) { l.setOptions(options); });
-    };
-    PolylineManager.prototype.deletePolyline = function (line) {
-        var _this = this;
-        var m = this._polylines.get(line);
-        if (m == null) {
-            return Promise.resolve();
-        }
-        return m.then(function (l) {
-            return _this._zone.run(function () {
-                l.setMap(null);
-                _this._polylines.delete(line);
-            });
-        });
-    };
-    PolylineManager.prototype.createEventObservable = function (eventName, line) {
-        var _this = this;
-        return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (observer) {
-            _this._polylines.get(line).then(function (l) {
-                l.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-        });
-    };
-    PolylineManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    PolylineManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return PolylineManager;
-}());
-
-//# sourceMappingURL=polyline-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/managers/rectangle-manager.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@agm/core/services/managers/rectangle-manager.js ***!
-  \***********************************************************************/
-/*! exports provided: RectangleManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RectangleManager", function() { return RectangleManager; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../google-maps-api-wrapper */ "./node_modules/@agm/core/services/google-maps-api-wrapper.js");
-
-
-
-var RectangleManager = /** @class */ (function () {
-    function RectangleManager(_apiWrapper, _zone) {
-        this._apiWrapper = _apiWrapper;
-        this._zone = _zone;
-        this._rectangles = new Map();
-    }
-    RectangleManager.prototype.addRectangle = function (rectangle) {
-        this._rectangles.set(rectangle, this._apiWrapper.createRectangle({
-            bounds: {
-                north: rectangle.north,
-                east: rectangle.east,
-                south: rectangle.south,
-                west: rectangle.west
-            },
-            clickable: rectangle.clickable,
-            draggable: rectangle.draggable,
-            editable: rectangle.editable,
-            fillColor: rectangle.fillColor,
-            fillOpacity: rectangle.fillOpacity,
-            strokeColor: rectangle.strokeColor,
-            strokeOpacity: rectangle.strokeOpacity,
-            strokePosition: rectangle.strokePosition,
-            strokeWeight: rectangle.strokeWeight,
-            visible: rectangle.visible,
-            zIndex: rectangle.zIndex
-        }));
-    };
-    /**
-     * Removes the given rectangle from the map.
-     */
-    /**
-       * Removes the given rectangle from the map.
-       */
-    RectangleManager.prototype.removeRectangle = /**
-       * Removes the given rectangle from the map.
-       */
-    function (rectangle) {
-        var _this = this;
-        return this._rectangles.get(rectangle).then(function (r) {
-            r.setMap(null);
-            _this._rectangles.delete(rectangle);
-        });
-    };
-    RectangleManager.prototype.setOptions = function (rectangle, options) {
-        return this._rectangles.get(rectangle).then(function (r) { return r.setOptions(options); });
-    };
-    RectangleManager.prototype.getBounds = function (rectangle) {
-        return this._rectangles.get(rectangle).then(function (r) { return r.getBounds(); });
-    };
-    RectangleManager.prototype.setBounds = function (rectangle) {
-        return this._rectangles.get(rectangle).then(function (r) {
-            return r.setBounds({
-                north: rectangle.north,
-                east: rectangle.east,
-                south: rectangle.south,
-                west: rectangle.west
-            });
-        });
-    };
-    RectangleManager.prototype.setEditable = function (rectangle) {
-        return this._rectangles.get(rectangle).then(function (r) {
-            return r.setEditable(rectangle.editable);
-        });
-    };
-    RectangleManager.prototype.setDraggable = function (rectangle) {
-        return this._rectangles.get(rectangle).then(function (r) {
-            return r.setDraggable(rectangle.draggable);
-        });
-    };
-    RectangleManager.prototype.setVisible = function (rectangle) {
-        return this._rectangles.get(rectangle).then(function (r) {
-            return r.setVisible(rectangle.visible);
-        });
-    };
-    RectangleManager.prototype.createEventObservable = function (eventName, rectangle) {
-        var _this = this;
-        return rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"].create(function (observer) {
-            var listener = null;
-            _this._rectangles.get(rectangle).then(function (r) {
-                listener = r.addListener(eventName, function (e) { return _this._zone.run(function () { return observer.next(e); }); });
-            });
-            return function () {
-                if (listener !== null) {
-                    listener.remove();
-                }
-            };
-        });
-    };
-    RectangleManager.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    /** @nocollapse */
-    RectangleManager.ctorParameters = function () { return [
-        { type: _google_maps_api_wrapper__WEBPACK_IMPORTED_MODULE_2__["GoogleMapsAPIWrapper"], },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
-    ]; };
-    return RectangleManager;
-}());
-
-//# sourceMappingURL=rectangle-manager.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@agm/core/services/maps-api-loader/maps-api-loader.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@agm/core/services/maps-api-loader/maps-api-loader.js ***!
-  \****************************************************************************/
-/*! exports provided: MapsAPILoader */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapsAPILoader", function() { return MapsAPILoader; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "@angular/core");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-
-var MapsAPILoader = /** @class */ (function () {
-    function MapsAPILoader() {
-    }
-    MapsAPILoader.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
-    ];
-    return MapsAPILoader;
-}());
-
-//# sourceMappingURL=maps-api-loader.js.map
-
-/***/ }),
-
 /***/ "./node_modules/@angular/material/bottom-sheet/typings/index.ngfactory.js":
 /*!********************************************************************************!*\
   !*** ./node_modules/@angular/material/bottom-sheet/typings/index.ngfactory.js ***!
@@ -4166,7 +2397,7 @@ exports.AppComponentNgFactory = AppComponentNgFactory;
  * tslint:disable
  */ 
 Object.defineProperty(exports, "__esModule", { value: true });
-var styles = ["body {\n  font-family: Roboto, 'Helvetica Neue', sans-serif; }\n  body * {\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n  body h1 {\n    font-size: x-large;\n    color: #444; }\n  body h2 {\n    font-size: large;\n    color: #666; }\n  body a {\n    text-decoration: none;\n    color: #444;\n    font-size: medium; }\n  body a:hover {\n    font-weight: bold; }\n  body img {\n    border-radius: 10px; }\n  body hr {\n    border: 0;\n    height: 1px;\n    background-image: linear-gradient(to right, rgba(192, 192, 192, 0), rgba(192, 192, 192, 0.75), rgba(192, 192, 192, 0)); }\n  body .paragraph {\n    background-color: whitesmoke;\n    border-radius: 10px;\n    text-align: center;\n    color: #666;\n    font-size: large;\n    padding: 8px 0; }\n  body .mat-sidenav {\n    border-top: thin ridge #ececec;\n    border-left: thin ridge #ececec;\n    width: 50vw;\n    max-width: 300px;\n    padding: 1vw;\n    z-index: 102; }\n  body .mat-sidenav img {\n      margin: 10px;\n      height: 100px; }\n  body .mat-sidenav .mat-button {\n      width: 100%;\n      position: relative;\n      bottom: 0;\n      margin: 24px 0; }\n  body .mat-sidenav .mat-nav-list img {\n      height: 40px;\n      width: 40px; }\n  body .mat-sidenav .mat-list-item {\n      outline: none;\n      color: #444;\n      background-color: transparent !important;\n      border-bottom: thin dotted silver;\n      border-radius: 10px; }\n  body .mat-sidenav .mat-list-item:hover {\n      background-color: lightyellow !important; }\n  body .mat-sidenav .active-link {\n      font-weight: bold;\n      background-color: whitesmoke !important; }\n  body .category-list {\n    border-bottom: thin dotted silver;\n    border-radius: 10px; }\n  body .category-list img {\n      height: 40px;\n      width: 40px;\n      vertical-align: middle;\n      margin-right: 15px; }\n  body .app-root {\n    background-color: white; }\n  body .app-content {\n    margin-top: 70px;\n    padding: 5px; }\n  body .mat-grid-tile img {\n    width: 100%;\n    height: 100%; }\n  body .mat-grid-tile-footer {\n    border-bottom-left-radius: 10px;\n    border-bottom-right-radius: 10px; }\n  body .mat-grid-list.mat-grid-list {\n    width: 100% !important; }\n  body .mat-toolbar-bg {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 65px; }\n  body .mat-toolbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 65px;\n    z-index: 101;\n    background-color: white;\n    border-bottom: thin dotted silver;\n    border-radius: 10px; }\n  body .mat-toolbar .mat-icon {\n      cursor: pointer; }\n  body .mat-toolbar .app-toolbar {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      width: 100%; }\n  body #home {\n    color: silver;\n    padding-bottom: 125px; }\n  body .horizontal-list {\n    height: 100px;\n    width: auto; }\n  body .horizontal-list-item {\n    color: #444;\n    cursor: pointer;\n    padding: 10px;\n    text-align: center;\n    float: left; }\n  body .horizontal-list-item img {\n      height: 60px; }\n  body .badge {\n    height: 10px;\n    margin-left: -5px;\n    padding: 2px 5px !important;\n    color: green;\n    background-color: #f5f5f5;\n    border: 1px solid;\n    border-radius: 30px;\n    font-size: x-small; }\n  body .done {\n    position: fixed;\n    bottom: 20px;\n    right: 20px;\n    color: white; }\n  body ::-webkit-scrollbar {\n    display: none; }\n  .app-content {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9nZXJhcmRvL1Byb2plY3RzL1plbi9aZW5SZXRhaWwuV2ViL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaURBQWlELEVBQUE7RUFEbkQ7SUFLSSxtQ0FBbUM7SUFDbkMsa0NBQWtDO0lBQ2xDLDRDQUE0QyxFQUFBO0VBUGhEO0lBV0ksa0JBQWtCO0lBQ2xCLFdBQVcsRUFBQTtFQVpmO0lBZ0JJLGdCQUFnQjtJQUNoQixXQUFXLEVBQUE7RUFqQmY7SUFxQkkscUJBQXFCO0lBQ3JCLFdBQVc7SUFDWCxpQkFBaUIsRUFBQTtFQXZCckI7SUEwQkksaUJBQWlCLEVBQUE7RUExQnJCO0lBOEJJLG1CQUFtQixFQUFBO0VBOUJ2QjtJQWtDSSxTQUFTO0lBQ1QsV0FBVztJQUNYLHNIQUFxSCxFQUFBO0VBcEN6SDtJQXdDSSw0QkFBNEI7SUFDNUIsbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLGNBQWMsRUFBQTtFQTdDbEI7SUFpREksOEJBQThCO0lBQzlCLCtCQUErQjtJQUMvQixXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWixZQUFZLEVBQUE7RUF0RGhCO01BeURNLFlBQVk7TUFDWixhQUFhLEVBQUE7RUExRG5CO01BNkRNLFdBQVc7TUFDWCxrQkFBa0I7TUFDbEIsU0FBUztNQUNULGNBQWMsRUFBQTtFQWhFcEI7TUFvRVEsWUFBWTtNQUNaLFdBQVcsRUFBQTtFQXJFbkI7TUF5RU0sYUFBYTtNQUNiLFdBQVc7TUFDWCx3Q0FBd0M7TUFDeEMsaUNBQWlDO01BQ2pDLG1CQUFtQixFQUFBO0VBN0V6QjtNQWdGTSx3Q0FBd0MsRUFBQTtFQWhGOUM7TUFtRk0saUJBQWlCO01BQ2pCLHVDQUF1QyxFQUFBO0VBcEY3QztJQXdGSSxpQ0FBaUM7SUFDakMsbUJBQW1CLEVBQUE7RUF6RnZCO01BMkZNLFlBQVk7TUFDWixXQUFXO01BQ1gsc0JBQXNCO01BQ3RCLGtCQUFrQixFQUFBO0VBOUZ4QjtJQWtHSSx1QkFBdUIsRUFBQTtFQWxHM0I7SUFzR0ksZ0JBQWdCO0lBQ2hCLFlBQVksRUFBQTtFQXZHaEI7SUE0R00sV0FBVztJQUNYLFlBQVksRUFBQTtFQTdHbEI7SUFpSEksK0JBQStCO0lBQy9CLGdDQUFnQyxFQUFBO0VBbEhwQztJQXNISSxzQkFBc0IsRUFBQTtFQXRIMUI7SUEwSEksZUFBZTtJQUNmLE1BQU07SUFDTixPQUFPO0lBQ1AsV0FBVztJQUNYLFlBQVksRUFBQTtFQTlIaEI7SUFrSUksZUFBZTtJQUNmLE1BQU07SUFDTixPQUFPO0lBQ1AsV0FBVztJQUNYLFlBQVk7SUFDWixZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLGlDQUFpQztJQUNqQyxtQkFBbUIsRUFBQTtFQTFJdkI7TUE2SU0sZUFBZSxFQUFBO0VBN0lyQjtNQWlKTSxhQUFhO01BQ2IsOEJBQThCO01BQzlCLG1CQUFtQjtNQUNuQixXQUFXLEVBQUE7RUFwSmpCO0lBeUpJLGFBQWE7SUFDYixxQkFBcUIsRUFBQTtFQTFKekI7SUE4SkksYUFBYTtJQUNiLFdBQVcsRUFBQTtFQS9KZjtJQW1LSSxXQUFXO0lBQ1gsZUFBZTtJQUNmLGFBQWE7SUFDYixrQkFBa0I7SUFDbEIsV0FBVyxFQUFBO0VBdktmO01BeUtNLFlBQVksRUFBQTtFQXpLbEI7SUErS0ksWUFBWTtJQUNaLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixpQkFBaUI7SUFDakIsbUJBQW1CO0lBQ25CLGtCQUFrQixFQUFBO0VBdEx0QjtJQTBMSSxlQUFlO0lBQ2YsWUFBWTtJQUNaLFdBQVc7SUFDWCxZQUFZLEVBQUE7RUE3TGhCO0lBaU1JLGFBQWEsRUFBQTtFQUtqQjtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osc0JBQXNCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJib2R5IHtcbiAgZm9udC1mYW1pbHk6IFJvYm90bywgJ0hlbHZldGljYSBOZXVlJywgc2Fucy1zZXJpZjtcbiAgLy8gSGVscHMgZm9udHMgb24gT1NYIGxvb2tzIG1vcmUgY29uc2lzdGVudCB3aXRoIG90aGVyIHN5c3RlbXNcbiAgLy8gSXNuJ3QgY3VycmVudGx5IGluIGJ1dHRvbiBzdHlsZXMgZHVlIHRvIHBlcmZvcm1hbmNlIGNvbmNlcm5zXG4gICoge1xuICAgIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkO1xuICAgIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XG4gICAgLW1zLW92ZXJmbG93LXN0eWxlOiAtbXMtYXV0b2hpZGluZy1zY3JvbGxiYXI7XG4gIH1cblxuICBoMSB7XG4gICAgZm9udC1zaXplOiB4LWxhcmdlO1xuICAgIGNvbG9yOiAjNDQ0O1xuICB9XG4gIFxuICBoMiB7XG4gICAgZm9udC1zaXplOiBsYXJnZTtcbiAgICBjb2xvcjogIzY2NjtcbiAgfVxuXG4gIGEge1xuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICBjb2xvcjogIzQ0NDtcbiAgICBmb250LXNpemU6IG1lZGl1bTtcbiAgfVxuICBhOmhvdmVyIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIGltZyB7XG4gICAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgfVxuXG4gIGhyIHtcbiAgICBib3JkZXI6IDA7XG4gICAgaGVpZ2h0OiAxcHg7IFxuICAgIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCxyZ2JhKDE5MiwgMTkyLCAxOTIsIDApLCByZ2JhKDE5MiwgMTkyLCAxOTIsIDAuNzUpLCByZ2JhKDE5MiwgMTkyLCAxOTIsIDApKTtcbiAgfVxuXG4gIC5wYXJhZ3JhcGgge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG4gICAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgY29sb3I6ICM2NjY7XG4gICAgZm9udC1zaXplOiBsYXJnZTtcbiAgICBwYWRkaW5nOiA4cHggMDtcbiAgfVxuXG4gIC5tYXQtc2lkZW5hdiB7XG4gICAgYm9yZGVyLXRvcDogdGhpbiByaWRnZSAjZWNlY2VjO1xuICAgIGJvcmRlci1sZWZ0OiB0aGluIHJpZGdlICNlY2VjZWM7XG4gICAgd2lkdGg6IDUwdnc7XG4gICAgbWF4LXdpZHRoOiAzMDBweDtcbiAgICBwYWRkaW5nOiAxdnc7XG4gICAgei1pbmRleDogMTAyO1xuICAgXG4gICAgaW1nIHtcbiAgICAgIG1hcmdpbjogMTBweDtcbiAgICAgIGhlaWdodDogMTAwcHg7XG4gICAgfVxuICAgIC5tYXQtYnV0dG9uIHtcbiAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgYm90dG9tOiAwO1xuICAgICAgbWFyZ2luOiAyNHB4IDA7XG4gICAgfVxuICAgIC5tYXQtbmF2LWxpc3Qge1xuICAgICAgaW1nIHtcbiAgICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgICAgICB3aWR0aDogNDBweDtcbiAgICAgIH1cbiAgICB9XG4gICAgLm1hdC1saXN0LWl0ZW0ge1xuICAgICAgb3V0bGluZTogbm9uZTtcbiAgICAgIGNvbG9yOiAjNDQ0O1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgICAgIGJvcmRlci1ib3R0b206IHRoaW4gZG90dGVkIHNpbHZlcjtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gICAgfVxuICAgIC5tYXQtbGlzdC1pdGVtOmhvdmVyIHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IGxpZ2h0eWVsbG93ICFpbXBvcnRhbnQ7XG4gICAgfVxuICAgIC5hY3RpdmUtbGluayB7XG4gICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2UgIWltcG9ydGFudDtcbiAgICB9XG4gIH1cbiAgLmNhdGVnb3J5LWxpc3Qge1xuICAgIGJvcmRlci1ib3R0b206IHRoaW4gZG90dGVkIHNpbHZlcjtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgIGltZyB7XG4gICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgICB3aWR0aDogNDBweDtcbiAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgICBtYXJnaW4tcmlnaHQ6IDE1cHg7XG4gICAgfVxuICB9XG4gIC5hcHAtcm9vdCB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIH1cblxuICAuYXBwLWNvbnRlbnQge1xuICAgIG1hcmdpbi10b3A6IDcwcHg7XG4gICAgcGFkZGluZzogNXB4O1xuICB9XG5cbiAgLm1hdC1ncmlkLXRpbGUge1xuICAgIGltZyB7XG4gICAgICB3aWR0aDogMTAwJTtcbiAgICAgIGhlaWdodDogMTAwJTtcbiAgICB9XG4gIH1cbiAgLm1hdC1ncmlkLXRpbGUtZm9vdGVyIHtcbiAgICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAxMHB4O1xuICAgIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxMHB4O1xuICB9XG5cbiAgLm1hdC1ncmlkLWxpc3QubWF0LWdyaWQtbGlzdCB7XG4gICAgd2lkdGg6IDEwMCUgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5tYXQtdG9vbGJhci1iZyB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogMDtcbiAgICBsZWZ0OiAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNjVweDtcbiAgfVxuXG4gIC5tYXQtdG9vbGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogMDtcbiAgICBsZWZ0OiAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNjVweDtcbiAgICB6LWluZGV4OiAxMDE7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyLWJvdHRvbTogdGhpbiBkb3R0ZWQgc2lsdmVyO1xuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIFxuICAgIC5tYXQtaWNvbiB7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuXG4gICAgLmFwcC10b29sYmFyIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgd2lkdGg6IDEwMCU7XG4gICAgfVxuICB9XG5cbiAgI2hvbWUge1xuICAgIGNvbG9yOiBzaWx2ZXI7XG4gICAgcGFkZGluZy1ib3R0b206IDEyNXB4O1xuICB9XG5cbiAgLmhvcml6b250YWwtbGlzdCB7XG4gICAgaGVpZ2h0OiAxMDBweDtcbiAgICB3aWR0aDogYXV0bztcbiAgfVxuXG4gIC5ob3Jpem9udGFsLWxpc3QtaXRlbSB7IFxuICAgIGNvbG9yOiAjNDQ0O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBwYWRkaW5nOiAxMHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmbG9hdDogbGVmdDtcbiAgICBpbWcge1xuICAgICAgaGVpZ2h0OiA2MHB4OyAgICAgIFxuICAgIH1cbiAgICBcbiAgfVxuXG4gIC5iYWRnZSB7XG4gICAgaGVpZ2h0OiAxMHB4O1xuICAgIG1hcmdpbi1sZWZ0OiAtNXB4O1xuICAgIHBhZGRpbmc6IDJweCA1cHggIWltcG9ydGFudDtcbiAgICBjb2xvcjogZ3JlZW47XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y1ZjVmNTtcbiAgICBib3JkZXI6IDFweCBzb2xpZDtcbiAgICBib3JkZXItcmFkaXVzOiAzMHB4O1xuICAgIGZvbnQtc2l6ZTogeC1zbWFsbDtcbiAgfVxuXG4gIC5kb25lIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgYm90dG9tOiAyMHB4O1xuICAgIHJpZ2h0OiAyMHB4O1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgfVxuXG4gIDo6LXdlYmtpdC1zY3JvbGxiYXIgeyBcbiAgICBkaXNwbGF5OiBub25lOyBcbiAgfVxufVxuXG4vLyBzdHJldGNoIHRvIHNjcmVlbiBzaXplIGluIGZ1bGxzY3JlZW4gbW9kZVxuLmFwcC1jb250ZW50IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbn1cbiJdfQ== */"];
+var styles = ["body {\n  font-family: Roboto, 'Helvetica Neue', sans-serif; }\n  body * {\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n  body h1 {\n    font-size: x-large;\n    color: #444; }\n  body h2 {\n    font-size: large;\n    color: #666; }\n  body a {\n    text-decoration: none;\n    color: #444;\n    font-size: medium; }\n  body a:hover {\n    font-weight: bold; }\n  body img {\n    border-radius: 10px; }\n  body hr {\n    border: 0;\n    height: 1px;\n    background-image: linear-gradient(to right, rgba(192, 192, 192, 0), rgba(192, 192, 192, 0.75), rgba(192, 192, 192, 0)); }\n  body .paragraph {\n    border-bottom: thin dotted silver;\n    border-radius: 10px;\n    text-align: center;\n    color: #666;\n    font-size: large;\n    margin-top: 30px;\n    padding-bottom: 10px; }\n  body .mat-sidenav {\n    border-top: thin ridge #ececec;\n    border-left: thin ridge #ececec;\n    width: 50vw;\n    max-width: 300px;\n    padding: 1vw;\n    z-index: 102; }\n  body .mat-sidenav img {\n      margin: 10px;\n      height: 100px; }\n  body .mat-sidenav .mat-button {\n      width: 100%;\n      position: relative;\n      bottom: 0;\n      margin: 24px 0; }\n  body .mat-sidenav .mat-nav-list img {\n      height: 40px;\n      width: 40px; }\n  body .mat-sidenav .mat-list-item {\n      outline: none;\n      color: #444;\n      background-color: transparent !important;\n      border-bottom: thin dotted silver;\n      border-radius: 10px; }\n  body .mat-sidenav .mat-list-item:hover {\n      background-color: lightyellow !important; }\n  body .mat-sidenav .active-link {\n      font-weight: bold;\n      background-color: whitesmoke !important; }\n  body .category-list {\n    border-bottom: thin dotted silver;\n    border-radius: 10px; }\n  body .category-list img {\n      height: 40px;\n      width: 40px;\n      vertical-align: middle;\n      margin-right: 15px; }\n  body .app-root {\n    background-color: white; }\n  body .app-content {\n    margin-top: 70px;\n    padding: 5px; }\n  body .mat-grid-tile img {\n    width: 100%;\n    height: 100%; }\n  body .mat-grid-tile-footer {\n    border-bottom-left-radius: 10px;\n    border-bottom-right-radius: 10px; }\n  body .mat-grid-list.mat-grid-list {\n    width: 100% !important; }\n  body .mat-toolbar-bg {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 65px; }\n  body .mat-toolbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 65px;\n    z-index: 101;\n    background-color: white;\n    border-bottom: thin dotted silver;\n    border-radius: 10px; }\n  body .mat-toolbar .mat-icon {\n      cursor: pointer; }\n  body .mat-toolbar .app-toolbar {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      width: 100%; }\n  body #home {\n    color: silver;\n    padding-bottom: 125px; }\n  body .horizontal-list {\n    height: 100px;\n    width: auto; }\n  body .horizontal-list-item {\n    color: #444;\n    cursor: pointer;\n    padding: 10px;\n    text-align: center;\n    float: left; }\n  body .horizontal-list-item img {\n      height: 60px; }\n  body .badge {\n    height: 10px;\n    margin-left: -5px;\n    padding: 2px 5px !important;\n    color: green;\n    background-color: #f5f5f5;\n    border: 1px solid;\n    border-radius: 30px;\n    font-size: x-small; }\n  body .done {\n    position: fixed;\n    bottom: 20px;\n    right: 20px;\n    color: white; }\n  body ::-webkit-scrollbar {\n    display: none; }\n  .app-content {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9nZXJhcmRvL1Byb2plY3RzL1plbi9aZW5SZXRhaWwuV2ViL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaURBQWlELEVBQUE7RUFEbkQ7SUFLSSxtQ0FBbUM7SUFDbkMsa0NBQWtDO0lBQ2xDLDRDQUE0QyxFQUFBO0VBUGhEO0lBV0ksa0JBQWtCO0lBQ2xCLFdBQVcsRUFBQTtFQVpmO0lBZ0JJLGdCQUFnQjtJQUNoQixXQUFXLEVBQUE7RUFqQmY7SUFxQkkscUJBQXFCO0lBQ3JCLFdBQVc7SUFDWCxpQkFBaUIsRUFBQTtFQXZCckI7SUEwQkksaUJBQWlCLEVBQUE7RUExQnJCO0lBOEJJLG1CQUFtQixFQUFBO0VBOUJ2QjtJQWtDSSxTQUFTO0lBQ1QsV0FBVztJQUNYLHNIQUFxSCxFQUFBO0VBcEN6SDtJQXdDSSxpQ0FBaUM7SUFDakMsbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixvQkFBb0IsRUFBQTtFQTlDeEI7SUFrREksOEJBQThCO0lBQzlCLCtCQUErQjtJQUMvQixXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWixZQUFZLEVBQUE7RUF2RGhCO01BMERNLFlBQVk7TUFDWixhQUFhLEVBQUE7RUEzRG5CO01BOERNLFdBQVc7TUFDWCxrQkFBa0I7TUFDbEIsU0FBUztNQUNULGNBQWMsRUFBQTtFQWpFcEI7TUFxRVEsWUFBWTtNQUNaLFdBQVcsRUFBQTtFQXRFbkI7TUEwRU0sYUFBYTtNQUNiLFdBQVc7TUFDWCx3Q0FBd0M7TUFDeEMsaUNBQWlDO01BQ2pDLG1CQUFtQixFQUFBO0VBOUV6QjtNQWlGTSx3Q0FBd0MsRUFBQTtFQWpGOUM7TUFvRk0saUJBQWlCO01BQ2pCLHVDQUF1QyxFQUFBO0VBckY3QztJQXlGSSxpQ0FBaUM7SUFDakMsbUJBQW1CLEVBQUE7RUExRnZCO01BNEZNLFlBQVk7TUFDWixXQUFXO01BQ1gsc0JBQXNCO01BQ3RCLGtCQUFrQixFQUFBO0VBL0Z4QjtJQW1HSSx1QkFBdUIsRUFBQTtFQW5HM0I7SUF1R0ksZ0JBQWdCO0lBQ2hCLFlBQVksRUFBQTtFQXhHaEI7SUE2R00sV0FBVztJQUNYLFlBQVksRUFBQTtFQTlHbEI7SUFrSEksK0JBQStCO0lBQy9CLGdDQUFnQyxFQUFBO0VBbkhwQztJQXVISSxzQkFBc0IsRUFBQTtFQXZIMUI7SUEySEksZUFBZTtJQUNmLE1BQU07SUFDTixPQUFPO0lBQ1AsV0FBVztJQUNYLFlBQVksRUFBQTtFQS9IaEI7SUFtSUksZUFBZTtJQUNmLE1BQU07SUFDTixPQUFPO0lBQ1AsV0FBVztJQUNYLFlBQVk7SUFDWixZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLGlDQUFpQztJQUNqQyxtQkFBbUIsRUFBQTtFQTNJdkI7TUE4SU0sZUFBZSxFQUFBO0VBOUlyQjtNQWtKTSxhQUFhO01BQ2IsOEJBQThCO01BQzlCLG1CQUFtQjtNQUNuQixXQUFXLEVBQUE7RUFySmpCO0lBMEpJLGFBQWE7SUFDYixxQkFBcUIsRUFBQTtFQTNKekI7SUErSkksYUFBYTtJQUNiLFdBQVcsRUFBQTtFQWhLZjtJQW9LSSxXQUFXO0lBQ1gsZUFBZTtJQUNmLGFBQWE7SUFDYixrQkFBa0I7SUFDbEIsV0FBVyxFQUFBO0VBeEtmO01BMEtNLFlBQVksRUFBQTtFQTFLbEI7SUFnTEksWUFBWTtJQUNaLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixpQkFBaUI7SUFDakIsbUJBQW1CO0lBQ25CLGtCQUFrQixFQUFBO0VBdkx0QjtJQTJMSSxlQUFlO0lBQ2YsWUFBWTtJQUNaLFdBQVc7SUFDWCxZQUFZLEVBQUE7RUE5TGhCO0lBa01JLGFBQWEsRUFBQTtFQUtqQjtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osc0JBQXNCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJib2R5IHtcbiAgZm9udC1mYW1pbHk6IFJvYm90bywgJ0hlbHZldGljYSBOZXVlJywgc2Fucy1zZXJpZjtcbiAgLy8gSGVscHMgZm9udHMgb24gT1NYIGxvb2tzIG1vcmUgY29uc2lzdGVudCB3aXRoIG90aGVyIHN5c3RlbXNcbiAgLy8gSXNuJ3QgY3VycmVudGx5IGluIGJ1dHRvbiBzdHlsZXMgZHVlIHRvIHBlcmZvcm1hbmNlIGNvbmNlcm5zXG4gICoge1xuICAgIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkO1xuICAgIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XG4gICAgLW1zLW92ZXJmbG93LXN0eWxlOiAtbXMtYXV0b2hpZGluZy1zY3JvbGxiYXI7XG4gIH1cblxuICBoMSB7XG4gICAgZm9udC1zaXplOiB4LWxhcmdlO1xuICAgIGNvbG9yOiAjNDQ0O1xuICB9XG4gIFxuICBoMiB7XG4gICAgZm9udC1zaXplOiBsYXJnZTtcbiAgICBjb2xvcjogIzY2NjtcbiAgfVxuXG4gIGEge1xuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICBjb2xvcjogIzQ0NDtcbiAgICBmb250LXNpemU6IG1lZGl1bTtcbiAgfVxuICBhOmhvdmVyIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIGltZyB7XG4gICAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgfVxuXG4gIGhyIHtcbiAgICBib3JkZXI6IDA7XG4gICAgaGVpZ2h0OiAxcHg7IFxuICAgIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCxyZ2JhKDE5MiwgMTkyLCAxOTIsIDApLCByZ2JhKDE5MiwgMTkyLCAxOTIsIDAuNzUpLCByZ2JhKDE5MiwgMTkyLCAxOTIsIDApKTtcbiAgfVxuXG4gIC5wYXJhZ3JhcGgge1xuICAgIGJvcmRlci1ib3R0b206IHRoaW4gZG90dGVkIHNpbHZlcjtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBjb2xvcjogIzY2NjtcbiAgICBmb250LXNpemU6IGxhcmdlO1xuICAgIG1hcmdpbi10b3A6IDMwcHg7XG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XG4gIH1cblxuICAubWF0LXNpZGVuYXYge1xuICAgIGJvcmRlci10b3A6IHRoaW4gcmlkZ2UgI2VjZWNlYztcbiAgICBib3JkZXItbGVmdDogdGhpbiByaWRnZSAjZWNlY2VjO1xuICAgIHdpZHRoOiA1MHZ3O1xuICAgIG1heC13aWR0aDogMzAwcHg7XG4gICAgcGFkZGluZzogMXZ3O1xuICAgIHotaW5kZXg6IDEwMjtcbiAgIFxuICAgIGltZyB7XG4gICAgICBtYXJnaW46IDEwcHg7XG4gICAgICBoZWlnaHQ6IDEwMHB4O1xuICAgIH1cbiAgICAubWF0LWJ1dHRvbiB7XG4gICAgICB3aWR0aDogMTAwJTtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIGJvdHRvbTogMDtcbiAgICAgIG1hcmdpbjogMjRweCAwO1xuICAgIH1cbiAgICAubWF0LW5hdi1saXN0IHtcbiAgICAgIGltZyB7XG4gICAgICAgIGhlaWdodDogNDBweDtcbiAgICAgICAgd2lkdGg6IDQwcHg7XG4gICAgICB9XG4gICAgfVxuICAgIC5tYXQtbGlzdC1pdGVtIHtcbiAgICAgIG91dGxpbmU6IG5vbmU7XG4gICAgICBjb2xvcjogIzQ0NDtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gICAgICBib3JkZXItYm90dG9tOiB0aGluIGRvdHRlZCBzaWx2ZXI7XG4gICAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICAgIH1cbiAgICAubWF0LWxpc3QtaXRlbTpob3ZlciB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBsaWdodHllbGxvdyAhaW1wb3J0YW50O1xuICAgIH1cbiAgICAuYWN0aXZlLWxpbmsge1xuICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZXNtb2tlICFpbXBvcnRhbnQ7XG4gICAgfVxuICB9XG4gIC5jYXRlZ29yeS1saXN0IHtcbiAgICBib3JkZXItYm90dG9tOiB0aGluIGRvdHRlZCBzaWx2ZXI7XG4gICAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgICBpbWcge1xuICAgICAgaGVpZ2h0OiA0MHB4O1xuICAgICAgd2lkdGg6IDQwcHg7XG4gICAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgICAgbWFyZ2luLXJpZ2h0OiAxNXB4O1xuICAgIH1cbiAgfVxuICAuYXBwLXJvb3Qge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICB9XG5cbiAgLmFwcC1jb250ZW50IHtcbiAgICBtYXJnaW4tdG9wOiA3MHB4O1xuICAgIHBhZGRpbmc6IDVweDtcbiAgfVxuXG4gIC5tYXQtZ3JpZC10aWxlIHtcbiAgICBpbWcge1xuICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgfVxuICB9XG4gIC5tYXQtZ3JpZC10aWxlLWZvb3RlciB7XG4gICAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMTBweDtcbiAgICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMTBweDtcbiAgfVxuXG4gIC5tYXQtZ3JpZC1saXN0Lm1hdC1ncmlkLWxpc3Qge1xuICAgIHdpZHRoOiAxMDAlICFpbXBvcnRhbnQ7XG4gIH1cblxuICAubWF0LXRvb2xiYXItYmcge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDY1cHg7XG4gIH1cblxuICAubWF0LXRvb2xiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDY1cHg7XG4gICAgei1pbmRleDogMTAxO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIGJvcmRlci1ib3R0b206IHRoaW4gZG90dGVkIHNpbHZlcjtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICBcbiAgICAubWF0LWljb24ge1xuICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIH1cblxuICAgIC5hcHAtdG9vbGJhciB7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cbiAgfVxuXG4gICNob21lIHtcbiAgICBjb2xvcjogc2lsdmVyO1xuICAgIHBhZGRpbmctYm90dG9tOiAxMjVweDtcbiAgfVxuXG4gIC5ob3Jpem9udGFsLWxpc3Qge1xuICAgIGhlaWdodDogMTAwcHg7XG4gICAgd2lkdGg6IGF1dG87XG4gIH1cblxuICAuaG9yaXpvbnRhbC1saXN0LWl0ZW0geyBcbiAgICBjb2xvcjogIzQ0NDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgcGFkZGluZzogMTBweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgaW1nIHtcbiAgICAgIGhlaWdodDogNjBweDsgICAgICBcbiAgICB9XG4gICAgXG4gIH1cblxuICAuYmFkZ2Uge1xuICAgIGhlaWdodDogMTBweDtcbiAgICBtYXJnaW4tbGVmdDogLTVweDtcbiAgICBwYWRkaW5nOiAycHggNXB4ICFpbXBvcnRhbnQ7XG4gICAgY29sb3I6IGdyZWVuO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNmNWY1ZjU7XG4gICAgYm9yZGVyOiAxcHggc29saWQ7XG4gICAgYm9yZGVyLXJhZGl1czogMzBweDtcbiAgICBmb250LXNpemU6IHgtc21hbGw7XG4gIH1cblxuICAuZG9uZSB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGJvdHRvbTogMjBweDtcbiAgICByaWdodDogMjBweDtcbiAgICBjb2xvcjogd2hpdGU7XG4gIH1cblxuICA6Oi13ZWJraXQtc2Nyb2xsYmFyIHsgXG4gICAgZGlzcGxheTogbm9uZTsgXG4gIH1cbn1cblxuLy8gc3RyZXRjaCB0byBzY3JlZW4gc2l6ZSBpbiBmdWxsc2NyZWVuIG1vZGVcbi5hcHAtY29udGVudCB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG59XG4iXX0= */"];
 exports.styles = styles;
 
 
@@ -4510,60 +2741,56 @@ var i34 = __webpack_require__(/*! @angular/material/stepper */ "@angular/materia
 var i35 = __webpack_require__(/*! @angular/material/sort */ "@angular/material/sort");
 var i36 = __webpack_require__(/*! @angular/common/http */ "@angular/common/http");
 var i37 = __webpack_require__(/*! ./services/url.interceptor */ "./src/app/services/url.interceptor.ts");
-var i38 = __webpack_require__(/*! @agm/core/utils/browser-globals */ "@agm/core/utils/browser-globals");
-var i39 = __webpack_require__(/*! @agm/core/services/maps-api-loader/maps-api-loader */ "@agm/core/services/maps-api-loader/maps-api-loader");
-var i40 = __webpack_require__(/*! @agm/core/services/maps-api-loader/lazy-maps-api-loader */ "@agm/core/services/maps-api-loader/lazy-maps-api-loader");
-var i41 = __webpack_require__(/*! @angular/router */ "@angular/router");
-var i42 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
-var i43 = __webpack_require__(/*! ./app.module */ "./src/app/app.module.ts");
-var i44 = __webpack_require__(/*! ./services/dialog.service */ "./src/app/services/dialog.service.ts");
-var i45 = __webpack_require__(/*! ./services/session.service */ "./src/app/services/session.service.ts");
-var i46 = __webpack_require__(/*! ./services/registry.service */ "./src/app/services/registry.service.ts");
-var i47 = __webpack_require__(/*! ./services/product.service */ "./src/app/services/product.service.ts");
-var i48 = __webpack_require__(/*! ./services/basket.service */ "./src/app/services/basket.service.ts");
-var i49 = __webpack_require__(/*! ./services/document.service */ "./src/app/services/document.service.ts");
-var i50 = __webpack_require__(/*! @angular/http */ "@angular/http");
-var i51 = __webpack_require__(/*! ./services/appload.service */ "./src/app/services/appload.service.ts");
-var i52 = __webpack_require__(/*! @angular/cdk/accordion */ "@angular/cdk/accordion");
-var i53 = __webpack_require__(/*! @angular/cdk/portal */ "@angular/cdk/portal");
-var i54 = __webpack_require__(/*! @angular/material/expansion */ "@angular/material/expansion");
-var i55 = __webpack_require__(/*! @angular/cdk/platform */ "@angular/cdk/platform");
-var i56 = __webpack_require__(/*! @angular/material/divider */ "@angular/material/divider");
-var i57 = __webpack_require__(/*! @angular/material/list */ "@angular/material/list");
-var i58 = __webpack_require__(/*! @angular/material/toolbar */ "@angular/material/toolbar");
-var i59 = __webpack_require__(/*! @angular/material/button */ "@angular/material/button");
-var i60 = __webpack_require__(/*! @angular/material/icon */ "@angular/material/icon");
-var i61 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
-var i62 = __webpack_require__(/*! @angular/cdk/scrolling */ "@angular/cdk/scrolling");
-var i63 = __webpack_require__(/*! @angular/material/sidenav */ "@angular/material/sidenav");
-var i64 = __webpack_require__(/*! @angular/material/grid-list */ "@angular/material/grid-list");
-var i65 = __webpack_require__(/*! @angular/material/checkbox */ "@angular/material/checkbox");
-var i66 = __webpack_require__(/*! @angular/material/radio */ "@angular/material/radio");
-var i67 = __webpack_require__(/*! @angular/cdk/text-field */ "@angular/cdk/text-field");
-var i68 = __webpack_require__(/*! @angular/material/form-field */ "@angular/material/form-field");
-var i69 = __webpack_require__(/*! @angular/material/input */ "@angular/material/input");
-var i70 = __webpack_require__(/*! @angular/material/snack-bar */ "@angular/material/snack-bar");
-var i71 = __webpack_require__(/*! @angular/cdk/stepper */ "@angular/cdk/stepper");
-var i72 = __webpack_require__(/*! @angular/cdk/table */ "@angular/cdk/table");
-var i73 = __webpack_require__(/*! @angular/material/table */ "@angular/material/table");
-var i74 = __webpack_require__(/*! @angular/material/bottom-sheet */ "@angular/material/bottom-sheet");
-var i75 = __webpack_require__(/*! ./material.module */ "./src/app/material.module.ts");
-var i76 = __webpack_require__(/*! @angular/cdk/layout */ "@angular/cdk/layout");
-var i77 = __webpack_require__(/*! angular2-useful-swiper */ "angular2-useful-swiper");
-var i78 = __webpack_require__(/*! @agm/core/core.module */ "@agm/core/core.module");
-var i79 = __webpack_require__(/*! @nguniversal/module-map-ngfactory-loader */ "@nguniversal/module-map-ngfactory-loader");
-var i80 = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-var i81 = __webpack_require__(/*! ./home/info.component */ "./src/app/home/info.component.ts");
-var i82 = __webpack_require__(/*! ./account/app.account */ "./src/app/account/app.account.ts");
-var i83 = __webpack_require__(/*! ./account/app.login */ "./src/app/account/app.login.ts");
-var i84 = __webpack_require__(/*! ./account/app.register */ "./src/app/account/app.register.ts");
-var i85 = __webpack_require__(/*! ./product/app.products */ "./src/app/product/app.products.ts");
-var i86 = __webpack_require__(/*! ./product/app.product */ "./src/app/product/app.product.ts");
-var i87 = __webpack_require__(/*! ./basket/app.basket */ "./src/app/basket/app.basket.ts");
-var i88 = __webpack_require__(/*! ./basket/app.checkout */ "./src/app/basket/app.checkout.ts");
-var i89 = __webpack_require__(/*! ./order/app.orders */ "./src/app/order/app.orders.ts");
-var i90 = __webpack_require__(/*! ./order/app.document */ "./src/app/order/app.document.ts");
-var AppServerModuleNgFactory = i0.ɵcmf(i1.AppServerModule, [i2.AppComponent], function (_l) { return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i3.MatDialogContainerNgFactory, i4.MatSnackBarContainerNgFactory, i4.SimpleSnackBarNgFactory, i5.MatBottomSheetContainerNgFactory, i6.ɵEmptyOutletComponentNgFactory, i7.AppComponentNgFactory, i8.HomeComponentNgFactory, i9.InfoComponentNgFactory, i10.AccountComponentNgFactory, i11.LoginComponentNgFactory, i12.RegisterComponentNgFactory, i13.ProductsComponentNgFactory, i14.ProductComponentNgFactory, i15.BasketComponentNgFactory, i16.CheckoutComponentNgFactory, i17.OrdersComponentNgFactory, i18.DocumentComponentNgFactory, i19.ConfirmDialogNgFactory, i20.BottomSheetComponentNgFactory]], [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵangular_packages_core_core_s, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i21.NgLocalization, i21.NgLocaleLocalization, [i0.LOCALE_ID, [2, i21.ɵangular_packages_common_common_a]]), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵangular_packages_core_core_q, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵangular_packages_core_core_r, []), i0.ɵmpd(4608, i22.DomSanitizer, i22.ɵDomSanitizerImpl, [i21.DOCUMENT]), i0.ɵmpd(6144, i0.Sanitizer, null, [i22.DomSanitizer]), i0.ɵmpd(4608, i22.HAMMER_GESTURE_CONFIG, i22.HammerGestureConfig, []), i0.ɵmpd(5120, i22.EVENT_MANAGER_PLUGINS, function (p0_0, p0_1, p0_2, p1_0, p2_0, p2_1, p2_2, p2_3, p3_0) { return [new i22.ɵDomEventsPlugin(p0_0, p0_1, p0_2), new i22.ɵKeyEventsPlugin(p1_0), new i22.ɵHammerGesturesPlugin(p2_0, p2_1, p2_2, p2_3), new i23.ɵangular_packages_platform_server_platform_server_d(p3_0)]; }, [i21.DOCUMENT, i0.NgZone, i0.PLATFORM_ID, i21.DOCUMENT, i21.DOCUMENT, i22.HAMMER_GESTURE_CONFIG, i0.ɵConsole, [2, i22.HAMMER_LOADER], i22.DOCUMENT]), i0.ɵmpd(4608, i22.EventManager, i22.EventManager, [i22.EVENT_MANAGER_PLUGINS, i0.NgZone]), i0.ɵmpd(135680, i22.ɵDomSharedStylesHost, i22.ɵDomSharedStylesHost, [i21.DOCUMENT]), i0.ɵmpd(4608, i22.ɵDomRendererFactory2, i22.ɵDomRendererFactory2, [i22.EventManager, i22.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i23.ɵangular_packages_platform_server_platform_server_c, i23.ɵangular_packages_platform_server_platform_server_c, [i22.DOCUMENT, [2, i22.ɵTRANSITION_ID]]), i0.ɵmpd(6144, i22.ɵSharedStylesHost, null, [i23.ɵangular_packages_platform_server_platform_server_c]), i0.ɵmpd(4608, i23.ɵServerRendererFactory2, i23.ɵServerRendererFactory2, [i22.EventManager, i0.NgZone, i22.DOCUMENT, i22.ɵSharedStylesHost]), i0.ɵmpd(4608, i24.AnimationDriver, i24.ɵNoopAnimationDriver, []), i0.ɵmpd(5120, i24.ɵAnimationStyleNormalizer, i25.ɵangular_packages_platform_browser_animations_animations_b, []), i0.ɵmpd(4608, i24.ɵAnimationEngine, i25.ɵInjectableAnimationEngine, [i21.DOCUMENT, i24.AnimationDriver, i24.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i23.ɵangular_packages_platform_server_platform_server_a, [i23.ɵServerRendererFactory2, i24.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(4352, i0.Testability, null, []), i0.ɵmpd(4608, i26.AnimationBuilder, i25.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i22.DOCUMENT]), i0.ɵmpd(4608, i27.ɵangular_packages_forms_forms_j, i27.ɵangular_packages_forms_forms_j, []), i0.ɵmpd(4608, i27.FormBuilder, i27.FormBuilder, []), i0.ɵmpd(4608, i28.MutationObserverFactory, i28.MutationObserverFactory, []), i0.ɵmpd(4608, i29.ErrorStateMatcher, i29.ErrorStateMatcher, []), i0.ɵmpd(4608, i30.OverlayContainer, i30.FullscreenOverlayContainer, [i21.DOCUMENT]), i0.ɵmpd(4608, i30.Overlay, i30.Overlay, [i30.ScrollStrategyOptions, i30.OverlayContainer, i0.ComponentFactoryResolver, i30.OverlayPositionBuilder, i30.OverlayKeyboardDispatcher, i0.Injector, i0.NgZone, i21.DOCUMENT, i31.Directionality, [2, i21.Location]]), i0.ɵmpd(5120, i30.ɵc, i30.ɵd, [i30.Overlay]), i0.ɵmpd(5120, i32.MAT_DIALOG_SCROLL_STRATEGY, i32.MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(135680, i32.MatDialog, i32.MatDialog, [i30.Overlay, i0.Injector, [2, i21.Location], [2, i32.MAT_DIALOG_DEFAULT_OPTIONS], i32.MAT_DIALOG_SCROLL_STRATEGY, [3, i32.MatDialog], i30.OverlayContainer]), i0.ɵmpd(5120, i33.MAT_SELECT_SCROLL_STRATEGY, i33.MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(5120, i34.MatStepperIntl, i34.MAT_STEPPER_INTL_PROVIDER_FACTORY, [[3, i34.MatStepperIntl]]), i0.ɵmpd(5120, i35.MatSortHeaderIntl, i35.MAT_SORT_HEADER_INTL_PROVIDER_FACTORY, [[3, i35.MatSortHeaderIntl]]), i0.ɵmpd(4608, i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_g, [i21.DOCUMENT, i0.PLATFORM_ID, i36.ɵangular_packages_common_http_http_e]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_h, i36.ɵangular_packages_common_http_http_h, [i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_f]), i0.ɵmpd(5120, i36.HTTP_INTERCEPTORS, function (p0_0) { return [p0_0, new i37.UrlInterceptor()]; }, [i36.ɵangular_packages_common_http_http_h]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_d, i36.ɵangular_packages_common_http_http_d, []), i0.ɵmpd(4608, i38.WindowRef, i38.WindowRef, []), i0.ɵmpd(4608, i38.DocumentRef, i38.DocumentRef, []), i0.ɵmpd(4608, i39.MapsAPILoader, i40.LazyMapsAPILoader, [[2, i40.LAZY_MAPS_API_CONFIG], i38.WindowRef, i38.DocumentRef]), i0.ɵmpd(5120, i41.ActivatedRoute, i41.ɵangular_packages_router_router_g, [i41.Router]), i0.ɵmpd(4608, i41.NoPreloading, i41.NoPreloading, []), i0.ɵmpd(6144, i41.PreloadingStrategy, null, [i41.NoPreloading]), i0.ɵmpd(135680, i41.RouterPreloader, i41.RouterPreloader, [i41.Router, i0.NgModuleFactoryLoader, i0.Compiler, i0.Injector, i41.PreloadingStrategy]), i0.ɵmpd(4608, i41.PreloadAllModules, i41.PreloadAllModules, []), i0.ɵmpd(4608, i21.ViewportScroller, i21.ɵNullViewportScroller, []), i0.ɵmpd(5120, i41.ɵangular_packages_router_router_n, i41.ɵangular_packages_router_router_c, [i41.Router, i21.ViewportScroller, i41.ROUTER_CONFIGURATION]), i0.ɵmpd(5120, i41.ROUTER_INITIALIZER, i41.ɵangular_packages_router_router_j, [i41.ɵangular_packages_router_router_h]), i0.ɵmpd(5120, i0.APP_BOOTSTRAP_LISTENER, function (p0_0) { return [p0_0]; }, [i41.ROUTER_INITIALIZER]), i0.ɵmpd(5120, i42.TranslateLoader, i43.HttpLoaderFactory, [i36.HttpClient]), i0.ɵmpd(4608, i42.TranslateCompiler, i42.TranslateFakeCompiler, []), i0.ɵmpd(4608, i42.TranslateParser, i42.TranslateDefaultParser, []), i0.ɵmpd(4608, i42.MissingTranslationHandler, i42.FakeMissingTranslationHandler, []), i0.ɵmpd(4608, i42.TranslateStore, i42.TranslateStore, []), i0.ɵmpd(4608, i42.TranslateService, i42.TranslateService, [i42.TranslateStore, i42.TranslateLoader, i42.TranslateCompiler, i42.TranslateParser, i42.MissingTranslationHandler, i42.USE_DEFAULT_LANG, i42.USE_STORE]), i0.ɵmpd(4608, i44.DialogService, i44.DialogService, [i32.MatDialog]), i0.ɵmpd(4608, i45.SessionService, i45.SessionService, [i0.PLATFORM_ID, i41.Router, i36.HttpClient]), i0.ɵmpd(4608, i46.RegistryService, i46.RegistryService, [i36.HttpClient]), i0.ɵmpd(4608, i47.ProductService, i47.ProductService, [i36.HttpClient]), i0.ɵmpd(4608, i48.BasketService, i48.BasketService, [i36.HttpClient]), i0.ɵmpd(4608, i49.DocumentService, i49.DocumentService, [i36.HttpClient]), i0.ɵmpd(4608, i50.BrowserXhr, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(4608, i50.ResponseOptions, i50.BaseResponseOptions, []), i0.ɵmpd(4608, i50.XSRFStrategy, i23.ɵangular_packages_platform_server_platform_server_f, []), i0.ɵmpd(4608, i50.XHRBackend, i50.XHRBackend, [i50.BrowserXhr, i50.ResponseOptions, i50.XSRFStrategy]), i0.ɵmpd(4608, i50.RequestOptions, i50.BaseRequestOptions, []), i0.ɵmpd(5120, i50.Http, i23.ɵangular_packages_platform_server_platform_server_g, [i50.XHRBackend, i50.RequestOptions]), i0.ɵmpd(1073742336, i21.CommonModule, i21.CommonModule, []), i0.ɵmpd(1024, i0.ErrorHandler, i22.ɵangular_packages_platform_browser_platform_browser_a, []), i0.ɵmpd(1024, i0.NgProbeToken, function () { return [i41.ɵangular_packages_router_router_b()]; }, []), i0.ɵmpd(256, i0.APP_ID, "zenretail-web", []), i0.ɵmpd(2048, i22.ɵTRANSITION_ID, null, [i0.APP_ID]), i0.ɵmpd(512, i41.ɵangular_packages_router_router_h, i41.ɵangular_packages_router_router_h, [i0.Injector]), i0.ɵmpd(512, i36.XhrFactory, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(512, i36.HttpXhrBackend, i36.HttpXhrBackend, [i36.XhrFactory]), i0.ɵmpd(2048, i36.HttpBackend, null, [i36.HttpXhrBackend]), i0.ɵmpd(1024, i36.HttpHandler, i23.ɵangular_packages_platform_server_platform_server_h, [i36.HttpBackend, i0.Injector]), i0.ɵmpd(512, i36.HttpClient, i36.HttpClient, [i36.HttpHandler]), i0.ɵmpd(512, i51.AppLoadService, i51.AppLoadService, [i36.HttpClient]), i0.ɵmpd(1024, i0.APP_INITIALIZER, function (p0_0, p1_0, p1_1, p1_2, p2_0, p3_0) { return [i22.ɵangular_packages_platform_browser_platform_browser_j(p0_0), i22.ɵangular_packages_platform_browser_platform_browser_h(p1_0, p1_1, p1_2), i41.ɵangular_packages_router_router_i(p2_0), i43.getSettings(p3_0)]; }, [[2, i0.NgProbeToken], i22.ɵTRANSITION_ID, i21.DOCUMENT, i0.Injector, i41.ɵangular_packages_router_router_h, i51.AppLoadService]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ApplicationRef, i0.ApplicationRef, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver, i0.ApplicationInitStatus]), i0.ɵmpd(1073742336, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]), i0.ɵmpd(1073742336, i22.BrowserModule, i22.BrowserModule, [[3, i22.BrowserModule]]), i0.ɵmpd(1073742336, i25.BrowserAnimationsModule, i25.BrowserAnimationsModule, []), i0.ɵmpd(1073742336, i27.ɵangular_packages_forms_forms_bc, i27.ɵangular_packages_forms_forms_bc, []), i0.ɵmpd(1073742336, i27.FormsModule, i27.FormsModule, []), i0.ɵmpd(1073742336, i27.ReactiveFormsModule, i27.ReactiveFormsModule, []), i0.ɵmpd(1073742336, i52.CdkAccordionModule, i52.CdkAccordionModule, []), i0.ɵmpd(1073742336, i53.PortalModule, i53.PortalModule, []), i0.ɵmpd(1073742336, i54.MatExpansionModule, i54.MatExpansionModule, []), i0.ɵmpd(1073742336, i31.BidiModule, i31.BidiModule, []), i0.ɵmpd(1073742336, i29.MatCommonModule, i29.MatCommonModule, [[2, i29.MATERIAL_SANITY_CHECKS], [2, i22.HAMMER_LOADER]]), i0.ɵmpd(1073742336, i29.MatLineModule, i29.MatLineModule, []), i0.ɵmpd(1073742336, i55.PlatformModule, i55.PlatformModule, []), i0.ɵmpd(1073742336, i29.MatRippleModule, i29.MatRippleModule, []), i0.ɵmpd(1073742336, i29.MatPseudoCheckboxModule, i29.MatPseudoCheckboxModule, []), i0.ɵmpd(1073742336, i56.MatDividerModule, i56.MatDividerModule, []), i0.ɵmpd(1073742336, i57.MatListModule, i57.MatListModule, []), i0.ɵmpd(1073742336, i58.MatToolbarModule, i58.MatToolbarModule, []), i0.ɵmpd(1073742336, i59.MatButtonModule, i59.MatButtonModule, []), i0.ɵmpd(1073742336, i60.MatIconModule, i60.MatIconModule, []), i0.ɵmpd(1073742336, i61.MatCardModule, i61.MatCardModule, []), i0.ɵmpd(1073742336, i62.ScrollingModule, i62.ScrollingModule, []), i0.ɵmpd(1073742336, i63.MatSidenavModule, i63.MatSidenavModule, []), i0.ɵmpd(1073742336, i64.MatGridListModule, i64.MatGridListModule, []), i0.ɵmpd(1073742336, i28.ObserversModule, i28.ObserversModule, []), i0.ɵmpd(1073742336, i65.MatCheckboxModule, i65.MatCheckboxModule, []), i0.ɵmpd(1073742336, i66.MatRadioModule, i66.MatRadioModule, []), i0.ɵmpd(1073742336, i67.TextFieldModule, i67.TextFieldModule, []), i0.ɵmpd(1073742336, i68.MatFormFieldModule, i68.MatFormFieldModule, []), i0.ɵmpd(1073742336, i69.MatInputModule, i69.MatInputModule, []), i0.ɵmpd(1073742336, i30.OverlayModule, i30.OverlayModule, []), i0.ɵmpd(1073742336, i32.MatDialogModule, i32.MatDialogModule, []), i0.ɵmpd(1073742336, i70.MatSnackBarModule, i70.MatSnackBarModule, []), i0.ɵmpd(1073742336, i29.MatOptionModule, i29.MatOptionModule, []), i0.ɵmpd(1073742336, i33.MatSelectModule, i33.MatSelectModule, []), i0.ɵmpd(1073742336, i71.CdkStepperModule, i71.CdkStepperModule, []), i0.ɵmpd(1073742336, i34.MatStepperModule, i34.MatStepperModule, []), i0.ɵmpd(1073742336, i72.CdkTableModule, i72.CdkTableModule, []), i0.ɵmpd(1073742336, i73.MatTableModule, i73.MatTableModule, []), i0.ɵmpd(1073742336, i35.MatSortModule, i35.MatSortModule, []), i0.ɵmpd(1073742336, i74.MatBottomSheetModule, i74.MatBottomSheetModule, []), i0.ɵmpd(1073742336, i75.MaterialModule, i75.MaterialModule, []), i0.ɵmpd(1073742336, i76.LayoutModule, i76.LayoutModule, []), i0.ɵmpd(1073742336, i36.HttpClientXsrfModule, i36.HttpClientXsrfModule, []), i0.ɵmpd(1073742336, i36.HttpClientModule, i36.HttpClientModule, []), i0.ɵmpd(1073742336, i77.SwiperModule, i77.SwiperModule, []), i0.ɵmpd(1073742336, i78.AgmCoreModule, i78.AgmCoreModule, []), i0.ɵmpd(1024, i41.ɵangular_packages_router_router_a, i41.ɵangular_packages_router_router_e, [[3, i41.Router]]), i0.ɵmpd(512, i41.UrlSerializer, i41.DefaultUrlSerializer, []), i0.ɵmpd(512, i41.ChildrenOutletContexts, i41.ChildrenOutletContexts, []), i0.ɵmpd(256, i41.ROUTER_CONFIGURATION, {}, []), i0.ɵmpd(1024, i21.LocationStrategy, i41.ɵangular_packages_router_router_d, [i21.PlatformLocation, [2, i21.APP_BASE_HREF], i41.ROUTER_CONFIGURATION]), i0.ɵmpd(512, i21.Location, i21.Location, [i21.LocationStrategy]), i0.ɵmpd(512, i0.Compiler, i0.Compiler, []), i0.ɵmpd(512, i0.NgModuleFactoryLoader, i79.ModuleMapNgFactoryLoader, [i0.Compiler, i79.MODULE_MAP]), i0.ɵmpd(1024, i41.ROUTES, function () { return [[{ path: "", component: i2.AppComponent, children: [{ path: "", component: i2.AppComponent, children: [{ path: "", redirectTo: "home", pathMatch: "full" }, { path: "home", component: i80.HomeComponent }, { path: "info", component: i81.InfoComponent }, { path: "account", component: i82.AccountComponent }, { path: "login", component: i83.LoginComponent }, { path: "register", component: i84.RegisterComponent }, { path: "brand/:name", component: i85.ProductsComponent }, { path: "category/:name", component: i85.ProductsComponent }, { path: "product/:name", component: i86.ProductComponent }, { path: "basket", component: i87.BasketComponent }, { path: "checkout", component: i88.CheckoutComponent }, { path: "orders", component: i89.OrdersComponent }, { path: "doc/:id", component: i90.DocumentComponent }] }] }]]; }, []), i0.ɵmpd(1024, i41.Router, i41.ɵangular_packages_router_router_f, [i0.ApplicationRef, i41.UrlSerializer, i41.ChildrenOutletContexts, i21.Location, i0.Injector, i0.NgModuleFactoryLoader, i0.Compiler, i41.ROUTES, i41.ROUTER_CONFIGURATION, [2, i41.UrlHandlingStrategy], [2, i41.RouteReuseStrategy]]), i0.ɵmpd(1073742336, i41.RouterModule, i41.RouterModule, [[2, i41.ɵangular_packages_router_router_a], [2, i41.Router]]), i0.ɵmpd(1073742336, i42.TranslateModule, i42.TranslateModule, []), i0.ɵmpd(1073742336, i43.AppModule, i43.AppModule, []), i0.ɵmpd(1073742336, i50.HttpModule, i50.HttpModule, []), i0.ɵmpd(1073742336, i25.NoopAnimationsModule, i25.NoopAnimationsModule, []), i0.ɵmpd(1073742336, i23.ServerModule, i23.ServerModule, []), i0.ɵmpd(1073742336, i79.ModuleMapLoaderModule, i79.ModuleMapLoaderModule, []), i0.ɵmpd(1073742336, i1.AppServerModule, i1.AppServerModule, []), i0.ɵmpd(256, i0.ɵAPP_ROOT, true, []), i0.ɵmpd(256, i25.ANIMATION_MODULE_TYPE, "NoopAnimations", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_e, "XSRF-TOKEN", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_f, "X-XSRF-TOKEN", []), i0.ɵmpd(256, i27.ɵangular_packages_forms_forms_k, "never", []), i0.ɵmpd(256, i40.LAZY_MAPS_API_CONFIG, { apiKey: "AIzaSyB3lyD6l1LxMEX0wNVhj6tmD_sDDRTjtA8" }, []), i0.ɵmpd(256, i42.USE_STORE, undefined, []), i0.ɵmpd(256, i42.USE_DEFAULT_LANG, undefined, [])]); });
+var i38 = __webpack_require__(/*! @angular/router */ "@angular/router");
+var i39 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
+var i40 = __webpack_require__(/*! ./app.module */ "./src/app/app.module.ts");
+var i41 = __webpack_require__(/*! ./services/dialog.service */ "./src/app/services/dialog.service.ts");
+var i42 = __webpack_require__(/*! ./services/session.service */ "./src/app/services/session.service.ts");
+var i43 = __webpack_require__(/*! ./services/registry.service */ "./src/app/services/registry.service.ts");
+var i44 = __webpack_require__(/*! ./services/product.service */ "./src/app/services/product.service.ts");
+var i45 = __webpack_require__(/*! ./services/basket.service */ "./src/app/services/basket.service.ts");
+var i46 = __webpack_require__(/*! ./services/document.service */ "./src/app/services/document.service.ts");
+var i47 = __webpack_require__(/*! @angular/http */ "@angular/http");
+var i48 = __webpack_require__(/*! ./services/appload.service */ "./src/app/services/appload.service.ts");
+var i49 = __webpack_require__(/*! @angular/cdk/accordion */ "@angular/cdk/accordion");
+var i50 = __webpack_require__(/*! @angular/cdk/portal */ "@angular/cdk/portal");
+var i51 = __webpack_require__(/*! @angular/material/expansion */ "@angular/material/expansion");
+var i52 = __webpack_require__(/*! @angular/cdk/platform */ "@angular/cdk/platform");
+var i53 = __webpack_require__(/*! @angular/material/divider */ "@angular/material/divider");
+var i54 = __webpack_require__(/*! @angular/material/list */ "@angular/material/list");
+var i55 = __webpack_require__(/*! @angular/material/toolbar */ "@angular/material/toolbar");
+var i56 = __webpack_require__(/*! @angular/material/button */ "@angular/material/button");
+var i57 = __webpack_require__(/*! @angular/material/icon */ "@angular/material/icon");
+var i58 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
+var i59 = __webpack_require__(/*! @angular/cdk/scrolling */ "@angular/cdk/scrolling");
+var i60 = __webpack_require__(/*! @angular/material/sidenav */ "@angular/material/sidenav");
+var i61 = __webpack_require__(/*! @angular/material/grid-list */ "@angular/material/grid-list");
+var i62 = __webpack_require__(/*! @angular/material/checkbox */ "@angular/material/checkbox");
+var i63 = __webpack_require__(/*! @angular/material/radio */ "@angular/material/radio");
+var i64 = __webpack_require__(/*! @angular/cdk/text-field */ "@angular/cdk/text-field");
+var i65 = __webpack_require__(/*! @angular/material/form-field */ "@angular/material/form-field");
+var i66 = __webpack_require__(/*! @angular/material/input */ "@angular/material/input");
+var i67 = __webpack_require__(/*! @angular/material/snack-bar */ "@angular/material/snack-bar");
+var i68 = __webpack_require__(/*! @angular/cdk/stepper */ "@angular/cdk/stepper");
+var i69 = __webpack_require__(/*! @angular/cdk/table */ "@angular/cdk/table");
+var i70 = __webpack_require__(/*! @angular/material/table */ "@angular/material/table");
+var i71 = __webpack_require__(/*! @angular/material/bottom-sheet */ "@angular/material/bottom-sheet");
+var i72 = __webpack_require__(/*! ./material.module */ "./src/app/material.module.ts");
+var i73 = __webpack_require__(/*! @angular/cdk/layout */ "@angular/cdk/layout");
+var i74 = __webpack_require__(/*! angular2-useful-swiper */ "angular2-useful-swiper");
+var i75 = __webpack_require__(/*! @nguniversal/module-map-ngfactory-loader */ "@nguniversal/module-map-ngfactory-loader");
+var i76 = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+var i77 = __webpack_require__(/*! ./home/info.component */ "./src/app/home/info.component.ts");
+var i78 = __webpack_require__(/*! ./account/app.account */ "./src/app/account/app.account.ts");
+var i79 = __webpack_require__(/*! ./account/app.login */ "./src/app/account/app.login.ts");
+var i80 = __webpack_require__(/*! ./account/app.register */ "./src/app/account/app.register.ts");
+var i81 = __webpack_require__(/*! ./product/app.products */ "./src/app/product/app.products.ts");
+var i82 = __webpack_require__(/*! ./product/app.product */ "./src/app/product/app.product.ts");
+var i83 = __webpack_require__(/*! ./basket/app.basket */ "./src/app/basket/app.basket.ts");
+var i84 = __webpack_require__(/*! ./basket/app.checkout */ "./src/app/basket/app.checkout.ts");
+var i85 = __webpack_require__(/*! ./order/app.orders */ "./src/app/order/app.orders.ts");
+var i86 = __webpack_require__(/*! ./order/app.document */ "./src/app/order/app.document.ts");
+var AppServerModuleNgFactory = i0.ɵcmf(i1.AppServerModule, [i2.AppComponent], function (_l) { return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i3.MatDialogContainerNgFactory, i4.MatSnackBarContainerNgFactory, i4.SimpleSnackBarNgFactory, i5.MatBottomSheetContainerNgFactory, i6.ɵEmptyOutletComponentNgFactory, i7.AppComponentNgFactory, i8.HomeComponentNgFactory, i9.InfoComponentNgFactory, i10.AccountComponentNgFactory, i11.LoginComponentNgFactory, i12.RegisterComponentNgFactory, i13.ProductsComponentNgFactory, i14.ProductComponentNgFactory, i15.BasketComponentNgFactory, i16.CheckoutComponentNgFactory, i17.OrdersComponentNgFactory, i18.DocumentComponentNgFactory, i19.ConfirmDialogNgFactory, i20.BottomSheetComponentNgFactory]], [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵangular_packages_core_core_s, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i21.NgLocalization, i21.NgLocaleLocalization, [i0.LOCALE_ID, [2, i21.ɵangular_packages_common_common_a]]), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵangular_packages_core_core_q, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵangular_packages_core_core_r, []), i0.ɵmpd(4608, i22.DomSanitizer, i22.ɵDomSanitizerImpl, [i21.DOCUMENT]), i0.ɵmpd(6144, i0.Sanitizer, null, [i22.DomSanitizer]), i0.ɵmpd(4608, i22.HAMMER_GESTURE_CONFIG, i22.HammerGestureConfig, []), i0.ɵmpd(5120, i22.EVENT_MANAGER_PLUGINS, function (p0_0, p0_1, p0_2, p1_0, p2_0, p2_1, p2_2, p2_3, p3_0) { return [new i22.ɵDomEventsPlugin(p0_0, p0_1, p0_2), new i22.ɵKeyEventsPlugin(p1_0), new i22.ɵHammerGesturesPlugin(p2_0, p2_1, p2_2, p2_3), new i23.ɵangular_packages_platform_server_platform_server_d(p3_0)]; }, [i21.DOCUMENT, i0.NgZone, i0.PLATFORM_ID, i21.DOCUMENT, i21.DOCUMENT, i22.HAMMER_GESTURE_CONFIG, i0.ɵConsole, [2, i22.HAMMER_LOADER], i22.DOCUMENT]), i0.ɵmpd(4608, i22.EventManager, i22.EventManager, [i22.EVENT_MANAGER_PLUGINS, i0.NgZone]), i0.ɵmpd(135680, i22.ɵDomSharedStylesHost, i22.ɵDomSharedStylesHost, [i21.DOCUMENT]), i0.ɵmpd(4608, i22.ɵDomRendererFactory2, i22.ɵDomRendererFactory2, [i22.EventManager, i22.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i23.ɵangular_packages_platform_server_platform_server_c, i23.ɵangular_packages_platform_server_platform_server_c, [i22.DOCUMENT, [2, i22.ɵTRANSITION_ID]]), i0.ɵmpd(6144, i22.ɵSharedStylesHost, null, [i23.ɵangular_packages_platform_server_platform_server_c]), i0.ɵmpd(4608, i23.ɵServerRendererFactory2, i23.ɵServerRendererFactory2, [i22.EventManager, i0.NgZone, i22.DOCUMENT, i22.ɵSharedStylesHost]), i0.ɵmpd(4608, i24.AnimationDriver, i24.ɵNoopAnimationDriver, []), i0.ɵmpd(5120, i24.ɵAnimationStyleNormalizer, i25.ɵangular_packages_platform_browser_animations_animations_b, []), i0.ɵmpd(4608, i24.ɵAnimationEngine, i25.ɵInjectableAnimationEngine, [i21.DOCUMENT, i24.AnimationDriver, i24.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i23.ɵangular_packages_platform_server_platform_server_a, [i23.ɵServerRendererFactory2, i24.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(4352, i0.Testability, null, []), i0.ɵmpd(4608, i26.AnimationBuilder, i25.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i22.DOCUMENT]), i0.ɵmpd(4608, i27.ɵangular_packages_forms_forms_j, i27.ɵangular_packages_forms_forms_j, []), i0.ɵmpd(4608, i27.FormBuilder, i27.FormBuilder, []), i0.ɵmpd(4608, i28.MutationObserverFactory, i28.MutationObserverFactory, []), i0.ɵmpd(4608, i29.ErrorStateMatcher, i29.ErrorStateMatcher, []), i0.ɵmpd(4608, i30.OverlayContainer, i30.FullscreenOverlayContainer, [i21.DOCUMENT]), i0.ɵmpd(4608, i30.Overlay, i30.Overlay, [i30.ScrollStrategyOptions, i30.OverlayContainer, i0.ComponentFactoryResolver, i30.OverlayPositionBuilder, i30.OverlayKeyboardDispatcher, i0.Injector, i0.NgZone, i21.DOCUMENT, i31.Directionality, [2, i21.Location]]), i0.ɵmpd(5120, i30.ɵc, i30.ɵd, [i30.Overlay]), i0.ɵmpd(5120, i32.MAT_DIALOG_SCROLL_STRATEGY, i32.MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(135680, i32.MatDialog, i32.MatDialog, [i30.Overlay, i0.Injector, [2, i21.Location], [2, i32.MAT_DIALOG_DEFAULT_OPTIONS], i32.MAT_DIALOG_SCROLL_STRATEGY, [3, i32.MatDialog], i30.OverlayContainer]), i0.ɵmpd(5120, i33.MAT_SELECT_SCROLL_STRATEGY, i33.MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(5120, i34.MatStepperIntl, i34.MAT_STEPPER_INTL_PROVIDER_FACTORY, [[3, i34.MatStepperIntl]]), i0.ɵmpd(5120, i35.MatSortHeaderIntl, i35.MAT_SORT_HEADER_INTL_PROVIDER_FACTORY, [[3, i35.MatSortHeaderIntl]]), i0.ɵmpd(4608, i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_g, [i21.DOCUMENT, i0.PLATFORM_ID, i36.ɵangular_packages_common_http_http_e]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_h, i36.ɵangular_packages_common_http_http_h, [i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_f]), i0.ɵmpd(5120, i36.HTTP_INTERCEPTORS, function (p0_0) { return [p0_0, new i37.UrlInterceptor()]; }, [i36.ɵangular_packages_common_http_http_h]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_d, i36.ɵangular_packages_common_http_http_d, []), i0.ɵmpd(5120, i38.ActivatedRoute, i38.ɵangular_packages_router_router_g, [i38.Router]), i0.ɵmpd(4608, i38.NoPreloading, i38.NoPreloading, []), i0.ɵmpd(6144, i38.PreloadingStrategy, null, [i38.NoPreloading]), i0.ɵmpd(135680, i38.RouterPreloader, i38.RouterPreloader, [i38.Router, i0.NgModuleFactoryLoader, i0.Compiler, i0.Injector, i38.PreloadingStrategy]), i0.ɵmpd(4608, i38.PreloadAllModules, i38.PreloadAllModules, []), i0.ɵmpd(4608, i21.ViewportScroller, i21.ɵNullViewportScroller, []), i0.ɵmpd(5120, i38.ɵangular_packages_router_router_n, i38.ɵangular_packages_router_router_c, [i38.Router, i21.ViewportScroller, i38.ROUTER_CONFIGURATION]), i0.ɵmpd(5120, i38.ROUTER_INITIALIZER, i38.ɵangular_packages_router_router_j, [i38.ɵangular_packages_router_router_h]), i0.ɵmpd(5120, i0.APP_BOOTSTRAP_LISTENER, function (p0_0) { return [p0_0]; }, [i38.ROUTER_INITIALIZER]), i0.ɵmpd(5120, i39.TranslateLoader, i40.HttpLoaderFactory, [i36.HttpClient]), i0.ɵmpd(4608, i39.TranslateCompiler, i39.TranslateFakeCompiler, []), i0.ɵmpd(4608, i39.TranslateParser, i39.TranslateDefaultParser, []), i0.ɵmpd(4608, i39.MissingTranslationHandler, i39.FakeMissingTranslationHandler, []), i0.ɵmpd(4608, i39.TranslateStore, i39.TranslateStore, []), i0.ɵmpd(4608, i39.TranslateService, i39.TranslateService, [i39.TranslateStore, i39.TranslateLoader, i39.TranslateCompiler, i39.TranslateParser, i39.MissingTranslationHandler, i39.USE_DEFAULT_LANG, i39.USE_STORE]), i0.ɵmpd(4608, i41.DialogService, i41.DialogService, [i32.MatDialog]), i0.ɵmpd(4608, i42.SessionService, i42.SessionService, [i0.PLATFORM_ID, i38.Router, i36.HttpClient]), i0.ɵmpd(4608, i43.RegistryService, i43.RegistryService, [i36.HttpClient]), i0.ɵmpd(4608, i44.ProductService, i44.ProductService, [i36.HttpClient]), i0.ɵmpd(4608, i45.BasketService, i45.BasketService, [i36.HttpClient]), i0.ɵmpd(4608, i46.DocumentService, i46.DocumentService, [i36.HttpClient]), i0.ɵmpd(4608, i47.BrowserXhr, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(4608, i47.ResponseOptions, i47.BaseResponseOptions, []), i0.ɵmpd(4608, i47.XSRFStrategy, i23.ɵangular_packages_platform_server_platform_server_f, []), i0.ɵmpd(4608, i47.XHRBackend, i47.XHRBackend, [i47.BrowserXhr, i47.ResponseOptions, i47.XSRFStrategy]), i0.ɵmpd(4608, i47.RequestOptions, i47.BaseRequestOptions, []), i0.ɵmpd(5120, i47.Http, i23.ɵangular_packages_platform_server_platform_server_g, [i47.XHRBackend, i47.RequestOptions]), i0.ɵmpd(1073742336, i21.CommonModule, i21.CommonModule, []), i0.ɵmpd(1024, i0.ErrorHandler, i22.ɵangular_packages_platform_browser_platform_browser_a, []), i0.ɵmpd(1024, i0.NgProbeToken, function () { return [i38.ɵangular_packages_router_router_b()]; }, []), i0.ɵmpd(256, i0.APP_ID, "zenretail-web", []), i0.ɵmpd(2048, i22.ɵTRANSITION_ID, null, [i0.APP_ID]), i0.ɵmpd(512, i38.ɵangular_packages_router_router_h, i38.ɵangular_packages_router_router_h, [i0.Injector]), i0.ɵmpd(512, i36.XhrFactory, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(512, i36.HttpXhrBackend, i36.HttpXhrBackend, [i36.XhrFactory]), i0.ɵmpd(2048, i36.HttpBackend, null, [i36.HttpXhrBackend]), i0.ɵmpd(1024, i36.HttpHandler, i23.ɵangular_packages_platform_server_platform_server_h, [i36.HttpBackend, i0.Injector]), i0.ɵmpd(512, i36.HttpClient, i36.HttpClient, [i36.HttpHandler]), i0.ɵmpd(512, i48.AppLoadService, i48.AppLoadService, [i36.HttpClient]), i0.ɵmpd(1024, i0.APP_INITIALIZER, function (p0_0, p1_0, p1_1, p1_2, p2_0, p3_0) { return [i22.ɵangular_packages_platform_browser_platform_browser_j(p0_0), i22.ɵangular_packages_platform_browser_platform_browser_h(p1_0, p1_1, p1_2), i38.ɵangular_packages_router_router_i(p2_0), i40.getSettings(p3_0)]; }, [[2, i0.NgProbeToken], i22.ɵTRANSITION_ID, i21.DOCUMENT, i0.Injector, i38.ɵangular_packages_router_router_h, i48.AppLoadService]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ApplicationRef, i0.ApplicationRef, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver, i0.ApplicationInitStatus]), i0.ɵmpd(1073742336, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]), i0.ɵmpd(1073742336, i22.BrowserModule, i22.BrowserModule, [[3, i22.BrowserModule]]), i0.ɵmpd(1073742336, i25.BrowserAnimationsModule, i25.BrowserAnimationsModule, []), i0.ɵmpd(1073742336, i27.ɵangular_packages_forms_forms_bc, i27.ɵangular_packages_forms_forms_bc, []), i0.ɵmpd(1073742336, i27.FormsModule, i27.FormsModule, []), i0.ɵmpd(1073742336, i27.ReactiveFormsModule, i27.ReactiveFormsModule, []), i0.ɵmpd(1073742336, i49.CdkAccordionModule, i49.CdkAccordionModule, []), i0.ɵmpd(1073742336, i50.PortalModule, i50.PortalModule, []), i0.ɵmpd(1073742336, i51.MatExpansionModule, i51.MatExpansionModule, []), i0.ɵmpd(1073742336, i31.BidiModule, i31.BidiModule, []), i0.ɵmpd(1073742336, i29.MatCommonModule, i29.MatCommonModule, [[2, i29.MATERIAL_SANITY_CHECKS], [2, i22.HAMMER_LOADER]]), i0.ɵmpd(1073742336, i29.MatLineModule, i29.MatLineModule, []), i0.ɵmpd(1073742336, i52.PlatformModule, i52.PlatformModule, []), i0.ɵmpd(1073742336, i29.MatRippleModule, i29.MatRippleModule, []), i0.ɵmpd(1073742336, i29.MatPseudoCheckboxModule, i29.MatPseudoCheckboxModule, []), i0.ɵmpd(1073742336, i53.MatDividerModule, i53.MatDividerModule, []), i0.ɵmpd(1073742336, i54.MatListModule, i54.MatListModule, []), i0.ɵmpd(1073742336, i55.MatToolbarModule, i55.MatToolbarModule, []), i0.ɵmpd(1073742336, i56.MatButtonModule, i56.MatButtonModule, []), i0.ɵmpd(1073742336, i57.MatIconModule, i57.MatIconModule, []), i0.ɵmpd(1073742336, i58.MatCardModule, i58.MatCardModule, []), i0.ɵmpd(1073742336, i59.ScrollingModule, i59.ScrollingModule, []), i0.ɵmpd(1073742336, i60.MatSidenavModule, i60.MatSidenavModule, []), i0.ɵmpd(1073742336, i61.MatGridListModule, i61.MatGridListModule, []), i0.ɵmpd(1073742336, i28.ObserversModule, i28.ObserversModule, []), i0.ɵmpd(1073742336, i62.MatCheckboxModule, i62.MatCheckboxModule, []), i0.ɵmpd(1073742336, i63.MatRadioModule, i63.MatRadioModule, []), i0.ɵmpd(1073742336, i64.TextFieldModule, i64.TextFieldModule, []), i0.ɵmpd(1073742336, i65.MatFormFieldModule, i65.MatFormFieldModule, []), i0.ɵmpd(1073742336, i66.MatInputModule, i66.MatInputModule, []), i0.ɵmpd(1073742336, i30.OverlayModule, i30.OverlayModule, []), i0.ɵmpd(1073742336, i32.MatDialogModule, i32.MatDialogModule, []), i0.ɵmpd(1073742336, i67.MatSnackBarModule, i67.MatSnackBarModule, []), i0.ɵmpd(1073742336, i29.MatOptionModule, i29.MatOptionModule, []), i0.ɵmpd(1073742336, i33.MatSelectModule, i33.MatSelectModule, []), i0.ɵmpd(1073742336, i68.CdkStepperModule, i68.CdkStepperModule, []), i0.ɵmpd(1073742336, i34.MatStepperModule, i34.MatStepperModule, []), i0.ɵmpd(1073742336, i69.CdkTableModule, i69.CdkTableModule, []), i0.ɵmpd(1073742336, i70.MatTableModule, i70.MatTableModule, []), i0.ɵmpd(1073742336, i35.MatSortModule, i35.MatSortModule, []), i0.ɵmpd(1073742336, i71.MatBottomSheetModule, i71.MatBottomSheetModule, []), i0.ɵmpd(1073742336, i72.MaterialModule, i72.MaterialModule, []), i0.ɵmpd(1073742336, i73.LayoutModule, i73.LayoutModule, []), i0.ɵmpd(1073742336, i36.HttpClientXsrfModule, i36.HttpClientXsrfModule, []), i0.ɵmpd(1073742336, i36.HttpClientModule, i36.HttpClientModule, []), i0.ɵmpd(1073742336, i74.SwiperModule, i74.SwiperModule, []), i0.ɵmpd(1024, i38.ɵangular_packages_router_router_a, i38.ɵangular_packages_router_router_e, [[3, i38.Router]]), i0.ɵmpd(512, i38.UrlSerializer, i38.DefaultUrlSerializer, []), i0.ɵmpd(512, i38.ChildrenOutletContexts, i38.ChildrenOutletContexts, []), i0.ɵmpd(256, i38.ROUTER_CONFIGURATION, {}, []), i0.ɵmpd(1024, i21.LocationStrategy, i38.ɵangular_packages_router_router_d, [i21.PlatformLocation, [2, i21.APP_BASE_HREF], i38.ROUTER_CONFIGURATION]), i0.ɵmpd(512, i21.Location, i21.Location, [i21.LocationStrategy]), i0.ɵmpd(512, i0.Compiler, i0.Compiler, []), i0.ɵmpd(512, i0.NgModuleFactoryLoader, i75.ModuleMapNgFactoryLoader, [i0.Compiler, i75.MODULE_MAP]), i0.ɵmpd(1024, i38.ROUTES, function () { return [[{ path: "", component: i2.AppComponent, children: [{ path: "", component: i2.AppComponent, children: [{ path: "", redirectTo: "home", pathMatch: "full" }, { path: "home", component: i76.HomeComponent }, { path: "info", component: i77.InfoComponent }, { path: "account", component: i78.AccountComponent }, { path: "login", component: i79.LoginComponent }, { path: "register", component: i80.RegisterComponent }, { path: "brand/:name", component: i81.ProductsComponent }, { path: "category/:name", component: i81.ProductsComponent }, { path: "product/:name", component: i82.ProductComponent }, { path: "basket", component: i83.BasketComponent }, { path: "checkout", component: i84.CheckoutComponent }, { path: "orders", component: i85.OrdersComponent }, { path: "doc/:id", component: i86.DocumentComponent }] }] }]]; }, []), i0.ɵmpd(1024, i38.Router, i38.ɵangular_packages_router_router_f, [i0.ApplicationRef, i38.UrlSerializer, i38.ChildrenOutletContexts, i21.Location, i0.Injector, i0.NgModuleFactoryLoader, i0.Compiler, i38.ROUTES, i38.ROUTER_CONFIGURATION, [2, i38.UrlHandlingStrategy], [2, i38.RouteReuseStrategy]]), i0.ɵmpd(1073742336, i38.RouterModule, i38.RouterModule, [[2, i38.ɵangular_packages_router_router_a], [2, i38.Router]]), i0.ɵmpd(1073742336, i39.TranslateModule, i39.TranslateModule, []), i0.ɵmpd(1073742336, i40.AppModule, i40.AppModule, []), i0.ɵmpd(1073742336, i47.HttpModule, i47.HttpModule, []), i0.ɵmpd(1073742336, i25.NoopAnimationsModule, i25.NoopAnimationsModule, []), i0.ɵmpd(1073742336, i23.ServerModule, i23.ServerModule, []), i0.ɵmpd(1073742336, i75.ModuleMapLoaderModule, i75.ModuleMapLoaderModule, []), i0.ɵmpd(1073742336, i1.AppServerModule, i1.AppServerModule, []), i0.ɵmpd(256, i0.ɵAPP_ROOT, true, []), i0.ɵmpd(256, i25.ANIMATION_MODULE_TYPE, "NoopAnimations", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_e, "XSRF-TOKEN", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_f, "X-XSRF-TOKEN", []), i0.ɵmpd(256, i27.ɵangular_packages_forms_forms_k, "never", []), i0.ɵmpd(256, i39.USE_STORE, undefined, []), i0.ɵmpd(256, i39.USE_DEFAULT_LANG, undefined, [])]); });
 exports.AppServerModuleNgFactory = AppServerModuleNgFactory;
 
 
@@ -5211,50 +3438,51 @@ var i3 = __webpack_require__(/*! @angular/material/grid-list */ "@angular/materi
 var i4 = __webpack_require__(/*! @angular/router */ "@angular/router");
 var i5 = __webpack_require__(/*! @angular/common */ "@angular/common");
 var i6 = __webpack_require__(/*! @angular/cdk/bidi */ "@angular/cdk/bidi");
-var i7 = __webpack_require__(/*! ../pipes/parseurl.pipe */ "./src/app/pipes/parseurl.pipe.ts");
-var i8 = __webpack_require__(/*! ../pipes/currency-format.pipe */ "./src/app/pipes/currency-format.pipe.ts");
-var i9 = __webpack_require__(/*! ../../../node_modules/@angular/material/card/typings/index.ngfactory */ "./node_modules/@angular/material/card/typings/index.ngfactory.js");
-var i10 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
-var i11 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
-var i12 = __webpack_require__(/*! ./home.component */ "./src/app/home/home.component.ts");
-var i13 = __webpack_require__(/*! ../services/product.service */ "./src/app/services/product.service.ts");
+var i7 = __webpack_require__(/*! ../pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
+var i8 = __webpack_require__(/*! ../pipes/parseurl.pipe */ "./src/app/pipes/parseurl.pipe.ts");
+var i9 = __webpack_require__(/*! ../pipes/currency-format.pipe */ "./src/app/pipes/currency-format.pipe.ts");
+var i10 = __webpack_require__(/*! ../../../node_modules/@angular/material/card/typings/index.ngfactory */ "./node_modules/@angular/material/card/typings/index.ngfactory.js");
+var i11 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
+var i12 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
+var i13 = __webpack_require__(/*! ./home.component */ "./src/app/home/home.component.ts");
+var i14 = __webpack_require__(/*! ../services/product.service */ "./src/app/services/product.service.ts");
 var styles_HomeComponent = [];
 var RenderType_HomeComponent = i0.ɵcrt({ encapsulation: 2, styles: styles_HomeComponent, data: {} });
 exports.RenderType_HomeComponent = RenderType_HomeComponent;
 function View_HomeComponent_3(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 0, "div", [], null, null, null, null, null))], null, null); }
-function View_HomeComponent_4(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 8, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "span", [["class", "percentage"]], null, null, null, null, null)), (_l()(), i0.ɵted(2, null, ["-", "%"])), (_l()(), i0.ɵeld(3, 0, null, null, 2, "del", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(7, null, ["", ""])), i0.ɵppd(8, 1)], null, function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.discount.percentage; _ck(_v, 2, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_1); var currVal_2 = i0.ɵunv(_v, 7, 0, _ck(_v, 8, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.discount.price)); _ck(_v, 7, 0, currVal_2); }); }
-function View_HomeComponent_5(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 5, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 4, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(2, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(3, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1)], null, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_0); }); }
+function View_HomeComponent_4(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 8, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "span", [["class", "percentage"]], null, null, null, null, null)), (_l()(), i0.ɵted(2, null, ["-", "%"])), (_l()(), i0.ɵeld(3, 0, null, null, 2, "del", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(7, null, ["", ""])), i0.ɵppd(8, 1)], null, function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.discount.percentage; _ck(_v, 2, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_1); var currVal_2 = i0.ɵunv(_v, 7, 0, _ck(_v, 8, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.discount.price)); _ck(_v, 7, 0, currVal_2); }); }
+function View_HomeComponent_5(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 5, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 4, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(2, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(3, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1)], null, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_0); }); }
 function View_HomeComponent_2(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 19, "mat-grid-tile", [["class", "mat-grid-tile"], ["style", "cursor: pointer"]], null, null, null, i2.View_MatGridTile_0, i2.RenderType_MatGridTile)), i0.ɵdid(1, 49152, [[1, 4]], 0, i3.MatGridTile, [i0.ElementRef, [2, i3.ɵa8]], null, null), (_l()(), i0.ɵeld(2, 0, null, 0, 2, "img", [], [[8, "alt", 0], [8, "src", 4]], [[null, "click"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (i0.ɵnov(_v, 3).onClick() !== false);
         ad = (pd_0 && ad);
-    } return ad; }, null, null)), i0.ɵdid(3, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵppd(4, 2), (_l()(), i0.ɵeld(5, 0, null, 0, 14, "mat-grid-tile-footer", [["class", "mat-grid-tile-footer"]], null, null, null, i2.View_MatGridTileText_0, i2.RenderType_MatGridTileText)), i0.ɵdid(6, 1097728, null, 1, i3.MatGridTileText, [i0.ElementRef], null, null), i0.ɵqud(603979776, 2, { _lines: 1 }), i0.ɵdid(8, 16384, null, 0, i3.MatGridTileFooterCssMatStyler, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 1, 3, "h3", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(10, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(11, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), i0.ɵted(12, null, ["", ""])), (_l()(), i0.ɵeld(13, 0, null, 1, 2, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(14, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵted(15, null, ["", ""])), (_l()(), i0.ɵand(16777216, null, 2, 1, null, View_HomeComponent_3)), i0.ɵdid(17, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i0.ɵand(0, [["discount_content", 2]], 2, 0, null, View_HomeComponent_4)), (_l()(), i0.ɵand(0, [["price_content", 2]], 2, 0, null, View_HomeComponent_5))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/product/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 3, 0, currVal_2); var currVal_5 = (_v.context.$implicit.discount.dicountId > 0); var currVal_6 = i0.ɵnov(_v, 18); var currVal_7 = i0.ɵnov(_v, 19); _ck(_v, 17, 0, currVal_5, currVal_6, currVal_7); }, function (_ck, _v) { var currVal_0 = _v.context.$implicit.productName; var currVal_1 = i0.ɵunv(_v, 2, 1, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 0), _v.context.$implicit.medias, "thumb")); _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.productName; _ck(_v, 12, 0, currVal_3); var currVal_4 = _v.context.$implicit.brand.brandName; _ck(_v, 15, 0, currVal_4); }); }
+    } return ad; }, null, null)), i0.ɵdid(3, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵppd(4, 2), (_l()(), i0.ɵeld(5, 0, null, 0, 14, "mat-grid-tile-footer", [["class", "mat-grid-tile-footer"]], null, null, null, i2.View_MatGridTileText_0, i2.RenderType_MatGridTileText)), i0.ɵdid(6, 1097728, null, 1, i3.MatGridTileText, [i0.ElementRef], null, null), i0.ɵqud(603979776, 2, { _lines: 1 }), i0.ɵdid(8, 16384, null, 0, i3.MatGridTileFooterCssMatStyler, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 1, 3, "h3", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(10, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(11, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), i0.ɵted(12, null, ["", ""])), (_l()(), i0.ɵeld(13, 0, null, 1, 2, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(14, 16384, [[2, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵted(15, null, ["", ""])), (_l()(), i0.ɵand(16777216, null, 2, 1, null, View_HomeComponent_3)), i0.ɵdid(17, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i0.ɵand(0, [["discount_content", 2]], 2, 0, null, View_HomeComponent_4)), (_l()(), i0.ɵand(0, [["price_content", 2]], 2, 0, null, View_HomeComponent_5))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/product/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 3, 0, currVal_2); var currVal_5 = (_v.context.$implicit.discount.dicountId > 0); var currVal_6 = i0.ɵnov(_v, 18); var currVal_7 = i0.ɵnov(_v, 19); _ck(_v, 17, 0, currVal_5, currVal_6, currVal_7); }, function (_ck, _v) { var currVal_0 = _v.context.$implicit.productName; var currVal_1 = i0.ɵunv(_v, 2, 1, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 1), _v.context.$implicit.medias, "thumb")); _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.productName; _ck(_v, 12, 0, currVal_3); var currVal_4 = _v.context.$implicit.brand.brandName; _ck(_v, 15, 0, currVal_4); }); }
 function View_HomeComponent_1(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 6, "div", [["class", "app-grid-list"]], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 5, "mat-grid-list", [["class", "mat-grid-list"]], [[4, "height", null], [4, "width", null]], null, null, i2.View_MatGridList_0, i2.RenderType_MatGridList)), i0.ɵprd(6144, null, i3.ɵa8, null, [i3.MatGridList]), i0.ɵdid(3, 2211840, null, 1, i3.MatGridList, [i0.ElementRef, [2, i6.Directionality]], { cols: [0, "cols"], rowHeight: [1, "rowHeight"] }, null), i0.ɵqud(603979776, 1, { _tiles: 1 }), (_l()(), i0.ɵand(16777216, null, 0, 1, null, View_HomeComponent_2)), i0.ɵdid(6, 278528, null, 0, i5.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_2 = _co.fixedCols; var currVal_3 = _co.fitListHeight; _ck(_v, 3, 0, currVal_2, currVal_3); var currVal_4 = _co.featured; _ck(_v, 6, 0, currVal_4); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.fitListHeight; var currVal_1 = _co.fitListWidth; _ck(_v, 1, 0, currVal_0, currVal_1); }); }
 function View_HomeComponent_8(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 0, "div", [], null, null, null, null, null))], null, null); }
-function View_HomeComponent_9(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 8, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "span", [["class", "percentage"]], null, null, null, null, null)), (_l()(), i0.ɵted(2, null, ["-", "%"])), (_l()(), i0.ɵeld(3, 0, null, null, 2, "del", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(7, null, ["", ""])), i0.ɵppd(8, 1)], null, function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.discount.percentage; _ck(_v, 2, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_1); var currVal_2 = i0.ɵunv(_v, 7, 0, _ck(_v, 8, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.discount.price)); _ck(_v, 7, 0, currVal_2); }); }
-function View_HomeComponent_10(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 5, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 4, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(2, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(3, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1)], null, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 1), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_0); }); }
+function View_HomeComponent_9(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 8, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "span", [["class", "percentage"]], null, null, null, null, null)), (_l()(), i0.ɵted(2, null, ["-", "%"])), (_l()(), i0.ɵeld(3, 0, null, null, 2, "del", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(7, null, ["", ""])), i0.ɵppd(8, 1)], null, function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.discount.percentage; _ck(_v, 2, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_1); var currVal_2 = i0.ɵunv(_v, 7, 0, _ck(_v, 8, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.discount.price)); _ck(_v, 7, 0, currVal_2); }); }
+function View_HomeComponent_10(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 5, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 4, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(2, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(3, 0, null, null, 2, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(4, null, ["", ""])), i0.ɵppd(5, 1)], null, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 4, 0, _ck(_v, 5, 0, i0.ɵnov(_v.parent.parent.parent, 2), _v.parent.context.$implicit.price.selling)); _ck(_v, 4, 0, currVal_0); }); }
 function View_HomeComponent_7(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 19, "mat-grid-tile", [["class", "mat-grid-tile"], ["style", "cursor: pointer"]], null, null, null, i2.View_MatGridTile_0, i2.RenderType_MatGridTile)), i0.ɵdid(1, 49152, [[3, 4]], 0, i3.MatGridTile, [i0.ElementRef, [2, i3.ɵa8]], null, null), (_l()(), i0.ɵeld(2, 0, null, 0, 2, "img", [], [[8, "alt", 0], [8, "src", 4]], [[null, "click"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (i0.ɵnov(_v, 3).onClick() !== false);
         ad = (pd_0 && ad);
-    } return ad; }, null, null)), i0.ɵdid(3, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵppd(4, 2), (_l()(), i0.ɵeld(5, 0, null, 0, 14, "mat-grid-tile-footer", [["class", "mat-grid-tile-footer"]], null, null, null, i2.View_MatGridTileText_0, i2.RenderType_MatGridTileText)), i0.ɵdid(6, 1097728, null, 1, i3.MatGridTileText, [i0.ElementRef], null, null), i0.ɵqud(603979776, 4, { _lines: 1 }), i0.ɵdid(8, 16384, null, 0, i3.MatGridTileFooterCssMatStyler, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 1, 3, "h3", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(10, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(11, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), i0.ɵted(12, null, ["", ""])), (_l()(), i0.ɵeld(13, 0, null, 1, 2, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(14, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵted(15, null, ["", ""])), (_l()(), i0.ɵand(16777216, null, 2, 1, null, View_HomeComponent_8)), i0.ɵdid(17, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i0.ɵand(0, [["discount_content", 2]], 2, 0, null, View_HomeComponent_9)), (_l()(), i0.ɵand(0, [["price_content", 2]], 2, 0, null, View_HomeComponent_10))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/product/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 3, 0, currVal_2); var currVal_5 = (_v.context.$implicit.discount.dicountId > 0); var currVal_6 = i0.ɵnov(_v, 18); var currVal_7 = i0.ɵnov(_v, 19); _ck(_v, 17, 0, currVal_5, currVal_6, currVal_7); }, function (_ck, _v) { var currVal_0 = _v.context.$implicit.productName; var currVal_1 = i0.ɵunv(_v, 2, 1, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 0), _v.context.$implicit.medias, "thumb")); _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.productName; _ck(_v, 12, 0, currVal_3); var currVal_4 = _v.context.$implicit.brand.brandName; _ck(_v, 15, 0, currVal_4); }); }
+    } return ad; }, null, null)), i0.ɵdid(3, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵppd(4, 2), (_l()(), i0.ɵeld(5, 0, null, 0, 14, "mat-grid-tile-footer", [["class", "mat-grid-tile-footer"]], null, null, null, i2.View_MatGridTileText_0, i2.RenderType_MatGridTileText)), i0.ɵdid(6, 1097728, null, 1, i3.MatGridTileText, [i0.ElementRef], null, null), i0.ɵqud(603979776, 4, { _lines: 1 }), i0.ɵdid(8, 16384, null, 0, i3.MatGridTileFooterCssMatStyler, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 1, 3, "h3", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(10, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵeld(11, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), i0.ɵted(12, null, ["", ""])), (_l()(), i0.ɵeld(13, 0, null, 1, 2, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i0.ɵdid(14, 16384, [[4, 4]], 0, i1.MatLine, [], null, null), (_l()(), i0.ɵted(15, null, ["", ""])), (_l()(), i0.ɵand(16777216, null, 2, 1, null, View_HomeComponent_8)), i0.ɵdid(17, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i0.ɵand(0, [["discount_content", 2]], 2, 0, null, View_HomeComponent_9)), (_l()(), i0.ɵand(0, [["price_content", 2]], 2, 0, null, View_HomeComponent_10))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/product/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 3, 0, currVal_2); var currVal_5 = (_v.context.$implicit.discount.dicountId > 0); var currVal_6 = i0.ɵnov(_v, 18); var currVal_7 = i0.ɵnov(_v, 19); _ck(_v, 17, 0, currVal_5, currVal_6, currVal_7); }, function (_ck, _v) { var currVal_0 = _v.context.$implicit.productName; var currVal_1 = i0.ɵunv(_v, 2, 1, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 1), _v.context.$implicit.medias, "thumb")); _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.productName; _ck(_v, 12, 0, currVal_3); var currVal_4 = _v.context.$implicit.brand.brandName; _ck(_v, 15, 0, currVal_4); }); }
 function View_HomeComponent_6(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 6, "div", [["class", "app-grid-list"]], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 5, "mat-grid-list", [["class", "mat-grid-list"]], [[4, "height", null], [4, "width", null]], null, null, i2.View_MatGridList_0, i2.RenderType_MatGridList)), i0.ɵprd(6144, null, i3.ɵa8, null, [i3.MatGridList]), i0.ɵdid(3, 2211840, null, 1, i3.MatGridList, [i0.ElementRef, [2, i6.Directionality]], { cols: [0, "cols"], rowHeight: [1, "rowHeight"] }, null), i0.ɵqud(603979776, 3, { _tiles: 1 }), (_l()(), i0.ɵand(16777216, null, 0, 1, null, View_HomeComponent_7)), i0.ɵdid(6, 278528, null, 0, i5.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_2 = _co.fixedCols; var currVal_3 = _co.fitListHeight; _ck(_v, 3, 0, currVal_2, currVal_3); var currVal_4 = _co.news; _ck(_v, 6, 0, currVal_4); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.fitListHeight; var currVal_1 = _co.fitListWidth; _ck(_v, 1, 0, currVal_0, currVal_1); }); }
 function View_HomeComponent_12(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 8, "div", [["class", "horizontal-list-item"]], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 3, "img", [], [[8, "src", 4], [8, "alt", 0]], [[null, "click"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (i0.ɵnov(_v, 2).onClick() !== false);
         ad = (pd_0 && ad);
-    } return ad; }, null, null)), i0.ɵdid(2, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵpad(3, 1), i0.ɵppd(4, 1), (_l()(), i0.ɵeld(5, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(6, 0, null, null, 2, "span", [], null, null, null, null, null)), (_l()(), i0.ɵeld(7, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(8, null, ["", ""]))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/brand/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 2, 0, currVal_2); }, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 1, 0, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 0), _ck(_v, 3, 0, _v.context.$implicit.media))); var currVal_1 = i0.ɵinlineInterpolate(1, "", _v.context.$implicit.brandName, ""); _ck(_v, 1, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.brandName; _ck(_v, 8, 0, currVal_3); }); }
+    } return ad; }, null, null)), i0.ɵdid(2, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), i0.ɵpad(3, 1), i0.ɵppd(4, 1), (_l()(), i0.ɵeld(5, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(6, 0, null, null, 2, "span", [], null, null, null, null, null)), (_l()(), i0.ɵeld(7, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(8, null, ["", ""]))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "/brand/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 2, 0, currVal_2); }, function (_ck, _v) { var currVal_0 = i0.ɵunv(_v, 1, 0, _ck(_v, 4, 0, i0.ɵnov(_v.parent.parent, 1), _ck(_v, 3, 0, _v.context.$implicit.media))); var currVal_1 = i0.ɵinlineInterpolate(1, "", _v.context.$implicit.brandName, ""); _ck(_v, 1, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.brandName; _ck(_v, 8, 0, currVal_3); }); }
 function View_HomeComponent_11(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 2, "div", [["class", "horizontal-list"]], null, null, null, null, null)), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_12)), i0.ɵdid(2, 278528, null, 0, i5.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.brands; _ck(_v, 2, 0, currVal_0); }, null); }
 function View_HomeComponent_14(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 6, "div", [["class", "horizontal-list-item"]], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 1, "img", [], [[8, "src", 4], [8, "alt", 0]], [[null, "click"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (i0.ɵnov(_v, 2).onClick() !== false);
         ad = (pd_0 && ad);
     } return ad; }, null, null)), i0.ɵdid(2, 16384, null, 0, i4.RouterLink, [i4.Router, i4.ActivatedRoute, [8, null], i0.Renderer2, i0.ElementRef], { routerLink: [0, "routerLink"] }, null), (_l()(), i0.ɵeld(3, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(4, 0, null, null, 2, "span", [], null, null, null, null, null)), (_l()(), i0.ɵeld(5, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i0.ɵted(6, null, ["", ""]))], function (_ck, _v) { var currVal_2 = i0.ɵinlineInterpolate(1, "", _v.context.$implicit.route, ""); _ck(_v, 2, 0, currVal_2); }, function (_ck, _v) { var currVal_0 = i0.ɵinlineInterpolate(1, "", _v.context.$implicit.image, ""); var currVal_1 = i0.ɵinlineInterpolate(1, "", _v.context.$implicit.name, ""); _ck(_v, 1, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.name; _ck(_v, 6, 0, currVal_3); }); }
 function View_HomeComponent_13(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 2, "div", [["class", "horizontal-list"]], null, null, null, null, null)), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_14)), i0.ɵdid(2, 278528, null, 0, i5.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.categories; _ck(_v, 2, 0, currVal_0); }, null); }
-function View_HomeComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i7.ParseUrlPipe, []), i0.ɵpid(0, i8.CurrencyFormatPipe, [i0.LOCALE_ID]), (_l()(), i0.ɵeld(2, 0, null, null, 28, "mat-card", [["class", "mat-card"], ["id", "home"]], null, null, null, i9.View_MatCard_0, i9.RenderType_MatCard)), i0.ɵdid(3, 49152, null, 0, i10.MatCard, [], null, null), (_l()(), i0.ɵeld(4, 0, null, 0, 8, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(5, 16384, null, 0, i10.MatCardTitle, [], null, null), (_l()(), i0.ɵeld(6, 0, null, null, 1, "h1", [], null, null, null, null, null)), (_l()(), i0.ɵted(7, null, ["", ""])), (_l()(), i0.ɵeld(8, 0, null, null, 1, "h2", [], null, null, null, null, null)), (_l()(), i0.ɵted(9, null, ["", ""])), (_l()(), i0.ɵeld(10, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(11, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i0.ɵeld(12, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(13, 0, null, 0, 17, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(14, 16384, null, 0, i10.MatCardContent, [], null, null), (_l()(), i0.ɵeld(15, 0, null, null, 1, "h3", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(16, 8536064, null, 0, i11.TranslateDirective, [i11.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_1)), i0.ɵdid(18, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(19, 0, null, null, 1, "h3", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(20, 8536064, null, 0, i11.TranslateDirective, [i11.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_6)), i0.ɵdid(22, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(23, 0, null, null, 1, "h3", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(24, 8536064, null, 0, i11.TranslateDirective, [i11.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_11)), i0.ɵdid(26, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(27, 0, null, null, 1, "h3", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(28, 8536064, null, 0, i11.TranslateDirective, [i11.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_13)), i0.ɵdid(30, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_2 = "Featured"; _ck(_v, 16, 0, currVal_2); var currVal_3 = _co.featured; _ck(_v, 18, 0, currVal_3); var currVal_4 = "News"; _ck(_v, 20, 0, currVal_4); var currVal_5 = _co.news; _ck(_v, 22, 0, currVal_5); var currVal_6 = "Brands"; _ck(_v, 24, 0, currVal_6); var currVal_7 = _co.brands; _ck(_v, 26, 0, currVal_7); var currVal_8 = "Categories"; _ck(_v, 28, 0, currVal_8); var currVal_9 = _co.categories; _ck(_v, 30, 0, currVal_9); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.name; _ck(_v, 7, 0, currVal_0); var currVal_1 = _co.description; _ck(_v, 9, 0, currVal_1); }); }
+function View_HomeComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i7.MyTranslatePipe, [i0.PLATFORM_ID]), i0.ɵpid(0, i8.ParseUrlPipe, []), i0.ɵpid(0, i9.CurrencyFormatPipe, [i0.LOCALE_ID]), (_l()(), i0.ɵeld(3, 0, null, null, 4, "mat-card", [["class", "mat-card"]], null, null, null, i10.View_MatCard_0, i10.RenderType_MatCard)), i0.ɵdid(4, 49152, null, 0, i11.MatCard, [], null, null), (_l()(), i0.ɵeld(5, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], [[8, "innerHTML", 1]], null, null, null, null)), i0.ɵdid(6, 16384, null, 0, i11.MatCardContent, [], null, null), i0.ɵppd(7, 1), (_l()(), i0.ɵeld(8, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(9, 0, null, null, 19, "mat-card", [["class", "mat-card"]], null, null, null, i10.View_MatCard_0, i10.RenderType_MatCard)), i0.ɵdid(10, 49152, null, 0, i11.MatCard, [], null, null), (_l()(), i0.ɵeld(11, 0, null, 0, 1, "h2", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(12, 8536064, null, 0, i12.TranslateDirective, [i12.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵeld(13, 0, null, 0, 15, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(14, 16384, null, 0, i11.MatCardContent, [], null, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_1)), i0.ɵdid(16, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(17, 0, null, null, 1, "h2", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(18, 8536064, null, 0, i12.TranslateDirective, [i12.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_6)), i0.ɵdid(20, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(21, 0, null, null, 1, "h2", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(22, 8536064, null, 0, i12.TranslateDirective, [i12.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_11)), i0.ɵdid(24, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i0.ɵeld(25, 0, null, null, 1, "h2", [["class", "paragraph"]], null, null, null, null, null)), i0.ɵdid(26, 8536064, null, 0, i12.TranslateDirective, [i12.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_HomeComponent_13)), i0.ɵdid(28, 16384, null, 0, i5.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_1 = "Featured"; _ck(_v, 12, 0, currVal_1); var currVal_2 = _co.featured; _ck(_v, 16, 0, currVal_2); var currVal_3 = "News"; _ck(_v, 18, 0, currVal_3); var currVal_4 = _co.news; _ck(_v, 20, 0, currVal_4); var currVal_5 = "Brands"; _ck(_v, 22, 0, currVal_5); var currVal_6 = _co.brands; _ck(_v, 24, 0, currVal_6); var currVal_7 = "Categories"; _ck(_v, 26, 0, currVal_7); var currVal_8 = _co.categories; _ck(_v, 28, 0, currVal_8); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i0.ɵunv(_v, 5, 0, _ck(_v, 7, 0, i0.ɵnov(_v, 0), _co.data.companyHomeContent)); _ck(_v, 5, 0, currVal_0); }); }
 exports.View_HomeComponent_0 = View_HomeComponent_0;
 function View_HomeComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-home", [], null, [["window", "resize"]], function (_v, en, $event) { var ad = true; if (("window:resize" === en)) {
         var pd_0 = (i0.ɵnov(_v, 1).onResize($event) !== false);
         ad = (pd_0 && ad);
-    } return ad; }, View_HomeComponent_0, RenderType_HomeComponent)), i0.ɵdid(1, 114688, null, 0, i12.HomeComponent, [i0.PLATFORM_ID, i13.ProductService], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+    } return ad; }, View_HomeComponent_0, RenderType_HomeComponent)), i0.ɵdid(1, 114688, null, 0, i13.HomeComponent, [i0.PLATFORM_ID, i14.ProductService], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 exports.View_HomeComponent_Host_0 = View_HomeComponent_Host_0;
-var HomeComponentNgFactory = i0.ɵccf("app-home", i12.HomeComponent, View_HomeComponent_Host_0, {}, {}, []);
+var HomeComponentNgFactory = i0.ɵccf("app-home", i13.HomeComponent, View_HomeComponent_Host_0, {}, {}, []);
 exports.HomeComponentNgFactory = HomeComponentNgFactory;
 
 
@@ -5302,11 +3530,10 @@ var HomeComponent = /** @class */ (function () {
         configurable: true
     });
     HomeComponent.prototype.onInit = function () {
-        this.name = this.data.companyName;
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyHomeSeo.title, this.name);
-        this.description = pipe.transform(this.data.companyHomeSeo.description, this.name);
-        app_component_1.AppComponent.current.setPage('Home', title, this.description, environment_1.environment.hostApi + '/media/logo.png');
+        var title = pipe.transform(this.data.companyHomeSeo.title, this.data.companyName);
+        var desc = pipe.transform(this.data.companyHomeSeo.description, title);
+        app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -5360,35 +3587,19 @@ exports.HomeComponent = HomeComponent;
  */ 
 Object.defineProperty(exports, "__esModule", { value: true });
 var i0 = __webpack_require__(/*! @angular/core */ "@angular/core");
-var i1 = __webpack_require__(/*! ../../../node_modules/@angular/material/card/typings/index.ngfactory */ "./node_modules/@angular/material/card/typings/index.ngfactory.js");
-var i2 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
-var i3 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
-var i4 = __webpack_require__(/*! ../../../node_modules/@agm/core/directives/map.ngfactory */ "./node_modules/@agm/core/directives/map.ngfactory.js");
-var i5 = __webpack_require__(/*! @agm/core/services/managers/marker-manager */ "@agm/core/services/managers/marker-manager");
-var i6 = __webpack_require__(/*! @agm/core/services/google-maps-api-wrapper */ "@agm/core/services/google-maps-api-wrapper");
-var i7 = __webpack_require__(/*! @agm/core/services/managers/info-window-manager */ "@agm/core/services/managers/info-window-manager");
-var i8 = __webpack_require__(/*! @agm/core/services/managers/circle-manager */ "@agm/core/services/managers/circle-manager");
-var i9 = __webpack_require__(/*! @agm/core/services/managers/rectangle-manager */ "@agm/core/services/managers/rectangle-manager");
-var i10 = __webpack_require__(/*! @agm/core/services/managers/polyline-manager */ "@agm/core/services/managers/polyline-manager");
-var i11 = __webpack_require__(/*! @agm/core/services/managers/polygon-manager */ "@agm/core/services/managers/polygon-manager");
-var i12 = __webpack_require__(/*! @agm/core/services/managers/kml-layer-manager */ "@agm/core/services/managers/kml-layer-manager");
-var i13 = __webpack_require__(/*! @agm/core/services/managers/data-layer-manager */ "@agm/core/services/managers/data-layer-manager");
-var i14 = __webpack_require__(/*! @agm/core/services/maps-api-loader/maps-api-loader */ "@agm/core/services/maps-api-loader/maps-api-loader");
-var i15 = __webpack_require__(/*! @agm/core/services/fit-bounds */ "@agm/core/services/fit-bounds");
-var i16 = __webpack_require__(/*! @agm/core/directives/map */ "@agm/core/directives/map");
-var i17 = __webpack_require__(/*! ../pipes/imageurl.pipe */ "./src/app/pipes/imageurl.pipe.ts");
-var i18 = __webpack_require__(/*! ../pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
-var i19 = __webpack_require__(/*! @angular/common */ "@angular/common");
-var i20 = __webpack_require__(/*! ./info.component */ "./src/app/home/info.component.ts");
-var styles_InfoComponent = ["agm-map[_ngcontent-%COMP%] {\n      height: 300px;\n    }"];
+var i1 = __webpack_require__(/*! ../pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
+var i2 = __webpack_require__(/*! ../../../node_modules/@angular/material/card/typings/index.ngfactory */ "./node_modules/@angular/material/card/typings/index.ngfactory.js");
+var i3 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
+var i4 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
+var i5 = __webpack_require__(/*! ./info.component */ "./src/app/home/info.component.ts");
+var styles_InfoComponent = [""];
 var RenderType_InfoComponent = i0.ɵcrt({ encapsulation: 0, styles: styles_InfoComponent, data: {} });
 exports.RenderType_InfoComponent = RenderType_InfoComponent;
-function View_InfoComponent_1(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 62, "div", [], null, null, null, null, null)), (_l()(), i0.ɵeld(1, 0, null, null, 11, "mat-card", [["class", "mat-card"]], null, null, null, i1.View_MatCard_0, i1.RenderType_MatCard)), i0.ɵdid(2, 49152, null, 0, i2.MatCard, [], null, null), (_l()(), i0.ɵeld(3, 0, null, 0, 6, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(4, 16384, null, 0, i2.MatCardTitle, [], null, null), (_l()(), i0.ɵeld(5, 0, null, null, 1, "img", [["alt", "logo"], ["height", "100"], ["style", "position: absolute; top: 0; right: 0;"]], [[8, "src", 4]], null, null, null, null)), i0.ɵppd(6, 1), (_l()(), i0.ɵted(7, null, [" ", " "])), (_l()(), i0.ɵeld(8, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(9, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(10, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], [[8, "innerHTML", 1]], null, null, null, null)), i0.ɵdid(11, 16384, null, 0, i2.MatCardContent, [], null, null), i0.ɵppd(12, 1), (_l()(), i0.ɵeld(13, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(14, 0, null, null, 26, "mat-card", [["class", "mat-card"]], null, null, null, i1.View_MatCard_0, i1.RenderType_MatCard)), i0.ɵdid(15, 49152, null, 0, i2.MatCard, [], null, null), (_l()(), i0.ɵeld(16, 0, null, 0, 3, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(17, 16384, null, 0, i2.MatCardTitle, [], null, null), (_l()(), i0.ɵted(18, null, ["", ""])), i0.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(20, 0, null, 0, 20, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(21, 16384, null, 0, i2.MatCardContent, [], null, null), (_l()(), i0.ɵeld(22, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(23, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(24, 8536064, null, 0, i3.TranslateDirective, [i3.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(25, null, ["\u00A0\u00A0", ""])), (_l()(), i0.ɵeld(26, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(27, 8536064, null, 0, i3.TranslateDirective, [i3.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵeld(28, 0, null, null, 12, "ul", [], null, null, null, null, null)), (_l()(), i0.ɵeld(29, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(30, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(31, null, ["", " (", ")"])), i0.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(33, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(34, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(35, null, ["", " (", ")"])), i0.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(37, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(38, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(39, null, ["", " (", ")"])), i0.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(41, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(42, 0, null, null, 8, "mat-card", [["class", "mat-card"]], null, null, null, i1.View_MatCard_0, i1.RenderType_MatCard)), i0.ɵdid(43, 49152, null, 0, i2.MatCard, [], null, null), (_l()(), i0.ɵeld(44, 0, null, 0, 3, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(45, 16384, null, 0, i2.MatCardTitle, [], null, null), (_l()(), i0.ɵted(46, null, ["", ""])), i0.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(48, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(49, 16384, null, 0, i2.MatCardContent, [], null, null), (_l()(), i0.ɵted(50, null, [" ", " ", " ", " ", " ", " "])), (_l()(), i0.ɵeld(51, 0, null, null, 11, "agm-map", [], [[2, "sebm-google-map-container", null]], null, null, i4.View_AgmMap_0, i4.RenderType_AgmMap)), i0.ɵprd(4608, null, i5.MarkerManager, i5.MarkerManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i7.InfoWindowManager, i7.InfoWindowManager, [i6.GoogleMapsAPIWrapper, i0.NgZone, i5.MarkerManager]), i0.ɵprd(4608, null, i8.CircleManager, i8.CircleManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i9.RectangleManager, i9.RectangleManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i10.PolylineManager, i10.PolylineManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i11.PolygonManager, i11.PolygonManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i12.KmlLayerManager, i12.KmlLayerManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(4608, null, i13.DataLayerManager, i13.DataLayerManager, [i6.GoogleMapsAPIWrapper, i0.NgZone]), i0.ɵprd(512, null, i6.GoogleMapsAPIWrapper, i6.GoogleMapsAPIWrapper, [i14.MapsAPILoader, i0.NgZone]), i0.ɵprd(512, null, i15.FitBoundsService, i15.FitBoundsService, [i14.MapsAPILoader]), i0.ɵdid(62, 770048, null, 0, i16.AgmMap, [i0.ElementRef, i6.GoogleMapsAPIWrapper, i15.FitBoundsService], { longitude: [0, "longitude"], latitude: [1, "latitude"], zoom: [2, "zoom"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_4 = "Phone"; _ck(_v, 24, 0, currVal_4); var currVal_6 = "Email"; _ck(_v, 27, 0, currVal_6); var currVal_23 = _co.lng; var currVal_24 = _co.lat; var currVal_25 = 10; _ck(_v, 62, 0, currVal_23, currVal_24, currVal_25); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i0.ɵinlineInterpolate(1, "", i0.ɵunv(_v, 5, 0, _ck(_v, 6, 0, i0.ɵnov(_v.parent, 0), "/media/logo.png")), ""); _ck(_v, 5, 0, currVal_0); var currVal_1 = _co.data.companyName; _ck(_v, 7, 0, currVal_1); var currVal_2 = i0.ɵunv(_v, 10, 0, _ck(_v, 12, 0, i0.ɵnov(_v.parent, 1), _co.data.companyDescription)); _ck(_v, 10, 0, currVal_2); var currVal_3 = i0.ɵunv(_v, 18, 0, i0.ɵnov(_v, 19).transform("Contacts")); _ck(_v, 18, 0, currVal_3); var currVal_5 = _co.data.companyPhone; _ck(_v, 25, 0, currVal_5); var currVal_7 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailInfo, ""); _ck(_v, 30, 0, currVal_7); var currVal_8 = _co.data.companyEmailInfo; var currVal_9 = i0.ɵunv(_v, 31, 1, i0.ɵnov(_v, 32).transform("Information")); _ck(_v, 31, 0, currVal_8, currVal_9); var currVal_10 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSales, ""); _ck(_v, 34, 0, currVal_10); var currVal_11 = _co.data.companyEmailSales; var currVal_12 = i0.ɵunv(_v, 35, 1, i0.ɵnov(_v, 36).transform("Sales")); _ck(_v, 35, 0, currVal_11, currVal_12); var currVal_13 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSupport, ""); _ck(_v, 38, 0, currVal_13); var currVal_14 = _co.data.companyEmailSupport; var currVal_15 = i0.ɵunv(_v, 39, 1, i0.ɵnov(_v, 40).transform("Support")); _ck(_v, 39, 0, currVal_14, currVal_15); var currVal_16 = i0.ɵunv(_v, 46, 0, i0.ɵnov(_v, 47).transform("Address")); _ck(_v, 46, 0, currVal_16); var currVal_17 = _co.data.companyAddress; var currVal_18 = _co.data.companyCity; var currVal_19 = _co.data.companyZip; var currVal_20 = _co.data.companyProvince; var currVal_21 = _co.data.companyCountry; _ck(_v, 50, 0, currVal_17, currVal_18, currVal_19, currVal_20, currVal_21); var currVal_22 = true; _ck(_v, 51, 0, currVal_22); }); }
-function View_InfoComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i17.ImageUrlPipe, []), i0.ɵpid(0, i18.MyTranslatePipe, [i0.PLATFORM_ID]), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_InfoComponent_1)), i0.ɵdid(3, 16384, null, 0, i19.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, "ngIf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.data; _ck(_v, 3, 0, currVal_0); }, null); }
+function View_InfoComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i1.MyTranslatePipe, [i0.PLATFORM_ID]), (_l()(), i0.ɵeld(1, 0, null, null, 4, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(2, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(3, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], [[8, "innerHTML", 1]], null, null, null, null)), i0.ɵdid(4, 16384, null, 0, i3.MatCardContent, [], null, null), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(7, 0, null, null, 31, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(8, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 0, 3, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(10, 16384, null, 0, i3.MatCardTitle, [], null, null), (_l()(), i0.ɵted(11, null, ["", ""])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(13, 0, null, 0, 25, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(14, 16384, null, 0, i3.MatCardContent, [], null, null), (_l()(), i0.ɵeld(15, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(16, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(17, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(18, null, ["\u00A0\u00A0", ""])), (_l()(), i0.ɵeld(19, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(20, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(21, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(22, null, ["\u00A0\u00A0 ", " ", " ", " ", " ", " "])), (_l()(), i0.ɵeld(23, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(24, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵeld(25, 0, null, null, 12, "ul", [], null, null, null, null, null)), (_l()(), i0.ɵeld(26, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(27, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(28, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(30, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(31, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(32, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(34, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(35, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(36, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(38, 0, null, null, 0, "br", [], null, null, null, null, null))], function (_ck, _v) { var currVal_2 = "Phone"; _ck(_v, 17, 0, currVal_2); var currVal_4 = "Address"; _ck(_v, 21, 0, currVal_4); var currVal_10 = "Email"; _ck(_v, 24, 0, currVal_10); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i0.ɵunv(_v, 3, 0, _ck(_v, 5, 0, i0.ɵnov(_v, 0), _co.data.companyInfoContent)); _ck(_v, 3, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 11, 0, i0.ɵnov(_v, 12).transform("Contacts")); _ck(_v, 11, 0, currVal_1); var currVal_3 = _co.data.companyPhone; _ck(_v, 18, 0, currVal_3); var currVal_5 = _co.data.companyAddress; var currVal_6 = _co.data.companyCity; var currVal_7 = _co.data.companyZip; var currVal_8 = _co.data.companyProvince; var currVal_9 = _co.data.companyCountry; _ck(_v, 22, 0, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9); var currVal_11 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailInfo, ""); _ck(_v, 27, 0, currVal_11); var currVal_12 = _co.data.companyEmailInfo; var currVal_13 = i0.ɵunv(_v, 28, 1, i0.ɵnov(_v, 29).transform("Information")); _ck(_v, 28, 0, currVal_12, currVal_13); var currVal_14 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSales, ""); _ck(_v, 31, 0, currVal_14); var currVal_15 = _co.data.companyEmailSales; var currVal_16 = i0.ɵunv(_v, 32, 1, i0.ɵnov(_v, 33).transform("Sales")); _ck(_v, 32, 0, currVal_15, currVal_16); var currVal_17 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSupport, ""); _ck(_v, 35, 0, currVal_17); var currVal_18 = _co.data.companyEmailSupport; var currVal_19 = i0.ɵunv(_v, 36, 1, i0.ɵnov(_v, 37).transform("Support")); _ck(_v, 36, 0, currVal_18, currVal_19); }); }
 exports.View_InfoComponent_0 = View_InfoComponent_0;
-function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 114688, null, 0, i20.InfoComponent, [i0.PLATFORM_ID], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 114688, null, 0, i5.InfoComponent, [i0.PLATFORM_ID], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 exports.View_InfoComponent_Host_0 = View_InfoComponent_Host_0;
-var InfoComponentNgFactory = i0.ɵccf("app-info", i20.InfoComponent, View_InfoComponent_Host_0, {}, {}, []);
+var InfoComponentNgFactory = i0.ɵccf("app-info", i5.InfoComponent, View_InfoComponent_Host_0, {}, {}, []);
 exports.InfoComponentNgFactory = InfoComponentNgFactory;
 
 
@@ -5411,8 +3622,6 @@ var helpers_1 = __webpack_require__(/*! app/shared/helpers */ "./src/app/shared/
 var InfoComponent = /** @class */ (function () {
     function InfoComponent(platformId) {
         this.platformId = platformId;
-        this.lat = 51.678418;
-        this.lng = 7.809007;
     }
     Object.defineProperty(InfoComponent.prototype, "data", {
         get: function () { return helpers_1.Helpers.setting; },
@@ -6178,13 +4387,13 @@ function View_ProductComponent_9(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 
 function View_ProductComponent_8(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_9)), i1.ɵdid(1, 278528, null, 0, i4.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵand(0, null, null, 0))], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.product.medias; _ck(_v, 1, 0, currVal_0); }, null); }
 function View_ProductComponent_11(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 6, "div", [["class", "swiper-slide"]], null, null, null, null, null)), (_l()(), i1.ɵeld(1, 0, null, null, 5, "a", [["target", "_blank"]], [[8, "href", 4]], null, null, null, null)), i1.ɵpad(2, 1), i1.ɵppd(3, 1), (_l()(), i1.ɵeld(4, 0, null, null, 2, "img", [], [[8, "src", 4], [8, "alt", 0]], null, null, null, null)), i1.ɵpad(5, 1), i1.ɵppd(6, 2)], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵinlineInterpolate(1, "", i1.ɵunv(_v, 1, 0, _ck(_v, 3, 0, i1.ɵnov(_v.parent.parent.parent.parent, 2), _ck(_v, 2, 0, _v.context.$implicit))), ""); _ck(_v, 1, 0, currVal_0); var currVal_1 = i1.ɵinlineInterpolate(1, "", i1.ɵunv(_v, 4, 0, _ck(_v, 6, 0, i1.ɵnov(_v.parent.parent.parent.parent, 2), _ck(_v, 5, 0, _v.context.$implicit), "thumb")), ""); var currVal_2 = i1.ɵinlineInterpolate(1, "", _co.product.productName, " image"); _ck(_v, 4, 0, currVal_1, currVal_2); }); }
 function View_ProductComponent_10(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 4, "swiper", [], null, null, null, i5.View_SwiperComponent_0, i5.RenderType_SwiperComponent)), i1.ɵdid(1, 12632064, null, 0, i6.SwiperComponent, [i1.ElementRef, i1.ChangeDetectorRef], { config: [0, "config"] }, null), (_l()(), i1.ɵeld(2, 0, null, 0, 2, "div", [["class", "swiper-wrapper"]], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_11)), i1.ɵdid(4, 278528, null, 0, i4.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.config; _ck(_v, 1, 0, currVal_0); var currVal_1 = _co.product.medias; _ck(_v, 4, 0, currVal_1); }, null); }
-function View_ProductComponent_2(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 16777216, null, null, 48, "mat-expansion-panel", [["class", "mat-expansion-panel"]], [[2, "mat-expanded", null], [2, "_mat-animation-noopable", null], [2, "mat-expansion-panel-spacing", null]], null, null, i7.View_MatExpansionPanel_0, i7.RenderType_MatExpansionPanel)), i1.ɵdid(1, 1753088, null, 1, i8.MatExpansionPanel, [[3, i8.MAT_ACCORDION], i1.ChangeDetectorRef, i9.UniqueSelectionDispatcher, i1.ViewContainerRef, i4.DOCUMENT, [2, i10.ANIMATION_MODULE_TYPE], [2, i8.MAT_EXPANSION_PANEL_DEFAULT_OPTIONS]], { expanded: [0, "expanded"] }, null), i1.ɵqud(335544320, 1, { _lazyContent: 0 }), i1.ɵprd(256, null, i8.MAT_ACCORDION, undefined, []), (_l()(), i1.ɵeld(4, 0, null, 0, 11, "mat-expansion-panel-header", [["class", "mat-expansion-panel-header"], ["role", "button"], ["style", "background-color: whitesmoke"]], [[1, "id", 0], [1, "tabindex", 0], [1, "aria-controls", 0], [1, "aria-expanded", 0], [1, "aria-disabled", 0], [2, "mat-expanded", null], [40, "@expansionHeight", 0]], [[null, "click"], [null, "keydown"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
+function View_ProductComponent_2(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 16777216, null, null, 47, "mat-expansion-panel", [["class", "mat-expansion-panel"]], [[2, "mat-expanded", null], [2, "_mat-animation-noopable", null], [2, "mat-expansion-panel-spacing", null]], null, null, i7.View_MatExpansionPanel_0, i7.RenderType_MatExpansionPanel)), i1.ɵdid(1, 1753088, null, 1, i8.MatExpansionPanel, [[3, i8.MAT_ACCORDION], i1.ChangeDetectorRef, i9.UniqueSelectionDispatcher, i1.ViewContainerRef, i4.DOCUMENT, [2, i10.ANIMATION_MODULE_TYPE], [2, i8.MAT_EXPANSION_PANEL_DEFAULT_OPTIONS]], { expanded: [0, "expanded"] }, null), i1.ɵqud(335544320, 1, { _lazyContent: 0 }), i1.ɵprd(256, null, i8.MAT_ACCORDION, undefined, []), (_l()(), i1.ɵeld(4, 0, null, 0, 11, "mat-expansion-panel-header", [["class", "mat-expansion-panel-header"], ["role", "button"], ["style", "background-color: whitesmoke"]], [[1, "id", 0], [1, "tabindex", 0], [1, "aria-controls", 0], [1, "aria-expanded", 0], [1, "aria-disabled", 0], [2, "mat-expanded", null], [40, "@expansionHeight", 0]], [[null, "click"], [null, "keydown"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (i1.ɵnov(_v, 5)._toggle() !== false);
         ad = (pd_0 && ad);
     } if (("keydown" === en)) {
         var pd_1 = (i1.ɵnov(_v, 5)._keydown($event) !== false);
         ad = (pd_1 && ad);
-    } return ad; }, i7.View_MatExpansionPanelHeader_0, i7.RenderType_MatExpansionPanelHeader)), i1.ɵdid(5, 180224, null, 0, i8.MatExpansionPanelHeader, [i8.MatExpansionPanel, i1.ElementRef, i11.FocusMonitor, i1.ChangeDetectorRef, [2, i8.MAT_EXPANSION_PANEL_DEFAULT_OPTIONS]], null, null), i1.ɵpod(6, { collapsedHeight: 0, expandedHeight: 1 }), i1.ɵpod(7, { value: 0, params: 1 }), (_l()(), i1.ɵeld(8, 0, null, 1, 3, "mat-panel-description", [["class", "mat-expansion-panel-header-description"]], null, null, null, null, null)), i1.ɵdid(9, 16384, null, 0, i8.MatExpansionPanelDescription, [], null, null), (_l()(), i1.ɵted(10, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(12, 0, null, 0, 3, "mat-panel-title", [["class", "mat-expansion-panel-header-title"]], null, null, null, null, null)), i1.ɵdid(13, 16384, null, 0, i8.MatExpansionPanelTitle, [], null, null), (_l()(), i1.ɵeld(14, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i1.ɵted(15, null, ["SKU: ", ""])), (_l()(), i1.ɵeld(16, 0, null, 1, 32, "div", [["class", "detail-content"]], null, null, null, null, null)), (_l()(), i1.ɵeld(17, 0, null, null, 1, "h1", [], null, null, null, null, null)), (_l()(), i1.ɵted(18, null, ["", ""])), (_l()(), i1.ɵeld(19, 0, null, null, 2, "h2", [], null, null, null, null, null)), (_l()(), i1.ɵted(20, null, ["", ""])), i1.ɵppd(21, 2), (_l()(), i1.ɵeld(22, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(23, 0, null, null, 7, "p", [], null, null, null, null, null)), (_l()(), i1.ɵeld(24, 0, null, null, 6, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(25, 16384, null, 0, i2.MatLine, [], null, null), (_l()(), i1.ɵted(26, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(28, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵeld(29, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i1.ɵted(30, null, ["", ""])), (_l()(), i1.ɵeld(31, 0, null, null, 7, "p", [], null, null, null, null, null)), (_l()(), i1.ɵeld(32, 0, null, null, 6, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(33, 16384, null, 0, i2.MatLine, [], null, null), (_l()(), i1.ɵted(34, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(36, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_3)), i1.ɵdid(38, 278528, null, 0, i4.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_4)), i1.ɵdid(40, 16384, null, 0, i4.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i1.ɵand(0, [["discount_content", 2]], null, 0, null, View_ProductComponent_5)), (_l()(), i1.ɵand(0, [["price_content", 2]], null, 0, null, View_ProductComponent_6)), (_l()(), i1.ɵeld(43, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(44, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_7)), i1.ɵdid(46, 16384, null, 0, i4.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i1.ɵand(0, [["server", 2]], null, 0, null, View_ProductComponent_8)), (_l()(), i1.ɵand(0, [["browser", 2]], null, 0, null, View_ProductComponent_10)), (_l()(), i1.ɵand(0, null, null, 0))], function (_ck, _v) { var _co = _v.component; var currVal_3 = true; _ck(_v, 1, 0, currVal_3); var currVal_18 = _co.product.categories; _ck(_v, 38, 0, currVal_18); var currVal_19 = (_co.product.discount.price > 0); var currVal_20 = i1.ɵnov(_v, 41); var currVal_21 = i1.ɵnov(_v, 42); _ck(_v, 40, 0, currVal_19, currVal_20, currVal_21); var currVal_22 = _co.isServer; var currVal_23 = i1.ɵnov(_v, 47); var currVal_24 = i1.ɵnov(_v, 48); _ck(_v, 46, 0, currVal_22, currVal_23, currVal_24); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵnov(_v, 1).expanded; var currVal_1 = (i1.ɵnov(_v, 1)._animationMode === "NoopAnimations"); var currVal_2 = i1.ɵnov(_v, 1)._hasSpacing(); _ck(_v, 0, 0, currVal_0, currVal_1, currVal_2); var currVal_4 = i1.ɵnov(_v, 5).panel._headerId; var currVal_5 = (i1.ɵnov(_v, 5).disabled ? (0 - 1) : 0); var currVal_6 = i1.ɵnov(_v, 5)._getPanelId(); var currVal_7 = i1.ɵnov(_v, 5)._isExpanded(); var currVal_8 = i1.ɵnov(_v, 5).panel.disabled; var currVal_9 = i1.ɵnov(_v, 5)._isExpanded(); var currVal_10 = _ck(_v, 7, 0, i1.ɵnov(_v, 5)._getExpandedState(), _ck(_v, 6, 0, i1.ɵnov(_v, 5).collapsedHeight, i1.ɵnov(_v, 5).expandedHeight)); _ck(_v, 4, 0, currVal_4, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9, currVal_10); var currVal_11 = i1.ɵunv(_v, 10, 0, i1.ɵnov(_v, 11).transform("Information")); _ck(_v, 10, 0, currVal_11); var currVal_12 = _co.product.productCode; _ck(_v, 15, 0, currVal_12); var currVal_13 = _co.product.productName; _ck(_v, 18, 0, currVal_13); var currVal_14 = i1.ɵunv(_v, 20, 0, _ck(_v, 21, 0, i1.ɵnov(_v.parent.parent, 0), _co.product.translations, _co.product.productName)); _ck(_v, 20, 0, currVal_14); var currVal_15 = i1.ɵunv(_v, 26, 0, i1.ɵnov(_v, 27).transform("Brand")); _ck(_v, 26, 0, currVal_15); var currVal_16 = _co.product.brand.brandName; _ck(_v, 30, 0, currVal_16); var currVal_17 = i1.ɵunv(_v, 34, 0, i1.ɵnov(_v, 35).transform("Categories")); _ck(_v, 34, 0, currVal_17); }); }
+    } return ad; }, i7.View_MatExpansionPanelHeader_0, i7.RenderType_MatExpansionPanelHeader)), i1.ɵdid(5, 180224, null, 0, i8.MatExpansionPanelHeader, [i8.MatExpansionPanel, i1.ElementRef, i11.FocusMonitor, i1.ChangeDetectorRef, [2, i8.MAT_EXPANSION_PANEL_DEFAULT_OPTIONS]], null, null), i1.ɵpod(6, { collapsedHeight: 0, expandedHeight: 1 }), i1.ɵpod(7, { value: 0, params: 1 }), (_l()(), i1.ɵeld(8, 0, null, 1, 3, "mat-panel-description", [["class", "mat-expansion-panel-header-description"]], null, null, null, null, null)), i1.ɵdid(9, 16384, null, 0, i8.MatExpansionPanelDescription, [], null, null), (_l()(), i1.ɵted(10, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(12, 0, null, 0, 3, "mat-panel-title", [["class", "mat-expansion-panel-header-title"]], null, null, null, null, null)), i1.ɵdid(13, 16384, null, 0, i8.MatExpansionPanelTitle, [], null, null), (_l()(), i1.ɵeld(14, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i1.ɵted(15, null, ["SKU: ", ""])), (_l()(), i1.ɵeld(16, 0, null, 1, 31, "div", [["class", "detail-content"]], null, null, null, null, null)), (_l()(), i1.ɵeld(17, 0, null, null, 1, "h1", [], null, null, null, null, null)), (_l()(), i1.ɵted(18, null, ["", ""])), (_l()(), i1.ɵeld(19, 0, null, null, 1, "p", [], [[8, "innerHTML", 1]], null, null, null, null)), i1.ɵppd(20, 1), (_l()(), i1.ɵeld(21, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(22, 0, null, null, 7, "p", [], null, null, null, null, null)), (_l()(), i1.ɵeld(23, 0, null, null, 6, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(24, 16384, null, 0, i2.MatLine, [], null, null), (_l()(), i1.ɵted(25, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(27, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵeld(28, 0, null, null, 1, "b", [], null, null, null, null, null)), (_l()(), i1.ɵted(29, null, ["", ""])), (_l()(), i1.ɵeld(30, 0, null, null, 7, "p", [], null, null, null, null, null)), (_l()(), i1.ɵeld(31, 0, null, null, 6, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(32, 16384, null, 0, i2.MatLine, [], null, null), (_l()(), i1.ɵted(33, null, ["", ""])), i1.ɵpid(131072, i3.TranslatePipe, [i3.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(35, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_3)), i1.ɵdid(37, 278528, null, 0, i4.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_4)), i1.ɵdid(39, 16384, null, 0, i4.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i1.ɵand(0, [["discount_content", 2]], null, 0, null, View_ProductComponent_5)), (_l()(), i1.ɵand(0, [["price_content", 2]], null, 0, null, View_ProductComponent_6)), (_l()(), i1.ɵeld(42, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(43, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_7)), i1.ɵdid(45, 16384, null, 0, i4.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i1.ɵand(0, [["server", 2]], null, 0, null, View_ProductComponent_8)), (_l()(), i1.ɵand(0, [["browser", 2]], null, 0, null, View_ProductComponent_10)), (_l()(), i1.ɵand(0, null, null, 0))], function (_ck, _v) { var _co = _v.component; var currVal_3 = true; _ck(_v, 1, 0, currVal_3); var currVal_18 = _co.product.categories; _ck(_v, 37, 0, currVal_18); var currVal_19 = (_co.product.discount.price > 0); var currVal_20 = i1.ɵnov(_v, 40); var currVal_21 = i1.ɵnov(_v, 41); _ck(_v, 39, 0, currVal_19, currVal_20, currVal_21); var currVal_22 = _co.isServer; var currVal_23 = i1.ɵnov(_v, 46); var currVal_24 = i1.ɵnov(_v, 47); _ck(_v, 45, 0, currVal_22, currVal_23, currVal_24); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵnov(_v, 1).expanded; var currVal_1 = (i1.ɵnov(_v, 1)._animationMode === "NoopAnimations"); var currVal_2 = i1.ɵnov(_v, 1)._hasSpacing(); _ck(_v, 0, 0, currVal_0, currVal_1, currVal_2); var currVal_4 = i1.ɵnov(_v, 5).panel._headerId; var currVal_5 = (i1.ɵnov(_v, 5).disabled ? (0 - 1) : 0); var currVal_6 = i1.ɵnov(_v, 5)._getPanelId(); var currVal_7 = i1.ɵnov(_v, 5)._isExpanded(); var currVal_8 = i1.ɵnov(_v, 5).panel.disabled; var currVal_9 = i1.ɵnov(_v, 5)._isExpanded(); var currVal_10 = _ck(_v, 7, 0, i1.ɵnov(_v, 5)._getExpandedState(), _ck(_v, 6, 0, i1.ɵnov(_v, 5).collapsedHeight, i1.ɵnov(_v, 5).expandedHeight)); _ck(_v, 4, 0, currVal_4, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9, currVal_10); var currVal_11 = i1.ɵunv(_v, 10, 0, i1.ɵnov(_v, 11).transform("Information")); _ck(_v, 10, 0, currVal_11); var currVal_12 = _co.product.productCode; _ck(_v, 15, 0, currVal_12); var currVal_13 = _co.product.productName; _ck(_v, 18, 0, currVal_13); var currVal_14 = i1.ɵunv(_v, 19, 0, _ck(_v, 20, 0, i1.ɵnov(_v.parent.parent, 0), _co.product.translations)); _ck(_v, 19, 0, currVal_14); var currVal_15 = i1.ɵunv(_v, 25, 0, i1.ɵnov(_v, 26).transform("Brand")); _ck(_v, 25, 0, currVal_15); var currVal_16 = _co.product.brand.brandName; _ck(_v, 29, 0, currVal_16); var currVal_17 = i1.ɵunv(_v, 33, 0, i1.ɵnov(_v, 34).transform("Categories")); _ck(_v, 33, 0, currVal_17); }); }
 function View_ProductComponent_1(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 5, "div", [], null, null, null, null, null)), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_ProductComponent_2)), i1.ɵdid(2, 16384, null, 0, i4.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i1.ɵeld(3, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i1.ɵeld(4, 0, null, null, 1, "article-picker", [], null, [[null, "onPicked"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("onPicked" === en)) {
         var pd_0 = (_co.pickerClick($event) !== false);
         ad = (pd_0 && ad);
@@ -6435,13 +4644,13 @@ function View_ProductsComponent_1(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0,
         var pd_0 = (i1.ɵnov(_v, 3).onClick() !== false);
         ad = (pd_0 && ad);
     } return ad; }, null, null)), i1.ɵdid(3, 16384, null, 0, i5.RouterLink, [i5.Router, i5.ActivatedRoute, [8, null], i1.Renderer2, i1.ElementRef], { routerLink: [0, "routerLink"] }, null), i1.ɵppd(4, 2), (_l()(), i1.ɵeld(5, 0, null, 0, 14, "mat-grid-tile-footer", [["class", "mat-grid-tile-footer"]], null, null, null, i3.View_MatGridTileText_0, i3.RenderType_MatGridTileText)), i1.ɵdid(6, 1097728, null, 1, i4.MatGridTileText, [i1.ElementRef], null, null), i1.ɵqud(603979776, 2, { _lines: 1 }), i1.ɵdid(8, 16384, null, 0, i4.MatGridTileFooterCssMatStyler, [], null, null), (_l()(), i1.ɵeld(9, 0, null, 1, 3, "h3", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(10, 16384, [[2, 4]], 0, i2.MatLine, [], null, null), (_l()(), i1.ɵeld(11, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), i1.ɵted(12, null, ["", ""])), (_l()(), i1.ɵeld(13, 0, null, 1, 2, "span", [["class", "mat-line"], ["mat-line", ""]], null, null, null, null, null)), i1.ɵdid(14, 16384, [[2, 4]], 0, i2.MatLine, [], null, null), (_l()(), i1.ɵted(15, null, ["", ""])), (_l()(), i1.ɵand(16777216, null, 2, 1, null, View_ProductsComponent_2)), i1.ɵdid(17, 16384, null, 0, i6.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"], ngIfThen: [1, "ngIfThen"], ngIfElse: [2, "ngIfElse"] }, null), (_l()(), i1.ɵand(0, [["discount_content", 2]], 2, 0, null, View_ProductsComponent_3)), (_l()(), i1.ɵand(0, [["price_content", 2]], 2, 0, null, View_ProductsComponent_4))], function (_ck, _v) { var currVal_2 = i1.ɵinlineInterpolate(1, "/product/", _v.context.$implicit.seo.permalink, ""); _ck(_v, 3, 0, currVal_2); var currVal_5 = (_v.context.$implicit.discount.dicountId > 0); var currVal_6 = i1.ɵnov(_v, 18); var currVal_7 = i1.ɵnov(_v, 19); _ck(_v, 17, 0, currVal_5, currVal_6, currVal_7); }, function (_ck, _v) { var currVal_0 = _v.context.$implicit.productName; var currVal_1 = i1.ɵunv(_v, 2, 1, _ck(_v, 4, 0, i1.ɵnov(_v.parent, 0), _v.context.$implicit.medias, "thumb")); _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_3 = _v.context.$implicit.productName; _ck(_v, 12, 0, currVal_3); var currVal_4 = _v.context.$implicit.brand.brandName; _ck(_v, 15, 0, currVal_4); }); }
-function View_ProductsComponent_0(_l) { return i1.ɵvid(0, [i1.ɵpid(0, i7.ParseUrlPipe, []), i1.ɵpid(0, i8.CurrencyFormatPipe, [i1.LOCALE_ID]), (_l()(), i1.ɵeld(2, 0, null, null, 0, "img", [["alt", "logo"], ["height", "100"], ["style", "position: absolute; top: 80px; right: 20px;"]], [[8, "src", 4]], null, null, null, null)), (_l()(), i1.ɵeld(3, 0, null, null, 4, "div", [["style", "padding: 20px;"]], null, null, null, null, null)), (_l()(), i1.ɵeld(4, 0, null, null, 1, "h1", [], null, null, null, null, null)), (_l()(), i1.ɵted(5, null, ["", ""])), (_l()(), i1.ɵeld(6, 0, null, null, 1, "h2", [], null, null, null, null, null)), (_l()(), i1.ɵted(7, null, ["", ""])), (_l()(), i1.ɵeld(8, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(9, 0, null, null, 12, "div", [["style", "padding: 10px 15px;"]], null, null, null, null, null)), (_l()(), i1.ɵeld(10, 0, null, null, 5, "mat-grid-list", [["class", "app-grid-list mat-grid-list"]], [[4, "height", null], [4, "width", null]], null, null, i3.View_MatGridList_0, i3.RenderType_MatGridList)), i1.ɵprd(6144, null, i4.ɵa8, null, [i4.MatGridList]), i1.ɵdid(12, 2211840, null, 1, i4.MatGridList, [i1.ElementRef, [2, i9.Directionality]], { cols: [0, "cols"], rowHeight: [1, "rowHeight"] }, null), i1.ɵqud(603979776, 1, { _tiles: 1 }), (_l()(), i1.ɵand(16777216, null, 0, 1, null, View_ProductsComponent_1)), i1.ɵdid(15, 278528, null, 0, i6.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵeld(16, 0, null, null, 5, "span", [["class", "done"]], null, null, null, null, null)), (_l()(), i1.ɵeld(17, 0, null, null, 4, "a", [["mat-fab", ""]], [[1, "tabindex", 0], [1, "disabled", 0], [1, "aria-disabled", 0], [2, "_mat-animation-noopable", null]], [[null, "click"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("click" === en)) {
-        var pd_0 = (i1.ɵnov(_v, 18)._haltDisabledEvents($event) !== false);
+function View_ProductsComponent_0(_l) { return i1.ɵvid(0, [i1.ɵpid(0, i7.ParseUrlPipe, []), i1.ɵpid(0, i8.CurrencyFormatPipe, [i1.LOCALE_ID]), (_l()(), i1.ɵeld(2, 0, null, null, 3, "div", [["style", "padding: 0 20px; height: 110px;"]], null, null, null, null, null)), (_l()(), i1.ɵeld(3, 0, null, null, 1, "h1", [["style", "float: left"]], null, null, null, null, null)), (_l()(), i1.ɵted(4, null, ["", ""])), (_l()(), i1.ɵeld(5, 0, null, null, 0, "img", [["alt", "logo"], ["height", "100"], ["style", "float: right"]], [[8, "src", 4]], null, null, null, null)), (_l()(), i1.ɵeld(6, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), i1.ɵeld(7, 0, null, null, 12, "div", [["style", "padding: 10px 15px;"]], null, null, null, null, null)), (_l()(), i1.ɵeld(8, 0, null, null, 5, "mat-grid-list", [["class", "app-grid-list mat-grid-list"]], [[4, "height", null], [4, "width", null]], null, null, i3.View_MatGridList_0, i3.RenderType_MatGridList)), i1.ɵprd(6144, null, i4.ɵa8, null, [i4.MatGridList]), i1.ɵdid(10, 2211840, null, 1, i4.MatGridList, [i1.ElementRef, [2, i9.Directionality]], { cols: [0, "cols"], rowHeight: [1, "rowHeight"] }, null), i1.ɵqud(603979776, 1, { _tiles: 1 }), (_l()(), i1.ɵand(16777216, null, 0, 1, null, View_ProductsComponent_1)), i1.ɵdid(13, 278528, null, 0, i6.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵeld(14, 0, null, null, 5, "span", [["class", "done"]], null, null, null, null, null)), (_l()(), i1.ɵeld(15, 0, null, null, 4, "a", [["mat-fab", ""]], [[1, "tabindex", 0], [1, "disabled", 0], [1, "aria-disabled", 0], [2, "_mat-animation-noopable", null]], [[null, "click"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("click" === en)) {
+        var pd_0 = (i1.ɵnov(_v, 16)._haltDisabledEvents($event) !== false);
         ad = (pd_0 && ad);
     } if (("click" === en)) {
         var pd_1 = (_co.openBottomSheet() !== false);
         ad = (pd_1 && ad);
-    } return ad; }, i10.View_MatAnchor_0, i10.RenderType_MatAnchor)), i1.ɵdid(18, 180224, null, 0, i11.MatAnchor, [i12.Platform, i13.FocusMonitor, i1.ElementRef, [2, i14.ANIMATION_MODULE_TYPE]], null, null), (_l()(), i1.ɵeld(19, 0, null, 0, 2, "mat-icon", [["class", "mat-icon notranslate"], ["role", "img"]], [[2, "mat-icon-inline", null], [2, "mat-icon-no-color", null]], null, null, i15.View_MatIcon_0, i15.RenderType_MatIcon)), i1.ɵdid(20, 9158656, null, 0, i16.MatIcon, [i1.ElementRef, i16.MatIconRegistry, [8, null], [2, i16.MAT_ICON_LOCATION]], null, null), (_l()(), i1.ɵted(-1, 0, ["filter_list"]))], function (_ck, _v) { var _co = _v.component; var currVal_5 = _co.fixedCols; var currVal_6 = _co.fitListHeight; _ck(_v, 12, 0, currVal_5, currVal_6); var currVal_7 = _co.filtered; _ck(_v, 15, 0, currVal_7); _ck(_v, 20, 0); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵinlineInterpolate(1, "", _co.image, ""); _ck(_v, 2, 0, currVal_0); var currVal_1 = _co.title; _ck(_v, 5, 0, currVal_1); var currVal_2 = _co.description; _ck(_v, 7, 0, currVal_2); var currVal_3 = _co.fitListHeight; var currVal_4 = _co.fitListWidth; _ck(_v, 10, 0, currVal_3, currVal_4); var currVal_8 = (i1.ɵnov(_v, 18).disabled ? (0 - 1) : (i1.ɵnov(_v, 18).tabIndex || 0)); var currVal_9 = (i1.ɵnov(_v, 18).disabled || null); var currVal_10 = i1.ɵnov(_v, 18).disabled.toString(); var currVal_11 = (i1.ɵnov(_v, 18)._animationMode === "NoopAnimations"); _ck(_v, 17, 0, currVal_8, currVal_9, currVal_10, currVal_11); var currVal_12 = i1.ɵnov(_v, 20).inline; var currVal_13 = (((i1.ɵnov(_v, 20).color !== "primary") && (i1.ɵnov(_v, 20).color !== "accent")) && (i1.ɵnov(_v, 20).color !== "warn")); _ck(_v, 19, 0, currVal_12, currVal_13); }); }
+    } return ad; }, i10.View_MatAnchor_0, i10.RenderType_MatAnchor)), i1.ɵdid(16, 180224, null, 0, i11.MatAnchor, [i12.Platform, i13.FocusMonitor, i1.ElementRef, [2, i14.ANIMATION_MODULE_TYPE]], null, null), (_l()(), i1.ɵeld(17, 0, null, 0, 2, "mat-icon", [["class", "mat-icon notranslate"], ["role", "img"]], [[2, "mat-icon-inline", null], [2, "mat-icon-no-color", null]], null, null, i15.View_MatIcon_0, i15.RenderType_MatIcon)), i1.ɵdid(18, 9158656, null, 0, i16.MatIcon, [i1.ElementRef, i16.MatIconRegistry, [8, null], [2, i16.MAT_ICON_LOCATION]], null, null), (_l()(), i1.ɵted(-1, 0, ["filter_list"]))], function (_ck, _v) { var _co = _v.component; var currVal_4 = _co.fixedCols; var currVal_5 = _co.fitListHeight; _ck(_v, 10, 0, currVal_4, currVal_5); var currVal_6 = _co.filtered; _ck(_v, 13, 0, currVal_6); _ck(_v, 18, 0); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.description; _ck(_v, 4, 0, currVal_0); var currVal_1 = i1.ɵinlineInterpolate(1, "", _co.image, ""); _ck(_v, 5, 0, currVal_1); var currVal_2 = _co.fitListHeight; var currVal_3 = _co.fitListWidth; _ck(_v, 8, 0, currVal_2, currVal_3); var currVal_7 = (i1.ɵnov(_v, 16).disabled ? (0 - 1) : (i1.ɵnov(_v, 16).tabIndex || 0)); var currVal_8 = (i1.ɵnov(_v, 16).disabled || null); var currVal_9 = i1.ɵnov(_v, 16).disabled.toString(); var currVal_10 = (i1.ɵnov(_v, 16)._animationMode === "NoopAnimations"); _ck(_v, 15, 0, currVal_7, currVal_8, currVal_9, currVal_10); var currVal_11 = i1.ɵnov(_v, 18).inline; var currVal_12 = (((i1.ɵnov(_v, 18).color !== "primary") && (i1.ɵnov(_v, 18).color !== "accent")) && (i1.ɵnov(_v, 18).color !== "warn")); _ck(_v, 17, 0, currVal_11, currVal_12); }); }
 exports.View_ProductsComponent_0 = View_ProductsComponent_0;
 function View_ProductsComponent_Host_0(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 1, "app-products", [], null, [["window", "resize"]], function (_v, en, $event) { var ad = true; if (("window:resize" === en)) {
         var pd_0 = (i1.ɵnov(_v, 1).onResize($event) !== false);
@@ -6561,18 +4770,18 @@ var ProductsComponent = /** @class */ (function () {
     ProductsComponent.prototype.addMetaByCategory = function (category) {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
         var name = pipe.transform(category.translations, category.categoryName);
-        this.title = pipe.transform(category.seo.title, name);
+        var title = pipe.transform(category.seo.title, name);
         this.description = pipe.transform(category.seo.description, name);
         this.image = new parseurl_pipe_1.ParseUrlPipe().transform([category.media], 'thumb');
-        app_component_1.AppComponent.current.setPage('Category', this.title, this.description, this.image);
+        app_component_1.AppComponent.current.setPage('Category', title, this.description, this.image);
     };
     ProductsComponent.prototype.addMetaByBrand = function (brand) {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
         var name = pipe.transform(brand.translations, brand.brandName);
-        this.title = pipe.transform(brand.seo.title, name);
+        var title = pipe.transform(brand.seo.title, name);
         this.description = pipe.transform(brand.seo.description, name);
         this.image = new parseurl_pipe_1.ParseUrlPipe().transform([brand.media], 'thumb');
-        app_component_1.AppComponent.current.setPage('Brand', this.title, this.description, this.image);
+        app_component_1.AppComponent.current.setPage('Brand', title, this.description, this.image);
     };
     ProductsComponent.prototype.loadProductsByCategory = function (categoryName) {
         var _this = this;
@@ -6690,7 +4899,7 @@ var AppLoadService = /** @class */ (function () {
                             .toPromise()];
                     case 1:
                         settings = _a.sent();
-                        console.log("Settings from API: ", settings);
+                        // console.log(`Settings from API: `, settings);
                         helpers_1.Helpers.setting = settings;
                         helpers_1.Helpers.currency = settings.companyCurrency;
                         helpers_1.Helpers.utc = settings.companyUtc;
@@ -7311,9 +5520,10 @@ var Setting = /** @class */ (function () {
     function Setting() {
         this.companyId = 0;
         this.companyName = '';
-        this.companyDescription = [];
         this.companyHomeSeo = new Seo();
+        this.companyHomeContent = [];
         this.companyInfoSeo = new Seo();
+        this.companyInfoContent = [];
         this.companyEmailInfo = '';
         this.companyEmailSales = '';
         this.companyEmailSupport = '';
@@ -7696,171 +5906,6 @@ exports.LAZY_MODULE_MAP = {};
 
 module.exports = __webpack_require__(/*! /Users/gerardo/Projects/Zen/ZenRetail.Web/src/main.server.ts */"./src/main.server.ts");
 
-
-/***/ }),
-
-/***/ "@agm/core/core.module":
-/*!****************************************!*\
-  !*** external "@agm/core/core.module" ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/core.module");
-
-/***/ }),
-
-/***/ "@agm/core/directives/map":
-/*!*******************************************!*\
-  !*** external "@agm/core/directives/map" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/directives/map");
-
-/***/ }),
-
-/***/ "@agm/core/services/fit-bounds":
-/*!************************************************!*\
-  !*** external "@agm/core/services/fit-bounds" ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/fit-bounds");
-
-/***/ }),
-
-/***/ "@agm/core/services/google-maps-api-wrapper":
-/*!*************************************************************!*\
-  !*** external "@agm/core/services/google-maps-api-wrapper" ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/google-maps-api-wrapper");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/circle-manager":
-/*!*************************************************************!*\
-  !*** external "@agm/core/services/managers/circle-manager" ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/circle-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/data-layer-manager":
-/*!*****************************************************************!*\
-  !*** external "@agm/core/services/managers/data-layer-manager" ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/data-layer-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/info-window-manager":
-/*!******************************************************************!*\
-  !*** external "@agm/core/services/managers/info-window-manager" ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/info-window-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/kml-layer-manager":
-/*!****************************************************************!*\
-  !*** external "@agm/core/services/managers/kml-layer-manager" ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/kml-layer-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/marker-manager":
-/*!*************************************************************!*\
-  !*** external "@agm/core/services/managers/marker-manager" ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/marker-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/polygon-manager":
-/*!**************************************************************!*\
-  !*** external "@agm/core/services/managers/polygon-manager" ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/polygon-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/polyline-manager":
-/*!***************************************************************!*\
-  !*** external "@agm/core/services/managers/polyline-manager" ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/polyline-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/managers/rectangle-manager":
-/*!****************************************************************!*\
-  !*** external "@agm/core/services/managers/rectangle-manager" ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/managers/rectangle-manager");
-
-/***/ }),
-
-/***/ "@agm/core/services/maps-api-loader/lazy-maps-api-loader":
-/*!**************************************************************************!*\
-  !*** external "@agm/core/services/maps-api-loader/lazy-maps-api-loader" ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/maps-api-loader/lazy-maps-api-loader");
-
-/***/ }),
-
-/***/ "@agm/core/services/maps-api-loader/maps-api-loader":
-/*!*********************************************************************!*\
-  !*** external "@agm/core/services/maps-api-loader/maps-api-loader" ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/services/maps-api-loader/maps-api-loader");
-
-/***/ }),
-
-/***/ "@agm/core/utils/browser-globals":
-/*!**************************************************!*\
-  !*** external "@agm/core/utils/browser-globals" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@agm/core/utils/browser-globals");
 
 /***/ }),
 
@@ -8436,17 +6481,6 @@ module.exports = require("file-saver");
 
 /***/ }),
 
-/***/ "rxjs":
-/*!***********************!*\
-  !*** external "rxjs" ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("rxjs");
-
-/***/ }),
-
 /***/ "rxjs/add/operator/toPromise":
 /*!**********************************************!*\
   !*** external "rxjs/add/operator/toPromise" ***!
@@ -8455,17 +6489,6 @@ module.exports = require("rxjs");
 /***/ (function(module, exports) {
 
 module.exports = require("rxjs/add/operator/toPromise");
-
-/***/ }),
-
-/***/ "rxjs/operators":
-/*!*********************************!*\
-  !*** external "rxjs/operators" ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("rxjs/operators");
 
 /***/ })
 

@@ -29,7 +29,7 @@ export class AppLoadService {
       .get<Setting>(environment.hostApi + '/api/ecommerce/setting')
       .toPromise();
     
-    console.log(`Settings from API: `, settings);
+    // console.log(`Settings from API: `, settings);
 
     Helpers.setting = settings;
     Helpers.currency = settings.companyCurrency;

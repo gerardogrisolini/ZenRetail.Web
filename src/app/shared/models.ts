@@ -9,9 +9,10 @@ export class Login {
 export class Setting {
   public companyId: number;
   public companyName: string;
-  public companyDescription: Translation[];
   public companyHomeSeo: Seo;
+  public companyHomeContent: Translation[];
   public companyInfoSeo: Seo;
+  public companyInfoContent: Translation[];
   public companyEmailInfo: string;
   public companyEmailSales: string;
   public companyEmailSupport: string;
@@ -36,9 +37,10 @@ export class Setting {
   constructor() {
     this.companyId = 0;
     this.companyName = '';
-    this.companyDescription = [];
     this.companyHomeSeo = new Seo();
+    this.companyHomeContent = [];
     this.companyInfoSeo = new Seo();
+    this.companyInfoContent = [];
     this.companyEmailInfo = '';
     this.companyEmailSales = '';
     this.companyEmailSupport = '';
@@ -103,6 +105,7 @@ export class Category {
   public categoryIsPrimary: boolean;
   public categoryName: string;
   public translations: Translation[];
+  public categoryContent: Translation[];
   public media: Media;
   public seo: Seo;
 

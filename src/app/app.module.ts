@@ -10,7 +10,6 @@ import { MaterialModule } from 'app/material.module';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SwiperModule } from 'angular2-useful-swiper';
-import { AgmCoreModule } from '@agm/core';
 
 import { ALL_ROUTES } from 'app/routes';
 
@@ -88,9 +87,6 @@ export function getSettings(appLoadService: AppLoadService) {
     HttpClientModule,
     SwiperModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB3lyD6l1LxMEX0wNVhj6tmD_sDDRTjtA8'
-    }),
     RouterModule.forRoot(ALL_ROUTES),
     TranslateModule.forRoot({
       loader: {
