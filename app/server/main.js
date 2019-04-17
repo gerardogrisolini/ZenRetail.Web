@@ -2499,10 +2499,11 @@ var AppComponent = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        console.log('title: ' + title);
+                        //console.log('title: ' + title);
                         _a = AppComponent;
                         return [4 /*yield*/, this.translate.get(name).toPromise()];
                     case 1:
+                        //console.log('title: ' + title);
                         _a.title = _b.sent();
                         AppComponent.backButton = backButton;
                         AppComponent.menuActive = menuActive;
