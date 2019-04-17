@@ -23,11 +23,20 @@ export class HomeComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: Object,
         private productService: ProductService
     ) {
+        let pipe = new MyTranslatePipe(this.platformId);
+        let title = pipe.transform(this.data.companyHomeSeo.title);
+        let desc = pipe.transform(this.data.companyHomeSeo.description);
+        AppComponent.current.setPage(
+            'Home', 
+            title, 
+            desc, 
+            environment.hostApi + '/media/logo.png'
+        );
         if (isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
         if (isPlatformServer(this.platformId)) {
-            this.resize(1200);
+            this.resize(480);
         }
     }
 
@@ -39,20 +48,7 @@ export class HomeComponent implements OnInit {
     get data(): Setting { return Helpers.setting }
     get categories(): any[] { return AppComponent.current.navItems; }
 
-    onInit() {
-        let pipe = new MyTranslatePipe(this.platformId);
-        let title = pipe.transform(this.data.companyHomeSeo.title);
-        let desc = pipe.transform(this.data.companyHomeSeo.description);
-        AppComponent.current.setPage(
-            'Home', 
-            title, 
-            desc, 
-            environment.hostApi + '/media/logo.png'
-        );
-    }
-
     ngOnInit() {
-        this.onInit();
         this.productService
             .getFeatured()
             .subscribe(result => {

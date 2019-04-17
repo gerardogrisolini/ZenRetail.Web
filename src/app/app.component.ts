@@ -6,8 +6,6 @@ import { Title, Meta } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
-import { Setting } from 'app/shared/models';
-import { Helpers } from 'app/shared/helpers';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';

@@ -28,11 +28,15 @@ export class ProductComponent implements OnInit, OnDestroy {
 		private basketService: BasketService,
 		private activatedRoute: ActivatedRoute
 	) {	
+		this.sub = this.activatedRoute.params.subscribe(params => {
+			const name = params['name'];
+			this.loadProduct(name);
+		});
 		if (isPlatformBrowser(this.platformId)) {
       this.resize(window.innerWidth);
     }
     if (isPlatformServer(this.platformId)) {
-      this.resize(600);
+      this.resize(480);
     }
 	}
 	
@@ -53,10 +57,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 		if (AppComponent.current.getItem('barcode')) {
 			this.pickerClick(null);
 		}
-		this.sub = this.activatedRoute.params.subscribe(params => {
-			const name = params['name'];
-			this.loadProduct(name);
-		});
 	}
 
   ngOnDestroy() {
@@ -70,9 +70,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   addMetaData(product: Product) {
 		let pipe = new MyTranslatePipe(this.platformId);
-    let brand = pipe.transform(product.brand.translations, product.brand.brandName);
-    let name = pipe.transform(product.translations, product.productName);
-    let title = pipe.transform(product.seo.title, product.productName + ' - ' + brand);
+    let title = pipe.transform(product.seo.title);
 		let description = pipe.transform(product.seo.description);
 		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
     AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);

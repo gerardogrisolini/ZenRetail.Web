@@ -3512,11 +3512,15 @@ var HomeComponent = /** @class */ (function () {
     function HomeComponent(platformId, productService) {
         this.platformId = platformId;
         this.productService = productService;
+        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
+        var title = pipe.transform(this.data.companyHomeSeo.title);
+        var desc = pipe.transform(this.data.companyHomeSeo.description);
+        app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
         if (common_1.isPlatformServer(this.platformId)) {
-            this.resize(1200);
+            this.resize(480);
         }
     }
     HomeComponent.prototype.onResize = function (event) {
@@ -3532,15 +3536,8 @@ var HomeComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    HomeComponent.prototype.onInit = function () {
-        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyHomeSeo.title);
-        var desc = pipe.transform(this.data.companyHomeSeo.description);
-        app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
-    };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.onInit();
         this.productService
             .getFeatured()
             .subscribe(function (result) {
@@ -3600,7 +3597,7 @@ var RenderType_InfoComponent = i0.ɵcrt({ encapsulation: 0, styles: styles_InfoC
 exports.RenderType_InfoComponent = RenderType_InfoComponent;
 function View_InfoComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i1.MyTranslatePipe, [i0.PLATFORM_ID]), (_l()(), i0.ɵeld(1, 0, null, null, 4, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(2, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(3, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], [[8, "innerHTML", 1]], null, null, null, null)), i0.ɵdid(4, 16384, null, 0, i3.MatCardContent, [], null, null), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(7, 0, null, null, 31, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(8, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 0, 3, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(10, 16384, null, 0, i3.MatCardTitle, [], null, null), (_l()(), i0.ɵted(11, null, ["", ""])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(13, 0, null, 0, 25, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(14, 16384, null, 0, i3.MatCardContent, [], null, null), (_l()(), i0.ɵeld(15, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(16, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(17, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(18, null, ["\u00A0\u00A0", ""])), (_l()(), i0.ɵeld(19, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(20, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(21, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(22, null, ["\u00A0\u00A0 ", " ", " ", " ", " ", " "])), (_l()(), i0.ɵeld(23, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(24, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵeld(25, 0, null, null, 12, "ul", [], null, null, null, null, null)), (_l()(), i0.ɵeld(26, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(27, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(28, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(30, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(31, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(32, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(34, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(35, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(36, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(38, 0, null, null, 0, "br", [], null, null, null, null, null))], function (_ck, _v) { var currVal_2 = "Phone"; _ck(_v, 17, 0, currVal_2); var currVal_4 = "Address"; _ck(_v, 21, 0, currVal_4); var currVal_10 = "Email"; _ck(_v, 24, 0, currVal_10); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i0.ɵunv(_v, 3, 0, _ck(_v, 5, 0, i0.ɵnov(_v, 0), _co.data.companyInfoContent)); _ck(_v, 3, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 11, 0, i0.ɵnov(_v, 12).transform("Contacts")); _ck(_v, 11, 0, currVal_1); var currVal_3 = _co.data.companyPhone; _ck(_v, 18, 0, currVal_3); var currVal_5 = _co.data.companyAddress; var currVal_6 = _co.data.companyCity; var currVal_7 = _co.data.companyZip; var currVal_8 = _co.data.companyProvince; var currVal_9 = _co.data.companyCountry; _ck(_v, 22, 0, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9); var currVal_11 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailInfo, ""); _ck(_v, 27, 0, currVal_11); var currVal_12 = _co.data.companyEmailInfo; var currVal_13 = i0.ɵunv(_v, 28, 1, i0.ɵnov(_v, 29).transform("Information")); _ck(_v, 28, 0, currVal_12, currVal_13); var currVal_14 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSales, ""); _ck(_v, 31, 0, currVal_14); var currVal_15 = _co.data.companyEmailSales; var currVal_16 = i0.ɵunv(_v, 32, 1, i0.ɵnov(_v, 33).transform("Sales")); _ck(_v, 32, 0, currVal_15, currVal_16); var currVal_17 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSupport, ""); _ck(_v, 35, 0, currVal_17); var currVal_18 = _co.data.companyEmailSupport; var currVal_19 = i0.ɵunv(_v, 36, 1, i0.ɵnov(_v, 37).transform("Support")); _ck(_v, 36, 0, currVal_18, currVal_19); }); }
 exports.View_InfoComponent_0 = View_InfoComponent_0;
-function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 114688, null, 0, i5.InfoComponent, [i0.PLATFORM_ID], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 49152, null, 0, i5.InfoComponent, [i0.PLATFORM_ID], null, null)], null, null); }
 exports.View_InfoComponent_Host_0 = View_InfoComponent_Host_0;
 var InfoComponentNgFactory = i0.ɵccf("app-info", i5.InfoComponent, View_InfoComponent_Host_0, {}, {}, []);
 exports.InfoComponentNgFactory = InfoComponentNgFactory;
@@ -3618,26 +3615,22 @@ exports.InfoComponentNgFactory = InfoComponentNgFactory;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "@angular/core");
 var app_component_1 = __webpack_require__(/*! app/app.component */ "./src/app/app.component.ts");
 var mytranslate_pipe_1 = __webpack_require__(/*! app/pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
 var helpers_1 = __webpack_require__(/*! app/shared/helpers */ "./src/app/shared/helpers.ts");
 var InfoComponent = /** @class */ (function () {
     function InfoComponent(platformId) {
         this.platformId = platformId;
+        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
+        var title = pipe.transform(this.data.companyInfoSeo.title);
+        var description = pipe.transform(this.data.companyInfoSeo.description);
+        app_component_1.AppComponent.current.setPage('Information', title, description, '/media/logo.png');
     }
     Object.defineProperty(InfoComponent.prototype, "data", {
         get: function () { return helpers_1.Helpers.setting; },
         enumerable: true,
         configurable: true
     });
-    InfoComponent.prototype.ngOnInit = function () {
-        var name = 'Information';
-        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyInfoSeo.title);
-        var description = pipe.transform(this.data.companyInfoSeo.description);
-        app_component_1.AppComponent.current.setPage(name, title, description, '/media/logo.png');
-    };
     return InfoComponent;
 }());
 exports.InfoComponent = InfoComponent;
@@ -4456,6 +4449,7 @@ var common_1 = __webpack_require__(/*! @angular/common */ "@angular/common");
 var parseurl_pipe_1 = __webpack_require__(/*! app/pipes/parseurl.pipe */ "./src/app/pipes/parseurl.pipe.ts");
 var ProductComponent = /** @class */ (function () {
     function ProductComponent(platformId, router, snackBar, translate, productService, basketService, activatedRoute) {
+        var _this = this;
         this.platformId = platformId;
         this.router = router;
         this.snackBar = snackBar;
@@ -4472,11 +4466,15 @@ var ProductComponent = /** @class */ (function () {
             slidesPerView: 2,
             spaceBetween: 30 // Space between each Item
         };
+        this.sub = this.activatedRoute.params.subscribe(function (params) {
+            var name = params['name'];
+            _this.loadProduct(name);
+        });
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.resize(window.innerWidth);
         }
         if (common_1.isPlatformServer(this.platformId)) {
-            this.resize(600);
+            this.resize(480);
         }
     }
     Object.defineProperty(ProductComponent.prototype, "isIframe", {
@@ -4490,14 +4488,9 @@ var ProductComponent = /** @class */ (function () {
         configurable: true
     });
     ProductComponent.prototype.ngOnInit = function () {
-        var _this = this;
         if (app_component_1.AppComponent.current.getItem('barcode')) {
             this.pickerClick(null);
         }
-        this.sub = this.activatedRoute.params.subscribe(function (params) {
-            var name = params['name'];
-            _this.loadProduct(name);
-        });
     };
     ProductComponent.prototype.ngOnDestroy = function () {
         // Clean sub to avoid memory leak
@@ -4508,9 +4501,7 @@ var ProductComponent = /** @class */ (function () {
     };
     ProductComponent.prototype.addMetaData = function (product) {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var brand = pipe.transform(product.brand.translations, product.brand.brandName);
-        var name = pipe.transform(product.translations, product.productName);
-        var title = pipe.transform(product.seo.title, product.productName + ' - ' + brand);
+        var title = pipe.transform(product.seo.title);
         var description = pipe.transform(product.seo.description);
         var image = new parseurl_pipe_1.ParseUrlPipe().transform(product.medias, 'thumb');
         app_component_1.AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);
@@ -4720,12 +4711,21 @@ var ProductsComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.bottomSheet = bottomSheet;
         this.close = 'Close';
-        this.translate.get(this.close).subscribe(function (res) { return _this.close = res; });
+        this.sub = this.activatedRoute.params.subscribe(function (params) {
+            var name = params['name'];
+            if (_this.router.url.indexOf('brand') < 0) {
+                _this.loadProductsByCategory(name);
+            }
+            else {
+                _this.loadProductsByBrand(name);
+            }
+            _this.translate.get(_this.close).subscribe(function (res) { return _this.close = res; });
+        });
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
         if (common_1.isPlatformServer(this.platformId)) {
-            this.resize(1200);
+            this.resize(480);
         }
     }
     ProductsComponent.prototype.onResize = function (event) {
