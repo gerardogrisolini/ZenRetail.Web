@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.resize(window.innerWidth);
     }
     if (isPlatformServer(this.platformId)) {
-      this.resize(1200);
+      this.resize(600);
     }
 	}
 	
@@ -65,15 +65,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 	
 	private resize(w: number) {
-		//this.config.slidesPerView = w < 600 ? 1 : w < 1200 ? 2 : 3;
+		this.config.slidesPerView = w < 600 ? 1 : w < 1200 ? 2 : 3;
 	}
 
   addMetaData(product: Product) {
 		let pipe = new MyTranslatePipe(this.platformId);
     let brand = pipe.transform(product.brand.translations, product.brand.brandName);
     let name = pipe.transform(product.translations, product.productName);
-    let title = pipe.transform(product.seo.title, product.productName) + ' - ' + brand;
-		let description = pipe.transform(product.seo.description, name);
+    let title = pipe.transform(product.seo.title, product.productName + ' - ' + brand);
+		let description = pipe.transform(product.seo.description);
 		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
     AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);
 }

@@ -2499,6 +2499,7 @@ var AppComponent = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        console.log('title: ' + title);
                         _a = AppComponent;
                         return [4 /*yield*/, this.translate.get(name).toPromise()];
                     case 1:
@@ -4474,7 +4475,7 @@ var ProductComponent = /** @class */ (function () {
             this.resize(window.innerWidth);
         }
         if (common_1.isPlatformServer(this.platformId)) {
-            this.resize(1200);
+            this.resize(600);
         }
     }
     Object.defineProperty(ProductComponent.prototype, "isIframe", {
@@ -4502,14 +4503,14 @@ var ProductComponent = /** @class */ (function () {
         this.sub.unsubscribe();
     };
     ProductComponent.prototype.resize = function (w) {
-        //this.config.slidesPerView = w < 600 ? 1 : w < 1200 ? 2 : 3;
+        this.config.slidesPerView = w < 600 ? 1 : w < 1200 ? 2 : 3;
     };
     ProductComponent.prototype.addMetaData = function (product) {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
         var brand = pipe.transform(product.brand.translations, product.brand.brandName);
         var name = pipe.transform(product.translations, product.productName);
-        var title = pipe.transform(product.seo.title, product.productName) + ' - ' + brand;
-        var description = pipe.transform(product.seo.description, name);
+        var title = pipe.transform(product.seo.title, product.productName + ' - ' + brand);
+        var description = pipe.transform(product.seo.description);
         var image = new parseurl_pipe_1.ParseUrlPipe().transform(product.medias, 'thumb');
         app_component_1.AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);
     };

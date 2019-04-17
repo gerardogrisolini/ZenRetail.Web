@@ -66,6 +66,7 @@ export class AppComponent implements OnInit {
     backButton: boolean = false, 
     menuActive: boolean = true
   ) {
+    console.log('title: ' + title);
     AppComponent.title = await this.translate.get(name).toPromise();
     AppComponent.backButton = backButton;
     AppComponent.menuActive = menuActive;
