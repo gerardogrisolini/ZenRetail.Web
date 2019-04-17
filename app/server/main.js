@@ -2473,7 +2473,6 @@ var AppComponent = /** @class */ (function () {
         this.navItems = [];
         this.count = 1;
         AppComponent.current = this;
-        //this.loadSetting();
         this.isIframe = this.isFrame();
         if (common_1.isPlatformBrowser(this.platformId)) {
             var country = navigator.language.substring(0, 2).toLowerCase();
@@ -2496,34 +2495,36 @@ var AppComponent = /** @class */ (function () {
         if (backButton === void 0) { backButton = false; }
         if (menuActive === void 0) { menuActive = true; }
         return __awaiter(this, void 0, void 0, function () {
-            var url;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.translate.get(name).toPromise()];
+            var _a, url;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = AppComponent;
+                        return [4 /*yield*/, this.translate.get(name).toPromise()];
                     case 1:
-                        name = _a.sent();
-                        title = (title !== null ? title : name);
-                        this.titleService.setTitle(title);
+                        _a.title = _b.sent();
+                        AppComponent.backButton = backButton;
+                        AppComponent.menuActive = menuActive;
                         this.metaService.removeTag("name='description'");
                         this.metaService.removeTag("name='og:title'");
                         this.metaService.removeTag("name='og:description'");
                         this.metaService.removeTag("name='og:type'");
                         this.metaService.removeTag("name='og:url'");
                         this.metaService.removeTag("name='og:image'");
-                        url = environment_1.environment.hostWeb + this.router.url;
-                        this.metaService.addTag({ name: 'og:title', content: title }, false);
-                        this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
-                        this.metaService.addTag({ name: 'og:url', content: url }, false);
-                        if (description !== null) {
-                            this.metaService.addTag({ name: 'description', content: description }, false);
-                            this.metaService.addTag({ name: 'og:description', content: description }, false);
+                        if (title !== null) {
+                            this.titleService.setTitle(title);
+                            url = environment_1.environment.hostWeb + this.router.url;
+                            this.metaService.addTag({ name: 'og:title', content: title }, false);
+                            this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
+                            this.metaService.addTag({ name: 'og:url', content: url }, false);
+                            if (description !== null) {
+                                this.metaService.addTag({ name: 'description', content: description }, false);
+                                this.metaService.addTag({ name: 'og:description', content: description }, false);
+                            }
+                            if (image !== null) {
+                                this.metaService.addTag({ name: 'og:image', image: image }, false);
+                            }
                         }
-                        if (image !== null) {
-                            this.metaService.addTag({ name: 'og:image', image: image }, false);
-                        }
-                        AppComponent.title = name;
-                        AppComponent.backButton = backButton;
-                        AppComponent.menuActive = menuActive;
                         return [2 /*return*/];
                 }
             });
@@ -3531,8 +3532,8 @@ var HomeComponent = /** @class */ (function () {
     });
     HomeComponent.prototype.onInit = function () {
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyHomeSeo.title, this.data.companyName);
-        var desc = pipe.transform(this.data.companyHomeSeo.description, title);
+        var title = pipe.transform(this.data.companyHomeSeo.title);
+        var desc = pipe.transform(this.data.companyHomeSeo.description);
         app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
     };
     HomeComponent.prototype.ngOnInit = function () {
@@ -3631,8 +3632,8 @@ var InfoComponent = /** @class */ (function () {
     InfoComponent.prototype.ngOnInit = function () {
         var name = 'Information';
         var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyInfoSeo.title, name);
-        var description = pipe.transform(this.data.companyInfoSeo.description, name);
+        var title = pipe.transform(this.data.companyInfoSeo.title);
+        var description = pipe.transform(this.data.companyInfoSeo.description);
         app_component_1.AppComponent.current.setPage(name, title, description, '/media/logo.png');
     };
     return InfoComponent;

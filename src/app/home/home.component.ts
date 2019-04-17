@@ -41,8 +41,8 @@ export class HomeComponent implements OnInit {
 
     onInit() {
         let pipe = new MyTranslatePipe(this.platformId);
-        let title = pipe.transform(this.data.companyHomeSeo.title, this.data.companyName);
-        let desc = pipe.transform(this.data.companyHomeSeo.description, title);
+        let title = pipe.transform(this.data.companyHomeSeo.title);
+        let desc = pipe.transform(this.data.companyHomeSeo.description);
         AppComponent.current.setPage(
             'Home', 
             title, 

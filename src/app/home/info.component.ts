@@ -17,8 +17,8 @@ export class InfoComponent implements OnInit {
   ngOnInit() {
     let name = 'Information';
     let pipe = new MyTranslatePipe(this.platformId);
-    let title = pipe.transform(this.data.companyInfoSeo.title, name);
-    let description = pipe.transform(this.data.companyInfoSeo.description, name);
+    let title = pipe.transform(this.data.companyInfoSeo.title);
+    let description = pipe.transform(this.data.companyInfoSeo.description);
     AppComponent.current.setPage(name, title, description, '/media/logo.png');
   }
 }

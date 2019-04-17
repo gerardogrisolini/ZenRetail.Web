@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
     private _element: ElementRef
   ) {
     AppComponent.current = this;
-    //this.loadSetting();
     this.isIframe = this.isFrame();
 
     if (isPlatformBrowser(this.platformId)) {
@@ -67,9 +66,10 @@ export class AppComponent implements OnInit {
     backButton: boolean = false, 
     menuActive: boolean = true
   ) {
-    name = await this.translate.get(name).toPromise();
-    title = (title !== null ? title : name);
-    this.titleService.setTitle(title);
+    AppComponent.title = await this.translate.get(name).toPromise();
+    AppComponent.backButton = backButton;
+    AppComponent.menuActive = menuActive;
+    
     this.metaService.removeTag("name='description'");
     this.metaService.removeTag("name='og:title'");
     this.metaService.removeTag("name='og:description'"); 
@@ -77,20 +77,20 @@ export class AppComponent implements OnInit {
     this.metaService.removeTag("name='og:url'");
     this.metaService.removeTag("name='og:image'");
     
-    let url = environment.hostWeb + this.router.url;
-    this.metaService.addTag({ name: 'og:title', content: title }, false);
-    this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
-    this.metaService.addTag({ name: 'og:url', content: url }, false);
-    if (description !== null) {
-      this.metaService.addTag({ name: 'description', content: description }, false);
-      this.metaService.addTag({ name: 'og:description', content: description }, false);
+    if (title !== null) {
+      this.titleService.setTitle(title);
+      let url = environment.hostWeb + this.router.url;
+      this.metaService.addTag({ name: 'og:title', content: title }, false);
+      this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
+      this.metaService.addTag({ name: 'og:url', content: url }, false);
+      if (description !== null) {
+        this.metaService.addTag({ name: 'description', content: description }, false);
+        this.metaService.addTag({ name: 'og:description', content: description }, false);
+      }
+      if (image !== null) {
+        this.metaService.addTag({ name: 'og:image', image }, false);
+      }
     }
-    if (image !== null) {
-      this.metaService.addTag({ name: 'og:image', image }, false);
-    }
-    AppComponent.title = name;
-    AppComponent.backButton = backButton;
-    AppComponent.menuActive = menuActive;
   }
 
   isFrame(): boolean {
