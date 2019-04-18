@@ -27,6 +27,7 @@
     "@angular/router": "*",
     "@nguniversal/express-engine": "*",
     "@nguniversal/module-map-ngfactory-loader": "*",
+    "@ngx-meta/core": "^7.0.0",
     "@ngx-translate/core": "*",
     "@ngx-translate/http-loader": "*",
     "angular2-useful-swiper": "*",

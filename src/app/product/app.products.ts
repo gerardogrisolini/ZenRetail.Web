@@ -37,15 +37,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private bottomSheet: MatBottomSheet
   ) {
-    this.sub = this.activatedRoute.params.subscribe(params => {
-      const name = params['name'];
-      if (this.router.url.indexOf('brand') < 0) {
-        this.loadProductsByCategory(name);
-      } else {
-        this.loadProductsByBrand(name);
-      }
-      this.translate.get(this.close).subscribe((res: string) => this.close = res);
-    });
     if (isPlatformBrowser(this.platformId)) {
       this.onResizeChanged(window);
     }
@@ -60,6 +51,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.sub = this.activatedRoute.params.subscribe(params => {
+      const name = params['name'];
+      if (this.router.url.indexOf('brand') < 0) {
+        this.loadProductsByCategory(name);
+      } else {
+        this.loadProductsByBrand(name);
+      }
+      this.translate.get(this.close).subscribe((res: string) => this.close = res);
+    });
     this.sub = this.activatedRoute.params.subscribe(params => {
       const name = params['name'];
       if (this.router.url.indexOf('brand') < 0) {

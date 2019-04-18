@@ -10,6 +10,7 @@ import { MaterialModule } from 'app/material.module';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SwiperModule } from 'angular2-useful-swiper';
+import { MetaModule } from '@ngx-meta/core';
 
 import { ALL_ROUTES } from 'app/routes';
 
@@ -88,6 +89,7 @@ export function getSettings(appLoadService: AppLoadService) {
     SwiperModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     RouterModule.forRoot(ALL_ROUTES),
+    MetaModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

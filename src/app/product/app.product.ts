@@ -28,16 +28,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 		private basketService: BasketService,
 		private activatedRoute: ActivatedRoute
 	) {	
-		this.sub = this.activatedRoute.params.subscribe(params => {
-			const name = params['name'];
-			this.loadProduct(name);
-		});
-		if (isPlatformBrowser(this.platformId)) {
-      this.resize(window.innerWidth);
-    }
-    if (isPlatformServer(this.platformId)) {
-      this.resize(480);
-    }
 	}
 	
 	config: SwiperOptions = {
@@ -54,6 +44,16 @@ export class ProductComponent implements OnInit, OnDestroy {
 	get isServer(): boolean { return isPlatformServer(this.platformId) }
 
 	ngOnInit() {
+		this.sub = this.activatedRoute.params.subscribe(params => {
+			const name = params['name'];
+			this.loadProduct(name);
+		});
+		if (isPlatformBrowser(this.platformId)) {
+      this.resize(window.innerWidth);
+    }
+    if (isPlatformServer(this.platformId)) {
+      this.resize(480);
+    }
 		if (AppComponent.current.getItem('barcode')) {
 			this.pickerClick(null);
 		}

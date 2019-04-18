@@ -2301,7 +2301,7 @@ var i18 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
 var i19 = __webpack_require__(/*! ../../node_modules/@angular/material/toolbar/typings/index.ngfactory */ "./node_modules/@angular/material/toolbar/typings/index.ngfactory.js");
 var i20 = __webpack_require__(/*! @angular/material/toolbar */ "@angular/material/toolbar");
 var i21 = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-var i22 = __webpack_require__(/*! @angular/platform-browser */ "@angular/platform-browser");
+var i22 = __webpack_require__(/*! @ngx-meta/core */ "@ngx-meta/core");
 var i23 = __webpack_require__(/*! ./services/basket.service */ "./src/app/services/basket.service.ts");
 var i24 = __webpack_require__(/*! ./services/product.service */ "./src/app/services/product.service.ts");
 var styles_AppComponent = [i0.styles];
@@ -2373,7 +2373,7 @@ function View_AppComponent_0(_l) { return i1.ɵvid(0, [i1.ɵpid(0, i13.ImageUrlP
         ad = (pd_1 && ad);
     } return ad; }, i4.View_MatListItem_0, i4.RenderType_MatListItem)), i1.ɵdid(76, 1228800, null, 3, i5.MatListItem, [i1.ElementRef, [2, i5.MatNavList], [2, i5.MatList], i1.ChangeDetectorRef], null, null), i1.ɵqud(603979776, 23, { _lines: 1 }), i1.ɵqud(335544320, 24, { _avatar: 0 }), i1.ɵqud(335544320, 25, { _icon: 0 }), i1.ɵdid(80, 671744, [[27, 4]], 0, i6.RouterLinkWithHref, [i6.Router, i6.ActivatedRoute, i7.LocationStrategy], { routerLink: [0, "routerLink"] }, null), i1.ɵpad(81, 1), i1.ɵdid(82, 1720320, null, 2, i6.RouterLinkActive, [i6.Router, i1.ElementRef, i1.Renderer2, i1.ChangeDetectorRef], { routerLinkActive: [0, "routerLinkActive"] }, null), i1.ɵqud(603979776, 26, { links: 1 }), i1.ɵqud(603979776, 27, { linksWithHrefs: 1 }), (_l()(), i1.ɵeld(85, 0, null, 2, 3, "span", [], null, null, null, null, null)), (_l()(), i1.ɵeld(86, 0, null, null, 2, "mat-icon", [["class", "mat-icon notranslate"], ["role", "img"]], [[2, "mat-icon-inline", null], [2, "mat-icon-no-color", null]], null, null, i2.View_MatIcon_0, i2.RenderType_MatIcon)), i1.ɵdid(87, 9158656, null, 0, i3.MatIcon, [i1.ElementRef, i3.MatIconRegistry, [8, null], [2, i3.MAT_ICON_LOCATION]], null, null), (_l()(), i1.ɵted(-1, 0, ["account_circle"])), (_l()(), i1.ɵted(89, 2, ["\u00A0\u00A0", " "])), i1.ɵpid(131072, i18.TranslatePipe, [i18.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵeld(91, 0, null, 0, 2, "h4", [["style", "margin-left: 15px"]], null, null, null, null, null)), (_l()(), i1.ɵted(92, null, ["", ""])), i1.ɵpid(131072, i18.TranslatePipe, [i18.TranslateService, i1.ChangeDetectorRef]), (_l()(), i1.ɵand(16777216, null, 0, 1, null, View_AppComponent_1)), i1.ɵdid(95, 278528, null, 0, i7.NgForOf, [i1.ViewContainerRef, i1.TemplateRef, i1.IterableDiffers], { ngForOf: [0, "ngForOf"] }, null), (_l()(), i1.ɵeld(96, 0, null, 2, 17, "div", [], null, null, null, null, null)), (_l()(), i1.ɵeld(97, 0, null, null, 11, "mat-toolbar", [["class", "mat-toolbar"], ["id", "toolbar"]], [[2, "mat-toolbar-multiple-rows", null], [2, "mat-toolbar-single-row", null]], null, null, i19.View_MatToolbar_0, i19.RenderType_MatToolbar)), i1.ɵdid(98, 4243456, null, 1, i20.MatToolbar, [i1.ElementRef, i10.Platform, i7.DOCUMENT], null, null), i1.ɵqud(603979776, 33, { _toolbarRows: 1 }), (_l()(), i1.ɵand(16777216, null, 0, 1, null, View_AppComponent_4)), i1.ɵdid(101, 16384, null, 0, i7.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i1.ɵand(16777216, null, 0, 1, null, View_AppComponent_5)), i1.ɵdid(103, 16384, null, 0, i7.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i1.ɵeld(104, 0, null, 0, 4, "div", [["class", "app-toolbar"]], null, null, null, null, null)), (_l()(), i1.ɵeld(105, 0, null, null, 1, "h1", [], null, null, null, null, null)), (_l()(), i1.ɵted(106, null, ["", ""])), (_l()(), i1.ɵand(16777216, null, null, 1, null, View_AppComponent_6)), i1.ɵdid(108, 16384, null, 0, i7.NgIf, [i1.ViewContainerRef, i1.TemplateRef], { ngIf: [0, "ngIf"] }, null), (_l()(), i1.ɵeld(109, 0, null, null, 4, "div", [["class", "app-content"], ["dir", "ltr"]], [[1, "dir", 0]], null, null, null, null)), i1.ɵprd(6144, null, i16.Directionality, null, [i16.Dir]), i1.ɵdid(111, 1196032, [["root", 4]], 0, i16.Dir, [], { dir: [0, "dir"] }, null), (_l()(), i1.ɵeld(112, 16777216, null, null, 1, "router-outlet", [], null, null, null, null, null)), i1.ɵdid(113, 212992, null, 0, i6.RouterOutlet, [i6.ChildrenOutletContexts, i1.ViewContainerRef, i1.ComponentFactoryResolver, [8, null], i1.ChangeDetectorRef], null, null)], function (_ck, _v) { var _co = _v.component; _ck(_v, 2, 0); var currVal_10 = "over"; _ck(_v, 6, 0, currVal_10); var currVal_16 = _ck(_v, 17, 0, "home"); _ck(_v, 16, 0, currVal_16); var currVal_17 = "active-link"; _ck(_v, 18, 0, currVal_17); _ck(_v, 23, 0); var currVal_25 = _ck(_v, 33, 0, "info"); _ck(_v, 32, 0, currVal_25); var currVal_26 = "active-link"; _ck(_v, 34, 0, currVal_26); _ck(_v, 39, 0); var currVal_34 = _ck(_v, 49, 0, "basket"); _ck(_v, 48, 0, currVal_34); var currVal_35 = "active-link"; _ck(_v, 50, 0, currVal_35); _ck(_v, 55, 0); var currVal_43 = _ck(_v, 65, 0, "orders"); _ck(_v, 64, 0, currVal_43); var currVal_44 = "active-link"; _ck(_v, 66, 0, currVal_44); _ck(_v, 71, 0); var currVal_52 = _ck(_v, 81, 0, "account"); _ck(_v, 80, 0, currVal_52); var currVal_53 = "active-link"; _ck(_v, 82, 0, currVal_53); _ck(_v, 87, 0); var currVal_58 = _co.navItems; _ck(_v, 95, 0, currVal_58); var currVal_61 = _co.backButton; _ck(_v, 101, 0, currVal_61); var currVal_62 = !_co.backButton; _ck(_v, 103, 0, currVal_62); var currVal_64 = !_co.isIframe; _ck(_v, 108, 0, currVal_64); var currVal_66 = "ltr"; _ck(_v, 111, 0, currVal_66); _ck(_v, 113, 0); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵnov(_v, 2)._backdropOverride; _ck(_v, 1, 0, currVal_0); var currVal_1 = i1.ɵnov(_v, 6)._animationState; var currVal_2 = null; var currVal_3 = (i1.ɵnov(_v, 6).position === "end"); var currVal_4 = (i1.ɵnov(_v, 6).mode === "over"); var currVal_5 = (i1.ɵnov(_v, 6).mode === "push"); var currVal_6 = (i1.ɵnov(_v, 6).mode === "side"); var currVal_7 = i1.ɵnov(_v, 6).fixedInViewport; var currVal_8 = (i1.ɵnov(_v, 6).fixedInViewport ? i1.ɵnov(_v, 6).fixedTopGap : null); var currVal_9 = (i1.ɵnov(_v, 6).fixedInViewport ? i1.ɵnov(_v, 6).fixedBottomGap : null); _ck(_v, 5, 0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9); var currVal_11 = i1.ɵinlineInterpolate(1, "", i1.ɵunv(_v, 7, 0, _ck(_v, 8, 0, i1.ɵnov(_v, 0), "/media/logo.png")), ""); _ck(_v, 7, 0, currVal_11); var currVal_12 = (i1.ɵnov(_v, 12)._avatar || i1.ɵnov(_v, 12)._icon); var currVal_13 = (i1.ɵnov(_v, 12)._avatar || i1.ɵnov(_v, 12)._icon); var currVal_14 = i1.ɵnov(_v, 16).target; var currVal_15 = i1.ɵnov(_v, 16).href; _ck(_v, 11, 0, currVal_12, currVal_13, currVal_14, currVal_15); var currVal_18 = i1.ɵnov(_v, 23).inline; var currVal_19 = (((i1.ɵnov(_v, 23).color !== "primary") && (i1.ɵnov(_v, 23).color !== "accent")) && (i1.ɵnov(_v, 23).color !== "warn")); _ck(_v, 22, 0, currVal_18, currVal_19); var currVal_20 = i1.ɵunv(_v, 25, 0, i1.ɵnov(_v, 26).transform("Home")); _ck(_v, 25, 0, currVal_20); var currVal_21 = (i1.ɵnov(_v, 28)._avatar || i1.ɵnov(_v, 28)._icon); var currVal_22 = (i1.ɵnov(_v, 28)._avatar || i1.ɵnov(_v, 28)._icon); var currVal_23 = i1.ɵnov(_v, 32).target; var currVal_24 = i1.ɵnov(_v, 32).href; _ck(_v, 27, 0, currVal_21, currVal_22, currVal_23, currVal_24); var currVal_27 = i1.ɵnov(_v, 39).inline; var currVal_28 = (((i1.ɵnov(_v, 39).color !== "primary") && (i1.ɵnov(_v, 39).color !== "accent")) && (i1.ɵnov(_v, 39).color !== "warn")); _ck(_v, 38, 0, currVal_27, currVal_28); var currVal_29 = i1.ɵunv(_v, 41, 0, i1.ɵnov(_v, 42).transform("Information")); _ck(_v, 41, 0, currVal_29); var currVal_30 = (i1.ɵnov(_v, 44)._avatar || i1.ɵnov(_v, 44)._icon); var currVal_31 = (i1.ɵnov(_v, 44)._avatar || i1.ɵnov(_v, 44)._icon); var currVal_32 = i1.ɵnov(_v, 48).target; var currVal_33 = i1.ɵnov(_v, 48).href; _ck(_v, 43, 0, currVal_30, currVal_31, currVal_32, currVal_33); var currVal_36 = i1.ɵnov(_v, 55).inline; var currVal_37 = (((i1.ɵnov(_v, 55).color !== "primary") && (i1.ɵnov(_v, 55).color !== "accent")) && (i1.ɵnov(_v, 55).color !== "warn")); _ck(_v, 54, 0, currVal_36, currVal_37); var currVal_38 = i1.ɵunv(_v, 57, 0, i1.ɵnov(_v, 58).transform("Basket")); _ck(_v, 57, 0, currVal_38); var currVal_39 = (i1.ɵnov(_v, 60)._avatar || i1.ɵnov(_v, 60)._icon); var currVal_40 = (i1.ɵnov(_v, 60)._avatar || i1.ɵnov(_v, 60)._icon); var currVal_41 = i1.ɵnov(_v, 64).target; var currVal_42 = i1.ɵnov(_v, 64).href; _ck(_v, 59, 0, currVal_39, currVal_40, currVal_41, currVal_42); var currVal_45 = i1.ɵnov(_v, 71).inline; var currVal_46 = (((i1.ɵnov(_v, 71).color !== "primary") && (i1.ɵnov(_v, 71).color !== "accent")) && (i1.ɵnov(_v, 71).color !== "warn")); _ck(_v, 70, 0, currVal_45, currVal_46); var currVal_47 = i1.ɵunv(_v, 73, 0, i1.ɵnov(_v, 74).transform("Orders")); _ck(_v, 73, 0, currVal_47); var currVal_48 = (i1.ɵnov(_v, 76)._avatar || i1.ɵnov(_v, 76)._icon); var currVal_49 = (i1.ɵnov(_v, 76)._avatar || i1.ɵnov(_v, 76)._icon); var currVal_50 = i1.ɵnov(_v, 80).target; var currVal_51 = i1.ɵnov(_v, 80).href; _ck(_v, 75, 0, currVal_48, currVal_49, currVal_50, currVal_51); var currVal_54 = i1.ɵnov(_v, 87).inline; var currVal_55 = (((i1.ɵnov(_v, 87).color !== "primary") && (i1.ɵnov(_v, 87).color !== "accent")) && (i1.ɵnov(_v, 87).color !== "warn")); _ck(_v, 86, 0, currVal_54, currVal_55); var currVal_56 = i1.ɵunv(_v, 89, 0, i1.ɵnov(_v, 90).transform("Account")); _ck(_v, 89, 0, currVal_56); var currVal_57 = i1.ɵunv(_v, 92, 0, i1.ɵnov(_v, 93).transform("Categories")); _ck(_v, 92, 0, currVal_57); var currVal_59 = (i1.ɵnov(_v, 98)._toolbarRows.length > 0); var currVal_60 = (i1.ɵnov(_v, 98)._toolbarRows.length === 0); _ck(_v, 97, 0, currVal_59, currVal_60); var currVal_63 = _co.title; _ck(_v, 106, 0, currVal_63); var currVal_65 = i1.ɵnov(_v, 111)._rawDir; _ck(_v, 109, 0, currVal_65); }); }
 exports.View_AppComponent_0 = View_AppComponent_0;
-function View_AppComponent_Host_0(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 1, "app-root", [], null, null, null, View_AppComponent_0, RenderType_AppComponent)), i1.ɵdid(1, 114688, null, 0, i21.AppComponent, [i1.PLATFORM_ID, i6.Router, i22.Title, i22.Meta, i18.TranslateService, i7.Location, i23.BasketService, i24.ProductService, i1.ElementRef], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+function View_AppComponent_Host_0(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 1, "app-root", [], null, null, null, View_AppComponent_0, RenderType_AppComponent)), i1.ɵdid(1, 114688, null, 0, i21.AppComponent, [i1.PLATFORM_ID, i6.Router, i22.MetaService, i18.TranslateService, i7.Location, i23.BasketService, i24.ProductService, i1.ElementRef], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 exports.View_AppComponent_Host_0 = View_AppComponent_Host_0;
 var AppComponentNgFactory = i1.ɵccf("app-root", i21.AppComponent, View_AppComponent_Host_0, {}, {}, []);
 exports.AppComponentNgFactory = AppComponentNgFactory;
@@ -2451,18 +2451,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "@angular/core");
 var common_1 = __webpack_require__(/*! @angular/common */ "@angular/common");
 var common_2 = __webpack_require__(/*! @angular/common */ "@angular/common");
-var platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ "@angular/platform-browser");
-var core_2 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
+var core_2 = __webpack_require__(/*! @ngx-meta/core */ "@ngx-meta/core");
+var core_3 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
 var basket_service_1 = __webpack_require__(/*! app/services/basket.service */ "./src/app/services/basket.service.ts");
 var product_service_1 = __webpack_require__(/*! app/services/product.service */ "./src/app/services/product.service.ts");
 var mytranslate_pipe_1 = __webpack_require__(/*! app/pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
 var environment_1 = __webpack_require__(/*! environments/environment */ "./src/environments/environment.ts");
 var router_1 = __webpack_require__(/*! @angular/router */ "@angular/router");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platformId, router, titleService, metaService, translate, location, basketService, productService, _element) {
+    function AppComponent(platformId, router, metaService, translate, location, basketService, productService, _element) {
         this.platformId = platformId;
         this.router = router;
-        this.titleService = titleService;
         this.metaService = metaService;
         this.translate = translate;
         this.location = location;
@@ -2507,24 +2506,24 @@ var AppComponent = /** @class */ (function () {
                         _a.title = _b.sent();
                         AppComponent.backButton = backButton;
                         AppComponent.menuActive = menuActive;
-                        this.metaService.removeTag("name='description'");
-                        this.metaService.removeTag("name='og:title'");
-                        this.metaService.removeTag("name='og:description'");
-                        this.metaService.removeTag("name='og:type'");
-                        this.metaService.removeTag("name='og:url'");
-                        this.metaService.removeTag("name='og:image'");
+                        this.metaService.removeTag("property='description'");
+                        this.metaService.removeTag("property='og:title'");
+                        this.metaService.removeTag("property='og:description'");
+                        this.metaService.removeTag("property='og:type'");
+                        this.metaService.removeTag("property='og:url'");
+                        this.metaService.removeTag("property='og:image'");
                         if (title !== null) {
-                            this.titleService.setTitle(title);
+                            this.metaService.setTitle(title);
                             url = environment_1.environment.hostWeb + this.router.url;
-                            this.metaService.addTag({ name: 'og:title', content: title }, false);
-                            this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
-                            this.metaService.addTag({ name: 'og:url', content: url }, false);
+                            this.metaService.setTag('og:title', title);
+                            this.metaService.setTag('og:type', 'website');
+                            this.metaService.setTag('og:url', url);
                             if (description !== null) {
-                                this.metaService.addTag({ name: 'description', content: description }, false);
-                                this.metaService.addTag({ name: 'og:description', content: description }, false);
+                                this.metaService.setTag('description', description);
+                                this.metaService.setTag('og:description', description);
                             }
                             if (image !== null) {
-                                this.metaService.addTag({ name: 'og:image', image: image }, false);
+                                this.metaService.setTag('og:image', image);
                             }
                         }
                         return [2 /*return*/];
@@ -2745,55 +2744,56 @@ var i35 = __webpack_require__(/*! @angular/material/sort */ "@angular/material/s
 var i36 = __webpack_require__(/*! @angular/common/http */ "@angular/common/http");
 var i37 = __webpack_require__(/*! ./services/url.interceptor */ "./src/app/services/url.interceptor.ts");
 var i38 = __webpack_require__(/*! @angular/router */ "@angular/router");
-var i39 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
-var i40 = __webpack_require__(/*! ./app.module */ "./src/app/app.module.ts");
-var i41 = __webpack_require__(/*! ./services/dialog.service */ "./src/app/services/dialog.service.ts");
-var i42 = __webpack_require__(/*! ./services/session.service */ "./src/app/services/session.service.ts");
-var i43 = __webpack_require__(/*! ./services/registry.service */ "./src/app/services/registry.service.ts");
-var i44 = __webpack_require__(/*! ./services/product.service */ "./src/app/services/product.service.ts");
-var i45 = __webpack_require__(/*! ./services/basket.service */ "./src/app/services/basket.service.ts");
-var i46 = __webpack_require__(/*! ./services/document.service */ "./src/app/services/document.service.ts");
-var i47 = __webpack_require__(/*! @angular/http */ "@angular/http");
-var i48 = __webpack_require__(/*! ./services/appload.service */ "./src/app/services/appload.service.ts");
-var i49 = __webpack_require__(/*! @angular/cdk/accordion */ "@angular/cdk/accordion");
-var i50 = __webpack_require__(/*! @angular/cdk/portal */ "@angular/cdk/portal");
-var i51 = __webpack_require__(/*! @angular/material/expansion */ "@angular/material/expansion");
-var i52 = __webpack_require__(/*! @angular/cdk/platform */ "@angular/cdk/platform");
-var i53 = __webpack_require__(/*! @angular/material/divider */ "@angular/material/divider");
-var i54 = __webpack_require__(/*! @angular/material/list */ "@angular/material/list");
-var i55 = __webpack_require__(/*! @angular/material/toolbar */ "@angular/material/toolbar");
-var i56 = __webpack_require__(/*! @angular/material/button */ "@angular/material/button");
-var i57 = __webpack_require__(/*! @angular/material/icon */ "@angular/material/icon");
-var i58 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
-var i59 = __webpack_require__(/*! @angular/cdk/scrolling */ "@angular/cdk/scrolling");
-var i60 = __webpack_require__(/*! @angular/material/sidenav */ "@angular/material/sidenav");
-var i61 = __webpack_require__(/*! @angular/material/grid-list */ "@angular/material/grid-list");
-var i62 = __webpack_require__(/*! @angular/material/checkbox */ "@angular/material/checkbox");
-var i63 = __webpack_require__(/*! @angular/material/radio */ "@angular/material/radio");
-var i64 = __webpack_require__(/*! @angular/cdk/text-field */ "@angular/cdk/text-field");
-var i65 = __webpack_require__(/*! @angular/material/form-field */ "@angular/material/form-field");
-var i66 = __webpack_require__(/*! @angular/material/input */ "@angular/material/input");
-var i67 = __webpack_require__(/*! @angular/material/snack-bar */ "@angular/material/snack-bar");
-var i68 = __webpack_require__(/*! @angular/cdk/stepper */ "@angular/cdk/stepper");
-var i69 = __webpack_require__(/*! @angular/cdk/table */ "@angular/cdk/table");
-var i70 = __webpack_require__(/*! @angular/material/table */ "@angular/material/table");
-var i71 = __webpack_require__(/*! @angular/material/bottom-sheet */ "@angular/material/bottom-sheet");
-var i72 = __webpack_require__(/*! ./material.module */ "./src/app/material.module.ts");
-var i73 = __webpack_require__(/*! @angular/cdk/layout */ "@angular/cdk/layout");
-var i74 = __webpack_require__(/*! angular2-useful-swiper */ "angular2-useful-swiper");
-var i75 = __webpack_require__(/*! @nguniversal/module-map-ngfactory-loader */ "@nguniversal/module-map-ngfactory-loader");
-var i76 = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-var i77 = __webpack_require__(/*! ./home/info.component */ "./src/app/home/info.component.ts");
-var i78 = __webpack_require__(/*! ./account/app.account */ "./src/app/account/app.account.ts");
-var i79 = __webpack_require__(/*! ./account/app.login */ "./src/app/account/app.login.ts");
-var i80 = __webpack_require__(/*! ./account/app.register */ "./src/app/account/app.register.ts");
-var i81 = __webpack_require__(/*! ./product/app.products */ "./src/app/product/app.products.ts");
-var i82 = __webpack_require__(/*! ./product/app.product */ "./src/app/product/app.product.ts");
-var i83 = __webpack_require__(/*! ./basket/app.basket */ "./src/app/basket/app.basket.ts");
-var i84 = __webpack_require__(/*! ./basket/app.checkout */ "./src/app/basket/app.checkout.ts");
-var i85 = __webpack_require__(/*! ./order/app.orders */ "./src/app/order/app.orders.ts");
-var i86 = __webpack_require__(/*! ./order/app.document */ "./src/app/order/app.document.ts");
-var AppServerModuleNgFactory = i0.ɵcmf(i1.AppServerModule, [i2.AppComponent], function (_l) { return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i3.MatDialogContainerNgFactory, i4.MatSnackBarContainerNgFactory, i4.SimpleSnackBarNgFactory, i5.MatBottomSheetContainerNgFactory, i6.ɵEmptyOutletComponentNgFactory, i7.AppComponentNgFactory, i8.HomeComponentNgFactory, i9.InfoComponentNgFactory, i10.AccountComponentNgFactory, i11.LoginComponentNgFactory, i12.RegisterComponentNgFactory, i13.ProductsComponentNgFactory, i14.ProductComponentNgFactory, i15.BasketComponentNgFactory, i16.CheckoutComponentNgFactory, i17.OrdersComponentNgFactory, i18.DocumentComponentNgFactory, i19.ConfirmDialogNgFactory, i20.BottomSheetComponentNgFactory]], [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵangular_packages_core_core_s, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i21.NgLocalization, i21.NgLocaleLocalization, [i0.LOCALE_ID, [2, i21.ɵangular_packages_common_common_a]]), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵangular_packages_core_core_q, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵangular_packages_core_core_r, []), i0.ɵmpd(4608, i22.DomSanitizer, i22.ɵDomSanitizerImpl, [i21.DOCUMENT]), i0.ɵmpd(6144, i0.Sanitizer, null, [i22.DomSanitizer]), i0.ɵmpd(4608, i22.HAMMER_GESTURE_CONFIG, i22.HammerGestureConfig, []), i0.ɵmpd(5120, i22.EVENT_MANAGER_PLUGINS, function (p0_0, p0_1, p0_2, p1_0, p2_0, p2_1, p2_2, p2_3, p3_0) { return [new i22.ɵDomEventsPlugin(p0_0, p0_1, p0_2), new i22.ɵKeyEventsPlugin(p1_0), new i22.ɵHammerGesturesPlugin(p2_0, p2_1, p2_2, p2_3), new i23.ɵangular_packages_platform_server_platform_server_d(p3_0)]; }, [i21.DOCUMENT, i0.NgZone, i0.PLATFORM_ID, i21.DOCUMENT, i21.DOCUMENT, i22.HAMMER_GESTURE_CONFIG, i0.ɵConsole, [2, i22.HAMMER_LOADER], i22.DOCUMENT]), i0.ɵmpd(4608, i22.EventManager, i22.EventManager, [i22.EVENT_MANAGER_PLUGINS, i0.NgZone]), i0.ɵmpd(135680, i22.ɵDomSharedStylesHost, i22.ɵDomSharedStylesHost, [i21.DOCUMENT]), i0.ɵmpd(4608, i22.ɵDomRendererFactory2, i22.ɵDomRendererFactory2, [i22.EventManager, i22.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i23.ɵangular_packages_platform_server_platform_server_c, i23.ɵangular_packages_platform_server_platform_server_c, [i22.DOCUMENT, [2, i22.ɵTRANSITION_ID]]), i0.ɵmpd(6144, i22.ɵSharedStylesHost, null, [i23.ɵangular_packages_platform_server_platform_server_c]), i0.ɵmpd(4608, i23.ɵServerRendererFactory2, i23.ɵServerRendererFactory2, [i22.EventManager, i0.NgZone, i22.DOCUMENT, i22.ɵSharedStylesHost]), i0.ɵmpd(4608, i24.AnimationDriver, i24.ɵNoopAnimationDriver, []), i0.ɵmpd(5120, i24.ɵAnimationStyleNormalizer, i25.ɵangular_packages_platform_browser_animations_animations_b, []), i0.ɵmpd(4608, i24.ɵAnimationEngine, i25.ɵInjectableAnimationEngine, [i21.DOCUMENT, i24.AnimationDriver, i24.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i23.ɵangular_packages_platform_server_platform_server_a, [i23.ɵServerRendererFactory2, i24.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(4352, i0.Testability, null, []), i0.ɵmpd(4608, i26.AnimationBuilder, i25.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i22.DOCUMENT]), i0.ɵmpd(4608, i27.ɵangular_packages_forms_forms_j, i27.ɵangular_packages_forms_forms_j, []), i0.ɵmpd(4608, i27.FormBuilder, i27.FormBuilder, []), i0.ɵmpd(4608, i28.MutationObserverFactory, i28.MutationObserverFactory, []), i0.ɵmpd(4608, i29.ErrorStateMatcher, i29.ErrorStateMatcher, []), i0.ɵmpd(4608, i30.OverlayContainer, i30.FullscreenOverlayContainer, [i21.DOCUMENT]), i0.ɵmpd(4608, i30.Overlay, i30.Overlay, [i30.ScrollStrategyOptions, i30.OverlayContainer, i0.ComponentFactoryResolver, i30.OverlayPositionBuilder, i30.OverlayKeyboardDispatcher, i0.Injector, i0.NgZone, i21.DOCUMENT, i31.Directionality, [2, i21.Location]]), i0.ɵmpd(5120, i30.ɵc, i30.ɵd, [i30.Overlay]), i0.ɵmpd(5120, i32.MAT_DIALOG_SCROLL_STRATEGY, i32.MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(135680, i32.MatDialog, i32.MatDialog, [i30.Overlay, i0.Injector, [2, i21.Location], [2, i32.MAT_DIALOG_DEFAULT_OPTIONS], i32.MAT_DIALOG_SCROLL_STRATEGY, [3, i32.MatDialog], i30.OverlayContainer]), i0.ɵmpd(5120, i33.MAT_SELECT_SCROLL_STRATEGY, i33.MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(5120, i34.MatStepperIntl, i34.MAT_STEPPER_INTL_PROVIDER_FACTORY, [[3, i34.MatStepperIntl]]), i0.ɵmpd(5120, i35.MatSortHeaderIntl, i35.MAT_SORT_HEADER_INTL_PROVIDER_FACTORY, [[3, i35.MatSortHeaderIntl]]), i0.ɵmpd(4608, i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_g, [i21.DOCUMENT, i0.PLATFORM_ID, i36.ɵangular_packages_common_http_http_e]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_h, i36.ɵangular_packages_common_http_http_h, [i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_f]), i0.ɵmpd(5120, i36.HTTP_INTERCEPTORS, function (p0_0) { return [p0_0, new i37.UrlInterceptor()]; }, [i36.ɵangular_packages_common_http_http_h]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_d, i36.ɵangular_packages_common_http_http_d, []), i0.ɵmpd(5120, i38.ActivatedRoute, i38.ɵangular_packages_router_router_g, [i38.Router]), i0.ɵmpd(4608, i38.NoPreloading, i38.NoPreloading, []), i0.ɵmpd(6144, i38.PreloadingStrategy, null, [i38.NoPreloading]), i0.ɵmpd(135680, i38.RouterPreloader, i38.RouterPreloader, [i38.Router, i0.NgModuleFactoryLoader, i0.Compiler, i0.Injector, i38.PreloadingStrategy]), i0.ɵmpd(4608, i38.PreloadAllModules, i38.PreloadAllModules, []), i0.ɵmpd(4608, i21.ViewportScroller, i21.ɵNullViewportScroller, []), i0.ɵmpd(5120, i38.ɵangular_packages_router_router_n, i38.ɵangular_packages_router_router_c, [i38.Router, i21.ViewportScroller, i38.ROUTER_CONFIGURATION]), i0.ɵmpd(5120, i38.ROUTER_INITIALIZER, i38.ɵangular_packages_router_router_j, [i38.ɵangular_packages_router_router_h]), i0.ɵmpd(5120, i0.APP_BOOTSTRAP_LISTENER, function (p0_0) { return [p0_0]; }, [i38.ROUTER_INITIALIZER]), i0.ɵmpd(5120, i39.TranslateLoader, i40.HttpLoaderFactory, [i36.HttpClient]), i0.ɵmpd(4608, i39.TranslateCompiler, i39.TranslateFakeCompiler, []), i0.ɵmpd(4608, i39.TranslateParser, i39.TranslateDefaultParser, []), i0.ɵmpd(4608, i39.MissingTranslationHandler, i39.FakeMissingTranslationHandler, []), i0.ɵmpd(4608, i39.TranslateStore, i39.TranslateStore, []), i0.ɵmpd(4608, i39.TranslateService, i39.TranslateService, [i39.TranslateStore, i39.TranslateLoader, i39.TranslateCompiler, i39.TranslateParser, i39.MissingTranslationHandler, i39.USE_DEFAULT_LANG, i39.USE_STORE]), i0.ɵmpd(4608, i41.DialogService, i41.DialogService, [i32.MatDialog]), i0.ɵmpd(4608, i42.SessionService, i42.SessionService, [i0.PLATFORM_ID, i38.Router, i36.HttpClient]), i0.ɵmpd(4608, i43.RegistryService, i43.RegistryService, [i36.HttpClient]), i0.ɵmpd(4608, i44.ProductService, i44.ProductService, [i36.HttpClient]), i0.ɵmpd(4608, i45.BasketService, i45.BasketService, [i36.HttpClient]), i0.ɵmpd(4608, i46.DocumentService, i46.DocumentService, [i36.HttpClient]), i0.ɵmpd(4608, i47.BrowserXhr, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(4608, i47.ResponseOptions, i47.BaseResponseOptions, []), i0.ɵmpd(4608, i47.XSRFStrategy, i23.ɵangular_packages_platform_server_platform_server_f, []), i0.ɵmpd(4608, i47.XHRBackend, i47.XHRBackend, [i47.BrowserXhr, i47.ResponseOptions, i47.XSRFStrategy]), i0.ɵmpd(4608, i47.RequestOptions, i47.BaseRequestOptions, []), i0.ɵmpd(5120, i47.Http, i23.ɵangular_packages_platform_server_platform_server_g, [i47.XHRBackend, i47.RequestOptions]), i0.ɵmpd(1073742336, i21.CommonModule, i21.CommonModule, []), i0.ɵmpd(1024, i0.ErrorHandler, i22.ɵangular_packages_platform_browser_platform_browser_a, []), i0.ɵmpd(1024, i0.NgProbeToken, function () { return [i38.ɵangular_packages_router_router_b()]; }, []), i0.ɵmpd(256, i0.APP_ID, "zenretail-web", []), i0.ɵmpd(2048, i22.ɵTRANSITION_ID, null, [i0.APP_ID]), i0.ɵmpd(512, i38.ɵangular_packages_router_router_h, i38.ɵangular_packages_router_router_h, [i0.Injector]), i0.ɵmpd(512, i36.XhrFactory, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(512, i36.HttpXhrBackend, i36.HttpXhrBackend, [i36.XhrFactory]), i0.ɵmpd(2048, i36.HttpBackend, null, [i36.HttpXhrBackend]), i0.ɵmpd(1024, i36.HttpHandler, i23.ɵangular_packages_platform_server_platform_server_h, [i36.HttpBackend, i0.Injector]), i0.ɵmpd(512, i36.HttpClient, i36.HttpClient, [i36.HttpHandler]), i0.ɵmpd(512, i48.AppLoadService, i48.AppLoadService, [i36.HttpClient]), i0.ɵmpd(1024, i0.APP_INITIALIZER, function (p0_0, p1_0, p1_1, p1_2, p2_0, p3_0) { return [i22.ɵangular_packages_platform_browser_platform_browser_j(p0_0), i22.ɵangular_packages_platform_browser_platform_browser_h(p1_0, p1_1, p1_2), i38.ɵangular_packages_router_router_i(p2_0), i40.getSettings(p3_0)]; }, [[2, i0.NgProbeToken], i22.ɵTRANSITION_ID, i21.DOCUMENT, i0.Injector, i38.ɵangular_packages_router_router_h, i48.AppLoadService]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ApplicationRef, i0.ApplicationRef, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver, i0.ApplicationInitStatus]), i0.ɵmpd(1073742336, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]), i0.ɵmpd(1073742336, i22.BrowserModule, i22.BrowserModule, [[3, i22.BrowserModule]]), i0.ɵmpd(1073742336, i25.BrowserAnimationsModule, i25.BrowserAnimationsModule, []), i0.ɵmpd(1073742336, i27.ɵangular_packages_forms_forms_bc, i27.ɵangular_packages_forms_forms_bc, []), i0.ɵmpd(1073742336, i27.FormsModule, i27.FormsModule, []), i0.ɵmpd(1073742336, i27.ReactiveFormsModule, i27.ReactiveFormsModule, []), i0.ɵmpd(1073742336, i49.CdkAccordionModule, i49.CdkAccordionModule, []), i0.ɵmpd(1073742336, i50.PortalModule, i50.PortalModule, []), i0.ɵmpd(1073742336, i51.MatExpansionModule, i51.MatExpansionModule, []), i0.ɵmpd(1073742336, i31.BidiModule, i31.BidiModule, []), i0.ɵmpd(1073742336, i29.MatCommonModule, i29.MatCommonModule, [[2, i29.MATERIAL_SANITY_CHECKS], [2, i22.HAMMER_LOADER]]), i0.ɵmpd(1073742336, i29.MatLineModule, i29.MatLineModule, []), i0.ɵmpd(1073742336, i52.PlatformModule, i52.PlatformModule, []), i0.ɵmpd(1073742336, i29.MatRippleModule, i29.MatRippleModule, []), i0.ɵmpd(1073742336, i29.MatPseudoCheckboxModule, i29.MatPseudoCheckboxModule, []), i0.ɵmpd(1073742336, i53.MatDividerModule, i53.MatDividerModule, []), i0.ɵmpd(1073742336, i54.MatListModule, i54.MatListModule, []), i0.ɵmpd(1073742336, i55.MatToolbarModule, i55.MatToolbarModule, []), i0.ɵmpd(1073742336, i56.MatButtonModule, i56.MatButtonModule, []), i0.ɵmpd(1073742336, i57.MatIconModule, i57.MatIconModule, []), i0.ɵmpd(1073742336, i58.MatCardModule, i58.MatCardModule, []), i0.ɵmpd(1073742336, i59.ScrollingModule, i59.ScrollingModule, []), i0.ɵmpd(1073742336, i60.MatSidenavModule, i60.MatSidenavModule, []), i0.ɵmpd(1073742336, i61.MatGridListModule, i61.MatGridListModule, []), i0.ɵmpd(1073742336, i28.ObserversModule, i28.ObserversModule, []), i0.ɵmpd(1073742336, i62.MatCheckboxModule, i62.MatCheckboxModule, []), i0.ɵmpd(1073742336, i63.MatRadioModule, i63.MatRadioModule, []), i0.ɵmpd(1073742336, i64.TextFieldModule, i64.TextFieldModule, []), i0.ɵmpd(1073742336, i65.MatFormFieldModule, i65.MatFormFieldModule, []), i0.ɵmpd(1073742336, i66.MatInputModule, i66.MatInputModule, []), i0.ɵmpd(1073742336, i30.OverlayModule, i30.OverlayModule, []), i0.ɵmpd(1073742336, i32.MatDialogModule, i32.MatDialogModule, []), i0.ɵmpd(1073742336, i67.MatSnackBarModule, i67.MatSnackBarModule, []), i0.ɵmpd(1073742336, i29.MatOptionModule, i29.MatOptionModule, []), i0.ɵmpd(1073742336, i33.MatSelectModule, i33.MatSelectModule, []), i0.ɵmpd(1073742336, i68.CdkStepperModule, i68.CdkStepperModule, []), i0.ɵmpd(1073742336, i34.MatStepperModule, i34.MatStepperModule, []), i0.ɵmpd(1073742336, i69.CdkTableModule, i69.CdkTableModule, []), i0.ɵmpd(1073742336, i70.MatTableModule, i70.MatTableModule, []), i0.ɵmpd(1073742336, i35.MatSortModule, i35.MatSortModule, []), i0.ɵmpd(1073742336, i71.MatBottomSheetModule, i71.MatBottomSheetModule, []), i0.ɵmpd(1073742336, i72.MaterialModule, i72.MaterialModule, []), i0.ɵmpd(1073742336, i73.LayoutModule, i73.LayoutModule, []), i0.ɵmpd(1073742336, i36.HttpClientXsrfModule, i36.HttpClientXsrfModule, []), i0.ɵmpd(1073742336, i36.HttpClientModule, i36.HttpClientModule, []), i0.ɵmpd(1073742336, i74.SwiperModule, i74.SwiperModule, []), i0.ɵmpd(1024, i38.ɵangular_packages_router_router_a, i38.ɵangular_packages_router_router_e, [[3, i38.Router]]), i0.ɵmpd(512, i38.UrlSerializer, i38.DefaultUrlSerializer, []), i0.ɵmpd(512, i38.ChildrenOutletContexts, i38.ChildrenOutletContexts, []), i0.ɵmpd(256, i38.ROUTER_CONFIGURATION, {}, []), i0.ɵmpd(1024, i21.LocationStrategy, i38.ɵangular_packages_router_router_d, [i21.PlatformLocation, [2, i21.APP_BASE_HREF], i38.ROUTER_CONFIGURATION]), i0.ɵmpd(512, i21.Location, i21.Location, [i21.LocationStrategy]), i0.ɵmpd(512, i0.Compiler, i0.Compiler, []), i0.ɵmpd(512, i0.NgModuleFactoryLoader, i75.ModuleMapNgFactoryLoader, [i0.Compiler, i75.MODULE_MAP]), i0.ɵmpd(1024, i38.ROUTES, function () { return [[{ path: "", component: i2.AppComponent, children: [{ path: "", component: i2.AppComponent, children: [{ path: "", redirectTo: "home", pathMatch: "full" }, { path: "home", component: i76.HomeComponent }, { path: "info", component: i77.InfoComponent }, { path: "account", component: i78.AccountComponent }, { path: "login", component: i79.LoginComponent }, { path: "register", component: i80.RegisterComponent }, { path: "brand/:name", component: i81.ProductsComponent }, { path: "category/:name", component: i81.ProductsComponent }, { path: "product/:name", component: i82.ProductComponent }, { path: "basket", component: i83.BasketComponent }, { path: "checkout", component: i84.CheckoutComponent }, { path: "orders", component: i85.OrdersComponent }, { path: "doc/:id", component: i86.DocumentComponent }] }] }]]; }, []), i0.ɵmpd(1024, i38.Router, i38.ɵangular_packages_router_router_f, [i0.ApplicationRef, i38.UrlSerializer, i38.ChildrenOutletContexts, i21.Location, i0.Injector, i0.NgModuleFactoryLoader, i0.Compiler, i38.ROUTES, i38.ROUTER_CONFIGURATION, [2, i38.UrlHandlingStrategy], [2, i38.RouteReuseStrategy]]), i0.ɵmpd(1073742336, i38.RouterModule, i38.RouterModule, [[2, i38.ɵangular_packages_router_router_a], [2, i38.Router]]), i0.ɵmpd(1073742336, i39.TranslateModule, i39.TranslateModule, []), i0.ɵmpd(1073742336, i40.AppModule, i40.AppModule, []), i0.ɵmpd(1073742336, i47.HttpModule, i47.HttpModule, []), i0.ɵmpd(1073742336, i25.NoopAnimationsModule, i25.NoopAnimationsModule, []), i0.ɵmpd(1073742336, i23.ServerModule, i23.ServerModule, []), i0.ɵmpd(1073742336, i75.ModuleMapLoaderModule, i75.ModuleMapLoaderModule, []), i0.ɵmpd(1073742336, i1.AppServerModule, i1.AppServerModule, []), i0.ɵmpd(256, i0.ɵAPP_ROOT, true, []), i0.ɵmpd(256, i25.ANIMATION_MODULE_TYPE, "NoopAnimations", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_e, "XSRF-TOKEN", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_f, "X-XSRF-TOKEN", []), i0.ɵmpd(256, i27.ɵangular_packages_forms_forms_k, "never", []), i0.ɵmpd(256, i39.USE_STORE, undefined, []), i0.ɵmpd(256, i39.USE_DEFAULT_LANG, undefined, [])]); });
+var i39 = __webpack_require__(/*! @ngx-meta/core */ "@ngx-meta/core");
+var i40 = __webpack_require__(/*! @ngx-translate/core */ "@ngx-translate/core");
+var i41 = __webpack_require__(/*! ./app.module */ "./src/app/app.module.ts");
+var i42 = __webpack_require__(/*! ./services/dialog.service */ "./src/app/services/dialog.service.ts");
+var i43 = __webpack_require__(/*! ./services/session.service */ "./src/app/services/session.service.ts");
+var i44 = __webpack_require__(/*! ./services/registry.service */ "./src/app/services/registry.service.ts");
+var i45 = __webpack_require__(/*! ./services/product.service */ "./src/app/services/product.service.ts");
+var i46 = __webpack_require__(/*! ./services/basket.service */ "./src/app/services/basket.service.ts");
+var i47 = __webpack_require__(/*! ./services/document.service */ "./src/app/services/document.service.ts");
+var i48 = __webpack_require__(/*! @angular/http */ "@angular/http");
+var i49 = __webpack_require__(/*! ./services/appload.service */ "./src/app/services/appload.service.ts");
+var i50 = __webpack_require__(/*! @angular/cdk/accordion */ "@angular/cdk/accordion");
+var i51 = __webpack_require__(/*! @angular/cdk/portal */ "@angular/cdk/portal");
+var i52 = __webpack_require__(/*! @angular/material/expansion */ "@angular/material/expansion");
+var i53 = __webpack_require__(/*! @angular/cdk/platform */ "@angular/cdk/platform");
+var i54 = __webpack_require__(/*! @angular/material/divider */ "@angular/material/divider");
+var i55 = __webpack_require__(/*! @angular/material/list */ "@angular/material/list");
+var i56 = __webpack_require__(/*! @angular/material/toolbar */ "@angular/material/toolbar");
+var i57 = __webpack_require__(/*! @angular/material/button */ "@angular/material/button");
+var i58 = __webpack_require__(/*! @angular/material/icon */ "@angular/material/icon");
+var i59 = __webpack_require__(/*! @angular/material/card */ "@angular/material/card");
+var i60 = __webpack_require__(/*! @angular/cdk/scrolling */ "@angular/cdk/scrolling");
+var i61 = __webpack_require__(/*! @angular/material/sidenav */ "@angular/material/sidenav");
+var i62 = __webpack_require__(/*! @angular/material/grid-list */ "@angular/material/grid-list");
+var i63 = __webpack_require__(/*! @angular/material/checkbox */ "@angular/material/checkbox");
+var i64 = __webpack_require__(/*! @angular/material/radio */ "@angular/material/radio");
+var i65 = __webpack_require__(/*! @angular/cdk/text-field */ "@angular/cdk/text-field");
+var i66 = __webpack_require__(/*! @angular/material/form-field */ "@angular/material/form-field");
+var i67 = __webpack_require__(/*! @angular/material/input */ "@angular/material/input");
+var i68 = __webpack_require__(/*! @angular/material/snack-bar */ "@angular/material/snack-bar");
+var i69 = __webpack_require__(/*! @angular/cdk/stepper */ "@angular/cdk/stepper");
+var i70 = __webpack_require__(/*! @angular/cdk/table */ "@angular/cdk/table");
+var i71 = __webpack_require__(/*! @angular/material/table */ "@angular/material/table");
+var i72 = __webpack_require__(/*! @angular/material/bottom-sheet */ "@angular/material/bottom-sheet");
+var i73 = __webpack_require__(/*! ./material.module */ "./src/app/material.module.ts");
+var i74 = __webpack_require__(/*! @angular/cdk/layout */ "@angular/cdk/layout");
+var i75 = __webpack_require__(/*! angular2-useful-swiper */ "angular2-useful-swiper");
+var i76 = __webpack_require__(/*! @nguniversal/module-map-ngfactory-loader */ "@nguniversal/module-map-ngfactory-loader");
+var i77 = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+var i78 = __webpack_require__(/*! ./home/info.component */ "./src/app/home/info.component.ts");
+var i79 = __webpack_require__(/*! ./account/app.account */ "./src/app/account/app.account.ts");
+var i80 = __webpack_require__(/*! ./account/app.login */ "./src/app/account/app.login.ts");
+var i81 = __webpack_require__(/*! ./account/app.register */ "./src/app/account/app.register.ts");
+var i82 = __webpack_require__(/*! ./product/app.products */ "./src/app/product/app.products.ts");
+var i83 = __webpack_require__(/*! ./product/app.product */ "./src/app/product/app.product.ts");
+var i84 = __webpack_require__(/*! ./basket/app.basket */ "./src/app/basket/app.basket.ts");
+var i85 = __webpack_require__(/*! ./basket/app.checkout */ "./src/app/basket/app.checkout.ts");
+var i86 = __webpack_require__(/*! ./order/app.orders */ "./src/app/order/app.orders.ts");
+var i87 = __webpack_require__(/*! ./order/app.document */ "./src/app/order/app.document.ts");
+var AppServerModuleNgFactory = i0.ɵcmf(i1.AppServerModule, [i2.AppComponent], function (_l) { return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i3.MatDialogContainerNgFactory, i4.MatSnackBarContainerNgFactory, i4.SimpleSnackBarNgFactory, i5.MatBottomSheetContainerNgFactory, i6.ɵEmptyOutletComponentNgFactory, i7.AppComponentNgFactory, i8.HomeComponentNgFactory, i9.InfoComponentNgFactory, i10.AccountComponentNgFactory, i11.LoginComponentNgFactory, i12.RegisterComponentNgFactory, i13.ProductsComponentNgFactory, i14.ProductComponentNgFactory, i15.BasketComponentNgFactory, i16.CheckoutComponentNgFactory, i17.OrdersComponentNgFactory, i18.DocumentComponentNgFactory, i19.ConfirmDialogNgFactory, i20.BottomSheetComponentNgFactory]], [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵangular_packages_core_core_s, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i21.NgLocalization, i21.NgLocaleLocalization, [i0.LOCALE_ID, [2, i21.ɵangular_packages_common_common_a]]), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵangular_packages_core_core_q, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵangular_packages_core_core_r, []), i0.ɵmpd(4608, i22.DomSanitizer, i22.ɵDomSanitizerImpl, [i21.DOCUMENT]), i0.ɵmpd(6144, i0.Sanitizer, null, [i22.DomSanitizer]), i0.ɵmpd(4608, i22.HAMMER_GESTURE_CONFIG, i22.HammerGestureConfig, []), i0.ɵmpd(5120, i22.EVENT_MANAGER_PLUGINS, function (p0_0, p0_1, p0_2, p1_0, p2_0, p2_1, p2_2, p2_3, p3_0) { return [new i22.ɵDomEventsPlugin(p0_0, p0_1, p0_2), new i22.ɵKeyEventsPlugin(p1_0), new i22.ɵHammerGesturesPlugin(p2_0, p2_1, p2_2, p2_3), new i23.ɵangular_packages_platform_server_platform_server_d(p3_0)]; }, [i21.DOCUMENT, i0.NgZone, i0.PLATFORM_ID, i21.DOCUMENT, i21.DOCUMENT, i22.HAMMER_GESTURE_CONFIG, i0.ɵConsole, [2, i22.HAMMER_LOADER], i22.DOCUMENT]), i0.ɵmpd(4608, i22.EventManager, i22.EventManager, [i22.EVENT_MANAGER_PLUGINS, i0.NgZone]), i0.ɵmpd(135680, i22.ɵDomSharedStylesHost, i22.ɵDomSharedStylesHost, [i21.DOCUMENT]), i0.ɵmpd(4608, i22.ɵDomRendererFactory2, i22.ɵDomRendererFactory2, [i22.EventManager, i22.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i23.ɵangular_packages_platform_server_platform_server_c, i23.ɵangular_packages_platform_server_platform_server_c, [i22.DOCUMENT, [2, i22.ɵTRANSITION_ID]]), i0.ɵmpd(6144, i22.ɵSharedStylesHost, null, [i23.ɵangular_packages_platform_server_platform_server_c]), i0.ɵmpd(4608, i23.ɵServerRendererFactory2, i23.ɵServerRendererFactory2, [i22.EventManager, i0.NgZone, i22.DOCUMENT, i22.ɵSharedStylesHost]), i0.ɵmpd(4608, i24.AnimationDriver, i24.ɵNoopAnimationDriver, []), i0.ɵmpd(5120, i24.ɵAnimationStyleNormalizer, i25.ɵangular_packages_platform_browser_animations_animations_b, []), i0.ɵmpd(4608, i24.ɵAnimationEngine, i25.ɵInjectableAnimationEngine, [i21.DOCUMENT, i24.AnimationDriver, i24.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i23.ɵangular_packages_platform_server_platform_server_a, [i23.ɵServerRendererFactory2, i24.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(4352, i0.Testability, null, []), i0.ɵmpd(4608, i26.AnimationBuilder, i25.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i22.DOCUMENT]), i0.ɵmpd(4608, i27.ɵangular_packages_forms_forms_j, i27.ɵangular_packages_forms_forms_j, []), i0.ɵmpd(4608, i27.FormBuilder, i27.FormBuilder, []), i0.ɵmpd(4608, i28.MutationObserverFactory, i28.MutationObserverFactory, []), i0.ɵmpd(4608, i29.ErrorStateMatcher, i29.ErrorStateMatcher, []), i0.ɵmpd(4608, i30.OverlayContainer, i30.FullscreenOverlayContainer, [i21.DOCUMENT]), i0.ɵmpd(4608, i30.Overlay, i30.Overlay, [i30.ScrollStrategyOptions, i30.OverlayContainer, i0.ComponentFactoryResolver, i30.OverlayPositionBuilder, i30.OverlayKeyboardDispatcher, i0.Injector, i0.NgZone, i21.DOCUMENT, i31.Directionality, [2, i21.Location]]), i0.ɵmpd(5120, i30.ɵc, i30.ɵd, [i30.Overlay]), i0.ɵmpd(5120, i32.MAT_DIALOG_SCROLL_STRATEGY, i32.MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(135680, i32.MatDialog, i32.MatDialog, [i30.Overlay, i0.Injector, [2, i21.Location], [2, i32.MAT_DIALOG_DEFAULT_OPTIONS], i32.MAT_DIALOG_SCROLL_STRATEGY, [3, i32.MatDialog], i30.OverlayContainer]), i0.ɵmpd(5120, i33.MAT_SELECT_SCROLL_STRATEGY, i33.MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, [i30.Overlay]), i0.ɵmpd(5120, i34.MatStepperIntl, i34.MAT_STEPPER_INTL_PROVIDER_FACTORY, [[3, i34.MatStepperIntl]]), i0.ɵmpd(5120, i35.MatSortHeaderIntl, i35.MAT_SORT_HEADER_INTL_PROVIDER_FACTORY, [[3, i35.MatSortHeaderIntl]]), i0.ɵmpd(4608, i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_g, [i21.DOCUMENT, i0.PLATFORM_ID, i36.ɵangular_packages_common_http_http_e]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_h, i36.ɵangular_packages_common_http_http_h, [i36.HttpXsrfTokenExtractor, i36.ɵangular_packages_common_http_http_f]), i0.ɵmpd(5120, i36.HTTP_INTERCEPTORS, function (p0_0) { return [p0_0, new i37.UrlInterceptor()]; }, [i36.ɵangular_packages_common_http_http_h]), i0.ɵmpd(4608, i36.ɵangular_packages_common_http_http_d, i36.ɵangular_packages_common_http_http_d, []), i0.ɵmpd(5120, i38.ActivatedRoute, i38.ɵangular_packages_router_router_g, [i38.Router]), i0.ɵmpd(4608, i38.NoPreloading, i38.NoPreloading, []), i0.ɵmpd(6144, i38.PreloadingStrategy, null, [i38.NoPreloading]), i0.ɵmpd(135680, i38.RouterPreloader, i38.RouterPreloader, [i38.Router, i0.NgModuleFactoryLoader, i0.Compiler, i0.Injector, i38.PreloadingStrategy]), i0.ɵmpd(4608, i38.PreloadAllModules, i38.PreloadAllModules, []), i0.ɵmpd(4608, i21.ViewportScroller, i21.ɵNullViewportScroller, []), i0.ɵmpd(5120, i38.ɵangular_packages_router_router_n, i38.ɵangular_packages_router_router_c, [i38.Router, i21.ViewportScroller, i38.ROUTER_CONFIGURATION]), i0.ɵmpd(5120, i38.ROUTER_INITIALIZER, i38.ɵangular_packages_router_router_j, [i38.ɵangular_packages_router_router_h]), i0.ɵmpd(5120, i0.APP_BOOTSTRAP_LISTENER, function (p0_0) { return [p0_0]; }, [i38.ROUTER_INITIALIZER]), i0.ɵmpd(5120, i39.MetaLoader, i39.metaFactory, []), i0.ɵmpd(4608, i39.MetaService, i39.MetaService, [i39.MetaLoader, i22.Title, i22.Meta]), i0.ɵmpd(4608, i39.MetaGuard, i39.MetaGuard, [i39.MetaService]), i0.ɵmpd(5120, i40.TranslateLoader, i41.HttpLoaderFactory, [i36.HttpClient]), i0.ɵmpd(4608, i40.TranslateCompiler, i40.TranslateFakeCompiler, []), i0.ɵmpd(4608, i40.TranslateParser, i40.TranslateDefaultParser, []), i0.ɵmpd(4608, i40.MissingTranslationHandler, i40.FakeMissingTranslationHandler, []), i0.ɵmpd(4608, i40.TranslateStore, i40.TranslateStore, []), i0.ɵmpd(4608, i40.TranslateService, i40.TranslateService, [i40.TranslateStore, i40.TranslateLoader, i40.TranslateCompiler, i40.TranslateParser, i40.MissingTranslationHandler, i40.USE_DEFAULT_LANG, i40.USE_STORE]), i0.ɵmpd(4608, i42.DialogService, i42.DialogService, [i32.MatDialog]), i0.ɵmpd(4608, i43.SessionService, i43.SessionService, [i0.PLATFORM_ID, i38.Router, i36.HttpClient]), i0.ɵmpd(4608, i44.RegistryService, i44.RegistryService, [i36.HttpClient]), i0.ɵmpd(4608, i45.ProductService, i45.ProductService, [i36.HttpClient]), i0.ɵmpd(4608, i46.BasketService, i46.BasketService, [i36.HttpClient]), i0.ɵmpd(4608, i47.DocumentService, i47.DocumentService, [i36.HttpClient]), i0.ɵmpd(4608, i48.BrowserXhr, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(4608, i48.ResponseOptions, i48.BaseResponseOptions, []), i0.ɵmpd(4608, i48.XSRFStrategy, i23.ɵangular_packages_platform_server_platform_server_f, []), i0.ɵmpd(4608, i48.XHRBackend, i48.XHRBackend, [i48.BrowserXhr, i48.ResponseOptions, i48.XSRFStrategy]), i0.ɵmpd(4608, i48.RequestOptions, i48.BaseRequestOptions, []), i0.ɵmpd(5120, i48.Http, i23.ɵangular_packages_platform_server_platform_server_g, [i48.XHRBackend, i48.RequestOptions]), i0.ɵmpd(1073742336, i21.CommonModule, i21.CommonModule, []), i0.ɵmpd(1024, i0.ErrorHandler, i22.ɵangular_packages_platform_browser_platform_browser_a, []), i0.ɵmpd(1024, i0.NgProbeToken, function () { return [i38.ɵangular_packages_router_router_b()]; }, []), i0.ɵmpd(256, i0.APP_ID, "zenretail-web", []), i0.ɵmpd(2048, i22.ɵTRANSITION_ID, null, [i0.APP_ID]), i0.ɵmpd(512, i38.ɵangular_packages_router_router_h, i38.ɵangular_packages_router_router_h, [i0.Injector]), i0.ɵmpd(512, i36.XhrFactory, i23.ɵangular_packages_platform_server_platform_server_e, []), i0.ɵmpd(512, i36.HttpXhrBackend, i36.HttpXhrBackend, [i36.XhrFactory]), i0.ɵmpd(2048, i36.HttpBackend, null, [i36.HttpXhrBackend]), i0.ɵmpd(1024, i36.HttpHandler, i23.ɵangular_packages_platform_server_platform_server_h, [i36.HttpBackend, i0.Injector]), i0.ɵmpd(512, i36.HttpClient, i36.HttpClient, [i36.HttpHandler]), i0.ɵmpd(512, i49.AppLoadService, i49.AppLoadService, [i36.HttpClient]), i0.ɵmpd(1024, i0.APP_INITIALIZER, function (p0_0, p1_0, p1_1, p1_2, p2_0, p3_0) { return [i22.ɵangular_packages_platform_browser_platform_browser_j(p0_0), i22.ɵangular_packages_platform_browser_platform_browser_h(p1_0, p1_1, p1_2), i38.ɵangular_packages_router_router_i(p2_0), i41.getSettings(p3_0)]; }, [[2, i0.NgProbeToken], i22.ɵTRANSITION_ID, i21.DOCUMENT, i0.Injector, i38.ɵangular_packages_router_router_h, i49.AppLoadService]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ApplicationRef, i0.ApplicationRef, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver, i0.ApplicationInitStatus]), i0.ɵmpd(1073742336, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]), i0.ɵmpd(1073742336, i22.BrowserModule, i22.BrowserModule, [[3, i22.BrowserModule]]), i0.ɵmpd(1073742336, i25.BrowserAnimationsModule, i25.BrowserAnimationsModule, []), i0.ɵmpd(1073742336, i27.ɵangular_packages_forms_forms_bc, i27.ɵangular_packages_forms_forms_bc, []), i0.ɵmpd(1073742336, i27.FormsModule, i27.FormsModule, []), i0.ɵmpd(1073742336, i27.ReactiveFormsModule, i27.ReactiveFormsModule, []), i0.ɵmpd(1073742336, i50.CdkAccordionModule, i50.CdkAccordionModule, []), i0.ɵmpd(1073742336, i51.PortalModule, i51.PortalModule, []), i0.ɵmpd(1073742336, i52.MatExpansionModule, i52.MatExpansionModule, []), i0.ɵmpd(1073742336, i31.BidiModule, i31.BidiModule, []), i0.ɵmpd(1073742336, i29.MatCommonModule, i29.MatCommonModule, [[2, i29.MATERIAL_SANITY_CHECKS], [2, i22.HAMMER_LOADER]]), i0.ɵmpd(1073742336, i29.MatLineModule, i29.MatLineModule, []), i0.ɵmpd(1073742336, i53.PlatformModule, i53.PlatformModule, []), i0.ɵmpd(1073742336, i29.MatRippleModule, i29.MatRippleModule, []), i0.ɵmpd(1073742336, i29.MatPseudoCheckboxModule, i29.MatPseudoCheckboxModule, []), i0.ɵmpd(1073742336, i54.MatDividerModule, i54.MatDividerModule, []), i0.ɵmpd(1073742336, i55.MatListModule, i55.MatListModule, []), i0.ɵmpd(1073742336, i56.MatToolbarModule, i56.MatToolbarModule, []), i0.ɵmpd(1073742336, i57.MatButtonModule, i57.MatButtonModule, []), i0.ɵmpd(1073742336, i58.MatIconModule, i58.MatIconModule, []), i0.ɵmpd(1073742336, i59.MatCardModule, i59.MatCardModule, []), i0.ɵmpd(1073742336, i60.ScrollingModule, i60.ScrollingModule, []), i0.ɵmpd(1073742336, i61.MatSidenavModule, i61.MatSidenavModule, []), i0.ɵmpd(1073742336, i62.MatGridListModule, i62.MatGridListModule, []), i0.ɵmpd(1073742336, i28.ObserversModule, i28.ObserversModule, []), i0.ɵmpd(1073742336, i63.MatCheckboxModule, i63.MatCheckboxModule, []), i0.ɵmpd(1073742336, i64.MatRadioModule, i64.MatRadioModule, []), i0.ɵmpd(1073742336, i65.TextFieldModule, i65.TextFieldModule, []), i0.ɵmpd(1073742336, i66.MatFormFieldModule, i66.MatFormFieldModule, []), i0.ɵmpd(1073742336, i67.MatInputModule, i67.MatInputModule, []), i0.ɵmpd(1073742336, i30.OverlayModule, i30.OverlayModule, []), i0.ɵmpd(1073742336, i32.MatDialogModule, i32.MatDialogModule, []), i0.ɵmpd(1073742336, i68.MatSnackBarModule, i68.MatSnackBarModule, []), i0.ɵmpd(1073742336, i29.MatOptionModule, i29.MatOptionModule, []), i0.ɵmpd(1073742336, i33.MatSelectModule, i33.MatSelectModule, []), i0.ɵmpd(1073742336, i69.CdkStepperModule, i69.CdkStepperModule, []), i0.ɵmpd(1073742336, i34.MatStepperModule, i34.MatStepperModule, []), i0.ɵmpd(1073742336, i70.CdkTableModule, i70.CdkTableModule, []), i0.ɵmpd(1073742336, i71.MatTableModule, i71.MatTableModule, []), i0.ɵmpd(1073742336, i35.MatSortModule, i35.MatSortModule, []), i0.ɵmpd(1073742336, i72.MatBottomSheetModule, i72.MatBottomSheetModule, []), i0.ɵmpd(1073742336, i73.MaterialModule, i73.MaterialModule, []), i0.ɵmpd(1073742336, i74.LayoutModule, i74.LayoutModule, []), i0.ɵmpd(1073742336, i36.HttpClientXsrfModule, i36.HttpClientXsrfModule, []), i0.ɵmpd(1073742336, i36.HttpClientModule, i36.HttpClientModule, []), i0.ɵmpd(1073742336, i75.SwiperModule, i75.SwiperModule, []), i0.ɵmpd(1024, i38.ɵangular_packages_router_router_a, i38.ɵangular_packages_router_router_e, [[3, i38.Router]]), i0.ɵmpd(512, i38.UrlSerializer, i38.DefaultUrlSerializer, []), i0.ɵmpd(512, i38.ChildrenOutletContexts, i38.ChildrenOutletContexts, []), i0.ɵmpd(256, i38.ROUTER_CONFIGURATION, {}, []), i0.ɵmpd(1024, i21.LocationStrategy, i38.ɵangular_packages_router_router_d, [i21.PlatformLocation, [2, i21.APP_BASE_HREF], i38.ROUTER_CONFIGURATION]), i0.ɵmpd(512, i21.Location, i21.Location, [i21.LocationStrategy]), i0.ɵmpd(512, i0.Compiler, i0.Compiler, []), i0.ɵmpd(512, i0.NgModuleFactoryLoader, i76.ModuleMapNgFactoryLoader, [i0.Compiler, i76.MODULE_MAP]), i0.ɵmpd(1024, i38.ROUTES, function () { return [[{ path: "", component: i2.AppComponent, children: [{ path: "", component: i2.AppComponent, children: [{ path: "", redirectTo: "home", pathMatch: "full" }, { path: "home", component: i77.HomeComponent }, { path: "info", component: i78.InfoComponent }, { path: "account", component: i79.AccountComponent }, { path: "login", component: i80.LoginComponent }, { path: "register", component: i81.RegisterComponent }, { path: "brand/:name", component: i82.ProductsComponent }, { path: "category/:name", component: i82.ProductsComponent }, { path: "product/:name", component: i83.ProductComponent }, { path: "basket", component: i84.BasketComponent }, { path: "checkout", component: i85.CheckoutComponent }, { path: "orders", component: i86.OrdersComponent }, { path: "doc/:id", component: i87.DocumentComponent }] }] }]]; }, []), i0.ɵmpd(1024, i38.Router, i38.ɵangular_packages_router_router_f, [i0.ApplicationRef, i38.UrlSerializer, i38.ChildrenOutletContexts, i21.Location, i0.Injector, i0.NgModuleFactoryLoader, i0.Compiler, i38.ROUTES, i38.ROUTER_CONFIGURATION, [2, i38.UrlHandlingStrategy], [2, i38.RouteReuseStrategy]]), i0.ɵmpd(1073742336, i38.RouterModule, i38.RouterModule, [[2, i38.ɵangular_packages_router_router_a], [2, i38.Router]]), i0.ɵmpd(1073742336, i39.MetaModule, i39.MetaModule, [[3, i39.MetaModule]]), i0.ɵmpd(1073742336, i40.TranslateModule, i40.TranslateModule, []), i0.ɵmpd(1073742336, i41.AppModule, i41.AppModule, []), i0.ɵmpd(1073742336, i48.HttpModule, i48.HttpModule, []), i0.ɵmpd(1073742336, i25.NoopAnimationsModule, i25.NoopAnimationsModule, []), i0.ɵmpd(1073742336, i23.ServerModule, i23.ServerModule, []), i0.ɵmpd(1073742336, i76.ModuleMapLoaderModule, i76.ModuleMapLoaderModule, []), i0.ɵmpd(1073742336, i1.AppServerModule, i1.AppServerModule, []), i0.ɵmpd(256, i0.ɵAPP_ROOT, true, []), i0.ɵmpd(256, i25.ANIMATION_MODULE_TYPE, "NoopAnimations", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_e, "XSRF-TOKEN", []), i0.ɵmpd(256, i36.ɵangular_packages_common_http_http_f, "X-XSRF-TOKEN", []), i0.ɵmpd(256, i27.ɵangular_packages_forms_forms_k, "never", []), i0.ɵmpd(256, i40.USE_STORE, undefined, []), i0.ɵmpd(256, i40.USE_DEFAULT_LANG, undefined, [])]); });
 exports.AppServerModuleNgFactory = AppServerModuleNgFactory;
 
 
@@ -3512,10 +3512,6 @@ var HomeComponent = /** @class */ (function () {
     function HomeComponent(platformId, productService) {
         this.platformId = platformId;
         this.productService = productService;
-        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyHomeSeo.title);
-        var desc = pipe.transform(this.data.companyHomeSeo.description);
-        app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
@@ -3538,6 +3534,10 @@ var HomeComponent = /** @class */ (function () {
     });
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
+        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
+        var title = pipe.transform(this.data.companyHomeSeo.title);
+        var desc = pipe.transform(this.data.companyHomeSeo.description);
+        app_component_1.AppComponent.current.setPage('Home', title, desc, environment_1.environment.hostApi + '/media/logo.png');
         this.productService
             .getFeatured()
             .subscribe(function (result) {
@@ -3597,7 +3597,7 @@ var RenderType_InfoComponent = i0.ɵcrt({ encapsulation: 0, styles: styles_InfoC
 exports.RenderType_InfoComponent = RenderType_InfoComponent;
 function View_InfoComponent_0(_l) { return i0.ɵvid(0, [i0.ɵpid(0, i1.MyTranslatePipe, [i0.PLATFORM_ID]), (_l()(), i0.ɵeld(1, 0, null, null, 4, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(2, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(3, 0, null, 0, 2, "mat-card-content", [["class", "mat-card-content"]], [[8, "innerHTML", 1]], null, null, null, null)), i0.ɵdid(4, 16384, null, 0, i3.MatCardContent, [], null, null), i0.ɵppd(5, 1), (_l()(), i0.ɵeld(6, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), i0.ɵeld(7, 0, null, null, 31, "mat-card", [["class", "mat-card"]], null, null, null, i2.View_MatCard_0, i2.RenderType_MatCard)), i0.ɵdid(8, 49152, null, 0, i3.MatCard, [], null, null), (_l()(), i0.ɵeld(9, 0, null, 0, 3, "mat-card-title", [["class", "mat-card-title"]], null, null, null, null, null)), i0.ɵdid(10, 16384, null, 0, i3.MatCardTitle, [], null, null), (_l()(), i0.ɵted(11, null, ["", ""])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(13, 0, null, 0, 25, "mat-card-content", [["class", "mat-card-content"]], null, null, null, null, null)), i0.ɵdid(14, 16384, null, 0, i3.MatCardContent, [], null, null), (_l()(), i0.ɵeld(15, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(16, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(17, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(18, null, ["\u00A0\u00A0", ""])), (_l()(), i0.ɵeld(19, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), i0.ɵeld(20, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(21, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵted(22, null, ["\u00A0\u00A0 ", " ", " ", " ", " ", " "])), (_l()(), i0.ɵeld(23, 0, null, null, 1, "strong", [], null, null, null, null, null)), i0.ɵdid(24, 8536064, null, 0, i4.TranslateDirective, [i4.TranslateService, i0.ElementRef, i0.ChangeDetectorRef], { translate: [0, "translate"] }, null), (_l()(), i0.ɵeld(25, 0, null, null, 12, "ul", [], null, null, null, null, null)), (_l()(), i0.ɵeld(26, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(27, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(28, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(30, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(31, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(32, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(34, 0, null, null, 3, "li", [], null, null, null, null, null)), (_l()(), i0.ɵeld(35, 0, null, null, 2, "a", [], [[8, "href", 4]], null, null, null, null)), (_l()(), i0.ɵted(36, null, ["", " (", ")"])), i0.ɵpid(131072, i4.TranslatePipe, [i4.TranslateService, i0.ChangeDetectorRef]), (_l()(), i0.ɵeld(38, 0, null, null, 0, "br", [], null, null, null, null, null))], function (_ck, _v) { var currVal_2 = "Phone"; _ck(_v, 17, 0, currVal_2); var currVal_4 = "Address"; _ck(_v, 21, 0, currVal_4); var currVal_10 = "Email"; _ck(_v, 24, 0, currVal_10); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = i0.ɵunv(_v, 3, 0, _ck(_v, 5, 0, i0.ɵnov(_v, 0), _co.data.companyInfoContent)); _ck(_v, 3, 0, currVal_0); var currVal_1 = i0.ɵunv(_v, 11, 0, i0.ɵnov(_v, 12).transform("Contacts")); _ck(_v, 11, 0, currVal_1); var currVal_3 = _co.data.companyPhone; _ck(_v, 18, 0, currVal_3); var currVal_5 = _co.data.companyAddress; var currVal_6 = _co.data.companyCity; var currVal_7 = _co.data.companyZip; var currVal_8 = _co.data.companyProvince; var currVal_9 = _co.data.companyCountry; _ck(_v, 22, 0, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9); var currVal_11 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailInfo, ""); _ck(_v, 27, 0, currVal_11); var currVal_12 = _co.data.companyEmailInfo; var currVal_13 = i0.ɵunv(_v, 28, 1, i0.ɵnov(_v, 29).transform("Information")); _ck(_v, 28, 0, currVal_12, currVal_13); var currVal_14 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSales, ""); _ck(_v, 31, 0, currVal_14); var currVal_15 = _co.data.companyEmailSales; var currVal_16 = i0.ɵunv(_v, 32, 1, i0.ɵnov(_v, 33).transform("Sales")); _ck(_v, 32, 0, currVal_15, currVal_16); var currVal_17 = i0.ɵinlineInterpolate(1, "mailto:", _co.data.companyEmailSupport, ""); _ck(_v, 35, 0, currVal_17); var currVal_18 = _co.data.companyEmailSupport; var currVal_19 = i0.ɵunv(_v, 36, 1, i0.ɵnov(_v, 37).transform("Support")); _ck(_v, 36, 0, currVal_18, currVal_19); }); }
 exports.View_InfoComponent_0 = View_InfoComponent_0;
-function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 49152, null, 0, i5.InfoComponent, [i0.PLATFORM_ID], null, null)], null, null); }
+function View_InfoComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-info", [], null, null, null, View_InfoComponent_0, RenderType_InfoComponent)), i0.ɵdid(1, 114688, null, 0, i5.InfoComponent, [i0.PLATFORM_ID], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 exports.View_InfoComponent_Host_0 = View_InfoComponent_Host_0;
 var InfoComponentNgFactory = i0.ɵccf("app-info", i5.InfoComponent, View_InfoComponent_Host_0, {}, {}, []);
 exports.InfoComponentNgFactory = InfoComponentNgFactory;
@@ -3615,22 +3615,25 @@ exports.InfoComponentNgFactory = InfoComponentNgFactory;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "@angular/core");
 var app_component_1 = __webpack_require__(/*! app/app.component */ "./src/app/app.component.ts");
 var mytranslate_pipe_1 = __webpack_require__(/*! app/pipes/mytranslate.pipe */ "./src/app/pipes/mytranslate.pipe.ts");
 var helpers_1 = __webpack_require__(/*! app/shared/helpers */ "./src/app/shared/helpers.ts");
 var InfoComponent = /** @class */ (function () {
     function InfoComponent(platformId) {
         this.platformId = platformId;
-        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
-        var title = pipe.transform(this.data.companyInfoSeo.title);
-        var description = pipe.transform(this.data.companyInfoSeo.description);
-        app_component_1.AppComponent.current.setPage('Information', title, description, '/media/logo.png');
     }
     Object.defineProperty(InfoComponent.prototype, "data", {
         get: function () { return helpers_1.Helpers.setting; },
         enumerable: true,
         configurable: true
     });
+    InfoComponent.prototype.ngOnInit = function () {
+        var pipe = new mytranslate_pipe_1.MyTranslatePipe(this.platformId);
+        var title = pipe.transform(this.data.companyInfoSeo.title);
+        var description = pipe.transform(this.data.companyInfoSeo.description);
+        app_component_1.AppComponent.current.setPage('Information', title, description, '/media/logo.png');
+    };
     return InfoComponent;
 }());
 exports.InfoComponent = InfoComponent;
@@ -4449,7 +4452,6 @@ var common_1 = __webpack_require__(/*! @angular/common */ "@angular/common");
 var parseurl_pipe_1 = __webpack_require__(/*! app/pipes/parseurl.pipe */ "./src/app/pipes/parseurl.pipe.ts");
 var ProductComponent = /** @class */ (function () {
     function ProductComponent(platformId, router, snackBar, translate, productService, basketService, activatedRoute) {
-        var _this = this;
         this.platformId = platformId;
         this.router = router;
         this.snackBar = snackBar;
@@ -4466,16 +4468,6 @@ var ProductComponent = /** @class */ (function () {
             slidesPerView: 2,
             spaceBetween: 30 // Space between each Item
         };
-        this.sub = this.activatedRoute.params.subscribe(function (params) {
-            var name = params['name'];
-            _this.loadProduct(name);
-        });
-        if (common_1.isPlatformBrowser(this.platformId)) {
-            this.resize(window.innerWidth);
-        }
-        if (common_1.isPlatformServer(this.platformId)) {
-            this.resize(480);
-        }
     }
     Object.defineProperty(ProductComponent.prototype, "isIframe", {
         get: function () { return app_component_1.AppComponent.current.isIframe; },
@@ -4488,6 +4480,17 @@ var ProductComponent = /** @class */ (function () {
         configurable: true
     });
     ProductComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.activatedRoute.params.subscribe(function (params) {
+            var name = params['name'];
+            _this.loadProduct(name);
+        });
+        if (common_1.isPlatformBrowser(this.platformId)) {
+            this.resize(window.innerWidth);
+        }
+        if (common_1.isPlatformServer(this.platformId)) {
+            this.resize(480);
+        }
         if (app_component_1.AppComponent.current.getItem('barcode')) {
             this.pickerClick(null);
         }
@@ -4702,7 +4705,6 @@ var parseurl_pipe_1 = __webpack_require__(/*! app/pipes/parseurl.pipe */ "./src/
 var common_1 = __webpack_require__(/*! @angular/common */ "@angular/common");
 var ProductsComponent = /** @class */ (function () {
     function ProductsComponent(platformId, snackBar, translate, productService, router, activatedRoute, bottomSheet) {
-        var _this = this;
         this.platformId = platformId;
         this.snackBar = snackBar;
         this.translate = translate;
@@ -4711,16 +4713,6 @@ var ProductsComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.bottomSheet = bottomSheet;
         this.close = 'Close';
-        this.sub = this.activatedRoute.params.subscribe(function (params) {
-            var name = params['name'];
-            if (_this.router.url.indexOf('brand') < 0) {
-                _this.loadProductsByCategory(name);
-            }
-            else {
-                _this.loadProductsByBrand(name);
-            }
-            _this.translate.get(_this.close).subscribe(function (res) { return _this.close = res; });
-        });
         if (common_1.isPlatformBrowser(this.platformId)) {
             this.onResizeChanged(window);
         }
@@ -4733,6 +4725,16 @@ var ProductsComponent = /** @class */ (function () {
     };
     ProductsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.sub = this.activatedRoute.params.subscribe(function (params) {
+            var name = params['name'];
+            if (_this.router.url.indexOf('brand') < 0) {
+                _this.loadProductsByCategory(name);
+            }
+            else {
+                _this.loadProductsByBrand(name);
+            }
+            _this.translate.get(_this.close).subscribe(function (res) { return _this.close = res; });
+        });
         this.sub = this.activatedRoute.params.subscribe(function (params) {
             var name = params['name'];
             if (_this.router.url.indexOf('brand') < 0) {
@@ -6426,6 +6428,17 @@ module.exports = require("@angular/router");
 /***/ (function(module, exports) {
 
 module.exports = require("@nguniversal/module-map-ngfactory-loader");
+
+/***/ }),
+
+/***/ "@ngx-meta/core":
+/*!*********************************!*\
+  !*** external "@ngx-meta/core" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@ngx-meta/core");
 
 /***/ }),
 
