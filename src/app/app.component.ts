@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
 import { Location } from '@angular/common';
-import { MetaService } from '@ngx-meta/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
-    private readonly metaService: MetaService,
+    private titleService: Title,
+    private metaService: Meta,
     public translate: TranslateService,
     private location: Location,
     private basketService: BasketService,
@@ -68,25 +69,24 @@ export class AppComponent implements OnInit {
     AppComponent.backButton = backButton;
     AppComponent.menuActive = menuActive;
     
-    this.metaService.removeTag("property='description'");
-    this.metaService.removeTag("property='og:title'");
-    this.metaService.removeTag("property='og:description'"); 
-    this.metaService.removeTag("property='og:type'");
-    this.metaService.removeTag("property='og:url'");
-    this.metaService.removeTag("property='og:image'");
-    
+    this.metaService.removeTag("name='og:title'");
+    this.metaService.removeTag("name='og:description'"); 
+    this.metaService.removeTag("name='og:type'");
+    this.metaService.removeTag("name='og:url'");
+    this.metaService.removeTag("name='og:image'");
+
     if (title !== null) {
-      this.metaService.setTitle(title);
+      this.titleService.setTitle(title);
       let url = environment.hostWeb + this.router.url;
-      this.metaService.setTag('og:title', title);
-      this.metaService.setTag('og:type', 'website');
-      this.metaService.setTag('og:url', url);
+      this.metaService.addTag({ name: 'og:title', content: title }, false);
+      this.metaService.addTag({ name: 'og:type', content: 'website' }, false);
+      this.metaService.addTag({ name: 'og:url', content: url }, false);
       if (description !== null) {
-        this.metaService.setTag('description', description);
-        this.metaService.setTag('og:description', description);
+        this.metaService.updateTag({ name: 'description', content: description });
+        this.metaService.addTag({ name: 'og:description', content: description }, false);
       }
       if (image !== null) {
-        this.metaService.setTag('og:image', image);
+        this.metaService.addTag({ name: 'og:image', image }, false);
       }
     }
   }

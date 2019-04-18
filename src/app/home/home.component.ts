@@ -39,31 +39,29 @@ export class HomeComponent implements OnInit {
     get data(): Setting { return Helpers.setting }
     get categories(): any[] { return AppComponent.current.navItems; }
 
-    ngOnInit() {
+    async ngOnInit() {
         let pipe = new MyTranslatePipe(this.platformId);
         let title = pipe.transform(this.data.companyHomeSeo.title);
         let desc = pipe.transform(this.data.companyHomeSeo.description);
-        AppComponent.current.setPage(
+        
+        await AppComponent.current.setPage(
             'Home', 
             title, 
             desc, 
             environment.hostApi + '/media/logo.png'
         );
-        this.productService
+        
+        this.featured = await this.productService
             .getFeatured()
-            .subscribe(result => {
-                this.featured = result;
-            });
-        this.productService
+            .toPromise();
+
+        this.news = await this.productService
             .getNews()
-            .subscribe(result => {
-                this.news = result;
-            });
-        this.productService
+            .toPromise();
+
+        this.brands = await this.productService
             .getBrands()
-            .subscribe(result => {
-                this.brands = result;
-            });
+            .toPromise();
     }
 
     onResizeChanged(event: any) {
