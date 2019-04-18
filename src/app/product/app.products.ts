@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,10 +6,9 @@ import { MatSnackBar } from '@angular/material';
 import { ProductService } from 'app/services/product.service';
 import { Product, Category, Brand } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { BottomSheetComponent } from './app.bottomsheet';
+import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
 import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -29,7 +28,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 	close = 'Close';
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private productService: ProductService,
@@ -37,12 +35,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private bottomSheet: MatBottomSheet
   ) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.onResizeChanged(window);
-    }
-    if (isPlatformServer(this.platformId)) {
-      this.resize(480);
-    }
+    this.onResizeChanged(window);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -101,21 +94,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addMetaByCategory(category: Category) {
-    let pipe = new MyTranslatePipe(this.platformId);
+    let pipe = new MyTranslatePipe();
     let name = pipe.transform(category.translations, category.categoryName);
     this.title = pipe.transform(category.seo.title, name);
     this.description = pipe.transform(category.seo.description, name);
     this.image = new ParseUrlPipe().transform([category.media], 'thumb')
-    AppComponent.current.setPage('Category', this.title, this.description, this.image);
+    AppComponent.current.setPage('Category');
   }
 
   addMetaByBrand(brand: Brand) {
-    let pipe = new MyTranslatePipe(this.platformId);
+    let pipe = new MyTranslatePipe();
     let name = pipe.transform(brand.translations, brand.brandName);
     this.title = pipe.transform(brand.seo.title, name);
     this.description = pipe.transform(brand.seo.description, name);
     this.image = new ParseUrlPipe().transform([brand.media], 'thumb')
-    AppComponent.current.setPage('Brand', this.title, this.description, this.image);
+    AppComponent.current.setPage('Brand');
   }
   
   loadProductsByCategory(categoryName: string) {

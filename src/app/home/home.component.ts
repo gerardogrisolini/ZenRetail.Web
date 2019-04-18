@@ -3,8 +3,6 @@ import { AppComponent } from 'app/app.component';
 import { Product, Brand, Setting } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { environment } from 'environments/environment';
 import { Helpers } from 'app/shared/helpers';
 
 @Component({
@@ -19,16 +17,8 @@ export class HomeComponent implements OnInit {
     news: Product[];
     brands: Brand[];
 
-    constructor(
-        @Inject(PLATFORM_ID) private platformId: Object,
-        private productService: ProductService
-    ) {
-        if (isPlatformBrowser(this.platformId)) {
-            this.onResizeChanged(window);
-        }
-        if (isPlatformServer(this.platformId)) {
-            this.resize(480);
-        }
+    constructor(private productService: ProductService) {
+        this.onResizeChanged(window);
     }
 
     @HostListener('window:resize', ['$event'])
@@ -40,15 +30,15 @@ export class HomeComponent implements OnInit {
     get categories(): any[] { return AppComponent.current.navItems; }
 
     async ngOnInit() {
-        let pipe = new MyTranslatePipe(this.platformId);
-        let title = pipe.transform(this.data.companyHomeSeo.title);
-        let desc = pipe.transform(this.data.companyHomeSeo.description);
+        // let pipe = new MyTranslatePipe(this.platformId);
+        // let title = pipe.transform(this.data.companyHomeSeo.title);
+        // let desc = pipe.transform(this.data.companyHomeSeo.description);
         
         await AppComponent.current.setPage(
-            'Home', 
-            title, 
-            desc, 
-            environment.hostApi + '/media/logo.png'
+            'Home'
+            // title, 
+            // desc, 
+            // environment.hostApi + '/media/logo.png'
         );
         
         this.featured = await this.productService

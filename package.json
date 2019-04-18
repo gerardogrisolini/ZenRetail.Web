@@ -5,9 +5,11 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start:dev": "ng serve",
-    "start": "node app/server.js",
-    "build": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "start": "ng serve --aot --base-href '/' --proxy-config proxy.config.json",
+    "build": "ng build --aot --prod --deploy-url / --base-href '/'",
+    "deploy": "rm -f ../ZenRetail/webroot/*.*; rm -rf ../ZenRetail/webroot/assets; mv ./app/browser/* ../ZenRetail/webroot/; rm -rf ./app;",
+    "start:ssr": "node app/server.js",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "build:client-and-server-bundles": "ng build --aot --prod && ng run zenretail-web:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },

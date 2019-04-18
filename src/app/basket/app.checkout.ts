@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSelectionList } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DialogService } from 'app/services/dialog.service';
 import { SessionService } from 'app/services/session.service';
 import { BasketService } from 'app/services/basket.service';
 import { Basket, Order, Item, Registry, Setting } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { Observable } from 'rxjs/Rx';
 import { AccountComponent } from 'app/account/app.account';
-import { isPlatformBrowser } from '@angular/common';
 import { Helpers } from 'app/shared/helpers';
 
 declare let paypal: any;
@@ -28,19 +26,18 @@ export class CheckoutComponent implements OnInit {
 	paymentMethod = '';
 
 	constructor(
-		@Inject(PLATFORM_ID) private platformId: Object,
 		public snackBar: MatSnackBar,
 		private router: Router,
 		private dialogsService: DialogService,
 		private sessionService: SessionService,
 		private basketService: BasketService) {
-		AppComponent.current.setPage('Checkout', null, null, null, true);
+		AppComponent.current.setPage('Checkout', true);
 	}
 
 	ngOnInit() {
 		if (!this.sessionService.checkCredentials()) { return; }
 
-		if (isPlatformBrowser(this.platformId)) {
+		if (AppComponent.current.isIframe) {
 			window.parent.postMessage('iframe:900', '*');
 		}
 

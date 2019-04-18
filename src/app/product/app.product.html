@@ -27,22 +27,14 @@
       </ng-template>
       <hr>
       <br/>
-      <div *ngIf="isServer;then server else browser"></div>
-      <ng-template #server>
-        <div *ngFor="let img of this.product.medias">
-          <img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" />
-        </div>
-      </ng-template>
-      <ng-template #browser>
-        <swiper [config]="config">
-          <div class="swiper-wrapper">
-            <div *ngFor="let img of this.product.medias" class="swiper-slide">
-              <a href="{{ [img] | parseUrl }}" target="_blank"><img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" /></a>
-            </div>
+      <swiper [config]="config">
+        <div class="swiper-wrapper">
+          <div *ngFor="let img of this.product.medias" class="swiper-slide">
+            <a href="{{ [img] | parseUrl }}" target="_blank"><img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" /></a>
           </div>
-        </swiper>
-      </ng-template>
-    </div>
+        </div>
+      </swiper>
+  </div>
   </mat-expansion-panel>
   <br/>
   <article-picker [product]="product" (onPicked)="pickerClick($event)"></article-picker>

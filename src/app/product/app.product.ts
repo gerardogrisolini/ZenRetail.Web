@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,9 +6,6 @@ import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
-import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
 	selector: 'app-product',
@@ -20,14 +17,14 @@ export class ProductComponent implements OnInit, OnDestroy {
 	product: Product;
 	
 	constructor(
-		@Inject(PLATFORM_ID) private platformId: Object,
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private translate: TranslateService,
 		private productService: ProductService,
 		private basketService: BasketService,
 		private activatedRoute: ActivatedRoute
-	) {	
+	) {
+		this.resize(window.innerWidth);
 	}
 	
 	config: SwiperOptions = {
@@ -41,19 +38,12 @@ export class ProductComponent implements OnInit, OnDestroy {
 	};
 	  
 	get isIframe(): boolean { return AppComponent.current.isIframe; }
-	get isServer(): boolean { return isPlatformServer(this.platformId) }
 
 	ngOnInit() {
 		this.sub = this.activatedRoute.params.subscribe(params => {
 			const name = params['name'];
 			this.loadProduct(name);
 		});
-		if (isPlatformBrowser(this.platformId)) {
-      this.resize(window.innerWidth);
-    }
-    if (isPlatformServer(this.platformId)) {
-      this.resize(480);
-    }
 		if (AppComponent.current.getItem('barcode')) {
 			this.pickerClick(null);
 		}
@@ -69,11 +59,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 	}
 
   addMetaData(product: Product) {
-		let pipe = new MyTranslatePipe(this.platformId);
-    let title = pipe.transform(product.seo.title);
-		let description = pipe.transform(product.seo.description);
-		let image = new ParseUrlPipe().transform(product.medias, 'thumb')
-    AppComponent.current.setPage("Product", title, description, image, !this.isIframe, !this.isIframe);
+		// let pipe = new MyTranslatePipe(this.platformId);
+    // let title = pipe.transform(product.seo.title);
+		// let description = pipe.transform(product.seo.description);
+		// let image = new ParseUrlPipe().transform(product.medias, 'thumb')
+    AppComponent.current.setPage('Product', !this.isIframe, !this.isIframe);
 }
 
   loadProduct(name: string) {
@@ -82,7 +72,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				this.product = result;
 				if (!this.isIframe) {
 					this.addMetaData(result);
-				} else if (isPlatformBrowser(this.platformId)) {
+				} else {
 					const height = (result.attributes.length * 100) + 160;
 					window.parent.postMessage('iframe:' + height, '*');
 				}
@@ -115,7 +105,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 								})
 								.onAction()
 								.subscribe(() => {
-									if (isPlatformBrowser(this.platformId) && this.isIframe) {
+									if (this.isIframe) {
 											window.parent.postMessage('basket', '*');
 									} else {
 										this.router.navigate(['basket']);
@@ -130,7 +120,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				} else {
 					this.basketService.basket.push(result);
 					}
-				} else if (isPlatformBrowser(this.platformId)) {
+				} else {
 					window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
 				}
 			},

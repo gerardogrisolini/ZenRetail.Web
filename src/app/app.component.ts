@@ -1,7 +1,4 @@
-import { Component, OnInit, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
-import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { Title, Meta } from '@angular/platform-browser';
+import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
@@ -27,10 +24,9 @@ export class AppComponent implements OnInit {
   public static current: AppComponent;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
-    private titleService: Title,
-    private metaService: Meta,
+    // private titleService: Title,
+    // private metaService: Meta,
     public translate: TranslateService,
     private location: Location,
     private basketService: BasketService,
@@ -40,11 +36,10 @@ export class AppComponent implements OnInit {
     AppComponent.current = this;
     this.isIframe = this.isFrame();
 
-    if (isPlatformBrowser(this.platformId)) {
+    if (navigator) {
       const country = navigator.language.substring(0, 2).toLowerCase();
       this.translate.use(country);
-    }
-    if (isPlatformServer(this.platformId)) {
+    } else {
       this.translate.setDefaultLang('en');
     }
   }
@@ -58,9 +53,9 @@ export class AppComponent implements OnInit {
 
   async setPage(
     name: string, 
-    title: string = null, 
-    description: string = null, 
-    image: string = null,
+    // title: string = null, 
+    // description: string = null, 
+    // image: string = null,
     backButton: boolean = false, 
     menuActive: boolean = true
   ) {
@@ -69,6 +64,7 @@ export class AppComponent implements OnInit {
     AppComponent.backButton = backButton;
     AppComponent.menuActive = menuActive;
     
+    /*
     this.metaService.removeTag("name='og:title'");
     this.metaService.removeTag("name='og:description'"); 
     this.metaService.removeTag("name='og:type'");
@@ -89,20 +85,16 @@ export class AppComponent implements OnInit {
         this.metaService.addTag({ name: 'og:image', image }, false);
       }
     }
+    */
   }
 
   isFrame(): boolean {
-    if (isPlatformServer(this.platformId)) {
-      return false;
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+      return true;
     }
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        return window.self !== window.top;
-      } catch (e) {
-        return true;
-      }
-    }
-  }
+}
 
   get title(): string {
     return AppComponent.title;
@@ -119,42 +111,25 @@ export class AppComponent implements OnInit {
   get itemsCount(): number { return this.basketService.count; }
 
   setItem(key: string, value: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(key, value);
-    }
+    localStorage.setItem(key, value);
   }
 
   getItem(key: string) : string {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(key);
-    } else {
-      return null;
-    }
+    return localStorage.getItem(key);
   }
 
   removeItem(key: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem(key);
-    }
+    localStorage.removeItem(key);
   }
-  count: number = 1;
 
-  // async loadSetting() {
-  //   this.count = this.count + 1;
-  //   console.log(this.count);
-  //   if (AppComponent.setting !== null) { return; }
-  //   AppComponent.setting = await this.basketService.getSetting().toPromise();
-  //   console.log(AppComponent.setting);
-  //   Helpers.currency = AppComponent.setting.companyCurrency;
-  //   Helpers.utc = AppComponent.setting.companyUtc;
-  // }
+  count: number = 1;
 
   loadCategories() {
     this.productService.getCategories()
       .subscribe(result => {
         result.forEach(p => {
-          let name = new MyTranslatePipe(this.platformId).transform(p.translations, p.categoryName);
-          this.navItems.push({ name: name, image: environment.hostApi + '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
+          let name = new MyTranslatePipe().transform(p.translations, p.categoryName);
+          this.navItems.push({ name: name, image: '/thumb/' + p.media.name, route: '/category/' + p.seo.permalink })
         });
       });
   }
@@ -181,17 +156,6 @@ export class AppComponent implements OnInit {
     } else if (elem.msRequestFullScreen) {
       elem.msRequestFullScreen();
     }
-
-    // const element = document as any;
-    // if (element.exitFullscreen) {
-    //     element.exitFullscreen();
-    // } else if (element.mozCancelFullScreen) {
-    //     element.mozCancelFullScreen();
-    // } else if (element.webkitExitFullscreen) {
-    //     element.webkitExitFullscreen();
-    // } else if (element.msExitFullscreen) {
-    //     element.msExitFullscreen();
-    // }
   }
 
   backClick() {

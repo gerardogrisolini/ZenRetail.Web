@@ -26,7 +26,7 @@ export class AppLoadService {
 
   async getSettings(): Promise<Setting> {
     const settings = await this.httpClient
-      .get<Setting>(environment.hostApi + '/api/ecommerce/setting')
+      .get<Setting>('/api/ecommerce/setting')
       .toPromise();
     
     // console.log(`Settings from API: `, settings);

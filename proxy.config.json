@@ -1,0 +1,17 @@
+{
+    "/media/**": {
+        "target": "https://zenretail-api.westeurope.cloudapp.azure.com",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/thumb/**": {
+        "target": "https://zenretail-api.westeurope.cloudapp.azure.com",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/api/**": {
+        "target": "https://zenretail-api.westeurope.cloudapp.azure.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
