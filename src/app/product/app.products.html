@@ -1,8 +1,7 @@
-<div style="padding: 0 20px; height: 120px;">
-  <img src="{{ image }}" alt="logo" height="100" style="float: right"/>
-  <h1>{{title}}</h1>
-  <p style="float: left">{{description}}</p>
-</div>
+<table class="table-header">
+  <tr><td><h1>{{title}}</h1></td><td rowspan="2" style="width: 100px"><img src="{{ image }}" alt="default image" height="100"/></td></tr>
+  <tr><td>{{description}}</td></tr>
+</table>
 <hr>
 <div style="padding: 10px 15px;">
   <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">

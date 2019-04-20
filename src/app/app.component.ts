@@ -4,8 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { environment } from 'environments/environment';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -49,6 +48,10 @@ export class AppComponent implements OnInit {
       this.loadBasket();
       this.loadCategories();
     }
+  }
+
+  onActivate(e, scroller) {
+    scroller.scrollTo(0, 0);
   }
 
   async setPage(
