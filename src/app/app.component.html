@@ -1,4 +1,4 @@
-<mat-sidenav-container class="app-root" fullscreen>
+<mat-sidenav-container fullscreen>
 
   <mat-sidenav mode="over" #start>
     <img src="/media/logo.png" alt='logo'/>
@@ -47,32 +47,34 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-toolbar id="toolbar">
-    <button *ngIf="backButton" mat-icon-button (click)="backClick()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button *ngIf="!backButton" mat-icon-button (click)="start.open()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div class="app-toolbar">
-      <h1>{{title}}</h1>
-      <div *ngIf="!isIframe">
-        <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
-          <mat-icon>fullscreen</mat-icon>
-        </button>
-        <button mat-icon-button routerLink="/home" title="Homepage">
-          <mat-icon>home</mat-icon>
-        </button>
-        <button mat-icon-button routerLink="/basket" title="Shopping Basket">
-          <mat-icon>shopping_cart</mat-icon>
-          <span class="badge" *ngIf="itemsCount>0"><b>{{itemsCount}}</b></span>
-        </button>
+  <mat-sidenav-content>
+    <mat-toolbar id="toolbar">
+      <button *ngIf="backButton" mat-icon-button (click)="backClick()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button *ngIf="!backButton" mat-icon-button (click)="start.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="app-toolbar">
+        <h1>{{title}}</h1>
+        <div *ngIf="!isIframe">
+          <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+          <button mat-icon-button routerLink="/home" title="Homepage">
+            <mat-icon>home</mat-icon>
+          </button>
+          <button mat-icon-button routerLink="/basket" title="Shopping Basket">
+            <mat-icon>shopping_cart</mat-icon>
+            <span class="badge" *ngIf="itemsCount>0"><b>{{itemsCount}}</b></span>
+          </button>
+        </div>
       </div>
-    </div>
-  </mat-toolbar>
+    </mat-toolbar>
   
-  <div #root="dir" dir="ltr" class="app-content" #scroller>
-    <router-outlet (activate)="onActivate($event, scroller)"></router-outlet>
-  </div>
+    <div #root="dir" dir="ltr" class="app-content">
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+  </mat-sidenav-content>
     
 </mat-sidenav-container>

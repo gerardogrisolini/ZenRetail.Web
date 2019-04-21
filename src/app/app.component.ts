@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit {
   public static current: AppComponent;
 
   constructor(
-    private router: Router,
     // private titleService: Title,
     // private metaService: Meta,
     public translate: TranslateService,
@@ -50,8 +48,13 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onActivate(e, scroller) {
-    scroller.scrollTo(0, 0);
+  onActivate(e) {
+    const contentContainer = this._element.nativeElement.querySelector('.mat-sidenav-content');
+    if (contentContainer) {
+      contentContainer.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    } else {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }
   }
 
   async setPage(

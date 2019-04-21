@@ -1,8 +1,7 @@
-import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Product, Brand, Setting } from 'app/shared/models';
 import { ProductService } from 'app/services/product.service';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Helpers } from 'app/shared/helpers';
 
 @Component({

@@ -85,7 +85,7 @@ export function getSettings(appLoadService: AppLoadService) {
     HttpClientModule,
     SwiperModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    RouterModule.forRoot(ALL_ROUTES),
+    RouterModule.forRoot(ALL_ROUTES, {scrollPositionRestoration: 'top'}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
