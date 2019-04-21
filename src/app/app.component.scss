@@ -4,7 +4,9 @@ html, body {
   // Isn't currently in button styles due to performance concerns
   margin: 0;
   padding: 0; 
-  
+  width: 100%;
+  height: 100%;
+
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -56,7 +58,7 @@ html, body {
     width: 50vw;
     max-width: 300px;
     padding: 1vw;
-    z-index: 102;
+    z-index: 10002;
     position: fixed;
     top: 0;
     left: 0;
