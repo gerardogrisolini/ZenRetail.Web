@@ -57,6 +57,10 @@ html, body {
     max-width: 300px;
     padding: 1vw;
     z-index: 102;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
    
     img {
       margin: 10px;
