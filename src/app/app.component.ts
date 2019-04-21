@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -128,8 +129,6 @@ export class AppComponent implements OnInit {
     localStorage.removeItem(key);
   }
 
-  count: number = 1;
-
   loadCategories() {
     this.productService.getCategories()
       .subscribe(result => {
@@ -151,8 +150,8 @@ export class AppComponent implements OnInit {
 			});
 	}
 
-  toggleFullscreen() {
-    const elem = this._element.nativeElement.querySelector('.app-content');
+  fullscreen() {
+    const elem = this._element.nativeElement.querySelector('.app-container');
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullScreen) {

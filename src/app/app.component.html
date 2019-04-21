@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="app-container">
 
   <mat-sidenav mode="over" #start>
     <img src="/media/logo.png" alt='logo'/>
@@ -58,7 +58,7 @@
       <div class="app-toolbar">
         <h1>{{title}}</h1>
         <div *ngIf="!isIframe">
-          <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+          <button mat-icon-button (click)="fullscreen()" title="Fullscreen">
             <mat-icon>fullscreen</mat-icon>
           </button>
           <button mat-icon-button routerLink="/home" title="Homepage">
