@@ -39,7 +39,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet
   ) {
     this.onResizeChanged(window);
-    this.filtered = [];
   }
 
   @HostListener('window:resize', ['$event'])
@@ -48,6 +47,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.filtered = this.products = [];
     this.sub = this.activatedRoute.params.subscribe(params => {
       const name = params['name'];
       if (this.router.url.indexOf('brand') < 0) {
