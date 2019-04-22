@@ -47,8 +47,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.filtered = this.products = [];
     this.sub = this.activatedRoute.params.subscribe(params => {
+      this.filtered = [];
+      this.page = 0;
       const name = params['name'];
       if (this.router.url.indexOf('brand') < 0) {
         this.loadProductsByCategory(name);
@@ -116,7 +117,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           this.products = result;
           this.getData();
-          const category = this.filtered[0].categories.find(p => p.category.seo.permalink === categoryName).category;
+          const category = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category;
           this.addMetaByCategory(category);
         }, onerror => this.snackBar.open(onerror._body, this.close));
   }
