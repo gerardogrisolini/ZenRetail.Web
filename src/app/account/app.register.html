@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-content>
-        <form [formGroup]="dataform">
+        <form [formGroup]="dataform" [ngStyle]="{'height': height + 'px'}">
             <mat-form-field style="width: 100%">
                 <input matInput [(ngModel)]="user.username" type="email" formControlName="email" placeholder="{{ 'Email' | translate }}"/>
                 <div *ngIf="!dataform.controls['email'].valid&&dataform.controls['email'].dirty">

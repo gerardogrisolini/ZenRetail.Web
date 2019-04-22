@@ -9,7 +9,7 @@
 
 <mat-card>
     <mat-card-content>
-        <mat-selection-list #items>
+        <mat-selection-list #items [ngStyle]="{'height': height + 'px'}">
         <mat-list-option *ngFor="let item of basket" [value]="item">
             <table cellspacing="10" style="width: 100%">
                 <tr>

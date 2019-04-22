@@ -53,6 +53,11 @@ export class AppComponent implements OnInit {
     const contentContainer = this._element.nativeElement.querySelector('.mat-sidenav-content');
     if (contentContainer) {
       contentContainer.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      // if (contentContainer.offsetHeight < window.innerHeight) {
+      //   contentContainer.style.height = window.innerHeight + 'px';
+      // } else {
+      //   contentContainer.style.height = null;
+      // }
     } else {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }

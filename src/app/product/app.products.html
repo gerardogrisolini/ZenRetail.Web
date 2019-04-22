@@ -1,5 +1,8 @@
-<table class="table-header">
-  <tr><td><h1>{{title}}</h1></td><td rowspan="2" style="width: 100px"><img src="{{ image }}" alt="default image" height="100"/></td></tr>
+<table *ngIf="title" class="table-header">
+  <tr>
+    <td><h1>{{title}}</h1></td>
+    <td rowspan="2" style="width: 100px"><img *ngIf="image" src="{{ image }}" alt="default image" height="100"/></td>
+  </tr>
   <tr><td>{{description}}</td></tr>
 </table>
 <hr>
@@ -23,8 +26,9 @@
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
-
+  <hr>
+  <a *ngIf="!isFullLoaded" mat-fab (click)="getData()" title="{{ 'load other items' | translate }}"><mat-icon>low_priority</mat-icon></a>
   <span class="done">
-      <a mat-fab (click)="openBottomSheet()"><mat-icon>filter_list</mat-icon></a>
+      <a mat-fab (click)="openBottomSheet()" title="{{ 'filter items' | translate }}"><mat-icon>filter_list</mat-icon></a>
   </span>
 </div>

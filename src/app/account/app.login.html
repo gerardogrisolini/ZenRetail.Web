@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-content>
-        <form [formGroup]="dataform">
+
+        <form [formGroup]="dataform" [ngStyle]="{'height': height + 'px'}">
             <mat-form-field style="width: 100%">
                 <input matInput [(ngModel)]="user.username" type="email" formControlName="email" placeholder="{{ 'Email' | translate }}"/>
                 <div *ngIf="!dataform.controls['email'].valid&&dataform.controls['email'].dirty">
@@ -22,5 +23,6 @@
             
             <a mat-raised-button routerLink="/register" style="float: right"><mat-icon>playlist_add</mat-icon> {{ 'Register' | translate }}</a>
         </form>
+
     </mat-card-content>
 </mat-card>

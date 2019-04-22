@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { SessionService } from 'app/services/session.service';
@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
 	dataform: FormGroup;
 	public user = new Login('', '');
 	close = 'Close';
+	height = 0;
 
 	constructor(
 		@Inject(PLATFORM_ID) private platformId: Object,
@@ -30,6 +31,12 @@ export class RegisterComponent implements OnInit {
 		if (isPlatformBrowser(this.platformId)) {
 			window.parent.postMessage('iframe:400', '*');
 		}
+		this.height = window.innerHeight - 100;
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(event) {
+		this.height = event.target.innerHeight - 100;
 	}
 
 	ngOnInit() {

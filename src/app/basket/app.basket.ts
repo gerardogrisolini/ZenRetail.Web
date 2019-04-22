@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { MatSnackBar, MatSelectionList } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'app/services/dialog.service';
@@ -9,12 +9,13 @@ import { AppComponent } from 'app/app.component';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-		selector: 'app-basket',
+	selector: 'app-basket',
 	templateUrl: 'app.basket.html',
 	styleUrls: ['app.basket.scss']
 })
 
 export class BasketComponent implements OnInit {
+	height = 0;
 	
 	constructor(
 		@Inject(PLATFORM_ID) private platformId: Object,
@@ -23,9 +24,15 @@ export class BasketComponent implements OnInit {
 		private dialogsService: DialogService,
 		private sessionService: SessionService,
 		private basketService: BasketService) {
-			AppComponent.current.setPage('Basket');
+		AppComponent.current.setPage('Basket');
+		this.height = window.innerHeight - 265;
 	}
 
+  	@HostListener('window:resize', ['$event'])
+  	onResize(event) {
+		this.height = event.target.innerHeight - 265;
+	}
+	  
 	get isIframe(): boolean { return AppComponent.current.isIframe; }
 
 	ngOnInit() {

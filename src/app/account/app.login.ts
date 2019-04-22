@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { SessionService } from 'app/services/session.service';
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 	dataform: FormGroup;
 	public user = new Login('', '');
 	close = 'Close';
+	height = 0;
 
 	constructor(
 		@Inject(PLATFORM_ID) private platformId: Object,
@@ -31,9 +32,15 @@ export class LoginComponent implements OnInit {
 		if (isPlatformBrowser(this.platformId)) {
 			window.parent.postMessage('iframe:300', '*');
 		}
+		this.height = window.innerHeight - 100;
 	}
 
-	ngOnInit() {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.height = event.target.innerHeight - 100;
+  }
+
+  ngOnInit() {
 		this.dataform = this.fb.group({
 			'email': new FormControl('', [Validators.required, Validators.email]),
 			'password': new FormControl('', Validators.required)

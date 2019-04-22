@@ -25,7 +25,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   title: string;
 	description: string;
 	image: string;
-	close = 'Close';
+  close = 'Close';
+  isFullLoaded: Boolean;
+  page = 0;
+  size = 0;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -36,6 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet
   ) {
     this.onResizeChanged(window);
+    this.filtered = [];
   }
 
   @HostListener('window:resize', ['$event'])
@@ -53,14 +57,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }
       this.translate.get(this.close).subscribe((res: string) => this.close = res);
     });
-    this.sub = this.activatedRoute.params.subscribe(params => {
-      const name = params['name'];
-      if (this.router.url.indexOf('brand') < 0) {
-        this.loadProductsByCategory(name);
-      } else {
-        this.loadProductsByBrand(name);
-      }
-    });
   }
 
   ngOnDestroy() {
@@ -75,15 +71,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private resize(w: number) {
       this.fixedCols = w < 600 ? 1 : w < 1200 ? 2 : 3;
+      this.size = this.fixedCols == 3 ? 12 : 8;
       this.fitListWidth = (w - this.fixedCols - 1) + 'px';
       this.fitListHeight = (w / this.fixedCols * 1.2) + 'px';
   }
 
   openBottomSheet(): void {
     let input = this.products.map(p => p.categories.map(s => s.category).filter(f => !f.categoryIsPrimary));
-    let categories = input.reduce(function(a, b) {
-      return a.concat(b);
-    }, []);
+    let categories: Category[] = [];
+    for (var data of input) {
+      if (categories.findIndex(p => p.categoryId == data[0].categoryId) < 0) {
+        categories.push(data[0]);
+      }
+    }
     const bottomSheetRef = this.bottomSheet.open(BottomSheetComponent, {
       data: categories,
     });
@@ -114,9 +114,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProductsByCategory(categoryName: string) {
     this.productService.getByCategoryName(categoryName)
         .subscribe(result => {
-          this.filtered = result;
-          this.products = result;
-          const category = this.products[0].categories.find(p => p.category.seo.permalink === categoryName).category;
+          this.products = [];
+          for (var i  = 0; i < 20; i++) {
+            this.products.push(result[0]);
+          }
+          // this.products = result;
+          this.getData();
+          const category = this.filtered[0].categories.find(p => p.category.seo.permalink === categoryName).category;
           this.addMetaByCategory(category);
         }, onerror => this.snackBar.open(onerror._body, this.close));
   }
@@ -124,11 +128,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProductsByBrand(brandName: string) {
     this.productService.getByBrandName(brandName)
         .subscribe(result => {
-          this.filtered = result;
           this.products = result;
+          this.getData();
           let brand = this.products[0].brand;
           this.addMetaByBrand(brand);
         }, onerror => this.snackBar.open(onerror._body, this.close));
+  }
+
+  getData() {
+    let startingIndex = this.page * this.size;
+    var endingIndex = startingIndex + this.size;
+    if (this.products.length <= endingIndex) {
+      this.isFullLoaded = true;
+      endingIndex = this.products.length;
+    }
+    for (var i = startingIndex; i < endingIndex; i++) {
+      this.filtered.push(this.products[i]);
+    }
+    this.page++;
   }
 
   onCategoryChange(categoryId: number) {

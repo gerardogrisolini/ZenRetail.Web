@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, HostListener } from '@angular/core';
 import { MatSnackBar, MatTableDataSource, MatSort } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from 'app/services/session.service';
@@ -14,7 +14,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 
 export class OrdersComponent implements OnInit {
-
+	height = 0;
 	@ViewChild(MatSort) sort: MatSort;
 	dataSource: MatTableDataSource<Movement>;
 	displayedColumns = ['movementNumber', 'movementDate', 'movementAmount', 'movementPayment', 'movementStatus', 'doc'];
@@ -26,6 +26,12 @@ export class OrdersComponent implements OnInit {
 		private sessionService: SessionService,
 		private registryService: RegistryService) {
 		AppComponent.current.setPage('Orders');
+		this.height = window.innerHeight - 65;
+	}
+
+  	@HostListener('window:resize', ['$event'])
+  	onResize(event) {
+		this.height = event.target.innerHeight - 65;
 	}
 
 	ngOnInit() {
