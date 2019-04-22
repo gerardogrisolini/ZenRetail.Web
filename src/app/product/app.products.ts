@@ -114,11 +114,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProductsByCategory(categoryName: string) {
     this.productService.getByCategoryName(categoryName)
         .subscribe(result => {
-          this.products = [];
-          for (var i  = 0; i < 20; i++) {
-            this.products.push(result[0]);
-          }
-          // this.products = result;
+          this.products = result;
           this.getData();
           const category = this.filtered[0].categories.find(p => p.category.seo.permalink === categoryName).category;
           this.addMetaByCategory(category);
