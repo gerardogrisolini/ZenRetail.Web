@@ -1,4 +1,4 @@
-<mat-spinner *ngIf="!product"></mat-spinner>
+<mat-spinner *ngIf="!product" [diameter]="50" style="margin-top: 20px; margin-left: 20px;"></mat-spinner>
 <div *ngIf="product">
   <mat-expansion-panel *ngIf="!isIframe" [expanded]="true">
     <mat-expansion-panel-header style="background-color: whitesmoke">
@@ -31,7 +31,7 @@
       <swiper [config]="config">
         <div class="swiper-wrapper">
           <div *ngFor="let img of this.product.medias" class="swiper-slide">
-            <a href="{{ [img] | parseUrl }}" target="_blank"><img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}} image" /></a>
+            <a href="{{ [img] | parseUrl }}" target="_blank"><img src="{{ [img] | parseUrl:'thumb' }}" alt="{{product.productName}}" /></a>
           </div>
         </div>
       </swiper>

@@ -50,7 +50,7 @@
         <h2 class="paragraph" [translate]="'Brands'"></h2>
         <div *ngIf="brands" class="horizontal-list">    
             <div class="horizontal-list-item" *ngFor="let b of brands">
-                <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl" alt="{{b.brandName}}" />
+                <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl:'thumb'" alt="{{b.brandName}}" />
                 <br/><span><b>{{b.brandName}}</b></span>
             </div>
         </div>

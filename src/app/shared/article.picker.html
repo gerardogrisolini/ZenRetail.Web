@@ -5,7 +5,7 @@
             <mat-select formControlName="{{a.attribute.attributeName}}" placeholder="{{a.attribute.translations | mytranslate:a.attribute.attributeName}}">
             <mat-option *ngFor="let v of a.attributeValues" [value]="v.attributeValue.attributeValueId">
                 {{v.attributeValue.translations | mytranslate:v.attributeValue.attributeValueName}}
-                <img width="96" height="38" style="float: right; margin: 2px;" *ngIf="v.attributeValue.media.name !== ''" src="{{[v.attributeValue.media] | parseUrl:thumb}}" alt="{{v.attributeValue.attributeValueName}}">
+                <img width="96" height="38" style="float: right; margin: 2px;" *ngIf="v.attributeValue.media.name !== ''" src="{{[v.attributeValue.media] | parseUrl:'thumb'}}" alt="{{v.attributeValue.attributeValueName}}">
             </mat-option>
             </mat-select>
         </mat-form-field>
