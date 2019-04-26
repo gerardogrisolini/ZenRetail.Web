@@ -9,10 +9,6 @@ export class Login {
 export class Setting {
   public companyId: number;
   public companyName: string;
-  public companyHomeSeo: Seo;
-  public companyHomeContent: Translation[];
-  public companyInfoSeo: Seo;
-  public companyInfoContent: Translation[];
   public companyEmailInfo: string;
   public companyEmailSales: string;
   public companyEmailSupport: string;
@@ -22,13 +18,22 @@ export class Setting {
   public companyZip: string;
   public companyProvince: string;
   public companyCountry: string;
-
   public companyFiscalCode: string;
   public companyVatNumber: string;
-
   public companyWebsite: string;
   public companyCurrency: string;
   public companyUtc: string;
+
+  public homeFeatured: Boolean;
+  public homeNews: Boolean;
+  public homeDiscount: Boolean;
+  public homeCategory: Boolean;
+  public homeBrand: Boolean;
+
+  public homeSeo: Seo;
+  public homeContent: Translation[];
+  public infoSeo: Seo;
+  public infoContent: Translation[];
 
   public paypalEnv: string;
   public paypalSandbox: string;
@@ -37,10 +42,6 @@ export class Setting {
   constructor() {
     this.companyId = 0;
     this.companyName = '';
-    this.companyHomeSeo = new Seo();
-    this.companyHomeContent = [];
-    this.companyInfoSeo = new Seo();
-    this.companyInfoContent = [];
     this.companyEmailInfo = '';
     this.companyEmailSales = '';
     this.companyEmailSupport = '';
@@ -50,13 +51,22 @@ export class Setting {
     this.companyZip = '';
     this.companyProvince = '';
     this.companyCountry = '';
-
     this.companyFiscalCode = '';
     this.companyVatNumber = '';
-
     this.companyWebsite = ''
     this.companyCurrency = ''
     this.companyUtc = ''
+
+    this.homeFeatured = true;
+    this.homeNews = true;
+    this.homeDiscount = true;
+    this.homeCategory = true;
+    this.homeBrand = true;
+  
+    this.homeSeo = new Seo();
+    this.homeContent = [];
+    this.infoSeo = new Seo();
+    this.infoContent = [];
 
     this.paypalEnv = '';
     this.paypalSandbox = '';

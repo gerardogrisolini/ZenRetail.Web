@@ -13,9 +13,10 @@ export class HomeComponent implements OnInit {
     fitListHeight: string;
     fitListWidth: string;
     featured: Product[];
+    sale: Product[];
     news: Product[];
     brands: Brand[];
-
+    
     constructor(private productService: ProductService) {
         this.onResizeChanged(window);
     }
@@ -40,17 +41,28 @@ export class HomeComponent implements OnInit {
             // environment.hostApi + '/media/logo.png'
         );
         
-        this.featured = await this.productService
-            .getFeatured()
-            .toPromise();
+        if (this.data.homeFeatured) {
+            this.featured = await this.productService
+                .getFeatured()
+                .toPromise();
+        }
+        if (this.data.homeNews) {
+            this.news = await this.productService
+                .getNews()
+                .toPromise();
+        }
 
-        this.news = await this.productService
-            .getNews()
+        if (this.data.homeDiscount) {
+        this.sale = await this.productService
+            .getSale()
             .toPromise();
+        }
 
-        this.brands = await this.productService
-            .getBrands()
-            .toPromise();
+        if (this.data.homeBrand) {
+            this.brands = await this.productService
+                .getBrands()
+                .toPromise();
+        }
     }
 
     onResizeChanged(event: any) {

@@ -18,6 +18,10 @@ export class ProductService {
         return this.http.get<Product[]>('/api/ecommerce/featured');
     }
 
+    getSale(): Observable<Product[]> {
+        return this.http.get<Product[]>('/api/ecommerce/sale');
+    }
+
     getNews(): Observable<Product[]> {
         return this.http.get<Product[]>('/api/ecommerce/new');
     }
