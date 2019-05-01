@@ -116,16 +116,16 @@ export class Category {
   public categoryName: string;
   public translations: Translation[];
   public categoryContent: Translation[];
-  public media: Media;
-  public seo: Seo;
+  public media?: Media;
+  public seo?: Seo;
 
   constructor(categoryId: number, categoryName: string) {
     this.categoryId = categoryId;
     this.categoryIsPrimary = false;
     this.categoryName = categoryName;
     this.translations = [];
-    this.media = new Media('', '');
-    this.seo = new Seo();
+    this.media = null;
+    this.seo = null;
   }
 }
 
@@ -191,10 +191,10 @@ export class Product {
   public productUm: string;
   public productTax: Tax;
   public price: Price;
-  public discount: Discount;
-  public packaging: Packaging;
+  public discount?: Discount;
+  public packaging?: Packaging;
   public medias: Media[];
-  public seo: Seo;
+  public seo?: Seo;
   public brand: Brand;
   public categories: ProductCategory[];
   public attributes: ProductAttribute[];
@@ -211,9 +211,9 @@ export class Product {
     this.productUm = '';
     this.productTax = new Tax('', 0);
     this.price = new Price();
-    this.discount = new Discount();
-    this.packaging = new Packaging();
-    this.seo = new Seo();
+    this.discount = null;
+    this.packaging = null;
+    this.seo = null;
     this.medias = [];
     this.translations = [];
     this.categories = [];
@@ -258,8 +258,8 @@ export class AttributeValue {
     public attributeValueId: number,
     public attributeValueCode: string,
     public attributeValueName: string,
-    public media: Media,
-    public translations: Translation[]
+    public translations: Translation[],
+    public media?: Media
   ) { }
 }
 
@@ -504,8 +504,8 @@ export interface ArticleAttributeValue {
 export interface Barcode {
   barcode: string;
   tags: Tag[];
-  price: Price;
-  discount: Discount;
+  price?: Price;
+  discount?: Discount;
 }
 
 export interface Tag {

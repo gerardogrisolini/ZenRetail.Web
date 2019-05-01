@@ -35,12 +35,12 @@ export class LoginComponent implements OnInit {
 		this.height = window.innerHeight - 100;
 	}
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.height = event.target.innerHeight - 100;
-  }
+	@HostListener('window:resize', ['$event'])
+	onResize(event) {
+		this.height = event.target.innerHeight - 100;
+	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.dataform = this.fb.group({
 			'email': new FormControl('', [Validators.required, Validators.email]),
 			'password': new FormControl('', Validators.required)
