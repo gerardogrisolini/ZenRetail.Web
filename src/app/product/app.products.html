@@ -1,7 +1,7 @@
 <table *ngIf="title" class="table-header">
   <tr>
     <td><h1>{{title}}</h1></td>
-    <td rowspan="2" style="width: 100px"><img *ngIf="image" src="{{ image }}" alt="default image" height="100"/></td>
+    <td rowspan="2" style="width: 100px"><img *ngIf="image" src="{{ image }}" alt="{{title}}" height="100"/></td>
   </tr>
   <tr><td>{{description}}</td></tr>
 </table>
@@ -13,7 +13,7 @@
       <mat-grid-tile-footer>
         <h3 mat-line><strong>{{product.productName}}</strong></h3>
         <span mat-line>{{product.brand.brandName}}</span>
-        <div *ngIf="product.discount.dicountId>0;then discount_content else price_content"></div>
+        <div *ngIf="product.discount;then discount_content else price_content"></div>
         <ng-template #discount_content>
           <p><span class="percentage">-{{product.discount.percentage}}%</span>
           <del>{{product.price.selling | currencyFormat}}</del>

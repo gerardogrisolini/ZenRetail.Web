@@ -15,7 +15,7 @@
       <p><span mat-line>{{ 'Categories' | translate }}<br/>
         <li *ngFor="let c of product.categories"><b>{{c.category.translations | mytranslate : c.category.categoryName}}</b></li>
       </span></p>
-      <div *ngIf="product.discount.price>0;then discount_content else price_content"></div>
+      <div *ngIf="product.discount;then discount_content else price_content"></div>
       <ng-template #discount_content>
         <p><span mat-line style="font-size: large">{{ 'Price' | translate }}<br/>
         <span class="percentage">-{{product.discount.percentage}}%</span>

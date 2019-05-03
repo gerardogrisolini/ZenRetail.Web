@@ -6,8 +6,8 @@
     <mat-card-title><h2 class="paragraph" [translate]="'Brands'"></h2></mat-card-title>
     <mat-card-content>    
         <div class="horizontal-list">    
-            <div class="horizontal-list-item" *ngFor="let b of brands">
-                <img routerLink="/brand/{{b.seo.permalink}}" [src]="[b.media] | parseUrl:'thumb'" alt="{{b.brandName}}" />
+            <div class="horizontal-list-item" *ngFor="let b of brands" routerLink="/brand/{{b.seo.permalink}}" >
+                <img *ngIf="b.image" [src]="[b.media] | parseUrl:'thumb'" alt="{{b.brandName}}" />
                 <br/><span><b>{{b.brandName}}</b></span>
             </div>
         </div>
@@ -18,8 +18,8 @@
     <mat-card-title><h2 class="paragraph" [translate]="'Categories'"></h2></mat-card-title>
     <mat-card-content>    
         <div class="horizontal-list">
-            <div class="horizontal-list-item" *ngFor="let c of categories">
-                <img routerLink="{{c.route}}" src="{{c.image}}" alt="{{c.name}}" />
+            <div class="horizontal-list-item" *ngFor="let c of categories" routerLink="{{c.route}}" >
+                <img *ngIf="c.image" src="{{c.image}}" alt="{{c.name}}" />
                 <br/><span><b>{{c.name}}</b></span>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>
-                <div *ngIf="product.discount.dicountId>0;then discount_content else price_content"></div>
+                <div *ngIf="product.discount;then discount_content else price_content"></div>
                 <ng-template #discount_content>
                     <p><span class="percentage">-{{product.discount.percentage}}%</span>
                     <del>{{product.price.selling | currencyFormat}}</del>
@@ -63,7 +63,7 @@
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>
-                <div *ngIf="product.discount.dicountId>0;then discount_content else price_content"></div>
+                <div *ngIf="product.discount;then discount_content else price_content"></div>
                 <ng-template #discount_content>
                     <p><span class="percentage">-{{product.discount.percentage}}%</span>
                     <del>{{product.price.selling | currencyFormat}}</del>
@@ -90,16 +90,11 @@
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>
-                <div *ngIf="product.discount.dicountId>0;then discount_content else price_content"></div>
-                <ng-template #discount_content>
-                    <p><span class="percentage">-{{product.discount.percentage}}%</span>
+                <p>
+                    <span class="percentage">-{{product.discount.percentage}}%</span>
                     <del>{{product.price.selling | currencyFormat}}</del>
                     <b>{{product.discount.price | currencyFormat}}</b>
-                    </p>
-                </ng-template>
-                <ng-template #price_content>
-                    <p><span mat-line><b>{{product.price.selling | currencyFormat}}</b></span></p>
-                </ng-template>
+                </p>
                 </mat-grid-tile-footer>
             </mat-grid-tile>
             </mat-grid-list>

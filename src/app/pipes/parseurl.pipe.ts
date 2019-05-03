@@ -10,6 +10,6 @@ export class ParseUrlPipe implements PipeTransform {
     if (args0 !== null && args0 === 'thumb') {
       path = '/thumb/';
     }
-    return value.length > 0 ? path + value[0].name : '';
+    return value[0] && value[0].name ? path + value[0].name : null;
   }
 }
