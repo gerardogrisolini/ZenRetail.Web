@@ -7,7 +7,7 @@
     <mat-card-content>    
         <div class="horizontal-list">    
             <div class="horizontal-list-item" *ngFor="let b of brands" routerLink="/brand/{{b.seo.permalink}}" >
-                <img *ngIf="b.image" [src]="[b.media] | parseUrl:'thumb'" alt="{{b.brandName}}" />
+                <img *ngIf="b.media" [src]="[b.media] | parseUrl:'thumb'" alt="{{b.brandName}}" />
                 <br/><span><b>{{b.brandName}}</b></span>
             </div>
         </div>
@@ -31,8 +31,8 @@
     <mat-card-content>
         <div class="app-grid-list">    
             <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
-            <mat-grid-tile *ngFor="let product of featured" style="cursor: pointer">
-                <img routerLink="/product/{{product.seo.permalink}}" [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
+            <mat-grid-tile *ngFor="let product of featured" routerLink="/product/{{product.seo.permalink}}" style="cursor: pointer; padding: 10px;">
+                <img [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>
@@ -58,8 +58,8 @@
     <mat-card-content>    
         <div class="app-grid-list">    
             <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
-            <mat-grid-tile *ngFor="let product of news" style="cursor: pointer">
-                <img routerLink="/product/{{product.seo.permalink}}" [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
+            <mat-grid-tile *ngFor="let product of news" routerLink="/product/{{product.seo.permalink}}" style="cursor: pointer">
+                <img [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>
@@ -85,8 +85,8 @@
     <mat-card-content>    
         <div class="app-grid-list">    
             <mat-grid-list [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
-            <mat-grid-tile *ngFor="let product of sale" style="cursor: pointer">
-                <img routerLink="/product/{{product.seo.permalink}}" [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
+            <mat-grid-tile *ngFor="let product of sale" routerLink="/product/{{product.seo.permalink}}" style="cursor: pointer">
+                <img [alt]="product.productName" [src]="product.medias | parseUrl:'thumb'">
                 <mat-grid-tile-footer>
                 <h3 mat-line><strong>{{product.productName}}</strong></h3>
                 <span mat-line>{{product.brand.brandName}}</span>

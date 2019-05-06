@@ -42,6 +42,7 @@ import { OrdersComponent } from 'app/order/app.orders';
 import { DocumentComponent } from 'app/order/app.document';
 import { BottomSheetComponent } from 'app/product/app.bottomsheet';
 import { AppLoadService } from './services/appload.service';
+import { ImportService } from './services/import.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -102,6 +103,7 @@ export function getSettings(appLoadService: AppLoadService) {
     ProductService,
     BasketService,
     DocumentService,
+    ImportService,
     { provide: APP_INITIALIZER,  useFactory: getSettings, deps: [AppLoadService], multi: true },
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true }

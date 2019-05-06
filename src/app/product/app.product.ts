@@ -6,6 +6,7 @@ import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
+import { ImportService } from 'app/services/import.service';
 
 @Component({
 	selector: 'app-product',
@@ -22,7 +23,8 @@ export class ProductComponent implements OnInit, OnDestroy {
 		private translate: TranslateService,
 		private productService: ProductService,
 		private basketService: BasketService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private importService: ImportService
 	) {
 		this.resize(window.innerWidth);
 	}
@@ -84,7 +86,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 			});
   	}
 
-	pickerClick(event: Article) {
+	async pickerClick(event: Article) {
 		const model = new Basket();
 		if (event !== null) {
 			model.basketBarcode = event.barcodes.find(p => p.tags.length === 0).barcode;
@@ -92,6 +94,15 @@ export class ProductComponent implements OnInit, OnDestroy {
 		} else {
 			model.basketBarcode = AppComponent.current.getItem('barcode');
 		}
+
+		let qt = await this.importService.getQuantity(model.basketBarcode).toPromise();
+		if (qt.stock - qt.booked <= 0) {
+			this.snackBar.open('Article not available!', null, {
+				duration: 5000
+			});
+			return;
+		}
+
 		this.basketService
 			.create(model)
 			.subscribe(result => {
