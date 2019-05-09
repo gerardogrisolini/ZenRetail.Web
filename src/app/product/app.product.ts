@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
 		let qt = await this.importService.getQuantity(model.basketBarcode).toPromise();
 		if (qt.stock - qt.booked <= 0) {
-			this.snackBar.open('Article not available!', null, {
+			this.snackBar.open('Article not available!', " X ", {
 				duration: 5000
 			});
 			return;
@@ -125,11 +125,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 							});
 					});
 				if (!this.isIframe) {
-				const basket = this.basketService.basket.find(p => p.basketBarcode === model.basketBarcode);
-				if (basket) {
-					basket.basketQuantity += 1.0;
-				} else {
-					this.basketService.basket.push(result);
+					const basket = this.basketService.basket.find(p => p.basketBarcode === model.basketBarcode);
+					if (basket) {
+						basket.basketQuantity += 1.0;
+					} else {
+						this.basketService.basket.push(result);
 					}
 				} else {
 					window.parent.postMessage('token:' + AppComponent.current.getItem('token'), '*');
