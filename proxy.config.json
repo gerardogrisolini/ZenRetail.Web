@@ -1,17 +1,20 @@
 {
     "/media/**": {
-        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
+        "changeOrigin": false,
         "logLevel": "debug"
     },
     "/thumb/**": {
-        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
+        "changeOrigin": false,
         "logLevel": "debug"
     },
     "/api/**": {
-        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
+        "changeOrigin": false,
         "logLevel": "debug"
     }
 }

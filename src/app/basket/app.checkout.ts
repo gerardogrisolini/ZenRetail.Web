@@ -18,7 +18,7 @@ declare let paypal: any;
 })
 
 export class CheckoutComponent implements OnInit {
-    @ViewChild('account') component: AccountComponent;
+    @ViewChild('account', null) component: AccountComponent;
 	payments: Item[] = [];
 	shippings: Item[] = [];
 	shippingCost = 0.0;

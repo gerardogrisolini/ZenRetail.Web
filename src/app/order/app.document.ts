@@ -10,13 +10,13 @@ import { AppComponent } from 'app/app.component';
 import * as FileSaver from 'file-saver';
 
 @Component({
-      selector: 'app-document',
+    selector: 'app-document',
     templateUrl: 'app.document.html',
 	styleUrls: ['app.document.scss']
 })
 
 export class DocumentComponent implements OnInit, OnDestroy {
-    @ViewChild('doc') doc: ElementRef;
+    @ViewChild('doc', null) doc: ElementRef;
     private sub: any;
     movementId: number;
     totalItems = 0;

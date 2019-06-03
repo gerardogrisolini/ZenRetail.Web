@@ -15,7 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 export class OrdersComponent implements OnInit {
 	height = 0;
-	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatSort, null) sort: MatSort;
 	dataSource: MatTableDataSource<Movement>;
 	displayedColumns = ['movementNumber', 'movementDate', 'movementAmount', 'movementPayment', 'movementStatus', 'doc'];
 
