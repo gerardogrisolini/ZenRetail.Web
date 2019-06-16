@@ -26,7 +26,7 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="data.homeFeatured&&featured" >
+<mat-card *ngIf="data.homeFeatured&&featured&&featured.length>0" >
     <mat-card-title><h2 class="paragraph" [translate]="'Featured'"></h2></mat-card-title>
     <mat-card-content>    
         <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
@@ -51,7 +51,7 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="data.homeNews&&news" >
+<mat-card *ngIf="data.homeNews&&news&&news.length>0" >
     <mat-card-title><h2 class="paragraph" [translate]="'News'"></h2></mat-card-title>
     <mat-card-content>    
         <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
@@ -76,8 +76,8 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="data.homeDiscount&&sale" >
-    <mat-card-title><h2 class="paragraph" [translate]="'Discount'"></h2></mat-card-title>
+<mat-card *ngIf="data.homeDiscount&&sale&&sale.length>0" >
+    <mat-card-title><h2 class="paragraph" [translate]="'On Sale'"></h2></mat-card-title>
     <mat-card-content>    
         <mat-grid-list class="app-grid-list" [cols]="fixedCols" [rowHeight]="fitListHeight" [style.height]="fitListHeight" [style.width]="fitListWidth">
             <mat-grid-tile *ngFor="let product of sale" routerLink="/product/{{product.seo.permalink}}" style="cursor: pointer">
