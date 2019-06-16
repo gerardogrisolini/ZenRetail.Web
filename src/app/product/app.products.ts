@@ -12,8 +12,7 @@ import { ParseUrlPipe } from 'app/pipes/parseurl.pipe';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './app.products.html',
-  styleUrls: ['./app.products.scss']
+  templateUrl: './app.products.html'
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   private sub: any;
@@ -44,6 +43,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.onResizeChanged(event.target);
+  }
+
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          if (!this.isFullLoaded) {
+            this.getData();
+          }
+      }
   }
 
   ngOnInit() {

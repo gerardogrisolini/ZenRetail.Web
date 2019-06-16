@@ -198,7 +198,50 @@ html, body {
   ::-webkit-scrollbar { 
     display: none; 
   }
+
+  .table-header {
+    padding: 20px 20px 0 20px;
+    height: 120px;
+    width: 100%;
+    
+    td {
+      vertical-align: top;
+    }
+  }
+  
+  .app-grid-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    p {
+      margin: 16px;
+    }
+  
+    .app-basic-list .mat-grid-tile {
+      background: rgba(0, 0, 0, 0.32);
+    }
+  
+    .mat-grid-tile-footer {
+      font-size: large;
+      height: 80px;
+      margin: 1%;
+    }
+  
+    img {
+      object-fit: cover;
+      height: 98%;
+      width: 98%;
+    }
+  }
+  
+  // .done {
+  //   position: fixed;
+  //   bottom: 10px;
+  //   right: 15px;
+  // }
 }
+
 
 // stretch to screen size in fullscreen mode
 .app-container {

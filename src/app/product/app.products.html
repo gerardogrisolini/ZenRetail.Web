@@ -27,7 +27,7 @@
     </mat-grid-tile>
   </mat-grid-list>
   <hr>
-  <a *ngIf="!isFullLoaded" mat-fab (click)="getData()" title="{{ 'load other items' | translate }}"><mat-icon>low_priority</mat-icon></a>
+  <mat-spinner *ngIf="!isFullLoaded" [color]="'warn'" [diameter]="50"></mat-spinner>
   <span class="done">
       <a mat-fab (click)="openBottomSheet()" title="{{ 'filter items' | translate }}"><mat-icon>filter_list</mat-icon></a>
   </span>

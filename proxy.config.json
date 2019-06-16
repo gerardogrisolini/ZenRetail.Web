@@ -1,20 +1,17 @@
 {
     "/media/**": {
-        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://localhost:8888",
         "secure": false,
-        "changeOrigin": false,
         "logLevel": "debug"
     },
     "/thumb/**": {
-        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://localhost:8888",
         "secure": false,
-        "changeOrigin": false,
         "logLevel": "debug"
     },
     "/api/**": {
-        "target": "https://enretail.westeurope.cloudapp.azure.com:443",
+        "target": "https://localhost:8888",
         "secure": false,
-        "changeOrigin": false,
         "logLevel": "debug"
     }
 }
