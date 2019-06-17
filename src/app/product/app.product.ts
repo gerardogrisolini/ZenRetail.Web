@@ -97,8 +97,10 @@ export class ProductComponent implements OnInit, OnDestroy {
 
 		let qt = await this.importService.getQuantity(model.basketBarcode).toPromise();
 		if (qt.stock - qt.booked <= 0) {
-			this.snackBar.open('Article not available!', " X ", {
-				duration: 5000
+			this.translate.get('Article not available!').subscribe((text: string) => {
+				this.snackBar.open(text, " X ", {
+					duration: 5000
+				});
 			});
 			return;
 		}
@@ -140,7 +142,9 @@ export class ProductComponent implements OnInit, OnDestroy {
 					.subscribe((message: string) => {
 						this.translate.get('Login')
 							.subscribe((login: string) => {
-								this.snackBar.open(onerror.status === 401 ? message : onerror._body, login)
+									this.snackBar.open(onerror.status === 401 ? message : onerror._body, login, {
+										duration: 10000
+									})
 									.onAction()
 									.subscribe(() => {
 										AppComponent.current.setItem('origin', this.router.url);

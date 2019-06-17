@@ -146,14 +146,13 @@ export class AppComponent implements OnInit {
 
 	loadBasket() {
     const uniqueID = this.getItem('uniqueID');
-    if (uniqueID == null) {
-      return;
+    if (uniqueID != null) {
+      this.basketService.get()
+        .subscribe(result => {
+          this.basketService.basket = result;
+        });
     }
-		this.basketService.get()
-			.subscribe(result => {
-				this.basketService.basket = result;
-			});
-	}
+  }
 
   fullscreen() {
     const elem = this._element.nativeElement.querySelector('.app-container');
