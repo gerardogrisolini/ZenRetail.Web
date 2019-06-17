@@ -16,7 +16,6 @@ import { isPlatformBrowser } from '@angular/common';
 export class LoginComponent implements OnInit {
 	dataform: FormGroup;
 	public user = new Login('', '');
-	close = 'Close';
 	height = 0;
 
 	constructor(
@@ -28,7 +27,6 @@ export class LoginComponent implements OnInit {
 		private fb: FormBuilder
 	) {
 		AppComponent.current.setPage('Authentication');
-		this.translate.get(this.close).subscribe((res: string) => this.close = res);
 		if (isPlatformBrowser(this.platformId)) {
 			window.parent.postMessage('iframe:300', '*');
 		}
@@ -52,7 +50,12 @@ export class LoginComponent implements OnInit {
 			.subscribe(result => {
 				this.sessionService.grantCredentials(this.user.username, result);
 				this.loadBasket();
-			}, onerror => this.snackBar.open(JSON.stringify(onerror), this.close))
+			}, onerror => {
+				this.translate.get('Invalid email and/or password!')
+					.subscribe((res: string) => this.snackBar.open(res, " X ", {
+						duration: 5000
+					}));
+			});
 	}
 
 	loadBasket() {

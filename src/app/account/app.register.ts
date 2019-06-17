@@ -55,6 +55,6 @@ export class RegisterComponent implements OnInit {
 			.subscribe(result => {
 				this.sessionService.grantCredentials(this.user.username, result);
 			},
-			onerror => this.snackBar.open(onerror._body, this.close));
+			onerror => this.snackBar.open(onerror, this.close));
 	}
 }
