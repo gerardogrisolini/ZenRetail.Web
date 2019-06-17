@@ -96,6 +96,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 		}
 
 		let qt = await this.importService.getQuantity(model.basketBarcode).toPromise();
+		alert(JSON.stringify(qt));
 		if (qt.stock - qt.booked <= 0) {
 			this.snackBar.open('Article not available!', " X ", {
 				duration: 5000
