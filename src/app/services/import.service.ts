@@ -10,6 +10,6 @@ export class ImportService {
     }
 
     getQuantity(barcode: string): Observable<ArticleItem> {
-        return this.http.get<ArticleItem>('http://www.grisolini.com:8080/webretail/ecommerce/sync?barcode=' + barcode);
+        return this.http.get<ArticleItem>('https://www.grisolini.com:8181/webretail/ecommerce/sync?barcode=' + barcode);
     }
 }
