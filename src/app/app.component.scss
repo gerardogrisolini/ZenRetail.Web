@@ -98,6 +98,7 @@ html, body {
     }
   }
   .category-list {
+    height: 40px;
     border-bottom: thin dotted silver;
     border-radius: 10px;
     img {
@@ -105,6 +106,10 @@ html, body {
       width: 40px;
       vertical-align: middle;
       margin-right: 15px;
+    }
+    span {
+      margin-left: 10px;
+      font-weight: bold;
     }
   }
 

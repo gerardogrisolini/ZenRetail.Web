@@ -1,16 +1,16 @@
 {
     "/media/**": {
-        "target": "https://localhost:8888",
+        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
         "logLevel": "debug"
     },
     "/thumb/**": {
-        "target": "https://localhost:8888",
+        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
         "logLevel": "debug"
     },
     "/api/**": {
-        "target": "https://localhost:8888",
+        "target": "https://zenretail.westeurope.cloudapp.azure.com:443",
         "secure": false,
         "logLevel": "debug"
     }
