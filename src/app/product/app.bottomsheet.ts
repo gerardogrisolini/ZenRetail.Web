@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { Category } from 'app/shared/models';
-import { filter } from 'rxjs/operators';
 
 @Component({
     moduleId: 'bottomsheet',

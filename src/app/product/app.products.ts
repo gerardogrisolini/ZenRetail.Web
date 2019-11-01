@@ -89,7 +89,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let input = this.products.map(p => p.categories.map(s => s.category).filter(f => !f.categoryIsPrimary));
     let categories: Category[] = [];
     for (var data of input) {
-      if (categories.findIndex(p => p.categoryId == data[0].categoryId) < 0) {
+      if (data.length > 0 && categories.findIndex(p => p.categoryId == data[0].categoryId) < 0) {
         categories.push(data[0]);
       }
     }
@@ -155,19 +155,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onCategoryChange(categoryId: number) {
     if (categoryId === 0) {
-      this.filtered = [];
-      this.filtered = this.products;
+      // this.filtered = [];
+      // this.filtered = this.products;
       return;
     }
     this.filtered = this.products.filter(p => p.categories.filter(f => f.category.categoryId == categoryId).length > 0);
   }
   
   onFilterChange(filter: string) {
-    if (filter === '') {
+    alert(filter);
+    if (filter == '') {
       this.filtered = [];
       this.filtered = this.products;
       return;
     }
     this.filtered = this.products.filter(p => p.productName.indexOf(filter) >= 0);
+    alert(this.filtered.length);
   }
 }
