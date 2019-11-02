@@ -163,7 +163,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   
   onFilterChange(filter: string) {
-    alert(filter);
     if (filter == '') {
       this.filtered = [];
       this.filtered = this.products;
