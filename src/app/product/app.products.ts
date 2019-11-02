@@ -170,6 +170,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
       return;
     }
     this.filtered = this.products.filter(p => p.productName.indexOf(filter) >= 0);
-    alert(this.filtered.length);
   }
 }
