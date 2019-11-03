@@ -97,8 +97,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       data: categories,
     });
     bottomSheetRef.afterDismissed().subscribe(() => {
-      this.onFilterChange(bottomSheetRef.instance.filter);
-      this.onCategoryChange(bottomSheetRef.instance.categoryId);
+      this.onFilterChange(bottomSheetRef.instance.categoryId, bottomSheetRef.instance.filter);
     });
   }
 
@@ -152,22 +151,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
     this.page++;
   }
-
-  onCategoryChange(categoryId: number) {
-    if (categoryId === 0) {
-      // this.filtered = [];
-      // this.filtered = this.products;
-      return;
-    }
-    this.filtered = this.products.filter(p => p.categories.filter(f => f.category.categoryId == categoryId).length > 0);
-  }
   
-  onFilterChange(filter: string) {
-    if (filter == '') {
-      this.filtered = [];
-      this.filtered = this.products;
+  onFilterChange(categoryId: number, filter: string) {
+    if (categoryId > 0) {
+      this.filtered = this.products.filter(p => p.categories.filter(f => f.category.categoryId == categoryId).length > 0);
+      return;
+    } else if (filter !== '') {
+      this.filtered = this.products.filter(p => p.productName.indexOf(filter) >= 0);
       return;
     }
-    this.filtered = this.products.filter(p => p.productName.indexOf(filter) >= 0);
-  }
+
+    //this.filtered = [];
+    this.filtered = this.products;
+}
 }
