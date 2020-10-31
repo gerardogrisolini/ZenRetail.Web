@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID, ViewChild, HostListener } from '@angular/core';
-import { MatSnackBar, MatTableDataSource, MatSort } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from 'app/services/session.service';
 import { RegistryService } from 'app/services/registry.service';

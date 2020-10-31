@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService } from 'app/services/dialog.service';
 import { SessionService } from 'app/services/session.service';
 import { BasketService } from 'app/services/basket.service';

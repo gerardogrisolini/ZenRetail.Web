@@ -1,7 +1,7 @@
-﻿import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Inject } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'app/services/session.service';
 import { RegistryService } from 'app/services/registry.service';
 import { DocumentService } from 'app/services/document.service';

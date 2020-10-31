@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService } from 'app/services/dialog.service';
 import { SessionService } from 'app/services/session.service';
 import { RegistryService } from 'app/services/registry.service';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'app/services/session.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Login } from 'app/shared/models';

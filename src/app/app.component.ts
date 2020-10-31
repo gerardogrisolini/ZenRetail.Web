@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { BasketService } from 'app/services/basket.service';
 import { ProductService } from 'app/services/product.service';
 import { MyTranslatePipe } from 'app/pipes/mytranslate.pipe';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',

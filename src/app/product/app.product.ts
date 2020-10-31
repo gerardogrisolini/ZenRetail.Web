@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductService } from 'app/services/product.service';
 import { BasketService } from 'app/services/basket.service';
 import { Product, Article, Basket } from 'app/shared/models';
 import { AppComponent } from 'app/app.component';
 import { ImportService } from 'app/services/import.service';
+import { SwiperOptions } from 'swiper';
 
 @Component({
 	selector: 'app-product',

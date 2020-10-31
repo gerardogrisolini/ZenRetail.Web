@@ -9,7 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from 'app/material.module';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
-import { SwiperModule } from 'angular2-useful-swiper';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 
 import { ALL_ROUTES } from 'app/routes';
 
@@ -84,7 +84,7 @@ export function getSettings(appLoadService: AppLoadService) {
     MaterialModule,
     LayoutModule,
     HttpClientModule,
-    SwiperModule,
+    NgxUsefulSwiperModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     RouterModule.forRoot(ALL_ROUTES, {scrollPositionRestoration: 'top'}),
     TranslateModule.forRoot({

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
-import { MatSnackBar, MatSelectionList } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectionList } from '@angular/material/list';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'app/services/dialog.service';
 import { SessionService } from 'app/services/session.service';
